@@ -1,0 +1,52 @@
+/* .login .login-signin,
+.login .login-signup,
+.login .login-forgot {
+  display: none;
+} */
+
+/* .login.login-signin-on .login-signup {
+  display: none;
+}
+
+.login.login-signin-on .login-signin {
+  display: block;
+}
+
+.login.login-signin-on .login-forgot {
+  display: none;
+}
+
+.login.login-signup-on .login-signup {
+  display: block;
+}
+
+.login.login-signup-on .login-signin {
+  display: none;
+}
+
+.login.login-signup-on .login-forgot {
+  display: none;
+}
+
+.login.login-forgot-on .login-signup {
+  display: none;
+}
+
+.login.login-forgot-on .login-signin {
+  display: none; }
+
+.login.login-forgot-on .login-forgot {
+  display: block;
+} */
+
+.login .login-form {
+  width: 100%;
+  max-width: 450px;
+}
+
+@media (max-width: 575.98px) {
+  .login .login-form {
+    width: 100%;
+    max-width: 100%;
+  }
+}
