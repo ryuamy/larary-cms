@@ -1,6 +1,6 @@
-# Buku Tamu
+# CMS
 
-(description in here)
+CMS utama untuk kjgng
 
 (semua tutorial yang ditulis di sini menggunakan web server XAMPP dan PHP ver 7.3.0)
 
@@ -26,6 +26,10 @@
 
 ## Getting started
 
+### Mengaktifkan enviroment beserta config
+Copy file dari folder **`copyfile`** (asked me first) dan paste dengan path berikut:
+* copyfile/.env ke .env (index path)
+
 ### Install Composer
 Download composer melalui web ini [https://getcomposer.org/download/](https://getcomposer.org/download/) dan ikuti langkah-langkahnya. Composer digunakan sebagai dependency manager untuk menghubung antara project dengan library luar laravel. Restart komputer.
 
@@ -35,7 +39,7 @@ Setelah install composer, run **`composer install`** pada console untuk mendapat
 run **`npm install`** untuk menginstall package dependency tambahan, contohnya `Laravel Mix`, dan beberapa dependency lainnya yang akan dipakai kedepannya.
 
 ### Mengaktifkan enviroment
-Copy-paste file **`.env`** dalam path yang sama. Rename file yang baru saja di paste menjadi **`.env`**. 
+Copy-paste file **`.env.example`** dalam path yang sama. Rename file yang baru saja di paste menjadi **`.env`**. 
 
 ### Mengubah enviroment
 Ubah beberapa property di bawah ini pada file **`.env`** menyesuaikan dengan local masing-masing
@@ -51,16 +55,13 @@ DB_DATABASE=yourdatabase
 DB_USERNAME=yourhostusername
 DB_PASSWORD=yourhostpassword
 ```
-**`APP_ENV`** akan diubah menjadi staging atau production menyesuaikan enviroment ketika diupload ke server sedangkan untuk pengerjaan di local bisa menggunakan `local` atau `development`. **`APP_URL`** bisa tetap menggunakan `http://127.0.0.1:8081` sesuai contoh atau disesuaikan dengan local masing-masing.
+**`APP_ENV`** akan diubah menjadi staging atau production menyesuaikan enviroment ketika diupload ke server sedangkan untuk pengerjaan di local bisa menggunakan `local` atau `development`. **`APP_URL`** bisa tetap menggunakan `http://127.0.0.1:8081` atau disesuaikan dengan local masing-masing.
 
 ### Run database migration
 Buat database di local masing-masing dengan nama yang sesuai dengan `DB_DATABASE` dan jalankan command **`php artisan migrate`** untuk mendapatkan table database.
 
 ### Run database seeder
 Jalankan command **`php artisan db:seed --class=[seedername]`** untuk mengisi basic data seperti data admin dan lain-lain atau dummy data lainnya. Ubah text **`[seedername]`** menjadi nama file di folder **`database\seeders\`** tanpa format file atau **`.php`**. Contohnya **`php artisan db:seed --class=UsersSeeder`**.
-
-### Buat folder foto dan qr
-Buat 2 folder **`foto`** dan **`qr`** di dalam **`/public/images`**
 
 ### Run server
 Jalankan command **`php artisan serve`** atau **`php artisan serve --port=8081`** jika `APP_URL` running di port 8081 untuk memulai project.
