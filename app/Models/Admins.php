@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Admins extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -17,9 +17,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'uuid',
         'name',
+        'slug',
         'email',
+        'email_verified_at',
         'password',
+        'role_id',
+        'remember_token',
+        'token_expired',
+        'created_by',
+        'updated_by',
     ];
 
     /**
@@ -42,7 +50,11 @@ class User extends Authenticatable
     ];
 
     public function logs() {
-        return $this->hasMany(Userlogs::class);
+        return $this->hasMany(Adminlogs::class);
+    }
+
+    public function role() {
+        return $this->hasOne(Adminroles::class);
     }
 
     // List of statuses
