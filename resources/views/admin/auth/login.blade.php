@@ -57,20 +57,20 @@ License: You must have a valid license purchased only from themeforest(the above
 							</div>
 
 							<form class="form" id="kt_login_signin_form">
-                				@if (Session::has('error-message'))
-									<div class="alert alert-custom alert-danger fade show" role="alert">
-										<div class="alert-text">
+								<div class="alert alert-custom alert-danger {{ Session::has('error-message') ? 'show' : 'hide' }} fade" id="bx_alert_message_login" role="alert">
+									<div class="alert-text" id="alert_message_login">
+                						@if (Session::has('error-message'))
 											You don't have access
-										</div>
-										<div class="alert-close">
-											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-												<span aria-hidden="true">
-													<i class="ki ki-close"></i>
-												</span>
-											</button>
-										</div>
+            							@endif
 									</div>
-            					@endif
+									<div class="alert-close">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">
+												<i class="ki ki-close"></i>
+											</span>
+										</button>
+									</div>
+								</div>
 
 								<div class="form-group mb-5">
 									<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Email" name="username" autocomplete="off" />

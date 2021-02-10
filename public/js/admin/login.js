@@ -55,7 +55,7 @@
 						url: login_url,
 						type: 'POST',
 						data: '_token=' + cToken + '&' + values,
-						success: function (res, textStatus, request) {
+						success: function (response, textStatus, request) {
 							swal.fire({
 								text: 'All is cool! Now you submit this form',
 								icon: 'success',
@@ -67,15 +67,16 @@
 							}).then(function() {
 								KTUtil.scrollTop();
 								if (request.status == 200) {
-
+									window.location.replace(response.datas.redirect);
+								} else {
+									$('#bx_alert_message_login').removeClass('hide').addClass('show');
+									$('#alert_message_login').html(response.responseJSON.message);
 								}
 							});
 						},
-						error: function (res, textStatus, request) {
-							console.log('error');
-							console.log(res);
-							console.log(textStatus);
-							console.log(request);
+						error: function (response, textStatus, request) {
+							$('#bx_alert_message_login').removeClass('hide').addClass('show');
+							$('#alert_message_login').html(response.responseJSON.message);
 						}
 					});
 				} else {

@@ -24,15 +24,15 @@ class AjaxController extends Controller
      */
     public function bulk_edit(Request $request)
     {
-        $table = $request->input("table");
-        $title = $request->input("title");
+        $table = $request->input('table');
+        $title = $request->input('title');
 
-        $bulk = $request->input("bulk");
-        $bulk = rtrim($bulk, ", ");
+        $bulk = $request->input('bulk');
+        $bulk = rtrim($bulk, ', ');
 
-        $ids = explode(",", $bulk);
+        $ids = explode(',', $bulk);
 
-        $status = $request->input("status");
+        $status = $request->input('status');
 
         foreach($ids as $id) {
             DB::table($table)->where('id', $id)->update( ['status' => $status] );
@@ -42,11 +42,11 @@ class AjaxController extends Controller
             $data_log->table            = $table;
             $data_log->table_id         = $id;
             if($status == -1) {
-                $data_log->action       = "DELETE";
+                $data_log->action       = 'DELETE';
             } else {
-                $data_log->action       = "UPDATE";
+                $data_log->action       = 'UPDATE';
             }
-            $data_log->action_detail    = "Change ".$title." status with id ".$id." to ".$status;
+            $data_log->action_detail    = 'Change '.$title.' status with id '.$id.' to '.$status;
             $data_log->ipaddress        = get_client_ip();
             $data_log->save();
         }
@@ -68,9 +68,9 @@ class AjaxController extends Controller
      */
     public function delete_data(Request $request)
     {
-        $table = $request->input("table");
-        $title = $request->input("title");
-        $id = $request->input("id");
+        $table = $request->input('table');
+        $title = $request->input('title');
+        $id = $request->input('id');
 
         DB::table($table)->where('id', $id)->update([
             'status'        => -1,
@@ -81,8 +81,8 @@ class AjaxController extends Controller
         $data_log->admin_id         = Auth::user()->id;
         $data_log->table            = $table;
         $data_log->table_id         = $id;
-        $data_log->action           = "DELETE";
-        $data_log->action_detail    = "Delete ".$title;
+        $data_log->action           = 'DELETE';
+        $data_log->action_detail    = 'Delete '.$title;
         $data_log->ipaddress        = get_client_ip();
         $data_log->save();
 
@@ -134,17 +134,17 @@ class AjaxController extends Controller
                     if($check->status != 1) {
                         $data_log = new Adminlogs();
                         $data_log->admin_id         = $check->id;
-                        $data_log->table            = "ADMINS";
+                        $data_log->table            = 'ADMINS';
                         $data_log->table_id         = $check->id;
-                        $data_log->action           = "";
-                        $data_log->action_detail    = "Failed to login due inactive admin account";
+                        $data_log->action           = '';
+                        $data_log->action_detail    = 'Failed to login due inactive admin account';
                         $data_log->ipaddress        = get_client_ip();
                         $data_log->save();
 
                         return response()->json(
                             array(
                                 'response'  => 'failed',
-                                'message'   => "Admin not active"
+                                'message'   => 'Admin not active'
                             ), 
                             400
                         );
@@ -152,17 +152,20 @@ class AjaxController extends Controller
 
                     $data_log = new Adminlogs();
                     $data_log->admin_id         = $check->id;
-                    $data_log->table            = "ADMINS";
+                    $data_log->table            = 'ADMINS';
                     $data_log->table_id         = $check->id;
-                    $data_log->action           = "";
-                    $data_log->action_detail    = "Success login";
+                    $data_log->action           = '';
+                    $data_log->action_detail    = 'Success login';
                     $data_log->ipaddress        = get_client_ip();
                     $data_log->save();
                     
                     return response()->json(
                         array(
                             'response'  => 'success',
-                            'message'   => "Admin found"
+                            'message'   => 'Admin found',
+                            'datas'     => [
+                                'redirect' => url('/admin/dashboard')
+                            ]
                         ), 
                         200
                     );
@@ -170,27 +173,28 @@ class AjaxController extends Controller
                     return response()->json(
                         array(
                             'response'  => 'failed',
+                            'message'   => $error->getMessage(),
                             'datas'     => [
                                 'exception'    => $error->getMessage()
                             ]
                         ), 
-                        400
+                        500
                     );
                 }
             } else {
                 $data_log = new Adminlogs();
                 $data_log->admin_id         = $check->id;
-                $data_log->table            = "ADMINS";
+                $data_log->table            = 'ADMINS';
                 $data_log->table_id         = $check->id;
-                $data_log->action           = "";
-                $data_log->action_detail    = "Attempting to login with incorrect password";
+                $data_log->action           = '';
+                $data_log->action_detail    = 'Attempting to login with incorrect password';
                 $data_log->ipaddress        = get_client_ip();
                 $data_log->save();
 
                 return response()->json(
                     array(
                         'response'  => 'failed',
-                        'message'   => "Incorrect password",
+                        'message'   => 'Incorrect password',
                     ), 
                     400
                 );
