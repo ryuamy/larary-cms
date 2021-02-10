@@ -37,12 +37,16 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div class="d-flex flex-column flex-root">
 			
 			<div class="login login-4 login-signin-on d-flex flex-row-fluid" id="kt_login">
-				<div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image: url('{{ asset('/img/admin/layout/bg-login.jpg') }}');">
+				<div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat"
+					style="background-image: url('{{ asset('/img/admin/layout/bg-login.jpg') }}');"
+				>
 					<div class="login-form text-center p-7 position-relative overflow-hidden">
 
 						<div class="d-flex flex-center mb-15">
 							<a href="#">
-								<img src="{{ asset('/metronic_v7.1.2/media/logos/logo-letter-13.png') }}" class="max-h-75px" alt="" />
+								<img src="{{ asset('/metronic_v7.1.2/media/logos/logo-letter-13.png') }}" 
+									class="max-h-75px" alt=""
+								/>
 							</a>
 						</div>
 						
@@ -51,7 +55,23 @@ License: You must have a valid license purchased only from themeforest(the above
 								<h3>Sign In To Admin</h3>
 								<div class="text-muted font-weight-bold">Enter your details to login to your account:</div>
 							</div>
+
 							<form class="form" id="kt_login_signin_form">
+                				@if (Session::has('error-message'))
+									<div class="alert alert-custom alert-danger fade show" role="alert">
+										<div class="alert-text">
+											You don't have access
+										</div>
+										<div class="alert-close">
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">
+													<i class="ki ki-close"></i>
+												</span>
+											</button>
+										</div>
+									</div>
+            					@endif
+
 								<div class="form-group mb-5">
 									<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Email" name="username" autocomplete="off" />
 								</div>
@@ -65,7 +85,9 @@ License: You must have a valid license purchased only from themeforest(the above
 										<span></span>Remember me</label>
 									</div>
 								</div>
-								<button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4">Sign In</button>
+								<button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4">
+									Sign In
+								</button>
 							</form>
 						</div>
 

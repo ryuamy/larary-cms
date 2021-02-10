@@ -55,10 +55,7 @@
 						url: login_url,
 						type: 'POST',
 						data: '_token=' + cToken + '&' + values,
-						success: function (res) {
-							console.log('success');
-							var obj = $.JSON.parse(res);
-
+						success: function (res, textStatus, request) {
 							swal.fire({
 								text: 'All is cool! Now you submit this form',
 								icon: 'success',
@@ -69,15 +66,16 @@
 								}
 							}).then(function() {
 								KTUtil.scrollTop();
-							});
+								if (request.status == 200) {
 
-							console.log(obj);
-							// location.reload();
+								}
+							});
 						},
-						error: function (res) {
+						error: function (res, textStatus, request) {
 							console.log('error');
-							var obj = $.JSON.parse(res);
-							console.log(obj);
+							console.log(res);
+							console.log(textStatus);
+							console.log(request);
 						}
 					});
 				} else {

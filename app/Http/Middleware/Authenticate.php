@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Route;
+use Session;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
@@ -14,14 +16,13 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        // if (! $request->expectsJson()) {
-        //     return route('login');
-        // }
+        if (! $request->expectsJson()) {
+            if(Route::is('admin.*')){
+                Session::flash('error-message', 'You don\'t have access');
+                return route('admin.login');
+            }
 
-        if (Auth::guard('admin')->check()) {
-            return redirect('/admin/dashboard');
-        } else if (Auth::guard('user')->check()) {
-            return redirect('/user');
+            return route('login');
         }
     }
 }
