@@ -1,15 +1,21 @@
 <?php
 
-function customTanggal($date,$date_format) {
-    return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format($date_format);    
+/** old fashion */
+
+if(!function_exists('customTanggal')) {
+    function customTanggal($date,$date_format) {
+        return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format($date_format);    
+    }
 }
 
-function current_uri() {
-    $currentURIPath = url()->current();
-    $paths = explode('/', $currentURIPath);
-    // $paths_total = count($paths);
-    $_SESSION['current_lang'] = ($paths[0] !== '') ? $paths[0] : 'en';
-    return $paths;
+if(!function_exists('current_uri')) {
+    function current_uri() {
+        $currentURIPath = url()->current();
+        $paths = explode('/', $currentURIPath);
+        // $paths_total = count($paths);
+        $_SESSION['current_lang'] = ($paths[0] !== '') ? $paths[0] : 'en';
+        return $paths;
+    }
 }
 
 // function admin_template($view, $datas) {
@@ -131,49 +137,49 @@ if(!function_exists('admin_breadcrumb')) {
  * 
  * param reference example
  * $param = array(
- * 		'base'				=> 'http://127.0.0.1:8001/admin/admin/',
- * 		'page'				=> $page,
- * 		'pages' 			=> $pages,
- * 		'key'					=> 'page',
+ * 		'base'          => 'user',
+ * 		'page'          => $page,
+ * 		'pages'         => $pages,
+ * 		'key'           => 'page',
  * 		'next_text'		=> 'Next',
  * 		'prev_text'		=> 'Prev',
  * 		'first_text'	=> 'First',
  * 		'last_text'		=> 'Last',
- * 		'show_dots'   => true
+ * 		'show_dots'     => true
  * );
  * 
  * param detail:
- * base				: (string - mandatory)	current page
- * page				: (integer - mandatory)	current page
- * pages			: (integer - mandatory)	total amount of pages
- * key				: (string - optional)		parameters name, default value 'page'
- * next_text	: (string - optional)		default value is 'Next'
- * prev_text	: (string - optional)		default value is 'Prev'
- * first_text	: (string - optional)		default value is 'First'
- * last_text	: (string - optional)		default value is 'Last'
- * show_dots  : (boolean - optional)  default value false
+ * base         : (string - mandatory)	current page
+ * page         : (integer - mandatory)	current page
+ * pages        : (integer - mandatory)	total amount of pages
+ * key          : (string - optional)   parameters name, default value 'page'
+ * next_text	: (string - optional)   default value is 'Next'
+ * prev_text	: (string - optional)   default value is 'Prev'
+ * first_text	: (string - optional)   default value is 'First'
+ * last_text	: (string - optional)   default value is 'Last'
+ * show_dots    : (boolean - optional)  default value false
  *
- * @param array $datas
+ * @param array $params
  * @param string $adminpage
  * @return string $html
  * @author Amy <laksmise@gmail.com>
  * 
  */
 if(!function_exists('custom_pagination')) {
-    function custom_pagination($datas, $adminpage='') {
+    function custom_pagination($params, $adminpage='') {
         if(!empty($adminpage)) {
 
         }
 
-        $key = (isset($datas['key'])) ? $datas['key'] : 'page';
-        $next_text = (isset($datas['next_text'])) ? $datas['next_text'] : 'Next';
-        $prev_text = (isset($datas['prev_text'])) ? $datas['prev_text'] : 'Prev';
-        $first_text = (isset($datas['first_text'])) ? $datas['first_text'] : 'First';
-        $last_text = (isset($datas['last_text'])) ? $datas['last_text'] : 'Last';
+        $key = (isset($params['key'])) ? $params['key'] : 'page';
+        $next_text = (isset($params['next_text'])) ? $params['next_text'] : 'Next';
+        $prev_text = (isset($params['prev_text'])) ? $params['prev_text'] : 'Prev';
+        $first_text = (isset($params['first_text'])) ? $params['first_text'] : 'First';
+        $last_text = (isset($params['last_text'])) ? $params['last_text'] : 'Last';
 
-        $page = $datas['page'];
-        $pages = $datas['pages'];
-        $base = $datas['base'];
+        $page = $params['page'];
+        $pages = $params['pages'];
+        $base = env('APP_URL').'/admin/'.$params['base'];
 
         $prevs = array();
         for ($p=1; $p<=4; $p++) {
@@ -203,11 +209,11 @@ if(!function_exists('custom_pagination')) {
                     $active = ($page==$i) ? 'class="active"':'';
                     $html .= '<a href="'.$base.$key.'='.$i.'" '. $active.'>'. $i.'</a> ';
                 }
-                if(isset($datas['show_dots']) && $datas['show_dots'] === TRUE) {
+                if(isset($params['show_dots']) && $params['show_dots'] === TRUE) {
                     $html .= '<span>...</span> ';
                 }
             } else {
-                if(isset($datas['show_dots']) && $datas['show_dots'] === TRUE) {
+                if(isset($params['show_dots']) && $params['show_dots'] === TRUE) {
                     if($page!=1 || $page==$pages) {
                         $html .= '<span>...</span> ';
                     }
@@ -229,7 +235,7 @@ if(!function_exists('custom_pagination')) {
                         }
                     }
                 }
-                if(isset($datas['show_dots']) && $datas['show_dots'] === TRUE) {
+                if(isset($params['show_dots']) && $params['show_dots'] === TRUE) {
                     if($page!=$pages) {
                         $html .= '<span>...</span> ';
                     }
@@ -249,7 +255,7 @@ if(!function_exists('custom_pagination')) {
             $html .= '<a class="last" href="'.$base.$key.'='. $pages.'">'.$last_text.'</a> ';
         }
 
-        if(isset($datas['show_goto']) && $datas['show_goto'] === TRUE) {
+        if(isset($params['show_goto']) && $params['show_goto'] === TRUE) {
             //coming soon~
         }
 
@@ -401,8 +407,15 @@ if(!function_exists('custom_pagination_prep')) {
     }
 }
 
-if(!function_exists('table_head')) {
-    function table_head($array) {
+/**
+ * Admin table header
+ *
+ * @param array $array
+ * @return array $table_head
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('admin_table_head')) {
+    function admin_table_head($array) {
         $table_head = [];
 
         foreach($array['head'] as $value) {
@@ -797,4 +810,142 @@ if(!function_exists('timezone_choice')) {
         return join( '\n', $structure );
     }
 }
+
+/**
+ * Global adsmedia / raja sms api
+ * 
+ * param reference example
+ * $param = array(
+ * 		'service'   => 'SMS_OTP',
+ * 		'number'    => '0812345xxxxx,
+ * 		'message'   => 'hello world'
+ * );
+ * 
+ * param detail:
+ * service  : (string - mandatory)	options are "MISSCALL_OTP", "SMS_OTP", "SMS_MASKING", "WA", "CHECK_BALANCE"
+ * number   : (string - optional)	phone number. accept numberic only and indonesia number only
+ * message  : (string - optional)	alpha numberic only and must be less than 890 character
+ * 
+ * @param array $params
+ * @return array $return
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('adsmedia_api')) {
+    function adsmedia_api($params) {
+        ob_start();
+
+        if(!$params['service']) {
+            $return = [
+                'code'      => 400,
+                'response'  => 'failed',
+                'message'   => 'Please tell us service name',
+                'datas'     => []
+            ];
+
+            return $return;
+        }
+
+        if(preg_match('/[^A-Z_]/i', $params['service'])) {
+            $return = [
+                'code'      => 400,
+                'response'  => 'failed',
+                'message'   => 'Invalid service name',
+                'datas'     => []
+            ];
+
+            return $return;
+        }
+        
+        $apikey         = env('ADSMEDIA_KEY');
+        $apiusername    = env('ADSMEDIA_USERNAME');
+        $apiurl         = env('ADSMEDIA_URL');
+        $callbackurl    = env('ADSMEDIA_CALLBACK');
+        $endpointurl    = $apiurl;
+        $senddata       = array();
+ 
+        if($params['service'] === 'SMS_OTP') {
+            $endpointurl = $endpointurl . 'api_sms_otp_send_json.php';
+
+            $senddata = array(
+                'apikey'        => $apikey,  
+                'callbackurl'   => $callbackurl, 
+                'datapacket'    => array()
+            );
+            
+            $number = preg_replace( '/[^0-9]/i', '', $params['number'] );
+
+            $message = preg_replace( '/[\W]/', '', $params['message'] );
+            $count_message = strlen($message);
+            if($count_message > 870) {
+                $message = substr($message, 0, 900) . '(cropped)';
+            }
+
+            array_push($senddata['datapacket'], array(
+                'number'    => $number,
+                'message'   => $message
+            ));
+        }
+ 
+        if($params['service'] === 'SMS_MASKING') {
+            $number = preg_replace( '/[^0-9]/i', '', $params['number'] );
+
+            $message = preg_replace( '/[\W]/', '', $params['message'] );
+            $count_message = strlen($message);
+            if($count_message > 870) {
+                $message = substr($message, 0, 900) . '(cropped)';
+            }
+
+            $endpointurl = $endpointurl . 'smsmasking.php?username='.$apikey.'&key='.$apikey.'&number='.$number.'&message='.$message;
+        }
+ 
+        if($params['service'] === 'MISSCALL_OTP') {
+            $endpointurl = $endpointurl . 'api_misscall_otp_send_json.php';
+
+            $senddata = array(
+                'apikey' => $apikey
+            );
+        }
+ 
+        if($params['service'] === 'WA') {
+            $endpointurl = $endpointurl . 'api_whatsapp_send_json.php';
+
+            $senddata = array(
+                'apikey' => $apikey
+            );
+        }
+ 
+        if($params['service'] === 'CHECK_BALANCE') {
+            $endpointurl = $endpointurl . 'api_sms_otp_balance_json.php';
+
+            $senddata = array(
+                'apikey' => $apikey
+            );
+        }
+ 
+        $data = json_encode($senddata);
+        $curlHandle = curl_init($endpointurl);
+
+        curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data))
+        );
+        curl_setopt($curlHandle, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
+        $respon = curl_exec($curlHandle);
+        curl_close($curlHandle);
+        
+        $return = [
+            'code'      => 200,
+            'response'  => 'success',
+            'message'   => '',
+            'datas'     => json_decode($respon)
+        ];
+
+        return $return;
+    }
+}
+
 ?>

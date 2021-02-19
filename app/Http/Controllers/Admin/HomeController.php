@@ -22,7 +22,7 @@ class HomeController extends Controller
         $datas = [
             "table" => "",
             "meta" => [
-                "title" => "Dashboard" . get_site_settings('title')
+                "title" => "Dashboard"
             ],
             "css" => [],
             "js" => [

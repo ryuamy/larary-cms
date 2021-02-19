@@ -39,21 +39,24 @@ Setelah install composer, run **`composer install`** pada console untuk mendapat
 run **`npm install`** untuk menginstall package dependency tambahan, contohnya `Laravel Mix`, dan beberapa dependency lainnya yang akan dipakai kedepannya.
 
 ### Mengaktifkan enviroment
-Copy-paste file **`.env.example`** dalam path yang sama. Rename file yang baru saja di paste menjadi **`.env`**. 
+Copy file **`.env`** dari folder **`copyfile`** (asked me first) dan paste di path yang sama dengan **`.env.example`**.
 
 ### Mengubah enviroment
 Ubah beberapa property di bawah ini pada file **`.env`** menyesuaikan dengan local masing-masing
 ```properties
+APP_NAME=(yourappname)
 APP_ENV=local
+APP_KEY=(generatekey)
 APP_DEBUG=true
-APP_URL=yourappurl
+APP_URL=(yourappurl)
+```
 
-DB_CONNECTION=mysql
-DB_HOST=yourhostname
-DB_PORT=yourhostport
-DB_DATABASE=yourdatabase
-DB_USERNAME=yourhostusername
-DB_PASSWORD=yourhostpassword
+```properties
+DB_HOST=(yourhostname)
+DB_PORT=(yourhostpost)
+DB_DATABASE=(yourdatabasename)
+DB_USERNAME=(yourhostnameusername)
+DB_PASSWORD=(yourhostnamepassword)
 ```
 **`APP_ENV`** akan diubah menjadi staging atau production menyesuaikan enviroment ketika diupload ke server sedangkan untuk pengerjaan di local bisa menggunakan `local` atau `development`. **`APP_URL`** bisa tetap menggunakan `http://127.0.0.1:8081` atau disesuaikan dengan local masing-masing.
 
@@ -71,13 +74,15 @@ Jalankan command **`php artisan serve`** atau **`php artisan serve --port=8081`*
 
 
 ## Not Work! What to do?
-* Jika kamu melakukan perubahan atau penambahan tetapi perubahan atau penambahan tersebut tidak berubah dari sebelumnya, jalankan beberapa problem solving dibawah ini:
-  * Clear cache route:
-  Jalankan perintah **`php artisan route:cache`** untuk membersihkan cache route jika kamu melakukan perubahan pada route tapi route masih tidak bisa diakses.
-  * Clear cache view:
-  Jika kamu membuat file view baru atau melakukan perubahan pada file view yang sudah ada tapi tidak terjadi perubahan sama sekali, jalankan perintah **`php artisan view:clear`** untuk membersihkan cache view.
-  * Clear cache aplikasi:
-  Jika kamu membuat perubahan pada file selain route dan view, tetapi perubahan tersebut tidak terlihat, jalankan **`php artisan cache:clear`** untuk membersihkan semua cache pada aplikasi.
+* Jika kamu melakukan perubahan atau penambahan tetapi perubahan atau penambahan tersebut tidak berubah dari sebelumnya, jalankan command di bawah ini secara berurutan:
+```command
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear
+php artisan config:clear
+php artisan clear-compiled
+composer dump-autoload
+```
 
 * Jika kamu tidak bisa menjalankan perintah `php artisan` atau `composer` dan menemukan notif error seperti **`In ProviderRepository.php line 208: Class 'blabla\blabla\blabla' not found`**, buka folder **`bootstrap\cache\config.php`** dan hapus manually Class yang membuat error, contohnya `Intervention\Image\ImageServiceProvider`, di bagian array providers dan array aliases (biasany memilihi path yang sama, contohnya `'Intervention\Image\Facades\Image'`) dan rapikan kembali array nya. Setelah itu hapus folder `vendor` dan jalankan `composer dump-autoload` dilanjutan dengan menjalankan perintah `composer update`.
 
@@ -95,15 +100,3 @@ File ini berfungsi sama dengan **`.gitignore`** tapi hanya berlaku di local masi
 [[top]](#table-of-contents)
 
 ---
-
-I don't know best word to explain this:
-
-Clear Config Cache in Laravel
-- php artisan config:cache
-
-Reoptimize Class
-- php artisan optimize
-
-composer dump-autoload
-
-[[top]](#table-of-contents)

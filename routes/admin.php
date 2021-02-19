@@ -19,6 +19,9 @@ Route::get( 'login', [App\Http\Controllers\Admin\Auth\LoginController::class, 'f
 Route::get( 'dashboard', [App\Http\Controllers\Admin\HomeController::class, 'index'] )
     ->name('admin.dashboard');
 
+Route::get( 'index', [App\Http\Controllers\Admin\HomeController::class, 'index'] )
+    ->name('admin.index');
+
     
 Route::prefix( 'ajax' )->group(function () {
     Route::post( 'bulk-edit', [App\Http\Controllers\Admin\AjaxController::class, 'bulk_edit'] )
@@ -34,4 +37,14 @@ Route::prefix( 'export' )->group(function () {
         ->name("admin.export.export_excel");
     Route::get("csv/{table}", [App\Http\Controllers\Admin\ExportController::class, 'export_csv'] )
         ->name("admin.export.export_csv");
+});
+
+Route::prefix( 'custom' )->group(function () {
+    Route::prefix( 'apps' )->group(function () {
+        Route::get( 'user/list-default', [App\Http\Controllers\Admin\Custom\Apps\UserController::class, 'list_default'] );
+    });
+});
+
+Route::prefix( 'sms' )->group(function () {
+    Route::get( 'callback', [App\Http\Controllers\Admin\Custom\Apps\UserController::class, 'list_default'] );
 });
