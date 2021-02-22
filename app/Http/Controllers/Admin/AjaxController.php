@@ -100,7 +100,8 @@ class AjaxController extends Controller
     {
         $rules = [
             'username'  => 'required|email',
-            'password'  => 'required|alpha_num_spaces'
+            'password'  => 'required|alpha_num_spaces',
+            'g-recaptcha-response' => 'required|captcha',
         ];
 
         $messages = [
