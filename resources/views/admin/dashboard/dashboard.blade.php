@@ -8,16 +8,13 @@
         
         <div class="row">
             <div class="col-lg-6 col-xxl-4">
-                <!--begin::Mixed Widget 1-->
                 <div class="card card-custom bg-gray-100 card-stretch gutter-b">
-                    <!--begin::Header-->
                     <div class="card-header border-0 bg-danger py-5">
                         <h3 class="card-title font-weight-bolder text-white">Sales Stat</h3>
                         <div class="card-toolbar">
                             <div class="dropdown dropdown-inline">
                                 <a href="#" class="btn btn-transparent-white btn-sm font-weight-bolder dropdown-toggle px-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export</a>
                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                    <!--begin::Navigation-->
                                     <ul class="navi navi-hover">
                                         <li class="navi-header pb-1">
                                             <span class="text-primary text-uppercase font-weight-bold font-size-sm">Add new:</span>
@@ -63,24 +60,18 @@
                                             </a>
                                         </li>
                                     </ul>
-                                    <!--end::Navigation-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--end::Header-->
-                    <!--begin::Body-->
+                    
                     <div class="card-body p-0 position-relative overflow-hidden">
-                        <!--begin::Chart-->
                         <div id="kt_mixed_widget_1_chart" class="card-rounded-bottom bg-danger" style="height: 200px"></div>
-                        <!--end::Chart-->
-                        <!--begin::Stats-->
+                        
                         <div class="card-spacer mt-n25">
-                            <!--begin::Row-->
                             <div class="row m-0">
                                 <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 mb-7">
                                     <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24" />
@@ -90,13 +81,12 @@
                                                 <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5" />
                                             </g>
                                         </svg>
-                                        <!--end::Svg Icon-->
                                     </span>
                                     <a href="#" class="text-warning font-weight-bold font-size-h6">Weekly Sales</a>
                                 </div>
+
                                 <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
                                     <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <polygon points="0 0 24 0 24 24 0 24" />
@@ -104,17 +94,14 @@
                                                 <path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
                                             </g>
                                         </svg>
-                                        <!--end::Svg Icon-->
                                     </span>
                                     <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">New Users</a>
                                 </div>
                             </div>
-                            <!--end::Row-->
-                            <!--begin::Row-->
+                            
                             <div class="row m-0">
                                 <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7">
                                     <span class="svg-icon svg-icon-3x svg-icon-danger d-block my-2">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <polygon points="0 0 24 0 24 24 0 24" />
@@ -122,13 +109,12 @@
                                                 <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3" />
                                             </g>
                                         </svg>
-                                        <!--end::Svg Icon-->
                                     </span>
                                     <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Item Orders</a>
                                 </div>
+
                                 <div class="col bg-light-success px-6 py-8 rounded-xl">
                                     <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Urgent-mail.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24" />
@@ -136,41 +122,37 @@
                                                 <path d="M9.80428954,10.9142091 L9,12 L11.2222222,12 L11.2222222,16 L15.6666667,10 L15.4615385,10 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 L9.80428954,10.9142091 Z" fill="#000000" />
                                             </g>
                                         </svg>
-                                        <!--end::Svg Icon-->
                                     </span>
                                     <a href="#" class="text-success font-weight-bold font-size-h6 mt-2">Bug Reports</a>
                                 </div>
                             </div>
-                            <!--end::Row-->
                         </div>
-                        <!--end::Stats-->
                     </div>
-                    <!--end::Body-->
                 </div>
-                <!--end::Mixed Widget 1-->
             </div>
             <div class="col-lg-6 col-xxl-4">
-                <!--begin::List Widget 9-->
                 <div class="card card-custom card-stretch gutter-b">
-                    <!--begin::Header-->
                     <div class="card-header align-items-center border-0 mt-4">
                         <h3 class="card-title align-items-start flex-column">
                             <span class="font-weight-bolder text-dark">My Activity</span>
                             <span class="text-muted mt-3 font-weight-bold font-size-sm">890,344 Sales</span>
                         </h3>
+
                         <div class="card-toolbar">
                             <div class="dropdown dropdown-inline">
                                 <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="ki ki-bold-more-hor"></i>
                                 </a>
+
                                 <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                                    <!--begin::Navigation-->
                                     <ul class="navi navi-hover">
                                         <li class="navi-header font-weight-bold py-4">
                                             <span class="font-size-lg">Choose Label:</span>
                                             <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
                                         </li>
+
                                         <li class="navi-separator mb-3 opacity-70"></li>
+
                                         <li class="navi-item">
                                             <a href="#" class="navi-link">
                                                 <span class="navi-text">
@@ -178,6 +160,7 @@
                                                 </span>
                                             </a>
                                         </li>
+
                                         <li class="navi-item">
                                             <a href="#" class="navi-link">
                                                 <span class="navi-text">
@@ -185,6 +168,7 @@
                                                 </span>
                                             </a>
                                         </li>
+
                                         <li class="navi-item">
                                             <a href="#" class="navi-link">
                                                 <span class="navi-text">
@@ -192,6 +176,7 @@
                                                 </span>
                                             </a>
                                         </li>
+
                                         <li class="navi-item">
                                             <a href="#" class="navi-link">
                                                 <span class="navi-text">
@@ -199,6 +184,7 @@
                                                 </span>
                                             </a>
                                         </li>
+
                                         <li class="navi-item">
                                             <a href="#" class="navi-link">
                                                 <span class="navi-text">
@@ -206,68 +192,55 @@
                                                 </span>
                                             </a>
                                         </li>
+
                                         <li class="navi-separator mt-3 opacity-70"></li>
+
                                         <li class="navi-footer py-4">
                                             <a class="btn btn-clean font-weight-bold btn-sm" href="#">
                                             <i class="ki ki-plus icon-sm"></i>Add new</a>
                                         </li>
                                     </ul>
-                                    <!--end::Navigation-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--end::Header-->
-                    <!--begin::Body-->
+                    
                     <div class="card-body pt-4">
-                        <!--begin::Timeline-->
                         <div class="timeline timeline-6 mt-3">
-                            <!--begin::Item-->
                             <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
                                 <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">08:42</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
+                                
                                 <div class="timeline-badge">
                                     <i class="fa fa-genderless text-warning icon-xl"></i>
                                 </div>
-                                <!--end::Badge-->
-                                <!--begin::Text-->
-                                <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">Outlines keep you honest. And keep structure</div>
-                                <!--end::Text-->
+                                
+                                <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">
+                                    Outlines keep you honest. And keep structure
+                                </div>
                             </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
+                            
                             <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
                                 <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">10:00</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
+                                
                                 <div class="timeline-badge">
                                     <i class="fa fa-genderless text-success icon-xl"></i>
                                 </div>
-                                <!--end::Badge-->
-                                <!--begin::Content-->
+                                
                                 <div class="timeline-content d-flex">
                                     <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">AEOL meeting</span>
                                 </div>
-                                <!--end::Content-->
                             </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
+                            
                             <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
                                 <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">14:37</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
+                                
                                 <div class="timeline-badge">
                                     <i class="fa fa-genderless text-danger icon-xl"></i>
                                 </div>
-                                <!--end::Badge-->
-                                <!--begin::Desc-->
+                                
                                 <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Make deposit
                                 <a href="#" class="text-primary">USD 700</a>. to ESL</div>
-                                <!--end::Desc-->
+                                
                             </div>
                             <!--end::Item-->
                             <!--begin::Item-->

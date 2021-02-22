@@ -115,6 +115,7 @@
 		});
 
 		$('#reload').click(function () {
+			$(".captcha span").html('loading new captcha...');
 			$.ajax({
 				type: 'GET',
 				url: baseUrl + 'ajax/reload-captcha',

@@ -30,15 +30,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="{{ asset('/css/admin/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
 		<link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" />
-		<!-- Styles -->
-    <style>
-        .container {
-            max-width: 500px;
-        }
-        .reload {
-            font-family: Lucida Sans Unicode
-        }
-    </style>
 
 	</head>
 	

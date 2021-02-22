@@ -72006,9 +72006,12 @@ to {
 }
 
 .form-group.captcha .bx-image {
-  width: 170px;
+  width: 160px;
   border-radius: 0.42rem;
   margin-right: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-group.captcha .bx-image img {
@@ -72017,7 +72020,7 @@ to {
 }
 
 .form-group.captcha input {
-  width: 180px;
+  width: 195px;
   margin-left: 0.5rem;
 }
 
@@ -72518,12 +72521,17 @@ to {
   border-radius: 0.42rem;
 }
 
+#kt_chat_modal.modal.modal-sticky.modal-sticky-bottom-right {
+  bottom: 0px;
+  right: 10px;
+}
+
 .modal.modal-sticky.modal-sticky-bottom-right .modal-dialog {
-    position: static;
-    max-width: 500px;
-    width: auto;
-    margin: 0;
-    border-radius: 0.42rem;
+  position: static;
+  max-width: 500px;
+  width: auto;
+  margin: 0;
+  border-radius: 0.42rem;
 }
 
 .modal.modal-sticky.modal-sticky-bottom-right .modal-dialog .modal-content {
