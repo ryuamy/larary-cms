@@ -71894,11 +71894,11 @@ code {
     vertical-align: middle;
 }
 
-.dropdown-menu .dropdown-menu:not(.daterangepicker) {
+/* .dropdown-menu .dropdown-menu:not(.daterangepicker) { */
     /*rtl:raw:
     left: auto !important;
     */
-}
+/* } */
 
 .dropdown-menu.dropdown-menu-anim-up {
     -webkit-animation: animation-dropdown-menu-fade-in .3s ease 1, animation-dropdown-menu-move-up .3s ease-out 1;
@@ -72003,6 +72003,22 @@ to {
 to {
     margin-top: 0px;
   }
+}
+
+.form-group.captcha .bx-image {
+  width: 170px;
+  border-radius: 0.42rem;
+  margin-right: 0.5rem;
+}
+
+.form-group.captcha .bx-image img {
+  height: 100%;
+  border-radius: 0.42rem;
+}
+
+.form-group.captcha input {
+  width: 180px;
+  margin-left: 0.5rem;
 }
 
 .form-group label {

@@ -65,6 +65,7 @@ class AjaxController extends Controller
      * Delete selected data
      *
      * @param request $request
+     * @return \Illuminate\Http\Response
      */
     public function delete_data(Request $request)
     {
@@ -96,19 +97,31 @@ class AjaxController extends Controller
         return $response;
     }
 
+    /**
+     * Admin login
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function login(Request $request)
     {
         $rules = [
             'username'  => 'required|email',
             'password'  => 'required|alpha_num_spaces',
-            'g-recaptcha-response' => 'required|captcha',
+            /** reCaptcha */
+            // 'g-recaptcha-response' => 'required|captcha',
+            /** Laravel Captcha */
+            'captcha'   => 'required|captcha_api:'. request('key') . ',default'
         ];
 
         $messages = [
-            'username.required' => 'Email is required',
-            'username.email'    => 'Email format invalid',
-            'password.required' => 'Password is required',
-            'password.string'   => 'Password only accept alphanumeric and space'
+            'username.required'     => 'Email is required',
+            'username.email'        => 'Email format invalid',
+            'password.required'     => 'Password is required',
+            'captcha.string'        => 'Password only accept alphanumeric and space',
+            /** Laravel Captcha */
+            'captcha.email'         => 'Captcha is required',
+            'captcha.captcha_api'   => 'Invalid captcha',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -205,4 +218,15 @@ class AjaxController extends Controller
             }
         }
     }
+
+    /**
+     * Reload image captcha / non reCaptcha
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reload_captcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
+    }
+
 }

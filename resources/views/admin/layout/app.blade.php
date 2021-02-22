@@ -14,7 +14,8 @@ License: You must have a valid license purchased only from themeforest(the above
 -->
 
 <html lang="en">
-	<head><base href="">
+	<head>
+		<base href="{{ url('/') }}" />
 		<meta charset="utf-8" />
 		<title>{{ $meta["title"] . get_site_settings('title') }}</title>
 		<meta name="description" content="{{ get_site_settings('description') }}" />

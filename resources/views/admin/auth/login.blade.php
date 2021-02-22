@@ -16,7 +16,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <html lang="en">
 	<head>
-		<base href="../../../../" />
+		<base href="{{ url('/') }}" />
 		<meta charset="utf-8" />
 		<title>{{ $meta["title"] }}</title>
 		<meta name="description" content="Login page example" />
@@ -30,6 +30,16 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="{{ asset('/css/admin/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
 		<link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" />
+		<!-- Styles -->
+    <style>
+        .container {
+            max-width: 500px;
+        }
+        .reload {
+            font-family: Lucida Sans Unicode
+        }
+    </style>
+
 	</head>
 	
 	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"
@@ -84,8 +94,22 @@ License: You must have a valid license purchased only from themeforest(the above
 									<input class="form-control h-auto form-control-solid py-4 px-8" type="password" placeholder="Password" name="password" />
 								</div>
 
-								<div class="form-group mb-5 d-flex justify-content-center">
-									{!! app('captcha')->display() !!}
+								<div class="form-group mb-5 d-flex justify-content-center captcha">
+									<?php /** reCaptcha */ ?>
+									<?php /*{!! app('captcha')->display() !!}*/ ?>
+									<?php /*@if ($errors->has('g-recaptcha-response'))
+										<span class="help-block">
+											<strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+										</span>
+									@endif*/ ?>
+
+									<span class="bx-image">
+										{!! captcha_img() !!}
+									</span>
+									<button type="button" class="btn btn-danger" class="reload" id="reload">
+										&#x21bb;
+									</button>
+									<input id="captcha" type="text" class="form-control h-auto form-control-solid py-4 px-8" placeholder="Enter Captcha" name="captcha">
 								</div>
 
 								<div class="form-group d-flex flex-wrap justify-content-between align-items-center">
@@ -118,7 +142,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<script src="{{ asset('/js/admin/login.js') }}"></script>
 
-		{!! NoCaptcha::renderJs() !!}
+		<?php /** reCaptcha */ ?>
+		<?php /*{!! NoCaptcha::renderJs() !!} */ ?>
 
 	</body>
 </html>

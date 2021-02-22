@@ -113,6 +113,16 @@
 				}
 			});
 		});
+
+		$('#reload').click(function () {
+			$.ajax({
+				type: 'GET',
+				url: baseUrl + 'ajax/reload-captcha',
+				success: function (data) {
+					$(".captcha span").html(data.captcha);
+				}
+			});
+		});
 	}
 
 	_handleSignInForm();

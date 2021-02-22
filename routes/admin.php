@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AjaxController;
 
 Route::get( 'login', [App\Http\Controllers\Admin\Auth\LoginController::class, 'form'] )
     ->name( 'admin.login' );
@@ -18,6 +19,7 @@ Route::prefix( 'ajax' )->group(function () {
         ->name( 'admin.ajax.delete_data');
     Route::post( 'login', [App\Http\Controllers\Admin\AjaxController::class, 'login'] )
         ->name( 'admin.ajax.login' );
+    Route::get( 'reload-captcha', [AjaxController::class, 'reload_captcha'] );
 });
 
 //** NOTES : buat Exports terlebih dahulu untuk mengaktifkan feature export */
