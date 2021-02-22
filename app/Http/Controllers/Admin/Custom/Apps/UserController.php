@@ -7,34 +7,57 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        // $this->middleware('auth:admin');
-    }
-
     public function list_default()
     {
         $datas = [
-            "table" => "",
-            "meta" => [
-                "title" => "List Default"
+            'table' => '',
+            'meta' => [
+                'title' => 'List Default'
             ],
-            "css" => [],
-            "js" => [],
-            "breadcrumb" => [
+            'css' => [],
+            'js' => [],
+            'breadcrumb' => [
                 //...
                 array(
-                    "title" => "User",
-                    "url" => "user"
+                    'title' => 'User',
+                    'url' => 'user'
                 ),
                 array(
-                    "title" => "List Default",
-                    "url" => "list-default"
+                    'title' => 'List Default',
+                    'url' => 'list-default'
                 ),
             ],
-            "data" => [],
+            'data' => [],
         ];
 
-        return view("admin.custom.apps.user.list_default", $datas);
+        return view('admin.custom.apps.user.list_default', $datas);
+    }
+
+    public function list_datatable()
+    {
+        $datas = [
+            'table' => '',
+            'meta' => [
+                'title' => 'List Datatable'
+            ],
+            'css' => [],
+            'js' => [
+                'metronic_v7.1.2/js/pages/custom/user/list-datatable'
+            ],
+            'breadcrumb' => [
+                //...
+                array(
+                    'title' => 'User',
+                    'url' => 'user'
+                ),
+                array(
+                    'title' => 'List Datatable',
+                    'url' => 'list-datatable'
+                ),
+            ],
+            'data' => [],
+        ];
+
+        return view('admin.custom.apps.user.list_datatable', $datas);
     }
 }

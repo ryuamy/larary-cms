@@ -18,6 +18,13 @@ if(!function_exists('current_uri')) {
     }
 }
 
+if(!function_exists('admin_uri')) {
+    function admin_uri() {
+        $admin_url = env('APP_ADMIN_URL');
+        return ($admin_url != null) ? $admin_url : env('APP_URL').'/admin/';
+    }
+}
+
 // function admin_template($view, $datas) {
 //     $trn = view('admin.layouts.header', $datas);
 //     $trn .= view('admin.'.$view, $datas);
@@ -53,12 +60,13 @@ if(!function_exists('base_img')) {
 /**
  * Get site settings
  * 
- * @return string $meta_value
+ * @return string $meta_value   
+ * @return string $separator    separator, default is "|"
  * @author Amy <laksmise@gmail.com>
  * 
  */
 if(!function_exists('get_site_settings')) {
-    function get_site_settings($meta_key) {
+    function get_site_settings($meta_key, $separator='|') {
         new \Illuminate\Support\Facades\DB;
         $select = DB::table('settings')
             ->where('status', 1)
@@ -66,10 +74,7 @@ if(!function_exists('get_site_settings')) {
             ->orderBy('id', 'desc')
             ->first();
         $meta_value = $select->meta_value;
-        if($meta_key == 'title') {
-            return ' | ' . $meta_value;
-        }
-        return $meta_value;
+        return ($meta_key == 'title') ? ' ' . $separator . ' ' . $meta_value : $meta_value;
     }
 }
 
@@ -97,38 +102,38 @@ if(!function_exists('is_mobile')) {
  */
 if(!function_exists('admin_breadcrumb')) {
     function admin_breadcrumb($edit_title='') {
-        $currentURIPath = url()->current();
-        $paths = explode('/', $currentURIPath);
+        // $currentURIPath = url()->current();
+        // $paths = explode('/', $currentURIPath);
 
-        $paths_total = count($paths);
-        $html = '<ol class=\'breadcrumb mb-4\'>';
-        foreach($paths as $key => $path) {
-            if($path !== 'http:' && $path !== 'https:' && $path !== '127.0.0.1:8081' && !empty($path)) {
-                $x = $paths_total-1;
-                $title_path = (empty($edit_title)) ? ucwords(str_replace('-', ' ', $path)) : $edit_title;
-                if(strtolower($title_path) != 'detail' && strtolower($title_path) != 'read') {
-                    $label = ($path === 'admin') ? 'Dashboard' : $title_path;
-                    if(strtolower($label) === 'seo') {
-                        $label = 'SEO';
-                    }
-                    $is_active = ($key === $x) ? ' active' : '';
-                    $href = ($path !== 'admin') ? url('/admin/'.$path) : url('/admin');
-                    if($path === 'role') {
-                        $href = url('/admin/admin/'.$path);
-                    }
-                    if($path === 'seo') {
-                        $href = url('/admin/support/'.$path);
-                    }
-                    if($path === 'setting') {
-                        $href = url('/admin/setting/general');
-                    }
-                    $href = ($key !== $x) ? '<a href=\''.$href.'\'>'.$label.'</a>' : $label;
-                    $html .= '<li class=\'breadcrumb-item'.$is_active.'\'>'.$href.'</li>';
-                }
-            }
-        }
-        $html .= '</ol>';
-        return $html;
+        // $paths_total = count($paths);
+        // $html = '<ol class=\'breadcrumb mb-4\'>';
+        // foreach($paths as $key => $path) {
+        //     if($path !== 'http:' && $path !== 'https:' && $path !== '127.0.0.1:8081' && !empty($path)) {
+        //         $x = $paths_total-1;
+        //         $title_path = (empty($edit_title)) ? ucwords(str_replace('-', ' ', $path)) : $edit_title;
+        //         if(strtolower($title_path) != 'detail' && strtolower($title_path) != 'read') {
+        //             $label = ($path === 'admin') ? 'Dashboard' : $title_path;
+        //             if(strtolower($label) === 'seo') {
+        //                 $label = 'SEO';
+        //             }
+        //             $is_active = ($key === $x) ? ' active' : '';
+        //             $href = ($path !== 'admin') ? url(admin_uri() . $path) : url(admin_uri());
+        //             if($path === 'role') {
+        //                 $href = url(admin_uri() . 'admin/'.$path);
+        //             }
+        //             if($path === 'seo') {
+        //                 $href = url(admin_uri() . 'support/'.$path);
+        //             }
+        //             if($path === 'setting') {
+        //                 $href = url(admin_uri() . 'setting/general');
+        //             }
+        //             $href = ($key !== $x) ? '<a href=\''.$href.'\'>'.$label.'</a>' : $label;
+        //             $html .= '<li class=\'breadcrumb-item'.$is_active.'\'>'.$href.'</li>';
+        //         }
+        //     }
+        // }
+        // $html .= '</ol>';
+        // return $html;
     }
 }
 
@@ -179,7 +184,7 @@ if(!function_exists('custom_pagination')) {
 
         $page = $params['page'];
         $pages = $params['pages'];
-        $base = env('APP_URL').'/admin/'.$params['base'];
+        $base = admin_uri().$params['base'];
 
         $prevs = array();
         for ($p=1; $p<=4; $p++) {
@@ -323,7 +328,7 @@ if(!function_exists('custom_pagination_prep')) {
  */
 if(!function_exists('custom_pagination_sort_link')) {
     function custom_pagination_sort_link($menu, $params, $is_myadmin=true) {
-        $link = ($is_myadmin === true) ? url('/admin/'.$menu.'?') : url('/'.$menu.'?');
+        $link = ($is_myadmin === true) ? url(admin_uri().$menu.'?') : url('/'.$menu.'?');
 
         if(
         (isset($params['action']) && isset($params['page'])) || 
@@ -352,7 +357,7 @@ if(!function_exists('custom_pagination_sort_link')) {
  */
 if(!function_exists('custom_pagination_link')) {
     function custom_pagination_link($menu, $params, $is_myadmin=true) {
-        $link = ($is_myadmin === true) ? url('/admin/'.$menu.'?') : url('/'.$menu.'?');
+        $link = ($is_myadmin === true) ? url(admin_uri().$menu.'?') : url('/'.$menu.'?');
 
         if(
         (isset($params['action']) && isset($params['order'])) || 

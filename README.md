@@ -26,10 +26,6 @@ CMS utama untuk kjgng
 
 ## Getting started
 
-### Mengaktifkan enviroment beserta config
-Copy file dari folder **`copyfile`** (asked me first) dan paste dengan path berikut:
-* copyfile/.env ke .env (index path)
-
 ### Install Composer
 Download composer melalui web ini [https://getcomposer.org/download/](https://getcomposer.org/download/) dan ikuti langkah-langkahnya. Composer digunakan sebagai dependency manager untuk menghubung antara project dengan library luar laravel. Restart komputer.
 
@@ -38,8 +34,9 @@ Setelah install composer, run **`composer install`** pada console untuk mendapat
 ### Install dependency package node.js
 run **`npm install`** untuk menginstall package dependency tambahan, contohnya `Laravel Mix`, dan beberapa dependency lainnya yang akan dipakai kedepannya.
 
-### Mengaktifkan enviroment
-Copy file **`.env`** dari folder **`copyfile`** (asked me first) dan paste di path yang sama dengan **`.env.example`**.
+### Mengaktifkan enviroment beserta config
+Copy file dari folder **`copyfile`** (asked me first) dan paste dengan path berikut:
+* copyfile/.env ke .env (index path)
 
 ### Mengubah enviroment
 Ubah beberapa property di bawah ini pada file **`.env`** menyesuaikan dengan local masing-masing

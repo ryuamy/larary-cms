@@ -32,8 +32,8 @@ License: You must have a valid license purchased only from themeforest(the above
         
 		<link href="{{ asset('/metronic_v7.1.2/css/themes/layout/header/base/light.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('/metronic_v7.1.2/css/themes/layout/header/menu/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/metronic_v7.1.2/css/themes/layout/brand/dark.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/metronic_v7.1.2/css/themes/layout/aside/dark.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('/metronic_v7.1.2/css/themes/layout/brand/light.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('/metronic_v7.1.2/css/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css" />
         
 		<link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" />
 	</head>
@@ -42,7 +42,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<a href="index">
-				<img alt="Logo" src="{{ asset('/metronic_v7.1.2/media/logos/logo-light.png') }}" />
+				<img alt="Logo" src="{{ asset('/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
 			</a>
             
 			<div class="d-flex align-items-center">
@@ -73,7 +73,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
 					<div class="brand flex-column-auto" id="kt_brand">
 						<a href="index" class="brand-logo">
-							<img alt="Logo" src="{{ asset('/metronic_v7.1.2/media/logos/logo-light.png') }}" />
+							<img alt="Logo" src="{{ asset('/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
 						</a>
                         
 						<button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
@@ -747,8 +747,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								</div>
 							</div>
                             
-							<div class="topbar">
-                                
+							<div class="topbar">                                
 								<div class="dropdown">
 									<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
 										<div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary">
@@ -1355,9 +1354,34 @@ License: You must have a valid license purchased only from themeforest(the above
 						</div>                        
 					</div>
 
-                    <main>
-                        @yield('content')
-                    </main>
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
+							<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+								<div class="d-flex align-items-center flex-wrap mr-1">
+									<div class="d-flex align-items-baseline flex-wrap mr-5">
+										<h5 class="text-dark font-weight-bold my-1 mr-5">
+											{{ $meta['title'] }}
+										</h5>
+
+										<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+											@foreach ($breadcrumb as $kB => $b)
+												<?php $last_key = count($breadcrumb) - 1;?>
+												<li class="breadcrumb-item">
+													<a href="{{ url('/'.$b['url']) }}" class="{{ ($kB == $last_key) ? 'text-muted' : '' }}">
+														{{ $b['title'] }}
+													</a>
+												</li>
+											@endforeach
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<main>
+							@yield('content')
+						</main>
+					</div>
 
 					<div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
 						<!--begin::Container-->
@@ -2541,6 +2565,17 @@ License: You must have a valid license purchased only from themeforest(the above
         @foreach ($js as $j)
 		    <script src="{{ asset('/'.$j.'.js') }}"></script>
         @endforeach
+
+		<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+		
+		<script type="text/javascript">
+			var onloadCallback = function() {
+				grecaptcha.render('html_element', {
+					'sitekey' : 'your_site_key'
+				});
+				alert("grecaptcha is ready!");
+			};
+		</script>
 
 	</body>
 </html>

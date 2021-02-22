@@ -20,24 +20,24 @@ class HomeController extends Controller
     public function index()
     {
         $datas = [
-            "table" => "",
-            "meta" => [
-                "title" => "Dashboard"
+            'table' => '',
+            'meta' => [
+                'title' => 'Dashboard'
             ],
-            "css" => [],
-            "js" => [
-                "metronic_v7.1.2/plugins/custom/fullcalendar/fullcalendar.bundle",
-                "metronic_v7.1.2/js/pages/widgets"
+            'css' => [],
+            'js' => [
+                'metronic_v7.1.2/plugins/custom/fullcalendar/fullcalendar.bundle',
+                'metronic_v7.1.2/js/pages/widgets'
             ],
-            "breadcrumb" => [
+            'breadcrumb' => [
                 array(
-                    "title" => "Dashboard",
-                    "url" => "dashboard"
+                    'title' => 'Dashboard',
+                    'url' => 'dashboard'
                 ),
             ],
-            "data" => [],
+            'data' => [],
         ];
 
-        return view("admin.dashboard.dashboard", $datas);
+        return view('admin.dashboard.dashboard', $datas);
     }
 }

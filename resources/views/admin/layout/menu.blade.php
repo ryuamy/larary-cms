@@ -1,8 +1,9 @@
 <?php $cur_uri = current_uri(); ?>
-<?php //dd(current_uri()); ?>
+<?php /** NOTES : take a look at how "active" works */ ?>
+
 <ul class="menu-nav">
     <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'dashboard' ? 'menu-item-active' : '' }}" aria-haspopup="true">
-        <a href="index" class="menu-link">
+        <a href="{{ url(admin_uri().'dashboard') }}" class="menu-link">
             <span class="svg-icon menu-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -13,6 +14,157 @@
                 </svg>
             </span>
             <span class="menu-text">Dashboard</span>
+        </a>
+    </li>
+
+    <li class="menu-section">
+        <h4 class="menu-text">Datas</h4>
+        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+    </li>
+
+    <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'pages' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+        <a href="{{ url(admin_uri().'pages') }}" class="menu-link menu-toggle">
+            <span class="svg-icon menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24" />
+                        <rect fill="#000000" opacity="0.3" x="4" y="4" width="8" height="16" />
+                        <path d="M6,18 L9,18 C9.66666667,18.1143819 10,18.4477153 10,19 C10,19.5522847 9.66666667,19.8856181 9,20 L4,20 L4,15 C4,14.3333333 4.33333333,14 5,14 C5.66666667,14 6,14.3333333 6,15 L6,18 Z M18,18 L18,15 C18.1143819,14.3333333 18.4477153,14 19,14 C19.5522847,14 19.8856181,14.3333333 20,15 L20,20 L15,20 C14.3333333,20 14,19.6666667 14,19 C14,18.3333333 14.3333333,18 15,18 L18,18 Z M18,6 L15,6 C14.3333333,5.88561808 14,5.55228475 14,5 C14,4.44771525 14.3333333,4.11438192 15,4 L20,4 L20,9 C20,9.66666667 19.6666667,10 19,10 C18.3333333,10 18,9.66666667 18,9 L18,6 Z M6,6 L6,9 C5.88561808,9.66666667 5.55228475,10 5,10 C4.44771525,10 4.11438192,9.66666667 4,9 L4,4 L9,4 C9.66666667,4 10,4.33333333 10,5 C10,5.66666667 9.66666667,6 9,6 L6,6 Z" fill="#000000" fill-rule="nonzero" />
+                    </g>
+                </svg>
+            </span>
+            <span class="menu-text">Pages</span>
+        </a>
+    </li>
+
+    <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+        <a href="{{ url(admin_uri().'news') }}" class="menu-link menu-toggle">
+            <span class="svg-icon menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24" />
+                        <rect fill="#000000" opacity="0.3" x="4" y="4" width="8" height="16" />
+                        <path d="M6,18 L9,18 C9.66666667,18.1143819 10,18.4477153 10,19 C10,19.5522847 9.66666667,19.8856181 9,20 L4,20 L4,15 C4,14.3333333 4.33333333,14 5,14 C5.66666667,14 6,14.3333333 6,15 L6,18 Z M18,18 L18,15 C18.1143819,14.3333333 18.4477153,14 19,14 C19.5522847,14 19.8856181,14.3333333 20,15 L20,20 L15,20 C14.3333333,20 14,19.6666667 14,19 C14,18.3333333 14.3333333,18 15,18 L18,18 Z M18,6 L15,6 C14.3333333,5.88561808 14,5.55228475 14,5 C14,4.44771525 14.3333333,4.11438192 15,4 L20,4 L20,9 C20,9.66666667 19.6666667,10 19,10 C18.3333333,10 18,9.66666667 18,9 L18,6 Z M6,6 L6,9 C5.88561808,9.66666667 5.55228475,10 5,10 C4.44771525,10 4.11438192,9.66666667 4,9 L4,4 L9,4 C9.66666667,4 10,4.33333333 10,5 C10,5.66666667 9.66666667,6 9,6 L6,6 Z" fill="#000000" fill-rule="nonzero" />
+                    </g>
+                </svg>
+            </span>
+            <span class="menu-text">News</span>
+        </a>
+    </li>
+
+    <li class="menu-section">
+        <h4 class="menu-text">Layout</h4>
+        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+    </li>
+
+    <li class="menu-item menu-item-submenu 
+            {{ isset($cur_uri[4]) && $cur_uri[4] === 'settings' ? 'menu-item-here' : '' }}
+            {{ isset($cur_uri[5]) && ($cur_uri[5] === 'general' || $cur_uri[5] === 'meta-website' || $cur_uri[5] === 'file-upload') ? 'menu-item-open' : '' }}
+        " aria-haspopup="true" data-menu-toggle="hover"
+    >
+        <a href="javascript:;" class="menu-link menu-toggle">
+            <i class="menu-icon flaticon2-laptop"></i>
+            <span class="menu-text">Settings</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                    <span class="menu-link">
+                        <span class="menu-text">Settings</span>
+                    </span>
+                </li>
+                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'general' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="{{ url(admin_uri().'settings/general') }}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">General Settings</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'meta-website' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="{{ url(admin_uri().'settings/meta-website') }}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Meta Website</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'file-upload' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="{{ url(admin_uri().'settings/file-upload') }}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">File Upload</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'themes' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+        <a href="{{ url(admin_uri().'themes') }}" class="menu-link menu-toggle">
+            <span class="svg-icon menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24" />
+                        <path d="M5,5 L5,15 C5,15.5948613 5.25970314,16.1290656 5.6719139,16.4954176 C5.71978107,16.5379595 5.76682388,16.5788906 5.81365532,16.6178662 C5.82524933,16.6294602 15,7.45470952 15,7.45470952 C15,6.9962515 15,6.17801499 15,5 L5,5 Z M5,3 L15,3 C16.1045695,3 17,3.8954305 17,5 L17,15 C17,17.209139 15.209139,19 13,19 L7,19 C4.790861,19 3,17.209139 3,15 L3,5 C3,3.8954305 3.8954305,3 5,3 Z" fill="#000000" fill-rule="nonzero" transform="translate(10.000000, 11.000000) rotate(-315.000000) translate(-10.000000, -11.000000)" />
+                        <path d="M20,22 C21.6568542,22 23,20.6568542 23,19 C23,17.8954305 22,16.2287638 20,14 C18,16.2287638 17,17.8954305 17,19 C17,20.6568542 18.3431458,22 20,22 Z" fill="#000000" opacity="0.3" />
+                    </g>
+                </svg>
+            </span>
+            <span class="menu-text">Themes</span>
+        </a>
+    </li>
+
+    <!--<li class="menu-item" aria-haspopup="true">
+        <a target="_blank" href="https://preview.keenthemes.com/metronic/demo1/builder" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24" />
+                        <path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000" />
+                        <rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
+                    </g>
+                </svg>
+            </span>
+            <span class="menu-text">Builder</span>
+        </a>
+    </li>-->
+
+    <li class="menu-section">
+        <h4 class="menu-text">Users</h4>
+        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+    </li>
+
+    <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'admins' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+        <a href="{{ url(admin_uri().'admins') }}" class="menu-link menu-toggle">
+            <span class="svg-icon menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24" />
+                        <rect fill="#000000" opacity="0.3" x="4" y="4" width="8" height="16" />
+                        <path d="M6,18 L9,18 C9.66666667,18.1143819 10,18.4477153 10,19 C10,19.5522847 9.66666667,19.8856181 9,20 L4,20 L4,15 C4,14.3333333 4.33333333,14 5,14 C5.66666667,14 6,14.3333333 6,15 L6,18 Z M18,18 L18,15 C18.1143819,14.3333333 18.4477153,14 19,14 C19.5522847,14 19.8856181,14.3333333 20,15 L20,20 L15,20 C14.3333333,20 14,19.6666667 14,19 C14,18.3333333 14.3333333,18 15,18 L18,18 Z M18,6 L15,6 C14.3333333,5.88561808 14,5.55228475 14,5 C14,4.44771525 14.3333333,4.11438192 15,4 L20,4 L20,9 C20,9.66666667 19.6666667,10 19,10 C18.3333333,10 18,9.66666667 18,9 L18,6 Z M6,6 L6,9 C5.88561808,9.66666667 5.55228475,10 5,10 C4.44771525,10 4.11438192,9.66666667 4,9 L4,4 L9,4 C9.66666667,4 10,4.33333333 10,5 C10,5.66666667 9.66666667,6 9,6 L6,6 Z" fill="#000000" fill-rule="nonzero" />
+                    </g>
+                </svg>
+            </span>
+            <span class="menu-text">Admins</span>
+        </a>
+    </li>
+
+    <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+        <a href="{{ url(admin_uri().'news') }}" class="menu-link menu-toggle">
+            <span class="svg-icon menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24" />
+                        <rect fill="#000000" opacity="0.3" x="4" y="4" width="8" height="16" />
+                        <path d="M6,18 L9,18 C9.66666667,18.1143819 10,18.4477153 10,19 C10,19.5522847 9.66666667,19.8856181 9,20 L4,20 L4,15 C4,14.3333333 4.33333333,14 5,14 C5.66666667,14 6,14.3333333 6,15 L6,18 Z M18,18 L18,15 C18.1143819,14.3333333 18.4477153,14 19,14 C19.5522847,14 19.8856181,14.3333333 20,15 L20,20 L15,20 C14.3333333,20 14,19.6666667 14,19 C14,18.3333333 14.3333333,18 15,18 L18,18 Z M18,6 L15,6 C14.3333333,5.88561808 14,5.55228475 14,5 C14,4.44771525 14.3333333,4.11438192 15,4 L20,4 L20,9 C20,9.66666667 19.6666667,10 19,10 C18.3333333,10 18,9.66666667 18,9 L18,6 Z M6,6 L6,9 C5.88561808,9.66666667 5.55228475,10 5,10 C4.44771525,10 4.11438192,9.66666667 4,9 L4,4 L9,4 C9.66666667,4 10,4.33333333 10,5 C10,5.66666667 9.66666667,6 9,6 L6,6 Z" fill="#000000" fill-rule="nonzero" />
+                    </g>
+                </svg>
+            </span>
+            <span class="menu-text">News</span>
         </a>
     </li>
 
@@ -59,7 +211,7 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item {{ isset($cur_uri[7]) && $cur_uri[7] === 'list-default' ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                                <a href="custom/apps/user/list-default" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/user/list-default') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -67,7 +219,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/user/list-datatable" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/user/list-datatable') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -75,7 +227,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/user/list-columns-1" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/user/list-columns-1') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -83,7 +235,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/user/list-columns-2" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/user/list-columns-2') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -91,7 +243,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/user/add-user" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/user/add-user') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -99,7 +251,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/user/edit-user" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/user/edit-user') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -132,7 +284,7 @@
                                     <i class="menu-arrow"></i>
                                     <ul class="menu-subnav">
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/profile/profile-1/overview" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/profile/profile-1/overview') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -140,7 +292,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/profile/profile-1/personal-information" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/profile/profile-1/personal-information') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -148,7 +300,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/profile/profile-1/account-information" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/profile/profile-1/account-information') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -156,7 +308,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/profile/profile-1/change-password" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/profile/profile-1/change-password') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -164,7 +316,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/profile/profile-1/email-settings" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/profile/profile-1/email-settings') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -175,7 +327,7 @@
                                 </div>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/profile/profile-2" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/profile/profile-2') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -183,7 +335,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/profile/profile-3" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/profile/profile-3') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -191,7 +343,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/profile/profile-4" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/profile/profile-4') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -213,7 +365,7 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/contacts/list-columns" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/contacts/list-columns') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -221,7 +373,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/contacts/list-datatable" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/contacts/list-datatable') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -229,7 +381,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/contacts/view-contact" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/contacts/view-contact') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -237,7 +389,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/contacts/add-contact" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/contacts/add-contact') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -245,7 +397,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/contacts/edit-contact" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/contacts/edit-contact') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -267,7 +419,7 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/projects/list-columns-1" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/projects/list-columns-1') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -275,7 +427,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/projects/list-columns-2" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/projects/list-columns-2') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -283,7 +435,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/projects/list-columns-3" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/projects/list-columns-3') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -291,7 +443,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/projects/list-columns-4" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/projects/list-columns-4') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -299,7 +451,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/projects/list-datatable" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/projects/list-datatable') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -307,7 +459,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/projects/view-project" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/projects/view-project') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -315,7 +467,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/projects/add-project" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/projects/add-project') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -323,7 +475,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/projects/edit-project" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/projects/edit-project') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -345,7 +497,7 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/support-center/home-1" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/support-center/home-1') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -353,7 +505,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/support-center/home-2" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/support-center/home-2') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -361,7 +513,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/support-center/faq-1" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/support-center/faq-1') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -369,7 +521,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/support-center/faq-2" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/support-center/faq-2') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -377,7 +529,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/support-center/faq-3" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/support-center/faq-3') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -385,7 +537,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/support-center/feedback" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/support-center/feedback') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -393,7 +545,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/support-center/license" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/support-center/license') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -415,7 +567,7 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/chat/private" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/chat/private') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -423,7 +575,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/chat/group" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/chat/group') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -431,7 +583,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/chat/popup" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/chat/popup') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -453,7 +605,7 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/todo/tasks" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/todo/tasks') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -461,7 +613,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/todo/docs" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/todo/docs') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -469,7 +621,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/todo/files" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/todo/files') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -502,7 +654,7 @@
                                     <i class="menu-arrow"></i>
                                     <ul class="menu-subnav">
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/education/school/dashboard" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/education/school/dashboard') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -510,7 +662,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/education/school/statistics" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/education/school/statistics') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -518,7 +670,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/education/school/calendar" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/education/school/calendar') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -526,7 +678,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/education/school/library" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/education/school/library') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -534,7 +686,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/education/school/teachers" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/education/school/teachers') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -542,7 +694,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/education/school/students" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/education/school/students') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -564,7 +716,7 @@
                                     <i class="menu-arrow"></i>
                                     <ul class="menu-subnav">
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/education/student/dashboard" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/education/student/dashboard') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -572,7 +724,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/education/student/profile" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/education/student/profile') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -580,7 +732,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/education/student/calendar" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/education/student/calendar') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -588,7 +740,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/apps/education/student/classmates" class="menu-link">
+                                            <a href="{{ url(admin_uri().'custom/apps/education/student/classmates') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-line">
                                                     <span></span>
                                                 </i>
@@ -599,7 +751,7 @@
                                 </div>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/education/class/dashboard" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/education/class/dashboard') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -621,7 +773,7 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/ecommerce/dashboard" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/ecommerce/dashboard') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -629,7 +781,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/ecommerce/dashboard-2" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/ecommerce/dashboard-2') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -637,7 +789,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/ecommerce/dashboard-3" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/ecommerce/dashboard-3') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -645,7 +797,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/ecommerce/dashboard-4" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/ecommerce/dashboard-4') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -653,7 +805,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/ecommerce/dashboard-5" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/ecommerce/dashboard-5') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -661,7 +813,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/ecommerce/my-orders" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/ecommerce/my-orders') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -669,7 +821,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/ecommerce/order-details" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/ecommerce/order-details') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -677,7 +829,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/ecommerce/shopping-cart" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/ecommerce/shopping-cart') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -685,7 +837,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/apps/ecommerce/checkout" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/apps/ecommerce/checkout') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -696,7 +848,7 @@
                     </div>
                 </li>
                 <li class="menu-item" aria-haspopup="true">
-                    <a href="custom/apps/inbox" class="menu-link">
+                    <a href="{{ url(admin_uri().'custom/apps/inbox') }}" class="menu-link">
                         <i class="menu-bullet menu-bullet-line">
                             <span></span>
                         </i>
@@ -738,180 +890,6 @@
                         <i class="menu-bullet menu-bullet-dot">
                             <span></span>
                         </i>
-                        <span class="menu-text">Login</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/login/login-1" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Login 1</span>
-                                </a>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/login/login-2" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Login 2</span>
-                                </a>
-                            </li>
-                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                <a href="javascript:;" class="menu-link menu-toggle">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Login 3</span>
-                                    <span class="menu-label">
-                                        <span class="label label-inline label-info">Wizard</span>
-                                    </span>
-                                    <i class="menu-arrow"></i>
-                                </a>
-                                <div class="menu-submenu">
-                                    <i class="menu-arrow"></i>
-                                    <ul class="menu-subnav">
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/login-3/signup" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Sign Up</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/login-3/signin" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Sign In</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/login-3/forgot" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Forgot Password</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                <a href="javascript:;" class="menu-link menu-toggle">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Login 4</span>
-                                    <span class="menu-label">
-                                        <span class="label label-inline label-info">Wizard</span>
-                                    </span>
-                                    <i class="menu-arrow"></i>
-                                </a>
-                                <div class="menu-submenu">
-                                    <i class="menu-arrow"></i>
-                                    <ul class="menu-subnav">
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/login-4/signup" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Sign Up</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/login-4/signin" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Sign In</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/login-4/forgot" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Forgot Password</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                <a href="javascript:;" class="menu-link menu-toggle">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Classic</span>
-                                    <i class="menu-arrow"></i>
-                                </a>
-                                <div class="menu-submenu">
-                                    <i class="menu-arrow"></i>
-                                    <ul class="menu-subnav">
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/classic/login-1" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Login 1</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/classic/login-2" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Login 2</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/classic/login-3" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Login 3</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/classic/login-4" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Login 4</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/classic/login-5" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Login 5</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item" aria-haspopup="true">
-                                            <a href="custom/pages/login/classic/login-6" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Login 6</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
                         <span class="menu-text">Wizard</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -919,7 +897,7 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/wizard/wizard-1" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/wizard/wizard-1') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -927,7 +905,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/wizard/wizard-2" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/wizard/wizard-2') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -935,7 +913,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/wizard/wizard-3" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/wizard/wizard-3') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -943,7 +921,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/wizard/wizard-4" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/wizard/wizard-4') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -951,7 +929,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/wizard/wizard-5" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/wizard/wizard-5') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -959,57 +937,11 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/wizard/wizard-6" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/wizard/wizard-6') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
                                     <span class="menu-text">Wizard 6</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Pricing Tables</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/pricing/pricing-1" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Pricing Tables 1</span>
-                                </a>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/pricing/pricing-2" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Pricing Tables 2</span>
-                                </a>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/pricing/pricing-3" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Pricing Tables 3</span>
-                                </a>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/pricing/pricing-4" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Pricing Tables 4</span>
                                 </a>
                             </li>
                         </ul>
@@ -1027,7 +959,7 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/invoices/invoice-1" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/invoices/invoice-1') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1035,7 +967,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/invoices/invoice-2" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/invoices/invoice-2') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1043,7 +975,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/invoices/invoice-3" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/invoices/invoice-3') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1051,7 +983,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/invoices/invoice-4" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/invoices/invoice-4') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1059,7 +991,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/invoices/invoice-5" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/invoices/invoice-5') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1067,7 +999,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/invoices/invoice-6" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/invoices/invoice-6') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1089,7 +1021,7 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/error/error-1" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/error/error-1') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1097,7 +1029,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/error/error-2" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/error/error-2') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1105,7 +1037,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/error/error-3" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/error/error-3') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1113,7 +1045,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/error/error-4" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/error/error-4') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1121,7 +1053,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/error/error-5" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/error/error-5') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1129,7 +1061,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="custom/pages/error/error-6" class="menu-link">
+                                <a href="{{ url(admin_uri().'custom/pages/error/error-6') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -1141,211 +1073,6 @@
                 </li>
             </ul>
         </div>
-    </li>
-
-    <li class="menu-section">
-        <h4 class="menu-text">Layout</h4>
-        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-    </li>
-
-    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-        <a href="javascript:;" class="menu-link menu-toggle">
-            <span class="svg-icon menu-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24" />
-                        <path d="M5,5 L5,15 C5,15.5948613 5.25970314,16.1290656 5.6719139,16.4954176 C5.71978107,16.5379595 5.76682388,16.5788906 5.81365532,16.6178662 C5.82524933,16.6294602 15,7.45470952 15,7.45470952 C15,6.9962515 15,6.17801499 15,5 L5,5 Z M5,3 L15,3 C16.1045695,3 17,3.8954305 17,5 L17,15 C17,17.209139 15.209139,19 13,19 L7,19 C4.790861,19 3,17.209139 3,15 L3,5 C3,3.8954305 3.8954305,3 5,3 Z" fill="#000000" fill-rule="nonzero" transform="translate(10.000000, 11.000000) rotate(-315.000000) translate(-10.000000, -11.000000)" />
-                        <path d="M20,22 C21.6568542,22 23,20.6568542 23,19 C23,17.8954305 22,16.2287638 20,14 C18,16.2287638 17,17.8954305 17,19 C17,20.6568542 18.3431458,22 20,22 Z" fill="#000000" opacity="0.3" />
-                    </g>
-                </svg>
-            </span>
-            <span class="menu-text">Themes</span>
-            <i class="menu-arrow"></i>
-        </a>
-
-        <div class="menu-submenu">
-            <i class="menu-arrow"></i>
-            <ul class="menu-subnav">
-                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                    <span class="menu-link">
-                        <span class="menu-text">Themes</span>
-                    </span>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/themes/aside-light" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Light Aside</span>
-                    </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/themes/header-dark" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Dark Header</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-
-    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-        <a href="javascript:;" class="menu-link menu-toggle">
-            <span class="svg-icon menu-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24" />
-                        <path d="M2.56066017,10.6819805 L4.68198052,8.56066017 C5.26776695,7.97487373 6.21751442,7.97487373 6.80330086,8.56066017 L8.9246212,10.6819805 C9.51040764,11.267767 9.51040764,12.2175144 8.9246212,12.8033009 L6.80330086,14.9246212 C6.21751442,15.5104076 5.26776695,15.5104076 4.68198052,14.9246212 L2.56066017,12.8033009 C1.97487373,12.2175144 1.97487373,11.267767 2.56066017,10.6819805 Z M14.5606602,10.6819805 L16.6819805,8.56066017 C17.267767,7.97487373 18.2175144,7.97487373 18.8033009,8.56066017 L20.9246212,10.6819805 C21.5104076,11.267767 21.5104076,12.2175144 20.9246212,12.8033009 L18.8033009,14.9246212 C18.2175144,15.5104076 17.267767,15.5104076 16.6819805,14.9246212 L14.5606602,12.8033009 C13.9748737,12.2175144 13.9748737,11.267767 14.5606602,10.6819805 Z" fill="#000000" opacity="0.3" />
-                        <path d="M8.56066017,16.6819805 L10.6819805,14.5606602 C11.267767,13.9748737 12.2175144,13.9748737 12.8033009,14.5606602 L14.9246212,16.6819805 C15.5104076,17.267767 15.5104076,18.2175144 14.9246212,18.8033009 L12.8033009,20.9246212 C12.2175144,21.5104076 11.267767,21.5104076 10.6819805,20.9246212 L8.56066017,18.8033009 C7.97487373,18.2175144 7.97487373,17.267767 8.56066017,16.6819805 Z M8.56066017,4.68198052 L10.6819805,2.56066017 C11.267767,1.97487373 12.2175144,1.97487373 12.8033009,2.56066017 L14.9246212,4.68198052 C15.5104076,5.26776695 15.5104076,6.21751442 14.9246212,6.80330086 L12.8033009,8.9246212 C12.2175144,9.51040764 11.267767,9.51040764 10.6819805,8.9246212 L8.56066017,6.80330086 C7.97487373,6.21751442 7.97487373,5.26776695 8.56066017,4.68198052 Z" fill="#000000" />
-                    </g>
-                </svg>
-            </span>
-            <span class="menu-text">Subheaders</span>
-            <i class="menu-arrow"></i>
-        </a>
-
-        <div class="menu-submenu">
-            <i class="menu-arrow"></i>
-            <ul class="menu-subnav">
-                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                    <span class="menu-link">
-                        <span class="menu-text">Subheaders</span>
-                    </span>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/subheader/toolbar" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Toolbar Nav</span>
-                    </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/subheader/actions" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Actions Buttons</span>
-                    </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/subheader/tabbed" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Tabbed Nav</span>
-                    </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/subheader/classic" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Classic</span>
-                    </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/subheader/none" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">None</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-
-    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-        <a href="javascript:;" class="menu-link menu-toggle">
-            <span class="svg-icon menu-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24" />
-                        <path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000" />
-                        <path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3" />
-                    </g>
-                </svg>
-            </span>
-            <span class="menu-text">General</span>
-            <i class="menu-arrow"></i>
-        </a>
-
-        <div class="menu-submenu">
-            <i class="menu-arrow"></i>
-            <ul class="menu-subnav">
-                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                    <span class="menu-link">
-                        <span class="menu-text">General</span>
-                    </span>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/general/fluid-content" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Fluid Content</span>
-                    </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/general/minimized-aside" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Minimized Aside</span>
-                    </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/general/no-aside" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">No Aside</span>
-                    </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/general/empty-page" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Empty Page</span>
-                    </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/general/fixed-footer" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">Fixed Footer</span>
-                    </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="layout/general/no-header-menu" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">No Header Menu</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-
-    <li class="menu-item" aria-haspopup="true">
-        <a target="_blank" href="https://preview.keenthemes.com/metronic/demo1/builder" class="menu-link">
-            <span class="svg-icon menu-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24" />
-                        <path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000" />
-                        <rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
-                    </g>
-                </svg>
-            </span>
-            <span class="menu-text">Builder</span>
-        </a>
     </li>
 
     <li class="menu-section">
