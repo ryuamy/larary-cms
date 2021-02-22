@@ -48,6 +48,19 @@
 			var values = $('#kt_login_signin_form').serialize();
 			var login_url = baseUrl + 'ajax/login';
 
+			var bx_alert_message_login = `<div class="alert alert-custom alert-danger show fade" role="alert">
+							<div class="alert-text" id="alert_message_login">
+								You don't have access
+							</div>
+							<div class="alert-close">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">
+										<i class="ki ki-close"></i>
+									</span>
+								</button>
+							</div>
+						</div>`;
+
 			validation.validate().then(function (status) {
 				console.log(status);
 				if (status == 'Valid') {
@@ -56,6 +69,9 @@
 						type: 'POST',
 						data: '_token=' + cToken + '&' + values,
 						success: function (response, textStatus, request) {
+							// console.log(response);
+							// console.log(textStatus);
+							// console.log(request);
 							swal.fire({
 								text: 'All is cool! Now you submit this form',
 								icon: 'success',
@@ -69,13 +85,16 @@
 								if (request.status == 200) {
 									window.location.replace(response.datas.redirect);
 								} else {
-									$('#bx_alert_message_login').removeClass('hide').addClass('show');
+									$('#bx_alert_message_login').html(bx_alert_message_login);
 									$('#alert_message_login').html(response.responseJSON.message);
 								}
 							});
 						},
 						error: function (response, textStatus, request) {
-							$('#bx_alert_message_login').removeClass('hide').addClass('show');
+							// console.log(response);
+							// console.log(textStatus);
+							// console.log(request);
+							$('#bx_alert_message_login').html(bx_alert_message_login);
 							$('#alert_message_login').html(response.responseJSON.message);
 						}
 					});

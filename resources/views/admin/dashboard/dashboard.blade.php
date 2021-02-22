@@ -8,20 +8,6 @@
         
         <div class="row">
             <div class="col-lg-6 col-xxl-4">
-                <div class="card card-custom bg-gray-100 card-stretch gutter-b">
-                    <div class="card-header border-0 bg-danger py-5">
-                        <h3 class="card-title font-weight-bolder text-white">reCaptcha</h3>
-                    </div>
-                    
-                    <div class="card-body p-0 position-relative overflow-hidden">
-                        <div class="g-recaptcha" data-sitekey="your_site_key"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-lg-6 col-xxl-4">
                 <!--begin::Mixed Widget 1-->
                 <div class="card card-custom bg-gray-100 card-stretch gutter-b">
                     <!--begin::Header-->

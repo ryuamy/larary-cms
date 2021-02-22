@@ -2566,16 +2566,5 @@ License: You must have a valid license purchased only from themeforest(the above
 		    <script src="{{ asset('/'.$j.'.js') }}"></script>
         @endforeach
 
-		<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-		
-		<script type="text/javascript">
-			var onloadCallback = function() {
-				grecaptcha.render('html_element', {
-					'sitekey' : 'your_site_key'
-				});
-				alert("grecaptcha is ready!");
-			};
-		</script>
-
 	</body>
 </html>

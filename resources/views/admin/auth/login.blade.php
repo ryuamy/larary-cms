@@ -32,7 +32,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" />
 	</head>
 	
-	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading" data-baseurl="{{ url('/admin').'/' }}" data-ctoken="{{ csrf_token() }}">
+	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"
+		data-baseurl="{{ url('/admin').'/' }}" data-ctoken="{{ csrf_token() }}"
+	>
 		
 		<div class="d-flex flex-column flex-root">
 			
@@ -42,42 +44,50 @@ License: You must have a valid license purchased only from themeforest(the above
 				>
 					<div class="login-form text-center p-7 position-relative overflow-hidden">
 
-						<div class="d-flex flex-center mb-15">
+						<?php /*<div class="d-flex flex-center mb-15">
 							<a href="#">
 								<img src="{{ asset('/metronic_v7.1.2/media/logos/logo-letter-13.png') }}" 
 									class="max-h-75px" alt=""
 								/>
 							</a>
-						</div>
+						</div>*/ ?>
 						
 						<div class="login-signin">
-							<div class="mb-20">
+							<div class="mb-14">
 								<h3>Sign In To Admin</h3>
 								<div class="text-muted font-weight-bold">Enter your details to login to your account:</div>
 							</div>
 
 							<form class="form" id="kt_login_signin_form">
-								<div class="alert alert-custom alert-danger {{ Session::has('error-message') ? 'show' : 'hide' }} fade" id="bx_alert_message_login" role="alert">
-									<div class="alert-text" id="alert_message_login">
-                						@if (Session::has('error-message'))
-											You don't have access
-            							@endif
-									</div>
-									<div class="alert-close">
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">
-												<i class="ki ki-close"></i>
-											</span>
-										</button>
-									</div>
+								<div id="bx_alert_message_login">
+									@if (Session::has('error-message'))
+										<div class="alert alert-custom alert-danger d-flex show fade" role="alert">
+											<div class="alert-text" id="alert_message_login">
+												You don't have access
+											</div>
+											<div class="alert-close">
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">
+														<i class="ki ki-close"></i>
+													</span>
+												</button>
+											</div>
+										</div>
+									@endif
 								</div>
 
 								<div class="form-group mb-5">
 									<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Email" name="username" autocomplete="off" />
 								</div>
+
 								<div class="form-group mb-5">
 									<input class="form-control h-auto form-control-solid py-4 px-8" type="password" placeholder="Password" name="password" />
 								</div>
+
+								<div class="form-group mb-5 d-flex justify-content-center">
+									{!! app('captcha')->display() !!}
+								</div>
+
 								<div class="form-group d-flex flex-wrap justify-content-between align-items-center">
 									<div class="checkbox-inline">
 										<label class="checkbox m-0 text-muted">
@@ -85,6 +95,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<span></span>Remember me</label>
 									</div>
 								</div>
+
 								<button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4">
 									Sign In
 								</button>
@@ -106,6 +117,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="{{ asset('/metronic_v7.1.2/js/scripts.bundle.js') }}"></script>
 
 		<script src="{{ asset('/js/admin/login.js') }}"></script>
+
+		{!! NoCaptcha::renderJs() !!}
 
 	</body>
 </html>
