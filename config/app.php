@@ -67,6 +67,7 @@ return [
          * Package Service Providers...
          */
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Edujugon\Laradoo\Providers\OdooServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
 
         /*
@@ -117,6 +118,7 @@ return [
         'Mail' => Illuminate\Support\Facades\Mail::class,
         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
+        'Odoo' => Edujugon\Laradoo\Facades\Odoo::class,
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,

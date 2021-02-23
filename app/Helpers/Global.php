@@ -861,10 +861,10 @@ if(!function_exists('adsmedia_api')) {
             return $return;
         }
         
-        $apikey         = env('ADSMEDIA_KEY');
-        $apiusername    = env('ADSMEDIA_USERNAME');
-        $apiurl         = env('ADSMEDIA_URL');
-        $callbackurl    = env('ADSMEDIA_CALLBACK');
+        $apikey         = env('RAJASMS_KEY');
+        $apiusername    = env('RAJASMS_USERNAME');
+        $apiurl         = env('RAJASMS_URL');
+        $callbackurl    = env('RAJASMS_CALLBACK');
         $endpointurl    = $apiurl;
         $senddata       = array();
  
