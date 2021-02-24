@@ -83,6 +83,8 @@ composer dump-autoload
 
 * Jika kamu tidak bisa menjalankan perintah `php artisan` atau `composer` dan menemukan notif error seperti **`In ProviderRepository.php line 208: Class 'blabla\blabla\blabla' not found`**, buka folder **`bootstrap\cache\config.php`** dan hapus manually Class yang membuat error, contohnya `Intervention\Image\ImageServiceProvider`, di bagian array providers dan array aliases (biasany memilihi path yang sama, contohnya `'Intervention\Image\Facades\Image'`) dan rapikan kembali array nya. Setelah itu hapus folder `vendor` dan jalankan `composer dump-autoload` dilanjutan dengan menjalankan perintah `composer update`.
 
+* Jika captcha (non reCaptcha) validation tidak jalan, buka file `CaptchaServiceProvider.php` line `29` tambahkan **`->middleware('web')`** dibelakang routing.
+
 [[top]](#table-of-contents)
 
 

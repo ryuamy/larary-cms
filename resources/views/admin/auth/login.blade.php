@@ -100,7 +100,9 @@ License: You must have a valid license purchased only from themeforest(the above
 									<button type="button" class="btn btn-danger" class="reload" id="reload">
 										&#x21bb;
 									</button>
-									<input id="captcha" type="text" class="form-control h-auto form-control-solid py-4 px-8" placeholder="Enter Captcha" name="captcha">
+									<div>
+										<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Enter Captcha" name="captcha" id="captcha" autocomplete="off" />
+									</div>
 								</div>
 
 								<div class="form-group d-flex flex-wrap justify-content-between align-items-center">

@@ -31,6 +31,13 @@
 								message: 'Password can consist of alphabetical, numeric and spaces only'
 							}
 						}
+					},
+					captcha: {
+						validators: {
+							notEmpty: {
+								message: 'Please enter captcha'
+							},
+						}
 					}
 				},
 				plugins: {
@@ -73,10 +80,10 @@
 							// console.log(textStatus);
 							// console.log(request);
 							swal.fire({
-								text: 'All is cool! Now you submit this form',
+								text: 'Success login',
 								icon: 'success',
 								buttonsStyling: false,
-								confirmButtonText: 'Ok, got it!',
+								confirmButtonText: 'Access Dashboard Now~',
 								customClass: {
 									confirmButton: 'btn font-weight-bold btn-light-primary'
 								}

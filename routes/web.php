@@ -19,4 +19,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
+/** clear cache on shared hosting */
+Route::get( '/route-cache', function() {
+    Artisan::call('route:cache');
+    return view( 'clearcache.main', array('message'=>'Route cache cleared!') );
+});
+Route::get( '/config-cache', function() {
+    Artisan::call('config:cache');
+    return view( 'clearcache.main', array('message'=>'Config cache cleared!') );
+});
+Route::get( '/clear-cache', function() {
+    Artisan::call('clear:cache');
+    return view( 'clearcache.main', array('message'=>'Application cache cleared!') );
+});
+Route::get( '/view-cache', function() {
+    Artisan::call('view:cache');
+    return view( 'clearcache.main', array('message'=>'View cache cleared!') );
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

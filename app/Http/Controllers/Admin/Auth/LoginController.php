@@ -14,16 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-
     use AuthenticatesUsers;
-  
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    // protected $redirectTo = '/admin/login';
-    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.

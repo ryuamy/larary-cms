@@ -111,7 +111,7 @@ class AjaxController extends Controller
             /** reCaptcha */
             // 'g-recaptcha-response' => 'required|captcha',
             /** Laravel Captcha */
-            'captcha'   => 'required|captcha_api:'. request('key') . ',default'
+            'captcha'   => 'required|captcha'
         ];
 
         $messages = [
@@ -121,7 +121,7 @@ class AjaxController extends Controller
             'captcha.string'        => 'Password only accept alphanumeric and space',
             /** Laravel Captcha */
             'captcha.email'         => 'Captcha is required',
-            'captcha.captcha_api'   => 'Invalid captcha',
+            'captcha.captcha'       => 'Invalid captcha',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
