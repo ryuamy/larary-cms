@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Adminroles extends Model
+class Pages extends Model
 {
     use HasFactory;
 
-    protected $table = "admin_roles";
+    protected $table = "Pages";
 
     protected $primaryKey = "id";
-    
+
     protected $fillable = [
         'uuid',
         'name',
         'slug',
+        'content',
+        'featured_image',
         'status',
         'created_by',
         'updated_by',
@@ -24,9 +26,12 @@ class Adminroles extends Model
         'updated_at'
     ];
 
-    public function admins()
-    {
-        return $this->hasMany(Admins::class);
+    public function logs() {
+        return $this->hasMany(Pagelogs::class);
+    }
+
+    public function admin() {
+        return $this->belongsTo(Admins::class);
     }
 
     // List of statuses

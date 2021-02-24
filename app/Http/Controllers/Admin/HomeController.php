@@ -15,12 +15,13 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+        $this->table = '';
     }
 
     public function index()
     {
         $datas = [
-            'table' => '',
+            'table' => $this->table,
             'meta' => [
                 'title' => 'Dashboard'
             ],
@@ -32,7 +33,7 @@ class HomeController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url' => 'dashboard'
+                    'url'   => 'dashboard'
                 ),
             ],
             'data' => [],

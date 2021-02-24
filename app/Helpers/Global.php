@@ -184,7 +184,7 @@ if(!function_exists('custom_pagination')) {
 
         $page = $params['page'];
         $pages = $params['pages'];
-        $base = admin_uri().$params['base'];
+        $base = $params['base'];
 
         $prevs = array();
         for ($p=1; $p<=4; $p++) {

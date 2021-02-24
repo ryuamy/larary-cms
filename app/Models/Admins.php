@@ -26,8 +26,11 @@ class Admins extends Authenticatable
         'role_id',
         'remember_token',
         'token_expired',
+        'status',
         'created_by',
         'updated_by',
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -54,7 +57,7 @@ class Admins extends Authenticatable
     }
 
     public function role() {
-        return $this->hasOne(Adminroles::class);
+        return $this->belongsTo(Adminroles::class);
     }
 
     // List of statuses

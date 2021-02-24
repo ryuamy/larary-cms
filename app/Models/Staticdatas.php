@@ -51,4 +51,13 @@ class Staticdatas extends Model
 
         return $list;
     }
+
+    //because we dont have this table, and not sure should I create one?
+    public static function default_status() {
+        $list = [];
+        $list[0] = "Inactive";
+        $list[1] = "Active";
+
+        return $list;
+    }
 }

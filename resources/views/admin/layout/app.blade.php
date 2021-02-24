@@ -39,8 +39,15 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" />
 	</head>
 
-	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+	<?php
+		$admin_data = Auth::guard('admin')->user();
+		// dd($admin_data->role_id);
+		$admin_name = explode(' ', $admin_data->name);
+		$first_name = $admin_name[0];
+		$last_name = isset($admin_name[1]) ? $admin_name[1] : '';
+	?>
 
+	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<a href="index">
 				<img alt="Logo" src="{{ asset('/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
@@ -745,11 +752,11 @@ License: You must have a valid license purchased only from themeforest(the above
 											Hi,
 										</span>
 										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-											Sean
+											{{ $first_name }}
 										</span>
 										<span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
 											<span class="symbol-label font-size-h5 font-weight-bold">
-												S
+												{{ substr($first_name, 0, 1) }}
 											</span>
 										</span>
 									</div>
@@ -823,19 +830,19 @@ License: You must have a valid license purchased only from themeforest(the above
             
 			<div class="offcanvas-content pr-5 mr-n5">
 				<div class="d-flex align-items-center mt-5">
-					<div class="symbol symbol-100 mr-5">
+					<?php /*<div class="symbol symbol-100 mr-5">
 						<div class="symbol-label"
 							style="background-image:url('{{ asset('/metronic_v7.1.2/media/users/300_21.jpg') }}')"></div>
 						<i class="symbol-badge bg-success"></i>
-					</div>
+					</div>*/ ?>
 
 					<div class="d-flex flex-column">
 						<a href="{{ url(admin_uri().'my-account') }}"
 							class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
 						>
-							James Jones
+							{{ $admin_data->name }}
 						</a>
-						<div class="text-muted mt-1">Admin</div>
+						<?php /*<div class="text-muted mt-1">Admin</div>*/ ?>
 						<div class="navi mt-2">
 							<a href="mailto:jm@softplus.com" class="navi-item">
 								<span class="navi-link p-0 pb-2">
@@ -854,7 +861,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										</span>
 									</span>
 									<span class="navi-text text-muted text-hover-primary">
-										jm@softplus.com
+										{{ $admin_data->email }}
 									</span>
 								</span>
 							</a>

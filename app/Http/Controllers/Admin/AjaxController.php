@@ -106,27 +106,38 @@ class AjaxController extends Controller
     public function login(Request $request)
     {
         $rules = [
-            'username'  => 'required|email',
-            'password'  => 'required|alpha_num_spaces',
+            'username'              => 'required|email',
+            'password'              => 'required|alpha_num_spaces',
             /** reCaptcha */
-            // 'g-recaptcha-response' => 'required|captcha',
+            // 'g-recaptcha-response'  => 'required|captcha',
             /** Laravel Captcha */
-            'captcha'   => 'required|captcha'
+            'captcha'               => 'required|captcha'
         ];
 
         $messages = [
-            'username.required'     => 'Email is required',
-            'username.email'        => 'Email format invalid',
-            'password.required'     => 'Password is required',
-            'captcha.string'        => 'Password only accept alphanumeric and space',
+            'username.required'             => 'Email is required',
+            'username.email'                => 'Email format invalid',
+            'password.required'             => 'Password is required',
+            'captcha.string'                => 'Password only accept alphanumeric and space',
+            /** reCaptcha */
+            // 'g-recaptcha-response.captcha'  => 'Invalid captcha',
             /** Laravel Captcha */
-            'captcha.email'         => 'Captcha is required',
-            'captcha.captcha'       => 'Invalid captcha',
+            'captcha.email'                 => 'Captcha is required',
+            'captcha.captcha'               => 'Invalid captcha',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if($validator->fails()){
+            $data_log = new Adminlogs();
+            $data_log->admin_id         = 0;
+            $data_log->table            = 'ADMINS';
+            $data_log->table_id         = 0;
+            $data_log->action           = '';
+            $data_log->action_detail    = 'Failed to login. Error: ' . $validator->errors()->all();
+            $data_log->ipaddress        = get_client_ip();
+            $data_log->save();
+
             return response()->json(
                 array(
                     'response'  => 'failed',
@@ -187,6 +198,15 @@ class AjaxController extends Controller
                         200
                     );
                 } catch (Exception $error) {
+                    $data_log = new Adminlogs();
+                    $data_log->admin_id         = $admin_id;
+                    $data_log->table            = 'ADMINS';
+                    $data_log->table_id         = $admin_id;
+                    $data_log->action           = '';
+                    $data_log->action_detail    = 'Failed to login. Error: ' . $error->getMessage();
+                    $data_log->ipaddress        = get_client_ip();
+                    $data_log->save();
+
                     return response()->json(
                         array(
                             'response'  => 'failed',

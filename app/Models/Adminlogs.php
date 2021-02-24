@@ -19,7 +19,9 @@ class Adminlogs extends Model
         'table_id',
         'action',
         'action_detail',
-        'ipaddress'
+        'ipaddress',
+        'created_at',
+        'updated_at'
     ];
 
     public function admin_data()

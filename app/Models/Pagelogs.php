@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Adminroles extends Model
+class Pagelogs extends Model
 {
     use HasFactory;
 
-    protected $table = "admin_roles";
+    protected $table = "page_logs";
 
     protected $primaryKey = "id";
     
@@ -24,13 +24,8 @@ class Adminroles extends Model
         'updated_at'
     ];
 
-    public function admins()
+    public function page()
     {
-        return $this->hasMany(Admins::class);
+        return $this->belongsTo(Pages::class);
     }
-
-    // List of statuses
-    const IS_ACTIVE = 1;
-    const IS_INACTIVE = 0;
-    const IS_DELETED = -1;
 }
