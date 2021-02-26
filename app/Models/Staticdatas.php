@@ -57,6 +57,7 @@ class Staticdatas extends Model
         $list = [];
         $list[0] = "Inactive";
         $list[1] = "Active";
+        $list[2] = "Deleted";
 
         return $list;
     }

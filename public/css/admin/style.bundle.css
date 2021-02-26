@@ -98220,18 +98220,31 @@ to {
 }
 
 .table-list th.created_date,
-.table-list th.updated_date {
-  width: 170px;
+.table-list th.updated_date,
+.table-list th.created_at,
+.table-list th.updated_at {
   text-align: center;
 }
 
+.table-list th.created_date,
+.table-list th.updated_date {
+  width: 170px;
+}
+
+.table-list th.created_at,
+.table-list th.updated_at {
+  width: 147px;
+}
+
 .table-list th.created_date a,
-.table-list th.updated_date a {
+.table-list th.updated_date a,
+.table-list th.created_at a,
+.table-list th.updated_at a {
   text-align: center;
 }
 
 .table-list thead th.status {
-  width: 120px;
+  width: 114px;
 }
 
 .table-list thead th a,
@@ -98316,7 +98329,7 @@ to {
 
 .admin-pagination {
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 }
 
 .admin-pagination a,

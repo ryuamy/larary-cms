@@ -16,7 +16,8 @@
 							notEmpty: {
 								message: 'Email is required'
 							},
-							emailAddress: {
+							regexp: {
+								regexp: /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i,
 								message: 'Invalid email address'
 							}
 						}
@@ -83,7 +84,7 @@
 								text: 'Success login',
 								icon: 'success',
 								buttonsStyling: false,
-								confirmButtonText: 'Access Dashboard Now~',
+								confirmButtonText: 'Go To Dashboard',
 								customClass: {
 									confirmButton: 'btn font-weight-bold btn-light-primary'
 								}
@@ -122,12 +123,12 @@
 		});
 
 		$('#reload').click(function () {
-			$(".captcha span").html('loading new captcha...');
+			$('.captcha span').html('loading new captcha...');
 			$.ajax({
 				type: 'GET',
 				url: baseUrl + 'ajax/reload-captcha',
 				success: function (data) {
-					$(".captcha span").html(data.captcha);
+					$('.captcha span').html(data.captcha);
 				}
 			});
 		});

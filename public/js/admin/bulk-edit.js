@@ -6,37 +6,37 @@ function clearconsole() {
 }
 
 (function ($) {
-    "use strict";
+    'use strict';
 
-    var baseUrl = $("body").data("baseurl");
-    var cToken = $("body").data("ctoken");
+    var baseUrl = $('body').data('baseurl');
+    var cToken = $('body').data('ctoken');
 
     function BulkConfirmDialog(message, bulkType) {
         swal.fire({
             text: message,
-            icon: "warning",
+            icon: 'warning',
             buttonsStyling: false,
             showCancelButton: true,
-            cancelButtonText: "Batalkan!",
-            confirmButtonText: "Ya!",
+            cancelButtonText: 'Cancel!',
+            confirmButtonText: 'Ok!',
             closeOnCancel: true,
             customClass: {
-                confirmButton: "btn font-weight-bold btn-light-primary",
-                cancelButton: "btn font-weight-bold btn-danger"
+                confirmButton: 'btn font-weight-bold btn-light-primary',
+                cancelButton: 'btn font-weight-bold btn-danger'
             }
         }).then((result) => {
             if (result.isConfirmed == true) {
-                var table = $(".table-list").attr("id");
-                let bulkCheckbox = "";
-                $(".bulk_action_list:checked").each(function () {
-                    bulkCheckbox += $(this).val() + ",";
+                var table = $('.table-list').attr('id');
+                let bulkCheckbox = '';
+                $('.bulk_action_list:checked').each(function () {
+                    bulkCheckbox += $(this).val() + ',';
                 });
 
-                if (bulkCheckbox != "") {
+                if (bulkCheckbox != '') {
                     $.ajax({
-                        url: baseUrl + "/ajax/bulk-edit",
-                        type: "POST",
-                        data: "_token=" + cToken + "&bulk=" + bulkCheckbox + "&table=" + table + "&type=" + bulkType,
+                        url: baseUrl + '/ajax/bulk-edit',
+                        type: 'POST',
+                        data: '_token=' + cToken + '&bulk=' + bulkCheckbox + '&table=' + table + '&type=' + bulkType,
                         success: function (res) {
                             location.reload();
                         },
@@ -47,12 +47,12 @@ function clearconsole() {
                     });
                 } else {
                     swal.fire({
-                        text: "Tidak ada data yang dipilih!",
-                        icon: "error",
+                        text: 'No data selected!',
+                        icon: 'error',
                         buttonsStyling: false,
-                        confirmButtonText: "Close",
+                        confirmButtonText: 'Close',
                         customClass: {
-                            confirmButton: "btn font-weight-bold btn-light-primary",
+                            confirmButton: 'btn font-weight-bold btn-light-primary',
                         }
                     })
                 }
@@ -62,56 +62,55 @@ function clearconsole() {
         });
     };
 
-    $("#bulk-action-checkbox").on("click", function (e) {
+    $('#bulk-action-checkbox').on('click', function (e) {
         if (this.checked) {
-            $("#bulk-action-checkbox-footer").prop("checked", true);
+            $('#bulk-action-checkbox-footer').prop('checked', true);
         } else {
-            $("#bulk-action-checkbox-footer").prop("checked", false);
+            $('#bulk-action-checkbox-footer').prop('checked', false);
         }
     });
 
-    $("#bulk-action-checkbox-footer").on("click", function (e) {
+    $('#bulk-action-checkbox-footer').on('click', function (e) {
         if (this.checked) {
-            $("#bulk-action-checkbox").prop("checked", true);
+            $('#bulk-action-checkbox').prop('checked', true);
         } else {
-            $("#bulk-action-checkbox").prop("checked", false);
+            $('#bulk-action-checkbox').prop('checked', false);
         }
     });
 
-    $("#bulk-action-checkbox, #bulk-action-checkbox-footer").on("click", function (e) {
+    $('#bulk-action-checkbox, #bulk-action-checkbox-footer').on('click', function (e) {
         if (this.checked) {
-            $(".bulk_action_list").each(function () {
+            $('.bulk_action_list').each(function () {
                 this.checked = true;
             });
         } else {
-            $(".bulk_action_list").each(function () {
+            $('.bulk_action_list').each(function () {
                 this.checked = false;
             });
         }
     });
 
-    $("#bulk-action-select").on("change", function (e) {
+    $('#bulk-action-select').on('change', function (e) {
         let bulkActionType = $(this).val();
-        var actionName = "",
-            alertMessage = "";
-        if (bulkActionType != "") {
+        var actionName = '',
+            alertMessage = '';
+        if (bulkActionType != '') {
             if (bulkActionType == 0) {
-                actionName = "Menunggu Konfirmasi";
+                actionName = 'Inactive';
             }
             if (bulkActionType == 1) {
-                actionName = "Dalam Proses";
+                actionName = 'Active';
             }
-            if (bulkActionType == -1) {
-                actionName = "Hapus Permanen";
+            if (bulkActionType == 2) {
+                actionName = 'Delete';
             }
-            if (bulkActionType != "") {
-                if (bulkActionType == -1) {
-                    alertMessage = "Anda ingin " + actionName + "?";
-                } else {
-                    alertMessage = "Anda ingin mengubah status data terpilih menjadi " + actionName + "?";
-                }
-                BulkConfirmDialog(alertMessage, bulkActionType);
-            }
+            alertMessage = 'Are you sure to ' + actionName + ' selected data?';
+            BulkConfirmDialog(alertMessage, bulkActionType);
         }
+    });
+
+    $('#page-limit').on('change', function (e) {
+        let pageLimit = $(this).val();
+        window.location.replace(baseUrl+'pages?limit='+pageLimit);
     });
 })(jQuery);

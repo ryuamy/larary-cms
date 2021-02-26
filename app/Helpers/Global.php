@@ -276,9 +276,7 @@ if(!function_exists('custom_pagination')) {
  */
 if(!function_exists('custom_pagination_limit')) {
     function custom_pagination_limit() {
-        $limit = (isset($_SESSION['custom_pagination_limit'])) ? 
-            $_SESSION['custom_pagination_limit'] : 
-            get_site_settings('admin_pagination_limit') ;
+        $limit = (isset($_GET['limit'])) ? $_GET['limit'] : get_site_settings('admin_pagination_limit') ;
         return intval($limit);
     }
 }

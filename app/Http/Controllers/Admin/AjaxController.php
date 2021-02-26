@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admins;
 use App\Models\Adminlogs;
-use App\Models\Userlogs;
+use App\Models\Pagelogs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,29 +24,45 @@ class AjaxController extends Controller
      */
     public function bulk_edit(Request $request)
     {
+        $admin_id = Auth::guard('admin')->user()->id;
+
         $table = $request->input('table');
-        $title = $request->input('title');
 
         $bulk = $request->input('bulk');
         $bulk = rtrim($bulk, ', ');
 
-        $ids = explode(',', $bulk);
+        $uuids = explode(',', $bulk);
 
         $status = $request->input('status');
 
-        foreach($ids as $id) {
-            DB::table($table)->where('id', $id)->update( ['status' => $status] );
+        foreach($uuids as $uuid) {
+            $data = DB::table($table)->where('uuid', $uuid)->first();
+            $title = $data['name'];
+
+            DB::table($table)->where('uuid', $uuid)->update( ['status' => $status] );
+
+            if($status == 2) {
+                $action = 'DELETE';
+            } else {
+                $action = 'UPDATE';
+            }
+
+            if($table == 'pages') {
+                $data_page_log = new Pagelogs();
+                $data_page_log->admin_id        = $admin_id;
+                $data_page_log->page_id         = $uuid;
+                $data_page_log->action          = $action;
+                $data_page_log->action_detail   = 'Change '.$title.' status with id '.$uuid.' to '.$status;
+                $data_page_log->ipaddress       = get_client_ip();
+                $data_page_log->save();
+            }
 
             $data_log = new Adminlogs();
-            $data_log->admin_id         = Auth::user()->id;
+            $data_log->admin_id         = $admin_id;
             $data_log->table            = $table;
-            $data_log->table_id         = $id;
-            if($status == -1) {
-                $data_log->action       = 'DELETE';
-            } else {
-                $data_log->action       = 'UPDATE';
-            }
-            $data_log->action_detail    = 'Change '.$title.' status with id '.$id.' to '.$status;
+            $data_log->table_id         = $uuid;
+            $data_log->action           = $action;
+            $data_log->action_detail    = 'Change '.$title.' status with id '.$uuid.' to '.$status;
             $data_log->ipaddress        = get_client_ip();
             $data_log->save();
         }
@@ -69,21 +85,36 @@ class AjaxController extends Controller
      */
     public function delete_data(Request $request)
     {
-        $table = $request->input('table');
-        $title = $request->input('title');
-        $id = $request->input('id');
+        $admin_id = Auth::guard('admin')->user()->id;
 
-        DB::table($table)->where('id', $id)->update([
-            'status'        => -1,
-            'updated_by'    => Auth::user()->id,
+        $table = $request->input('table');
+        
+        $uuid = $request->input('uuid');
+
+        $data = DB::table($table)->where('uuid', $uuid)->first();
+        $title = $data['name'];
+
+        DB::table($table)->where('uuid', $uuid)->update([
+            'status'        => 2,
+            'updated_by'    => $admin_id,
         ]);
 
+        if($table == 'pages') {
+            $data_page_log = new Pagelogs();
+            $data_page_log->admin_id        = $admin_id;
+            $data_page_log->page_id         = $uuid;
+            $data_page_log->action          = 'DELETE';
+            $data_page_log->action_detail   = 'Delete '.$title.' (uuid '.$uuid.')';
+            $data_page_log->ipaddress       = get_client_ip();
+            $data_page_log->save();
+        }
+
         $data_log = new Adminlogs();
-        $data_log->admin_id         = Auth::user()->id;
+        $data_log->admin_id         = $admin_id;
         $data_log->table            = $table;
-        $data_log->table_id         = $id;
+        $data_log->table_id         = $uuid;
         $data_log->action           = 'DELETE';
-        $data_log->action_detail    = 'Delete '.$title;
+        $data_log->action_detail    = 'Delete '.$title.' (uuid '.$uuid.')';
         $data_log->ipaddress        = get_client_ip();
         $data_log->save();
 
