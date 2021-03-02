@@ -47,7 +47,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		$last_name = isset($admin_name[1]) ? $admin_name[1] : '';
 	?>
 
-	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"
+		data-baseurl="{{ url(admin_uri()) }}" data-ctoken="{{ csrf_token() }}"
+	>
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<a href="index">
 				<img alt="Logo" src="{{ asset('/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
@@ -737,6 +739,26 @@ License: You must have a valid license purchased only from themeforest(the above
 														fill="#000000"
 													/>
 													<path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z"
+														fill="#000000"
+														opacity="0.3"
+													/>
+												</g>
+											</svg>
+										</span>
+									</div>
+								</div>
+                                
+								<div class="topbar-item">
+									<div class="btn btn-icon btn-clean btn-lg mr-1" id="kt_quick_panel_toggle">
+										<span class="svg-icon svg-icon-xl svg-icon-primary">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+												width="24px" height="24px"
+												viewBox="0 0 24 24" version="1.1"
+											>
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect x="0" y="0" width="24" height="24" />
+													<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
+													<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
 														fill="#000000"
 														opacity="0.3"
 													/>
@@ -1437,6 +1459,18 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="{{ asset('/metronic_v7.1.2/plugins/global/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
 		<script src="{{ asset('/metronic_v7.1.2/js/scripts.bundle.js') }}"></script>
+
+		<script>
+			var baseUrl = $('body').data('baseurl');
+			var cToken = $('body').data('ctoken');
+			
+			function clearconsole() {
+				console.log(window.console);
+				if (window.console) {
+					console.clear();
+				}
+			}
+		</script>
 
         @foreach ($js as $j)
 		    <script src="{{ asset('/'.$j.'.js') }}"></script>

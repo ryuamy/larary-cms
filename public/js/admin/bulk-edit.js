@@ -1,10 +1,3 @@
-function clearconsole() {
-    console.log(window.console);
-    if (window.console) {
-        console.clear();
-    }
-}
-
 (function ($) {
     'use strict';
 
@@ -34,7 +27,7 @@ function clearconsole() {
 
                 if (bulkCheckbox != '') {
                     $.ajax({
-                        url: baseUrl + '/ajax/bulk-edit',
+                        url: baseUrl + 'ajax/bulk-edit',
                         type: 'POST',
                         data: '_token=' + cToken + '&bulk=' + bulkCheckbox + '&table=' + table + '&type=' + bulkType,
                         success: function (res) {

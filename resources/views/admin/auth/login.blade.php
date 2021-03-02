@@ -34,7 +34,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	</head>
 	
 	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"
-		data-baseurl="{{ url('/admin').'/' }}" data-ctoken="{{ csrf_token() }}"
+		data-baseurl="{{ url(admin_uri()) }}" data-ctoken="{{ csrf_token() }}"
 	>
 		
 		<div class="d-flex flex-column flex-root">

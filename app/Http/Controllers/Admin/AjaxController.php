@@ -33,11 +33,11 @@ class AjaxController extends Controller
 
         $uuids = explode(',', $bulk);
 
-        $status = $request->input('status');
+        $status = $request->input('type');
 
         foreach($uuids as $uuid) {
             $data = DB::table($table)->where('uuid', $uuid)->first();
-            $title = $data['name'];
+            $title = $data->name;
 
             DB::table($table)->where('uuid', $uuid)->update( ['status' => $status] );
 
@@ -50,7 +50,7 @@ class AjaxController extends Controller
             if($table == 'pages') {
                 $data_page_log = new Pagelogs();
                 $data_page_log->admin_id        = $admin_id;
-                $data_page_log->page_id         = $uuid;
+                $data_page_log->page_id         = $data->id;
                 $data_page_log->action          = $action;
                 $data_page_log->action_detail   = 'Change '.$title.' status with id '.$uuid.' to '.$status;
                 $data_page_log->ipaddress       = get_client_ip();
@@ -60,7 +60,7 @@ class AjaxController extends Controller
             $data_log = new Adminlogs();
             $data_log->admin_id         = $admin_id;
             $data_log->table            = $table;
-            $data_log->table_id         = $uuid;
+            $data_log->table_id         = $data->id;
             $data_log->action           = $action;
             $data_log->action_detail    = 'Change '.$title.' status with id '.$uuid.' to '.$status;
             $data_log->ipaddress        = get_client_ip();
@@ -92,7 +92,7 @@ class AjaxController extends Controller
         $uuid = $request->input('uuid');
 
         $data = DB::table($table)->where('uuid', $uuid)->first();
-        $title = $data['name'];
+        $title = $data->name;
 
         DB::table($table)->where('uuid', $uuid)->update([
             'status'        => 2,
@@ -102,7 +102,7 @@ class AjaxController extends Controller
         if($table == 'pages') {
             $data_page_log = new Pagelogs();
             $data_page_log->admin_id        = $admin_id;
-            $data_page_log->page_id         = $uuid;
+            $data_page_log->page_id         = $data->id;
             $data_page_log->action          = 'DELETE';
             $data_page_log->action_detail   = 'Delete '.$title.' (uuid '.$uuid.')';
             $data_page_log->ipaddress       = get_client_ip();
@@ -112,7 +112,7 @@ class AjaxController extends Controller
         $data_log = new Adminlogs();
         $data_log->admin_id         = $admin_id;
         $data_log->table            = $table;
-        $data_log->table_id         = $uuid;
+        $data_log->table_id         = $data->id;
         $data_log->action           = 'DELETE';
         $data_log->action_detail    = 'Delete '.$title.' (uuid '.$uuid.')';
         $data_log->ipaddress        = get_client_ip();

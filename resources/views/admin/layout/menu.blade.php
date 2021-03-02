@@ -1,5 +1,4 @@
 <?php $cur_uri = current_uri(); ?>
-<?php /** NOTES : take a look at how "active" works */ ?>
 
 <ul class="menu-nav">
     <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'dashboard' ? 'menu-item-active' : '' }}" aria-haspopup="true">
@@ -52,7 +51,7 @@
         </a>
     </li>
 
-    <li class="menu-section">
+    <!--<li class="menu-section">
         <h4 class="menu-text">Messages</h4>
         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
     </li>
@@ -106,7 +105,7 @@
             </span>
             <span class="menu-text">Sent</span>
         </a>
-    </li>
+    </li>-->
 
     <li class="menu-section">
         <h4 class="menu-text">Reporting</h4>

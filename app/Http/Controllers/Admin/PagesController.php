@@ -20,35 +20,42 @@ class PagesController extends Controller
     {
         $this->middleware('auth:admin');
         $this->table = 'pages';
+        $this->admin_url = admin_uri().$this->table;
     }
 
     public function index()
     {
         $datas = [
             'table' => $this->table,
+            'admin_url' =>$this->admin_url,
             'meta' => [
                 'title'     => 'CMS Pages',
                 'heading'   => 'Pages Management'
             ],
             'css' => [],
             'js' => [
-                'js/admin/bulk-edit'
+                'js/admin/bulk-edit',
+                'js/admin/filter-data'
             ],
             'breadcrumb' => [
                 array(
+                    'title' => 'Dashboard',
+                    'url'   => 'dashboard'
+                ),
+                array(
                     'title' => 'Pages',
-                    'url'   => 'pages'
+                    'url'   => $this->table
                 ),
             ],
+            'admindata' => Auth::guard('admin')->user(),
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            // 'data' => [],
         ];
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = Pages::whereRaw('status != -1');
+        $datas_list = Pages::whereRaw('status != 2');
         
         //*** Filter
         if(isset($_GET['action'])) {
@@ -67,6 +74,9 @@ class PagesController extends Controller
         $order = 'id';
         if(isset($param_get['order'])) {
             $order = $param_get['order'];
+            if($param_get['order'] == 'title') {
+                $order = 'name';
+            }
             if($param_get['order'] == 'created_date') {
                 $order = 'created_at';
             } elseif($param_get['order'] == 'updated_date') {
@@ -83,10 +93,10 @@ class PagesController extends Controller
         $offset = (isset($param_get['page']) && $param_get['page'] > 1) ? ($param_get['page'] * $limit) - $limit : 0;
         $datas['list'] = $datas_list->offset($offset)->limit($limit)->get();
 
-        $base_sort_link = custom_pagination_sort_link('pages', $param_get);
+        $base_sort_link = custom_pagination_sort_link($this->table, $param_get);
         $datas['pagination']['base_sort_link'] = $base_sort_link;
 
-        $page_link = custom_pagination_link('pages', $param_get);
+        $page_link = custom_pagination_link($this->table, $param_get);
         $datas['pagination']['page_link'] = $page_link;
 
         $current_page = isset($param_get['page']) ? (int)$param_get['page'] : 1;
@@ -110,42 +120,91 @@ class PagesController extends Controller
         
         $table_head = [
             'table'         => $this->table,
-            'head'          => [ 'title', 'featured_image', 'status', 'created_date', 'updated_date' ],
+            'head'          => [ 'title', 'featured_image', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => [ 'featured_image' ]
         ];
         $table_head = admin_table_head($table_head);
         $datas['table_head'] = $table_head;
 
-        // dd($datas);
-
         return view('admin.pages.index', $datas);
     }
 
-    public function list_datatable()
+    public function create()
     {
         $datas = [
-            'table' => '',
+            'table' => $this->table,
+            'admin_url' =>$this->admin_url,
             'meta' => [
-                'title' => 'List Datatable'
+                'title'     => 'Create New Page',
+                'heading'   => 'Pages Management'
             ],
             'css' => [],
             'js' => [
-                'metronic_v7.1.2/js/pages/custom/user/list-datatable'
+                'js/admin/edit-permalink',
+                'js/admin/set-feature-image',
+                'js/admin/wysiwyg-editor'
             ],
             'breadcrumb' => [
-                //...
                 array(
-                    'title' => 'User',
-                    'url' => 'user'
+                    'title' => 'Dashboard',
+                    'url'   => 'dashboard'
                 ),
                 array(
-                    'title' => 'List Datatable',
-                    'url' => 'list-datatable'
+                    'title' => 'Pages',
+                    'url'   => $this->table
+                ),
+                array(
+                    'title' => 'Create Page',
+                    'url'   => $this->table . '/create'
                 ),
             ],
-            'data' => [],
+            'admindata' => Auth::guard('admin')->user(),
+            'staticdata' => [
+                'default_status' => Staticdatas::default_status()
+            ],
         ];
 
-        return view('admin.custom.apps.user.list_datatable', $datas);
+        return view('admin.pages.form', $datas);
+    }
+
+    public function detail($uuid)
+    {
+        $current = Pages::where('uuid', $uuid)->first();
+
+        $datas = [
+            'table' => $this->table,
+            'admin_url' =>$this->admin_url,
+            'meta' => [
+                'title'     => 'Detail ' . $current['name'] . ' Page',
+                'heading'   => 'Pages Management'
+            ],
+            'css' => [],
+            'js' => [
+                'js/admin/edit-permalink',
+                'js/admin/set-feature-image',
+                'js/admin/wysiwyg-editor'
+            ],
+            'breadcrumb' => [
+                array(
+                    'title' => 'Dashboard',
+                    'url'   => 'dashboard'
+                ),
+                array(
+                    'title' => 'Pages',
+                    'url'   => $this->table
+                ),
+                array(
+                    'title' => 'Detail Page',
+                    'url'   => $this->table . '/detail/' . $uuid
+                ),
+            ],
+            'current' => $current,
+            'admindata' => Auth::guard('admin')->user(),
+            'staticdata' => [
+                'default_status' => Staticdatas::default_status()
+            ],
+        ];
+
+        return view('admin.pages.form', $datas);
     }
 }

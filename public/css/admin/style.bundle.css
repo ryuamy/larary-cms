@@ -71477,127 +71477,127 @@ button {
 }
 
 .btn.btn-light-linkedin i {
-    color: #0077b5;
+  color: #0077b5;
 }
 
 .btn.btn-light-linkedin .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #0077b5;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #0077b5;
 }
 
 .btn.btn-light-linkedin .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-light-linkedin.dropdown-toggle:after {
-    color: #0077b5;
+  color: #0077b5;
 }
 
 .btn.btn-light-linkedin:hover:not(.btn-text):not(:disabled):not(.disabled),
 .btn.btn-light-linkedin:focus:not(.btn-text),
 .btn.btn-light-linkedin.focus:not(.btn-text) {
-    color: #ffffff;
-    background-color: #0077b5;
-    border-color: transparent;
+  color: #ffffff;
+  background-color: #0077b5;
+  border-color: transparent;
 }
 
 .btn.btn-light-linkedin:hover:not(.btn-text):not(:disabled):not(.disabled) i,
 .btn.btn-light-linkedin:focus:not(.btn-text) i,
 .btn.btn-light-linkedin.focus:not(.btn-text) i {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-light-linkedin:hover:not(.btn-text):not(:disabled):not(.disabled) .svg-icon svg g [fill],
 .btn.btn-light-linkedin:focus:not(.btn-text) .svg-icon svg g [fill],
 .btn.btn-light-linkedin.focus:not(.btn-text) .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #ffffff;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #ffffff;
 }
 
 .btn.btn-light-linkedin:hover:not(.btn-text):not(:disabled):not(.disabled) .svg-icon svg:hover g [fill],
 .btn.btn-light-linkedin:focus:not(.btn-text) .svg-icon svg:hover g [fill],
 .btn.btn-light-linkedin.focus:not(.btn-text) .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-light-linkedin:hover:not(.btn-text):not(:disabled):not(.disabled).dropdown-toggle:after,
 .btn.btn-light-linkedin:focus:not(.btn-text).dropdown-toggle:after,
 .btn.btn-light-linkedin.focus:not(.btn-text).dropdown-toggle:after {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-light-linkedin.disabled,
 .btn.btn-light-linkedin:disabled {
-    color: #0077b5;
-    background-color: rgba(0, 119, 181, 0.1);
-    border-color: transparent;
+  color: #0077b5;
+  background-color: rgba(0, 119, 181, 0.1);
+  border-color: transparent;
 }
 
 .btn.btn-light-linkedin.disabled i,
 .btn.btn-light-linkedin:disabled i {
-    color: #0077b5;
+  color: #0077b5;
 }
 
 .btn.btn-light-linkedin.disabled .svg-icon svg g [fill],
 .btn.btn-light-linkedin:disabled .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #0077b5;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #0077b5;
 }
 
 .btn.btn-light-linkedin.disabled .svg-icon svg:hover g [fill],
 .btn.btn-light-linkedin:disabled .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-light-linkedin.disabled.dropdown-toggle:after,
 .btn.btn-light-linkedin:disabled.dropdown-toggle:after {
-    color: #0077b5;
+  color: #0077b5;
 }
 
 .btn.btn-light-linkedin:not(:disabled):not(.disabled):active:not(.btn-text),
 .btn.btn-light-linkedin:not(:disabled):not(.disabled).active,
 .show > .btn.btn-light-linkedin.dropdown-toggle,
 .show .btn.btn-light-linkedin.btn-dropdown {
-    color: #ffffff;
-    background-color: #0077b5;
-    border-color: transparent;
+  color: #ffffff;
+  background-color: #0077b5;
+  border-color: transparent;
 }
 
 .btn.btn-light-linkedin:not(:disabled):not(.disabled):active:not(.btn-text) i,
 .btn.btn-light-linkedin:not(:disabled):not(.disabled).active i,
 .show > .btn.btn-light-linkedin.dropdown-toggle i,
 .show .btn.btn-light-linkedin.btn-dropdown i {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-light-linkedin:not(:disabled):not(.disabled):active:not(.btn-text) .svg-icon svg g [fill],
 .btn.btn-light-linkedin:not(:disabled):not(.disabled).active .svg-icon svg g [fill],
 .show > .btn.btn-light-linkedin.dropdown-toggle .svg-icon svg g [fill],
 .show .btn.btn-light-linkedin.btn-dropdown .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #ffffff;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #ffffff;
 }
 
 .btn.btn-light-linkedin:not(:disabled):not(.disabled):active:not(.btn-text) .svg-icon svg:hover g [fill],
 .btn.btn-light-linkedin:not(:disabled):not(.disabled).active .svg-icon svg:hover g [fill],
 .show > .btn.btn-light-linkedin.dropdown-toggle .svg-icon svg:hover g [fill],
 .show .btn.btn-light-linkedin.btn-dropdown .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-light-linkedin:not(:disabled):not(.disabled):active:not(.btn-text).dropdown-toggle:after,
 .btn.btn-light-linkedin:not(:disabled):not(.disabled).active.dropdown-toggle:after,
 .show > .btn.btn-light-linkedin.dropdown-toggle.dropdown-toggle:after,
 .show .btn.btn-light-linkedin.btn-dropdown.dropdown-toggle:after {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-skype {
@@ -71607,127 +71607,127 @@ button {
 }
 
 .btn.btn-skype i {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-skype .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #ffffff;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #ffffff;
 }
 
 .btn.btn-skype .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-skype.dropdown-toggle:after {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-skype:hover:not(.btn-text):not(:disabled):not(.disabled),
 .btn.btn-skype:focus:not(.btn-text),
 .btn.btn-skype.focus:not(.btn-text) {
-    color: #ffffff;
-    background-color: #0093ca;
-    border-color: #0093ca;
+  color: #ffffff;
+  background-color: #0093ca;
+  border-color: #0093ca;
 }
 
 .btn.btn-skype:hover:not(.btn-text):not(:disabled):not(.disabled) i,
 .btn.btn-skype:focus:not(.btn-text) i,
 .btn.btn-skype.focus:not(.btn-text) i {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-skype:hover:not(.btn-text):not(:disabled):not(.disabled) .svg-icon svg g [fill],
 .btn.btn-skype:focus:not(.btn-text) .svg-icon svg g [fill],
 .btn.btn-skype.focus:not(.btn-text) .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #ffffff;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #ffffff;
 }
 
 .btn.btn-skype:hover:not(.btn-text):not(:disabled):not(.disabled) .svg-icon svg:hover g [fill],
 .btn.btn-skype:focus:not(.btn-text) .svg-icon svg:hover g [fill],
 .btn.btn-skype.focus:not(.btn-text) .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-skype:hover:not(.btn-text):not(:disabled):not(.disabled).dropdown-toggle:after,
 .btn.btn-skype:focus:not(.btn-text).dropdown-toggle:after,
 .btn.btn-skype.focus:not(.btn-text).dropdown-toggle:after {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-skype.disabled,
 .btn.btn-skype:disabled {
-    color: #ffffff;
-    background-color: #00aff0;
-    border-color: #00aff0;
+  color: #ffffff;
+  background-color: #00aff0;
+  border-color: #00aff0;
 }
 
 .btn.btn-skype.disabled i,
 .btn.btn-skype:disabled i {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-skype.disabled .svg-icon svg g [fill],
 .btn.btn-skype:disabled .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #ffffff;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #ffffff;
 }
 
 .btn.btn-skype.disabled .svg-icon svg:hover g [fill],
 .btn.btn-skype:disabled .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-skype.disabled.dropdown-toggle:after,
 .btn.btn-skype:disabled.dropdown-toggle:after {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-skype:not(:disabled):not(.disabled):active:not(.btn-text),
 .btn.btn-skype:not(:disabled):not(.disabled).active,
 .show > .btn.btn-skype.dropdown-toggle,
 .show .btn.btn-skype.btn-dropdown {
-    color: #ffffff;
-    background-color: #0093ca;
-    border-color: #0093ca;
+  color: #ffffff;
+  background-color: #0093ca;
+  border-color: #0093ca;
 }
 
 .btn.btn-skype:not(:disabled):not(.disabled):active:not(.btn-text) i,
 .btn.btn-skype:not(:disabled):not(.disabled).active i,
 .show > .btn.btn-skype.dropdown-toggle i,
 .show .btn.btn-skype.btn-dropdown i {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-skype:not(:disabled):not(.disabled):active:not(.btn-text) .svg-icon svg g [fill],
 .btn.btn-skype:not(:disabled):not(.disabled).active .svg-icon svg g [fill],
 .show > .btn.btn-skype.dropdown-toggle .svg-icon svg g [fill],
 .show .btn.btn-skype.btn-dropdown .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #ffffff;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #ffffff;
 }
 
 .btn.btn-skype:not(:disabled):not(.disabled):active:not(.btn-text) .svg-icon svg:hover g [fill],
 .btn.btn-skype:not(:disabled):not(.disabled).active .svg-icon svg:hover g [fill],
 .show > .btn.btn-skype.dropdown-toggle .svg-icon svg:hover g [fill],
 .show .btn.btn-skype.btn-dropdown .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-skype:not(:disabled):not(.disabled):active:not(.btn-text).dropdown-toggle:after,
 .btn.btn-skype:not(:disabled):not(.disabled).active.dropdown-toggle:after,
 .show > .btn.btn-skype.dropdown-toggle.dropdown-toggle:after,
 .show .btn.btn-skype.btn-dropdown.dropdown-toggle:after {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-light-skype {
@@ -71737,127 +71737,127 @@ button {
 }
 
 .btn.btn-light-skype i {
-    color: #00aff0;
+  color: #00aff0;
 }
 
 .btn.btn-light-skype .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #00aff0;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #00aff0;
 }
 
 .btn.btn-light-skype .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-light-skype.dropdown-toggle:after {
-    color: #00aff0;
+  color: #00aff0;
 }
 
 .btn.btn-light-skype:hover:not(.btn-text):not(:disabled):not(.disabled),
 .btn.btn-light-skype:focus:not(.btn-text),
 .btn.btn-light-skype.focus:not(.btn-text) {
-    color: #ffffff;
-    background-color: #00aff0;
-    border-color: transparent;
+  color: #ffffff;
+  background-color: #00aff0;
+  border-color: transparent;
 }
 
 .btn.btn-light-skype:hover:not(.btn-text):not(:disabled):not(.disabled) i,
 .btn.btn-light-skype:focus:not(.btn-text) i,
 .btn.btn-light-skype.focus:not(.btn-text) i {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-light-skype:hover:not(.btn-text):not(:disabled):not(.disabled) .svg-icon svg g [fill],
 .btn.btn-light-skype:focus:not(.btn-text) .svg-icon svg g [fill],
 .btn.btn-light-skype.focus:not(.btn-text) .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #ffffff;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #ffffff;
 }
 
 .btn.btn-light-skype:hover:not(.btn-text):not(:disabled):not(.disabled) .svg-icon svg:hover g [fill],
 .btn.btn-light-skype:focus:not(.btn-text) .svg-icon svg:hover g [fill],
 .btn.btn-light-skype.focus:not(.btn-text) .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-light-skype:hover:not(.btn-text):not(:disabled):not(.disabled).dropdown-toggle:after,
 .btn.btn-light-skype:focus:not(.btn-text).dropdown-toggle:after,
 .btn.btn-light-skype.focus:not(.btn-text).dropdown-toggle:after {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-light-skype.disabled,
 .btn.btn-light-skype:disabled {
-    color: #00aff0;
-    background-color: rgba(0, 175, 240, 0.1);
-    border-color: transparent;
+  color: #00aff0;
+  background-color: rgba(0, 175, 240, 0.1);
+  border-color: transparent;
 }
 
 .btn.btn-light-skype.disabled i,
 .btn.btn-light-skype:disabled i {
-    color: #00aff0;
+  color: #00aff0;
 }
 
 .btn.btn-light-skype.disabled .svg-icon svg g [fill],
 .btn.btn-light-skype:disabled .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #00aff0;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #00aff0;
 }
 
 .btn.btn-light-skype.disabled .svg-icon svg:hover g [fill],
 .btn.btn-light-skype:disabled .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-light-skype.disabled.dropdown-toggle:after,
 .btn.btn-light-skype:disabled.dropdown-toggle:after {
-    color: #00aff0;
+  color: #00aff0;
 }
 
 .btn.btn-light-skype:not(:disabled):not(.disabled):active:not(.btn-text),
 .btn.btn-light-skype:not(:disabled):not(.disabled).active,
 .show > .btn.btn-light-skype.dropdown-toggle,
 .show .btn.btn-light-skype.btn-dropdown {
-    color: #ffffff;
-    background-color: #00aff0;
-    border-color: transparent;
+  color: #ffffff;
+  background-color: #00aff0;
+  border-color: transparent;
 }
 
 .btn.btn-light-skype:not(:disabled):not(.disabled):active:not(.btn-text) i,
 .btn.btn-light-skype:not(:disabled):not(.disabled).active i,
 .show > .btn.btn-light-skype.dropdown-toggle i,
 .show .btn.btn-light-skype.btn-dropdown i {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn.btn-light-skype:not(:disabled):not(.disabled):active:not(.btn-text) .svg-icon svg g [fill],
 .btn.btn-light-skype:not(:disabled):not(.disabled).active .svg-icon svg g [fill],
 .show > .btn.btn-light-skype.dropdown-toggle .svg-icon svg g [fill],
 .show .btn.btn-light-skype.btn-dropdown .svg-icon svg g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
-    fill: #ffffff;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #ffffff;
 }
 
 .btn.btn-light-skype:not(:disabled):not(.disabled):active:not(.btn-text) .svg-icon svg:hover g [fill],
 .btn.btn-light-skype:not(:disabled):not(.disabled).active .svg-icon svg:hover g [fill],
 .show > .btn.btn-light-skype.dropdown-toggle .svg-icon svg:hover g [fill],
 .show .btn.btn-light-skype.btn-dropdown .svg-icon svg:hover g [fill] {
-    -webkit-transition: fill 0.3s ease;
-    transition: fill 0.3s ease;
+  -webkit-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 .btn.btn-light-skype:not(:disabled):not(.disabled):active:not(.btn-text).dropdown-toggle:after,
 .btn.btn-light-skype:not(:disabled):not(.disabled).active.dropdown-toggle:after,
 .show > .btn.btn-light-skype.dropdown-toggle.dropdown-toggle:after,
 .show .btn.btn-light-skype.btn-dropdown.dropdown-toggle:after {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 code {

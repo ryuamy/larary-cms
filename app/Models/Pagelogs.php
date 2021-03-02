@@ -14,12 +14,11 @@ class Pagelogs extends Model
     protected $primaryKey = "id";
     
     protected $fillable = [
-        'uuid',
-        'name',
-        'slug',
-        'status',
-        'created_by',
-        'updated_by',
+        'admin_id',
+        'page_id',
+        'action',
+        'action_detail',
+        'ipaddress',
         'created_at',
         'updated_at'
     ];
