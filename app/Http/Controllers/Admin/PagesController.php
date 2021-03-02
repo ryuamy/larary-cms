@@ -93,7 +93,7 @@ class PagesController extends Controller
         $offset = (isset($param_get['page']) && $param_get['page'] > 1) ? ($param_get['page'] * $limit) - $limit : 0;
         $datas['list'] = $datas_list->offset($offset)->limit($limit)->get();
 
-        $base_sort_link = custom_pagination_sort_link($this->table, $param_get);
+        $base_sort_link = custom_sort_link($this->table, $param_get);
         $datas['pagination']['base_sort_link'] = $base_sort_link;
 
         $page_link = custom_pagination_link($this->table, $param_get);

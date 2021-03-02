@@ -37,4 +37,6 @@ Route::get( '/view-cache', function() {
     return view( 'clearcache.main', array('message'=>'View cache cleared!') );
 });
 
+Route::get('/oauth2callback', [App\Http\Controllers\OAuthController::class, 'index'])->name('oauth');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

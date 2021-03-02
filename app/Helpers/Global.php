@@ -324,9 +324,13 @@ if(!function_exists('custom_pagination_prep')) {
  * @return string $link
  * @author Amy <laksmise@gmail.com>
  */
-if(!function_exists('custom_pagination_sort_link')) {
-    function custom_pagination_sort_link($menu, $params, $is_myadmin=true) {
-        $link = ($is_myadmin === true) ? url(admin_uri().$menu.'?') : url('/'.$menu.'?');
+if(!function_exists('custom_sort_link')) {
+    function custom_sort_link($menu, $params, $is_admin_page=true) {
+        $link = ($is_admin_page === true) ? url(admin_uri().$menu.'?') : url('/'.$menu.'?');
+
+        if(isset($params['limit'])) {
+            $link =  $link.'limit='.$params['limit'].'&';
+        }
 
         if(
         (isset($params['action']) && isset($params['page'])) || 
@@ -354,8 +358,12 @@ if(!function_exists('custom_pagination_sort_link')) {
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_pagination_link')) {
-    function custom_pagination_link($menu, $params, $is_myadmin=true) {
-        $link = ($is_myadmin === true) ? url(admin_uri().$menu.'?') : url('/'.$menu.'?');
+    function custom_pagination_link($menu, $params, $is_admin_page=true) {
+        $link = ($is_admin_page === true) ? url(admin_uri().$menu.'?') : url('/'.$menu.'?');
+
+        if(isset($params['limit'])) {
+            $link =  $link.'limit='.$params['limit'].'&';
+        }
 
         if(
         (isset($params['action']) && isset($params['order'])) || 
