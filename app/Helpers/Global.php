@@ -62,6 +62,7 @@ if(!function_exists('base_img')) {
  * 
  * @return string $meta_value   
  * @return string $separator    separator, default is "|"
+ * 
  * @author Amy <laksmise@gmail.com>
  * 
  */
@@ -74,7 +75,7 @@ if(!function_exists('get_site_settings')) {
             ->orderBy('id', 'desc')
             ->first();
         $meta_value = $select->meta_value;
-        return ($meta_key == 'title') ? ' ' . $separator . ' ' . $meta_value : $meta_value;
+        return ($meta_key == 'title') ? ' '.$separator.' '.$meta_value : $meta_value;
     }
 }
 
@@ -97,6 +98,7 @@ if(!function_exists('is_mobile')) {
  *
  * @param string $edit_title
  * @return string $html
+ * 
  * @author Amy <laksmise@gmail.com>
  * 
  */
@@ -117,15 +119,15 @@ if(!function_exists('admin_breadcrumb')) {
         //                 $label = 'SEO';
         //             }
         //             $is_active = ($key === $x) ? ' active' : '';
-        //             $href = ($path !== 'admin') ? url(admin_uri() . $path) : url(admin_uri());
+        //             $href = ($path !== 'admin') ? url(admin_uri().$path) : url(admin_uri());
         //             if($path === 'role') {
-        //                 $href = url(admin_uri() . 'admin/'.$path);
+        //                 $href = url(admin_uri().'admin/'.$path);
         //             }
         //             if($path === 'seo') {
-        //                 $href = url(admin_uri() . 'support/'.$path);
+        //                 $href = url(admin_uri().'support/'.$path);
         //             }
         //             if($path === 'setting') {
-        //                 $href = url(admin_uri() . 'setting/general');
+        //                 $href = url(admin_uri().'setting/general');
         //             }
         //             $href = ($key !== $x) ? '<a href=\''.$href.'\'>'.$label.'</a>' : $label;
         //             $html .= '<li class=\'breadcrumb-item'.$is_active.'\'>'.$href.'</li>';
@@ -167,6 +169,7 @@ if(!function_exists('admin_breadcrumb')) {
  * @param array $params
  * @param string $adminpage
  * @return string $html
+ * 
  * @author Amy <laksmise@gmail.com>
  * 
  */
@@ -272,6 +275,7 @@ if(!function_exists('custom_pagination')) {
  * Global limit for custom pagination
  * 
  * @return integer $limit
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_pagination_limit')) {
@@ -285,6 +289,7 @@ if(!function_exists('custom_pagination_limit')) {
  * Pagination number of showing to and showing from
  * 
  * @return array $rtn
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_pagination_prep')) {
@@ -322,6 +327,7 @@ if(!function_exists('custom_pagination_prep')) {
  * Pagination global sort link
  * 
  * @return string $link
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_sort_link')) {
@@ -355,6 +361,7 @@ if(!function_exists('custom_sort_link')) {
  * Pagination global link
  * 
  * @return string $link
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_pagination_link')) {
@@ -385,6 +392,7 @@ if(!function_exists('custom_pagination_link')) {
  * Pagination number of showing to and showing from
  * 
  * @return array $rtn
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_pagination_prep')) {
@@ -423,6 +431,7 @@ if(!function_exists('custom_pagination_prep')) {
  *
  * @param array $array
  * @return array $table_head
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('admin_table_head')) {
@@ -452,6 +461,7 @@ if(!function_exists('admin_table_head')) {
  *
  * @param int $month
  * @return string
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('month_idn')) {
@@ -479,6 +489,7 @@ if(!function_exists('month_idn')) {
  *
  * @param int $day
  * @return string
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('day_idn')) {
@@ -501,6 +512,7 @@ if(!function_exists('day_idn')) {
  * //still not ready, coming soon
  * 
  * @return string $path
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('create_uploads_folder')) {
@@ -524,6 +536,7 @@ if(!function_exists('create_uploads_folder')) {
  * Get client ip address
  *
  * @return string $ipaddress
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('get_client_ip')) {
@@ -551,6 +564,7 @@ if(!function_exists('get_client_ip')) {
  * Get client ip address location information
  *
  * @return array $output
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('get_client_ip_info')) {
@@ -624,6 +638,7 @@ if(!function_exists('get_client_ip_info')) {
  * Get client locale
  *
  * @return array
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('get_client_locale')) {
@@ -682,7 +697,7 @@ if(!function_exists('timezone_choice')) {
         $structure = array();
 
         if ( empty( $selected_zone ) ) {
-            $structure[] = '<option selected="selected" value="">' . __( 'Select a city' ) . '</option>';
+            $structure[] = '<option selected="selected" value="">'.__( 'Select a city' ).'</option>';
         }
 
         foreach ( $zonen as $key => $zone ) {
@@ -698,7 +713,7 @@ if(!function_exists('timezone_choice')) {
                 // Continent optgroup.
                 if ( ! isset( $zonen[ $key - 1 ] ) || $zonen[ $key - 1 ]['continent'] !== $zone['continent'] ) {
                     $label       = $zone['continent'];
-                    $structure[] = '<optgroup label="' . $label . '">';
+                    $structure[] = '<optgroup label="'.$label.'">';
                 }
 
                 // Add the city to the value.
@@ -708,7 +723,7 @@ if(!function_exists('timezone_choice')) {
                 if ( ! empty( $zone['subcity'] ) ) {
                     // Add the subcity to the value.
                     $value[]  = $zone['subcity'];
-                    $display .= ' - ' . $zone['subcity'];
+                    $display .= ' - '.$zone['subcity'];
                 }
             }
 
@@ -721,7 +736,7 @@ if(!function_exists('timezone_choice')) {
 
             $display = str_replace('_', ' ', $display);
 
-            $structure[] = '<option ' . $selected . 'value="' . $value . '">' . $display . '</option>';
+            $structure[] = '<option '.$selected.'value="'.$value.'">'.$display.'</option>';
 
             // Close continent optgroup.
             if ( ! empty( $zone['city'] ) && ( ! isset( $zonen[ $key + 1 ] ) || ( isset( $zonen[ $key + 1 ] ) && $zonen[ $key + 1 ]['continent'] !== $zone['continent'] ) ) ) {
@@ -735,7 +750,7 @@ if(!function_exists('timezone_choice')) {
         if ( 'UTC' === $selected_zone ) {
             $selected = 'selected="selected" ';
         }
-        $structure[] = '<option ' . $selected . 'value="UTC">UTC</option>';
+        $structure[] = '<option '.$selected.'value="UTC">UTC</option>';
         $structure[] = '</optgroup>';
 
         // Do manual UTC offsets.
@@ -800,25 +815,54 @@ if(!function_exists('timezone_choice')) {
 
         foreach ( $offset_range as $offset ) {
             if ( 0 <= $offset ) {
-                $offset_name = '+' . $offset;
+                $offset_name = '+'.$offset;
             } else {
                 $offset_name = (string) $offset;
             }
 
             $offset_value = $offset_name;
             $offset_name  = str_replace( array( '.25', '.5', '.75' ), array( ':15', ':30', ':45' ), $offset_name );
-            $offset_name  = 'UTC' . $offset_name;
-            $offset_value = 'UTC' . $offset_value;
+            $offset_name  = 'UTC'.$offset_name;
+            $offset_value = 'UTC'.$offset_value;
 
             $selected     = '';
             if ( $offset_value === $selected_zone ) {
                 $selected = 'selected="selected" ';
             }
-            $structure[] = '<option ' . $selected . 'value="' . $offset_value . '">' . $offset_name . '</option>';
+            $structure[] = '<option '.$selected.'value="'.$offset_value.'">'.$offset_name.'</option>';
         }
         $structure[] = '</optgroup>';
 
         return join( '\n', $structure );
+    }
+}
+
+/**
+ * Create slug
+ * 
+ * @param string $table
+ * @return string $title
+ * @return string $separator
+ * 
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('create_slug')) {
+    function create_slug($table, $title, $separator = '-') {
+        new \Illuminate\Support\Facades\DB;
+
+        $slug = strtolower(str_replace(' ', $separator, $title));
+
+        $check = DB::table($table)
+            ->whereRaw('status != 2')
+            ->where('slug', $slug)
+            ->get();
+        
+        if(!empty($check)) {
+            $total = count($check) + 1;
+            $slug = $slug.$separator.$total;
+        }
+
+        return $slug;
     }
 }
 
@@ -839,6 +883,7 @@ if(!function_exists('timezone_choice')) {
  * 
  * @param array $params
  * @return array $return
+ * 
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('adsmedia_api')) {
@@ -875,7 +920,7 @@ if(!function_exists('adsmedia_api')) {
         $senddata       = array();
  
         if($params['service'] === 'SMS_OTP') {
-            $endpointurl = $endpointurl . 'api_sms_otp_send_json.php';
+            $endpointurl = $endpointurl.'api_sms_otp_send_json.php';
 
             $senddata = array(
                 'apikey'        => $apikey,  
@@ -887,8 +932,8 @@ if(!function_exists('adsmedia_api')) {
 
             $message = preg_replace( '/[\W]/', '', $params['message'] );
             $count_message = strlen($message);
-            if($count_message > 870) {
-                $message = substr($message, 0, 900) . '(cropped)';
+            if($count_message > 145) {
+                $message = substr($message, 0, 145).'(cropped)';
             }
 
             array_push($senddata['datapacket'], array(
@@ -903,14 +948,14 @@ if(!function_exists('adsmedia_api')) {
             $message = preg_replace( '/[\W]/', '', $params['message'] );
             $count_message = strlen($message);
             if($count_message > 870) {
-                $message = substr($message, 0, 900) . '(cropped)';
+                $message = substr($message, 0, 900).'(cropped)';
             }
 
-            $endpointurl = $endpointurl . 'smsmasking.php?username='.$apikey.'&key='.$apikey.'&number='.$number.'&message='.$message;
+            $endpointurl = $endpointurl.'smsmasking.php?username='.$apikey.'&key='.$apikey.'&number='.$number.'&message='.$message;
         }
  
         if($params['service'] === 'MISSCALL_OTP') {
-            $endpointurl = $endpointurl . 'api_misscall_otp_send_json.php';
+            $endpointurl = $endpointurl.'api_misscall_otp_send_json.php';
 
             $senddata = array(
                 'apikey' => $apikey
@@ -918,7 +963,7 @@ if(!function_exists('adsmedia_api')) {
         }
  
         if($params['service'] === 'WA') {
-            $endpointurl = $endpointurl . 'api_whatsapp_send_json.php';
+            $endpointurl = $endpointurl.'api_whatsapp_send_json.php';
 
             $senddata = array(
                 'apikey' => $apikey
@@ -926,7 +971,7 @@ if(!function_exists('adsmedia_api')) {
         }
  
         if($params['service'] === 'CHECK_BALANCE') {
-            $endpointurl = $endpointurl . 'api_sms_otp_balance_json.php';
+            $endpointurl = $endpointurl.'api_sms_otp_balance_json.php';
 
             $senddata = array(
                 'apikey' => $apikey
@@ -941,12 +986,15 @@ if(!function_exists('adsmedia_api')) {
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
-            'Content-Length: ' . strlen($data))
+            'Content-Length: '.strlen($data))
         );
         curl_setopt($curlHandle, CURLOPT_TIMEOUT, 30);
         curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
         $respon = curl_exec($curlHandle);
         curl_close($curlHandle);
+
+        $response = json_decode($respon);
+        dd( $response->sending_respon[0]->globalstatustext );
         
         $return = [
             'code'      => 200,
