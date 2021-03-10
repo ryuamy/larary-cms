@@ -22,59 +22,7 @@
 
                     <div class="col-sm-12 col-md-7">
                         <div class="d-flex justify-content-end">
-                            <div class="dropdown dropdown-inline mr-2">
-                                <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Export
-                                </button>
-
-                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                    <ul class="navi flex-column navi-hover py-2">
-                                        <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">
-                                            Choose an option:
-                                        </li>
-                                        <?php /*<li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="la la-print"></i>
-                                                </span>
-                                                <span class="navi-text">Print</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="la la-copy"></i>
-                                                </span>
-                                                <span class="navi-text">Copy</span>
-                                            </a>
-                                        </li>*/ ?>
-                                        <li class="navi-item">
-                                            <a id="export-excel" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="la la-file-excel-o"></i>
-                                                </span>
-                                                <span class="navi-text">Excel</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a id="export-csv" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="la la-file-text-o"></i>
-                                                </span>
-                                                <span class="navi-text">CSV</span>
-                                            </a>
-                                        </li>
-                                        <?php /*<li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="la la-file-pdf-o"></i>
-                                                </span>
-                                                <span class="navi-text">PDF</span>
-                                            </a>
-                                        </li>*/ ?>
-                                    </ul>
-                                </div>
-                            </div>
+                            {{ view( "admin.layout.export_button" ) }}
                             
                             <button class="btn {{ isset($_GET['action']) ? 'btn-light-success' : 'btn-success' }} mr-2 font-weight-bolder" id="btn-filter" style="padding-left: 9px;">
                                 <span class="svg-icon-md">
@@ -200,6 +148,25 @@
                         </div>
                     </div>
                 </div>
+            
+                @if (Session::has('error-message'))
+                    <div class="row">
+                        <div class="col-md-12 mb-5 mt-5">
+                            <div class="alert alert-custom alert-danger d-flex show fade" role="alert">
+                                <div class="alert-text" id="alert_message_login">
+                                    {{ Session::get('error-message') }}
+                                </div>
+                                <div class="alert-close">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">
+                                            <i class="ki ki-close"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
                 <form id="table-data" class="table-responsive">
                     <table id="{{ $table }}" class="table table-vertical-center table-head-custom table-foot-custom table-checkable table-list">
@@ -215,7 +182,7 @@
                                 @endif
                                 <?php foreach($table_head as $khead => $vhead) { ?>
                                     <th class="{{ $khead }} {{ ( (isset($_GET['order']) && $_GET['order'] === $khead) ) ? "active" : "" }} {{ $vhead['class'] }}">
-                                        <a <?php echo (!empty($vhead['order'])) ? 'href="' . $pagination['base_sort_link'] . $vhead['order'] . '"' : ''; ?>>
+                                        <a <?php echo (!empty($vhead['order'])) ? 'href="'.$pagination['base_sort_link'].$vhead['order'].'"' : ''; ?>>
                                             {{  ucwords( str_replace("_", " ", $khead) ) }} <?php echo (!empty($vhead['order'])) ? "<span></span>" : ''; ?>
                                         </a>
                                     </th>
@@ -235,7 +202,7 @@
                                 @endif
                                 <?php foreach($table_head as $khead => $vhead) { ?>
                                     <th class="{{ $khead }} {{ ( (isset($_GET['order']) && $_GET['order'] === $khead) ) ? "active" : "" }} {{ $vhead['class'] }}">
-                                        <a <?php echo (!empty($vhead['order'])) ? 'href="' . $pagination['base_sort_link'] . $vhead['order'] . '"' : ''; ?>>
+                                        <a <?php echo (!empty($vhead['order'])) ? 'href="'.$pagination['base_sort_link'].$vhead['order'].'"' : ''; ?>>
                                             {{ ucwords( str_replace("_", " ", $khead) ) }} <?php echo (!empty($vhead['order'])) ? "<span></span>" : ''; ?>
                                         </a>
                                     </th>
@@ -256,15 +223,17 @@
                                             </td>
                                         @endif
                                         <td>
-                                            <a href="{{ $admin_url . '/detail/' . $dt['uuid'] }}">
+                                            <a href="{{ $admin_url.'/detail/'.$dt['uuid'] }}">
                                                 {{ $dt['name'] }}
                                             </a>
                                         </td>
                                         <td>
-                                            <img src="{{ $dt['featured_image'] ? asset('/img/'.$dt['featured_image']) : asset('/img/admin/layout/no-image-available.png') }}"
-                                                alt="{{ $dt['name'] }}"
-                                                width="80"
-                                            />
+                                            <a href="{{ $dt['featured_image'] ? $dt['featured_image'] : 'Javascript:;'}}" {{ $dt['featured_image'] ? 'target="_blank"' : '' }}>
+                                                <img src="{{ $dt['featured_image'] ? asset($dt['featured_image']) : asset('/img/admin/layout/no-image-available.png') }}"
+                                                    alt="{{ $dt['name'] }}"
+                                                    width="80"
+                                                />
+                                            </a>
                                         </td>
                                         <td class="text-center">
                                             <span class="status-{{ $dt['status'] }}">

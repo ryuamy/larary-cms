@@ -32,12 +32,20 @@ class AppServiceProvider extends ServiceProvider
             return preg_match('/^(^\+62\s?|^0)(\d{2,4}-?){2}\d{3,5}$/', $value);
         });
 
+        Validator::extend("idn_address", function($attr, $value){
+            return preg_match('/^[a-zA-Z0-9-_,.\s]*$/', $value);
+        });
+
         Validator::extend('alpha_spaces', function($attr, $value){
             return preg_match('/^[\pL\s]+$/u', $value);
         });
 
         Validator::extend('alpha_num_spaces', function($attr, $value){
             return preg_match('/^[a-zA-Z0-9\s]*$/', $value);
+        });
+
+        Validator::extend('slug', function($attr, $value){
+            return preg_match('/^[a-zA-Z0-9-_]+$/', $value);
         });
     }
 }

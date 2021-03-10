@@ -10,42 +10,6 @@ function preview_image(event, id) {
 
 function delete_feature_image(image_slug) {
     var baseUrl = $('body').data('baseurl');
-
-    $('<div id="alert-confirm"></div>').appendTo('body')
-        .html('<div><h6>Are you sure want to delete permanently current featured image?</h6></div>')
-        .dialog({
-            modal: true,
-            title: 'Confirm Delete Featured Image',
-            autoOpen: true,
-            width: 'auto',
-            resizable: false,
-            buttons: {
-                Yes: function () {
-                    $.ajax({
-                        url: baseUrl + '/ajax/delete-featured-image',
-                        type: 'POST',
-                        data: 'image_slug=' + image_slug,
-                        success: function (res) {
-                            $('#set_feature_image').html('Set featured image');
-                            $('#preview_feature_img').attr('src', '');
-                            $('#preview_feature_image').css('display', 'none');
-                            $('#delete_feature_image').remove();
-                        },
-                        error: function (res) {
-                            var obj = $.parseJSON(res);
-                            console.log(obj);
-                        }
-                    });
-                    $(this).dialog('close');
-                },
-                No: function () {
-                    $(this).dialog('close');
-                }
-            },
-            close: function (event, ui) {
-                $(this).remove();
-            }
-        });
 }
 
 function reset_feature_image(image_slug) {
@@ -56,23 +20,54 @@ function reset_feature_image(image_slug) {
 
 (function ($) {
     'use strict';
+    
+    var baseUrl = $('body').data('baseurl');
 
     $('#set_feature_image').click(function(){
         // alert('boo!');
         $('#upload_feature_image').trigger('click'); 
     })
 
-    function set_feature_image() {
-        alert('boo!');
-        // let html_set_feature_image = $('#set_feature_image').html();
-        // $('#upload_feature_image').click();
-        // $('#upload_feature_image').change(function (e) {
-        //     if (html_set_feature_image != 'Change featured image') {
-        //         $('#set_feature_image').html('Change featured image');
-        //     }
-        //     $('#preview_feature_image').css('display', 'block');
-        //     // var fileName = e.target.files[0].name;
-        //     // $('#preview_feature_image span').html(fileName);
-        // });
-    }
+    $('#delete_feature_image').click(function () {
+        swal.fire({
+            text: 'Are you sure want to delete permanently current featured image?',
+            icon: 'warning',
+            buttonsStyling: false,
+            showCancelButton: true,
+            cancelButtonText: 'No!',
+            confirmButtonText: 'Yes',
+            closeOnCancel: true,
+            customClass: {
+                confirmButton: 'btn font-weight-bold btn-light-primary',
+                cancelButton: 'btn font-weight-bold btn-danger'
+            }
+        }).then((result) => {
+            if (result.isConfirmed == true) {
+                var table = $('.form-input').attr('id');
+                var value = $('#upload_feature_image').val();
+                $.ajax({
+                    url: baseUrl + 'ajax/delete-file',
+                    type: 'POST',
+                    data: '_token=' + cToken + '&value=' + value + '&table=' + table,
+                    success: function (res) {
+                        $('#preview_feature_img').attr('src', '../img/admin/layout/default-featured-img.png');
+                        $('#delete_feature_image').hide();
+                        swal.fire({
+                            text: 'Image deleted',
+                            icon: 'success',
+                            timer: 2000,
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        });
+                    },
+                    error: function (res) {
+                        var obj = $.parseJSON(res);
+                        console.log(obj);
+                    }
+                });                    
+            } else if (result.isDismissed == true) {
+                // Swal.fire('Changes are not saved', '', 'info')
+            }
+        });
+    })
 })(jQuery);

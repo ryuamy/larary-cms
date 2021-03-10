@@ -36,8 +36,8 @@
         </a>
     </li>
 
-    <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
-        <a href="{{ url(admin_uri().'news') }}" class="menu-link menu-toggle">
+    <li class="menu-item menu-item-submenu {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+        <a href="Javascript:;" class="menu-link menu-toggle">
             <span class="svg-icon menu-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -48,7 +48,38 @@
                 </svg>
             </span>
             <span class="menu-text">News</span>
+            <i class="menu-arrow"></i>
         </a>
+
+        <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+                <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' && !isset($cur_uri[5]) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="{{ url(admin_uri().'news') }}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">News</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'bullet' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="{{ url(admin_uri().'news/categories') }}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Categories</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'tags' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="{{ url(admin_uri().'news/tags') }}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Tags</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </li>
 
     <!--<li class="menu-section">

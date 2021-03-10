@@ -2,6 +2,25 @@
 
 /** old fashion */
 
+/**
+ * Old debug
+ * 
+ * @param array $array
+ * @return boolean $exist_flag
+ * 
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('pre')) {
+    function pre($array, $exist_flag = true) {
+        echo '<pre>';
+        print_r($array);
+        echo '</pre>';
+        if($exist_flag === true) {
+            exit;
+        }
+    }
+}
+
 if(!function_exists('customTanggal')) {
     function customTanggal($date,$date_format) {
         return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format($date_format);    
@@ -24,20 +43,6 @@ if(!function_exists('admin_uri')) {
         return ($admin_url != null) ? $admin_url : env('APP_URL').'/admin/';
     }
 }
-
-// function admin_template($view, $datas) {
-//     $trn = view('admin.layouts.header', $datas);
-//     $trn .= view('admin.'.$view, $datas);
-//     $trn .= view('admin.layouts.footer', $datas);
-//     return $trn;
-// }
-
-// function web_template($theme, $view, $datas) {
-//     $trn = view('web.'.$theme.'.layouts.header', $datas);
-//     $trn .= view('web.'.$theme.'.'.$view, $datas);
-//     $trn .= view('web.'.$theme.'.layouts.footer', $datas);
-//     return $trn;
-// }
 
 if(!function_exists('base_css')) {
     function base_css() {
@@ -89,53 +94,6 @@ if(!function_exists('is_mobile')) {
             return false;
         }
         return true;
-    }
-}
-
-/**
- * Breadcrub for admin
- * by default label got from uri path, you custom label by send to $edit_title param
- *
- * @param string $edit_title
- * @return string $html
- * 
- * @author Amy <laksmise@gmail.com>
- * 
- */
-if(!function_exists('admin_breadcrumb')) {
-    function admin_breadcrumb($edit_title='') {
-        // $currentURIPath = url()->current();
-        // $paths = explode('/', $currentURIPath);
-
-        // $paths_total = count($paths);
-        // $html = '<ol class=\'breadcrumb mb-4\'>';
-        // foreach($paths as $key => $path) {
-        //     if($path !== 'http:' && $path !== 'https:' && $path !== '127.0.0.1:8081' && !empty($path)) {
-        //         $x = $paths_total-1;
-        //         $title_path = (empty($edit_title)) ? ucwords(str_replace('-', ' ', $path)) : $edit_title;
-        //         if(strtolower($title_path) != 'detail' && strtolower($title_path) != 'read') {
-        //             $label = ($path === 'admin') ? 'Dashboard' : $title_path;
-        //             if(strtolower($label) === 'seo') {
-        //                 $label = 'SEO';
-        //             }
-        //             $is_active = ($key === $x) ? ' active' : '';
-        //             $href = ($path !== 'admin') ? url(admin_uri().$path) : url(admin_uri());
-        //             if($path === 'role') {
-        //                 $href = url(admin_uri().'admin/'.$path);
-        //             }
-        //             if($path === 'seo') {
-        //                 $href = url(admin_uri().'support/'.$path);
-        //             }
-        //             if($path === 'setting') {
-        //                 $href = url(admin_uri().'setting/general');
-        //             }
-        //             $href = ($key !== $x) ? '<a href=\''.$href.'\'>'.$label.'</a>' : $label;
-        //             $html .= '<li class=\'breadcrumb-item'.$is_active.'\'>'.$href.'</li>';
-        //         }
-        //     }
-        // }
-        // $html .= '</ol>';
-        // return $html;
     }
 }
 
@@ -519,14 +477,12 @@ if(!function_exists('create_uploads_folder')) {
     function create_uploads_folder() {
         $year_folder = './uploads/'.date('Y');
         if (!file_exists($year_folder)) {
-          mkdir($year_folder, 0777);
+            mkdir($year_folder, 0777);
         }
-
         $month_folder = $year_folder.'/'.date('m');
         if (!file_exists($month_folder)) {
-          mkdir($month_folder, 0777);
+            mkdir($month_folder, 0777);
         }
-
         $path = 'uploads/'.date('Y').'/'.date('m');
         return $path;
     }
@@ -854,7 +810,7 @@ if(!function_exists('create_slug')) {
 
         $check = DB::table($table)
             ->whereRaw('status != 2')
-            ->where('slug', $slug)
+            ->where('slug', 'like', '%'.$slug.'%')
             ->get();
         
         if(!empty($check)) {
@@ -888,122 +844,125 @@ if(!function_exists('create_slug')) {
  */
 if(!function_exists('adsmedia_api')) {
     function adsmedia_api($params) {
-        ob_start();
+        // ob_start();
 
-        if(!$params['service']) {
-            $return = [
-                'code'      => 400,
-                'response'  => 'failed',
-                'message'   => 'Please tell us service name',
-                'datas'     => []
-            ];
+        // if(!$params['service']) {
+        //     $return = [
+        //         'code'      => 400,
+        //         'response'  => 'failed',
+        //         'message'   => 'Please tell us service name',
+        //         'datas'     => []
+        //     ];
 
-            return $return;
-        }
+        //     return $return;
+        // }
 
-        if(preg_match('/[^A-Z_]/i', $params['service'])) {
-            $return = [
-                'code'      => 400,
-                'response'  => 'failed',
-                'message'   => 'Invalid service name',
-                'datas'     => []
-            ];
+        // if(preg_match('/[^A-Z_]/i', $params['service'])) {
+        //     $return = [
+        //         'code'      => 400,
+        //         'response'  => 'failed',
+        //         'message'   => 'Invalid service name',
+        //         'datas'     => []
+        //     ];
 
-            return $return;
-        }
+        //     return $return;
+        // }
         
-        $apikey         = env('RAJASMS_KEY');
-        $apiusername    = env('RAJASMS_USERNAME');
-        $apiurl         = env('RAJASMS_URL');
-        $callbackurl    = env('RAJASMS_CALLBACK');
-        $endpointurl    = $apiurl;
-        $senddata       = array();
+        // $apikey         = env('RAJASMS_KEY');
+        // $apiusername    = env('RAJASMS_USERNAME');
+        // $apiurl         = env('RAJASMS_URL');
+        // $callbackurl    = env('RAJASMS_CALLBACK');
+        // $endpointurl    = $apiurl;
+        // $senddata       = array();
  
-        if($params['service'] === 'SMS_OTP') {
-            $endpointurl = $endpointurl.'api_sms_otp_send_json.php';
+        // if($params['service'] === 'SMS_OTP') {
+        //     $endpointurl = $endpointurl.'api_sms_otp_send_json.php';
 
-            $senddata = array(
-                'apikey'        => $apikey,  
-                'callbackurl'   => $callbackurl, 
-                'datapacket'    => array()
-            );
+        //     $senddata = array(
+        //         'apikey'        => $apikey,  
+        //         'callbackurl'   => $callbackurl, 
+        //         'datapackets'    => array()
+        //     );
             
-            $number = preg_replace( '/[^0-9]/i', '', $params['number'] );
+        //     $number = preg_replace( '/[^0-9]/i', '', $params['number'] );
 
-            $message = preg_replace( '/[\W]/', '', $params['message'] );
-            $count_message = strlen($message);
-            if($count_message > 145) {
-                $message = substr($message, 0, 145).'(cropped)';
-            }
+        //     $message = preg_replace( '/[\W]/', '', $params['message'] );
+        //     $count_message = strlen($message);
+        //     if($count_message > 145) {
+        //         $message = substr($message, 0, 145).'(cropped)';
+        //     }
 
-            array_push($senddata['datapacket'], array(
-                'number'    => $number,
-                'message'   => $message
-            ));
-        }
+        //     array_push($senddata['datapackets'], array(
+        //         'number'    => $number,
+        //         'message'   => $message
+        //     ));
+        // }
  
-        if($params['service'] === 'SMS_MASKING') {
-            $number = preg_replace( '/[^0-9]/i', '', $params['number'] );
+        // if($params['service'] === 'SMS_MASKING') {
+        //     $number = preg_replace( '/[^0-9]/i', '', $params['number'] );
 
-            $message = preg_replace( '/[\W]/', '', $params['message'] );
-            $count_message = strlen($message);
-            if($count_message > 870) {
-                $message = substr($message, 0, 900).'(cropped)';
-            }
+        //     $message = preg_replace( '/[\W]/', '', $params['message'] );
+        //     $count_message = strlen($message);
+        //     if($count_message > 870) {
+        //         $message = substr($message, 0, 900).'(cropped)';
+        //     }
 
-            $endpointurl = $endpointurl.'smsmasking.php?username='.$apikey.'&key='.$apikey.'&number='.$number.'&message='.$message;
-        }
+        //     $endpointurl = $endpointurl.'smsmasking.php?username='.$apikey.'&key='.$apikey.'&number='.$number.'&message='.$message;
+        // }
  
-        if($params['service'] === 'MISSCALL_OTP') {
-            $endpointurl = $endpointurl.'api_misscall_otp_send_json.php';
+        // if($params['service'] === 'MISSCALL_OTP') {
+        //     $endpointurl = $endpointurl.'api_misscall_otp_send_json.php';
 
-            $senddata = array(
-                'apikey' => $apikey
-            );
-        }
+        //     $senddata = array(
+        //         'apikey' => $apikey
+        //     );
+        // }
  
-        if($params['service'] === 'WA') {
-            $endpointurl = $endpointurl.'api_whatsapp_send_json.php';
+        // if($params['service'] === 'WA') {
+        //     $endpointurl = $endpointurl.'api_whatsapp_send_json.php';
 
-            $senddata = array(
-                'apikey' => $apikey
-            );
-        }
+        //     $senddata = array(
+        //         'apikey' => $apikey
+        //     );
+        // }
  
-        if($params['service'] === 'CHECK_BALANCE') {
-            $endpointurl = $endpointurl.'api_sms_otp_balance_json.php';
+        // if($params['service'] === 'CHECK_BALANCE') {
+        //     $endpointurl = $endpointurl.'api_sms_otp_balance_json.php';
 
-            $senddata = array(
-                'apikey' => $apikey
-            );
-        }
+        //     $senddata = array(
+        //         'apikey' => $apikey
+        //     );
+        // }
  
-        $data = json_encode($senddata);
-        $curlHandle = curl_init($endpointurl);
+        // $data = json_encode($senddata);
+        // $curlHandle = curl_init($endpointurl);
 
-        curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Content-Length: '.strlen($data))
-        );
-        curl_setopt($curlHandle, CURLOPT_TIMEOUT, 30);
-        curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
-        $respon = curl_exec($curlHandle);
-        curl_close($curlHandle);
+        // curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
+        // curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
+        // curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
+        //     'Content-Type: application/json',
+        //     'Content-Length: '.strlen($data))
+        // );
+        // curl_setopt($curlHandle, CURLOPT_TIMEOUT, 30);
+        // curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
+        // $respon = curl_exec($curlHandle);
+        // curl_close($curlHandle);
 
-        $response = json_decode($respon);
-        dd( $response->sending_respon[0]->globalstatustext );
+        // $response = json_decode($respon);
+        // echo '<pre>';
+        // print_r($response->sending_respon[0]);
+        // echo '</pre>';
+        // exit;
         
-        $return = [
-            'code'      => 200,
-            'response'  => 'success',
-            'message'   => '',
-            'datas'     => json_decode($respon)
-        ];
+        // $return = [
+        //     'code'      => 200,
+        //     'response'  => 'success',
+        //     'message'   => '',
+        //     'datas'     => json_decode($respon)
+        // ];
 
-        return $return;
+        // return $return;
     }
 }
 

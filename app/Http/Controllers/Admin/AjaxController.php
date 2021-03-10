@@ -165,7 +165,7 @@ class AjaxController extends Controller
             $data_log->table            = 'ADMINS';
             $data_log->table_id         = 0;
             $data_log->action           = '';
-            $data_log->action_detail    = 'Failed to login. Error: ' . $validator->errors()->all();
+            $data_log->action_detail    = 'Failed to login. Error: '.$validator->errors()->all();
             $data_log->ipaddress        = get_client_ip();
             $data_log->save();
 
@@ -234,7 +234,7 @@ class AjaxController extends Controller
                     $data_log->table            = 'ADMINS';
                     $data_log->table_id         = $admin_id;
                     $data_log->action           = '';
-                    $data_log->action_detail    = 'Failed to login. Error: ' . $error->getMessage();
+                    $data_log->action_detail    = 'Failed to login. Error: '.$error->getMessage();
                     $data_log->ipaddress        = get_client_ip();
                     $data_log->save();
 
@@ -278,6 +278,48 @@ class AjaxController extends Controller
     public function reload_captcha()
     {
         return response()->json(['captcha'=> captcha_img()]);
+    }
+
+    /**
+     * Delete selected file
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function delete_file(Request $request)
+    {
+        $table = $request->table;
+        $value = $request->value;
+        $path = '';
+        $file = '';
+        if(file_exists($path.'\\'.$file) === false) {
+            return response()->json(
+                array(
+                    'response'  => 'failed',
+                    'message'   => 'File not exist.',
+                ), 
+                400
+            );
+        }
+
+        if(is_file($path.'\\'.$file) === false) {
+            return response()->json(
+                array(
+                    'response'  => 'failed',
+                    'message'   => 'Invalid file.',
+                ), 
+                400
+            );
+        }
+
+        unlink($path.'\\'.$file);
+
+        return response()->json(
+            array(
+                'response'  => 'success',
+                'message'   => 'File deleted.',
+            ), 
+            200
+        );
     }
 
 }

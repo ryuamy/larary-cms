@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
-class PagesController extends Controller
+class NewsController extends Controller
 {
     protected $validationRules = [
         'title' => 'required|alpha_num_spaces',
