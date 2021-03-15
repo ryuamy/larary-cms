@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pages extends Model
+class News extends Model
 {
     use HasFactory;
 
-    protected $table = "pages";
+    protected $table = "news";
 
     protected $primaryKey = "id";
 
@@ -24,8 +24,16 @@ class Pages extends Model
         'updated_by'
     ];
 
+    public function categories() {
+        return $this->hasMany(Newscategories::class);
+    }
+
+    public function tags() {
+        return $this->hasMany(Newstags::class);
+    }
+
     public function logs() {
-        return $this->hasMany(Pagelogs::class);
+        return $this->hasMany(Newslogs::class);
     }
 
     public function admin() {

@@ -27,9 +27,7 @@ class User extends Authenticatable
         'token_expired',
         'status',
         'created_by',
-        'updated_by',
-        'created_at',
-        'updated_at'
+        'updated_by'
     ];
 
     /**

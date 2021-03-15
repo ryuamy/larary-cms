@@ -5,30 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Adminroles extends Model
+class Newscategories extends Model
 {
     use HasFactory;
 
-    protected $table = "admin_roles";
+    protected $table = "news_categories";
 
     protected $primaryKey = "id";
     
     protected $fillable = [
-        'uuid',
-        'name',
-        'slug',
+        'news_id',
+        'category_id',
         'status',
         'created_by',
         'updated_by'
     ];
 
-    public function admins()
+    public function news()
     {
-        return $this->hasMany(Admins::class);
+        return $this->belongsTo(News::class);
     }
-
-    // List of statuses
-    const IS_INACTIVE = 0;
-    const IS_ACTIVE = 1;
-    const IS_DELETED = 2;
 }

@@ -6,6 +6,7 @@
  * Old debug
  * 
  * @param array $array
+ * 
  * @return boolean $exist_flag
  * 
  * @author Amy <laksmise@gmail.com>
@@ -65,8 +66,10 @@ if(!function_exists('base_img')) {
 /**
  * Get site settings
  * 
- * @return string $meta_value   
- * @return string $separator    separator, default is "|"
+ * @param string $meta_value   
+ * @param string $separator    separator, default is "|"
+ * 
+ * @return string
  * 
  * @author Amy <laksmise@gmail.com>
  * 
@@ -126,6 +129,7 @@ if(!function_exists('is_mobile')) {
  *
  * @param array $params
  * @param string $adminpage
+ * 
  * @return string $html
  * 
  * @author Amy <laksmise@gmail.com>
@@ -388,6 +392,7 @@ if(!function_exists('custom_pagination_prep')) {
  * Admin table header
  *
  * @param array $array
+ * 
  * @return array $table_head
  * 
  * @author Amy <laksmise@gmail.com>
@@ -418,6 +423,7 @@ if(!function_exists('admin_table_head')) {
  * Month in bahasa Indonesia
  *
  * @param int $month
+ * 
  * @return string
  * 
  * @author Amy <laksmise@gmail.com>
@@ -446,6 +452,7 @@ if(!function_exists('month_idn')) {
  * Day in bahasa Indonesia
  *
  * @param int $day
+ * 
  * @return string
  * 
  * @author Amy <laksmise@gmail.com>
@@ -466,8 +473,7 @@ if(!function_exists('day_idn')) {
 }
 
 /**
- * Create organized folder
- * //still not ready, coming soon
+ * Create organized upload image folder
  * 
  * @return string $path
  * 
@@ -485,6 +491,54 @@ if(!function_exists('create_uploads_folder')) {
         }
         $path = 'uploads/'.date('Y').'/'.date('m');
         return $path;
+    }
+}
+
+/**
+ * Create log file
+ * 
+ * @param string $message
+ * @param string $foldername
+ * 
+ * @return string
+ * 
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('create_log')) {
+    function create_log($message, $foldername='default') {
+        if(env('APP_CREATE_LOG_FILE') === true) {
+            $foldername = './logs/'.$foldername;
+            if (!file_exists($foldername)) {
+                mkdir($foldername, 0777);
+            }
+
+            $year_folder = $foldername.'/'.date('Y');
+            if (!file_exists($year_folder)) {
+                mkdir($year_folder, 0777);
+            }
+
+            $month_folder = $year_folder.'/'.date('m');
+            if (!file_exists($month_folder)) {
+                mkdir($month_folder, 0777);
+            }
+            
+            $path = str_replace('./', '', $month_folder); //'logs/'.$foldername.'/'.date('Y').'/'.date('m');
+
+            // $log_data['event_datetime'] = '['.date('Y-m-d h:i:s A').'] [client '.$_SERVER['REMOTE_ADDR'].']';
+            $insert_content = '';
+            // $insert_content .= $log_data['event_datetime'].' '.$message."\n";
+            $insert_content .= '['.date('Y-m-d h:i:s A').'] [client '.$_SERVER['REMOTE_ADDR'].']'.' '.$message."\n";
+
+            $stCurLogFileName = $path . '/file_log.log';
+
+            $fHandler = fopen($stCurLogFileName,'a+');
+            fwrite($fHandler, $insert_content);
+            fclose($fHandler);
+
+            return 'log created';
+        }
+
+        return 'failed create log';
     }
 }
 
@@ -619,6 +673,7 @@ if(!function_exists('get_client_locale')) {
  *
  * @param string $selected_zone Selected timezone.
  * @param string $locale        Optional. Locale to load the timezones in. Default current site locale.
+ * 
  * @return string
  */
 if(!function_exists('timezone_choice')) {
@@ -797,6 +852,7 @@ if(!function_exists('timezone_choice')) {
  * Create slug
  * 
  * @param string $table
+ * 
  * @return string $title
  * @return string $separator
  * 
@@ -838,6 +894,7 @@ if(!function_exists('create_slug')) {
  * message  : (string - optional)	alpha numberic only and must be less than 890 character
  * 
  * @param array $params
+ * 
  * @return array $return
  * 
  * @author Amy <laksmise@gmail.com>

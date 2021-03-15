@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Adminroles extends Model
+class Categories extends Model
 {
     use HasFactory;
 
-    protected $table = "admin_roles";
+    protected $table = "categories";
 
     protected $primaryKey = "id";
     
@@ -17,18 +17,9 @@ class Adminroles extends Model
         'uuid',
         'name',
         'slug',
+        'type',
         'status',
         'created_by',
         'updated_by'
     ];
-
-    public function admins()
-    {
-        return $this->hasMany(Admins::class);
-    }
-
-    // List of statuses
-    const IS_INACTIVE = 0;
-    const IS_ACTIVE = 1;
-    const IS_DELETED = 2;
 }

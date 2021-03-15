@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/public/logs
 .env
 google_credentials.json
 .phpunit.result.cache
