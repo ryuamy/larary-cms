@@ -45,6 +45,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		$admin_name = explode(' ', $admin_data->name);
 		$first_name = $admin_name[0];
 		$last_name = isset($admin_name[1]) ? $admin_name[1] : '';
+		$cur_uri = current_uri();
 	?>
 
 	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"
@@ -115,7 +116,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</div>                    
 					<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 						<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
-                            {{ view( "admin.layout.menu" ) }}
+                            {{ view( 'admin.layout.menu' ) }}
 						</div>
 					</div>
 				</div>
@@ -783,22 +784,32 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
 							<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-								<div class="d-flex align-items-center flex-wrap mr-1">
-									<div class="d-flex align-items-baseline flex-wrap mr-5">
-										<h5 class="text-dark font-weight-bold my-1 mr-5">
-											{{ $meta['title'] }}
-										</h5>
+								<div class="d-flex align-items-center flex-wrap mr-1 w-100">
+									<div class="d-flex justify-content-between align-items-baseline flex-wrap w-100">
+										<div class="d-flex align-items-baseline w-50">
+											<h5 class="text-dark font-weight-bold my-1 mr-5">
+												{{ $meta['title'] }}
+											</h5>
 
-										<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-											@foreach ($breadcrumb as $kB => $b)
-												<?php $last_key = count($breadcrumb) - 1;?>
-												<li class="breadcrumb-item">
-													<a href="{{ url(admin_uri().$b['url']) }}" class="{{ ($kB == $last_key) ? 'text-muted' : '' }}">
-														{{ $b['title'] }}
-													</a>
-												</li>
-											@endforeach
-										</ul>
+											<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+												@foreach ($breadcrumb as $kB => $b)
+													<?php $last_key = count($breadcrumb) - 1;?>
+													<li class="breadcrumb-item">
+														<a href="{{ url(admin_uri().$b['url']) }}" class="{{ ($kB == $last_key) ? 'text-muted' : '' }}">
+															{{ $b['title'] }}
+														</a>
+													</li>
+												@endforeach
+											</ul>
+										</div>
+
+										<div class="jam-bukutamu">
+											<div>
+												<span>{{ day_idn(date('w')).', '.date(' d ').month_idn(date('n')).date(' Y') }}</span> - 
+												<span id="OHours2">00</span><span id="OPoint">:</span><span id="OMin">00</span><span id="OPoint">:</span><span id="OSec">00</span>  
+												<span id="OAMPM">AM</span> 
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1452,6 +1463,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="{{ asset('/metronic_v7.1.2/plugins/global/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
 		<script src="{{ asset('/metronic_v7.1.2/js/scripts.bundle.js') }}"></script>
+		<script src="{{ asset('/js/admin/clock.js') }}"></script>
 
 		<script>
 			var baseUrl = $('body').data('baseurl');
@@ -1468,6 +1480,16 @@ License: You must have a valid license purchased only from themeforest(the above
         @foreach ($js as $j)
 		    <script src="{{ asset('/'.$j.'.js') }}"></script>
         @endforeach
+
+		@if (isset($cur_uri[4]) && $cur_uri[4] === 'news' && ($cur_uri[5] === 'create' || $cur_uri[5] === 'detail'))
+			<?php
+				$datas = [
+					'tags' => $tags,
+					'categories' => $categories
+				]
+			?>
+			{{ view( 'admin.news.tagify', $datas ) }}
+		@endif
 
 	</body>
 </html>

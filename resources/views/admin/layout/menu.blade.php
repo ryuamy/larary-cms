@@ -36,7 +36,9 @@
         </a>
     </li>
 
-    <li class="menu-item menu-item-submenu {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+    <li class="menu-item menu-item-submenu {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' ? 'menu-item-active menu-item-open' : '' }} 
+        {{ isset($cur_uri[5]) && ($cur_uri[5] === 'news' || $cur_uri[5] === 'categories' || $cur_uri[5] === 'tags') ? 'menu-item-open' : '' }} " 
+        aria-haspopup="true" data-menu-toggle="hover">
         <a href="Javascript:;" class="menu-link menu-toggle">
             <span class="svg-icon menu-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

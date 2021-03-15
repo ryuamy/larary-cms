@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 // use App\Http\Requests\PagesRequest;
 use App\Models\Admins;
 use App\Models\Adminlogs;
-use App\Models\Pages;
-use App\Models\Pagelogs;
+use App\Models\Categories;
+use App\Models\News;
+use App\Models\Newscategories;
+use App\Models\Newslogs;
+use App\Models\Newstags;
+use App\Models\Tags;
 use App\Models\Staticdatas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -37,12 +41,9 @@ class NewsController extends Controller
      */
     public function __construct()
     {
-        // dd(Auth::guard('admin')->user());
-        // dd(Auth::guard('admin')->check());
-        // $this->middleware('admin');
         $this->middleware('auth:admin');
         $this->admin = Auth::guard('admin')->user();
-        $this->table = 'pages';
+        $this->table = 'news';
         $this->admin_url = admin_uri().$this->table;
     }
 
@@ -52,8 +53,8 @@ class NewsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'CMS Pages',
-                'heading'   => 'Pages Management'
+                'title'     => 'CMS News',
+                'heading'   => 'News Management'
             ],
             'css' => [],
             'js' => [
@@ -66,7 +67,7 @@ class NewsController extends Controller
                     'url'   => 'dashboard'
                 ),
                 array(
-                    'title' => 'Pages',
+                    'title' => 'News',
                     'url'   => $this->table
                 ),
             ],
@@ -78,7 +79,7 @@ class NewsController extends Controller
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = Pages::whereRaw('status != 2');
+        $datas_list = News::whereRaw('status != 2');
         
         //*** Filter
         if(isset($_GET['action'])) {
@@ -149,7 +150,7 @@ class NewsController extends Controller
         $table_head = admin_table_head($table_head);
         $datas['table_head'] = $table_head;
 
-        return view('admin.pages.index', $datas);
+        return view('admin.news.index', $datas);
     }
 
     public function create()
@@ -158,14 +159,13 @@ class NewsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Create New Page',
-                'heading'   => 'Pages Management'
+                'title'     => 'Create News',
+                'heading'   => 'News Management'
             ],
             'css' => [],
             'js' => [
-                'js/admin/edit-permalink',
                 'js/admin/set-feature-image',
-                'js/admin/wysiwyg-editor'
+                'js/admin/wysiwyg-editor',
             ],
             'breadcrumb' => [
                 array(
@@ -173,21 +173,24 @@ class NewsController extends Controller
                     'url'   => 'dashboard'
                 ),
                 array(
-                    'title' => 'Pages',
+                    'title' => 'News',
                     'url'   => $this->table
                 ),
                 array(
-                    'title' => 'Create Page',
+                    'title' => 'Create News',
                     'url'   => $this->table.'/create'
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'category_tag_type' => Staticdatas::category_tag_type()
             ],
+            'categories' => Categories::whereRaw('status != 2')->get(),
+            'tags' => Tags::whereRaw('status != 2')->get(),
         ];
 
-        return view('admin.pages.form', $datas);
+        return view('admin.news.form', $datas);
     }
 
     public function save(Request $request)
@@ -221,7 +224,7 @@ class NewsController extends Controller
 
         $slug = create_slug($this->table, $request->input('title'));
 
-        $insert = new Pages();
+        $insert = new News();
         $insert->uuid           = (string) Str::uuid();
         $insert->name           = $request->input('title');
         $insert->slug           = $slug;
@@ -232,13 +235,57 @@ class NewsController extends Controller
         $insert->updated_by     = $admin_id;
         $insert->save();
 
-        $new_data = Pages::whereRaw('status != 2')->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
+        $new_data = News::whereRaw('status != 2')->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
 
-        $data_log = new Pagelogs();
+        if(!empty($request->input('tags'))) {
+            foreach($request->input('tags') as $tags) {
+                $tag_data = Tags::whereRaw('status != 2')->whereRaw('name = "'.$tags['value'].'"')->first();
+
+                $data_tag = new Newstags();
+                $data_tag->tag_id       = $tag_data->id;
+                $data_tag->news_id      = $new_data->id;
+                $data_tag->status       = 1;
+                $data_tag->created_by   = $admin_id;
+                $data_tag->updated_by   = $admin_id;
+                $data_tag->save();
+                
+                $data_log_tags = new Newslogs();
+                $data_log_tags->admin_id         = $admin_id;
+                $data_log_tags->news_id          = $current->id;
+                $data_log_tags->action           = 'INSERT';
+                $data_log_tags->action_detail    = 'Add news tags';
+                $data_log_tags->ipaddress        = get_client_ip();
+                $data_log_tags->save();
+            }
+        }
+
+        if(!empty($request->input('categories'))) {
+            foreach($request->input('categories') as $categories) {
+                $category_data = Categories::whereRaw('status != 2')->whereRaw('name = "'.$categories['value'].'"')->first();
+
+                $data_category = new Newscategories();
+                $data_category->category_id = $category_data->id;
+                $data_category->news_id     = $new_data->id;
+                $data_category->status      = 1;
+                $data_category->created_by  = $admin_id;
+                $data_category->updated_by  = $admin_id;
+                $data_category->save();
+                
+                $data_log_categories = new Newslogs();
+                $data_log_categories->admin_id         = $admin_id;
+                $data_log_categories->news_id          = $current->id;
+                $data_log_categories->action           = 'INSERT';
+                $data_log_categories->action_detail    = 'Add news categories';
+                $data_log_categories->ipaddress        = get_client_ip();
+                $data_log_categories->save();
+            }
+        }
+
+        $data_log = new Newslogs();
         $data_log->admin_id         = $admin_id;
-        $data_log->page_id          = $new_data->id;
+        $data_log->news_id          = $new_data->id;
         $data_log->action           = 'INSERT';
-        $data_log->action_detail    = 'Created page';
+        $data_log->action_detail    = 'Created news';
         $data_log->ipaddress        = get_client_ip();
         $data_log->save();
 
@@ -247,18 +294,18 @@ class NewsController extends Controller
         $admin_log->table            = strtoupper($this->table);
         $admin_log->table_id         = $new_data->id;
         $admin_log->action           = 'INSERT';
-        $admin_log->action_detail    = 'Create new pages with title '.$new_data->name;
+        $admin_log->action_detail    = 'Create news with title '.$new_data->name;
         $admin_log->ipaddress        = get_client_ip();
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
-            'success-message' => 'Success add new page.'
+            'success-message' => 'Success add news.'
         ]);
     }
 
     public function detail($uuid)
     {
-        $current = Pages::where('uuid', $uuid)->first();
+        $current = News::where('uuid', $uuid)->first();
 
         if(!$current) {
             return redirect($this->admin_url)->with([
@@ -270,8 +317,8 @@ class NewsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Detail '.$current['name'].' Page',
-                'heading'   => 'Pages Management'
+                'title'     => 'Detail '.$current['name'].' NSews',
+                'heading'   => 'News Management'
             ],
             'css' => [],
             'js' => [
@@ -285,11 +332,11 @@ class NewsController extends Controller
                     'url'   => 'dashboard'
                 ),
                 array(
-                    'title' => 'Pages',
+                    'title' => 'News',
                     'url'   => $this->table
                 ),
                 array(
-                    'title' => 'Detail Page',
+                    'title' => 'Detail News',
                     'url'   => $this->table.'/detail/'.$uuid
                 ),
             ],
@@ -300,12 +347,12 @@ class NewsController extends Controller
             ],
         ];
 
-        return view('admin.pages.form', $datas);
+        return view('admin.news.form', $datas);
     }
 
     public function update($uuid, Request $request)
     {
-        $current = Pages::where('uuid', $uuid)->first();
+        $current = News::where('uuid', $uuid)->first();
 
         if(!$current) {
             return redirect($this->admin_url)->with([
@@ -347,7 +394,7 @@ class NewsController extends Controller
 
         $slug = create_slug($this->table, $request->input('permalink'));
 
-        Pages::where('uuid', $uuid)->update(
+        News::where('uuid', $uuid)->update(
             array(
                 'name'              => $request->input('title'),
                 'slug'              => $slug,
@@ -358,13 +405,77 @@ class NewsController extends Controller
             )
         );
 
+        if(!empty($request->input('tags'))) {
+            Newstags::where('news_id', $current->id)->delete();
+
+            $data_log = new Newslogs();
+            $data_log->admin_id         = $admin_id;
+            $data_log->news_id          = $current->id;
+            $data_log->action           = 'DELETE';
+            $data_log->action_detail    = 'Delete previous news tags';
+            $data_log->ipaddress        = get_client_ip();
+            $data_log->save();
+
+            foreach($request->input('tags') as $tags) {
+                $tag_data = Tags::whereRaw('status != 2')->whereRaw('name = "'.$tags['value'].'"')->first();
+
+                $data_tag = new Newstags();
+                $data_tag->tag_id       = $tag_data->id;
+                $data_tag->news_id      = $new_data->id;
+                $data_tag->status       = 1;
+                $data_tag->created_by   = $admin_id;
+                $data_tag->updated_by   = $admin_id;
+                $data_tag->save();
+                
+                $data_log = new Newslogs();
+                $data_log->admin_id         = $admin_id;
+                $data_log->news_id          = $current->id;
+                $data_log->action           = 'UPDATE';
+                $data_log->action_detail    = 'Update news tags';
+                $data_log->ipaddress        = get_client_ip();
+                $data_log->save();
+            }
+        }
+
+        if(!empty($request->input('categories'))) {
+            Newscategories::where('news_id', $current->id)->delete();
+
+            $data_log = new Newslogs();
+            $data_log->admin_id         = $admin_id;
+            $data_log->news_id          = $current->id;
+            $data_log->action           = 'DELETE';
+            $data_log->action_detail    = 'Delete previous news categories';
+            $data_log->ipaddress        = get_client_ip();
+            $data_log->save();
+
+            foreach($request->input('categories') as $categories) {
+                $category_data = Categories::whereRaw('status != 2')->whereRaw('name = "'.$categories['value'].'"')->first();
+
+                $data_category = new Newscategories();
+                $data_category->category_id = $category_data->id;
+                $data_category->news_id     = $new_data->id;
+                $data_category->status      = 1;
+                $data_category->created_by  = $admin_id;
+                $data_category->updated_by  = $admin_id;
+                $data_category->save();
+                
+                $data_log = new Newslogs();
+                $data_log->admin_id         = $admin_id;
+                $data_log->news_id          = $current->id;
+                $data_log->action           = 'UPDATE';
+                $data_log->action_detail    = 'Update news categories';
+                $data_log->ipaddress        = get_client_ip();
+                $data_log->save();
+            }
+        }
+
         $action_detail = ($current->name != $request->input('title')) ? 
-            'Update content and rename title fron '.$current->name.' to '.$request->input('title'): 
-            'Update pages '.$current->name;
+            'Update content and rename title from '.$current->name.' to '.$request->input('title'): 
+            'Update news '.$current->name;
         
-        $data_log = new Pagelogs();
+        $data_log = new Newslogs();
         $data_log->admin_id         = $admin_id;
-        $data_log->page_id          = $current->id;
+        $data_log->news_id          = $current->id;
         $data_log->action           = 'UPDATE';
         $data_log->action_detail    = $action_detail;
         $data_log->ipaddress        = get_client_ip();
@@ -380,7 +491,7 @@ class NewsController extends Controller
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([
-            'success-message' => 'Success update page.'
+            'success-message' => 'Success update news.'
         ]);
     }
 }

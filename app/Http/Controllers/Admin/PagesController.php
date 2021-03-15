@@ -359,7 +359,7 @@ class PagesController extends Controller
         );
 
         $action_detail = ($current->name != $request->input('title')) ? 
-            'Update content and rename title fron '.$current->name.' to '.$request->input('title'): 
+            'Update content and rename title from '.$current->name.' to '.$request->input('title'): 
             'Update pages '.$current->name;
         
         $data_log = new Pagelogs();

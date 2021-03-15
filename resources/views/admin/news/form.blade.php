@@ -134,6 +134,20 @@
                                 >Active</option>
                             </select>
                         </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                Categories
+                            </label>                            
+                            <input id="categories_tagify" class="form-control tagify" name='categories' placeholder='type...' value='' autofocus="" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                Tags
+                            </label>                            
+                            <input id="tags_tagify" class="form-control tagify" name="tags" placeholder='type...' value='' />
+                        </div>
                     </div>
                 </div>
 

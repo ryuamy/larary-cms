@@ -62,7 +62,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<form class="form" id="kt_login_signin_form">
 								<div id="bx_alert_message_login">
 									@if (Session::has('error-message'))
-										<div class="alert alert-custom alert-danger d-flex show fade" role="alert">
+										<div class="alert mb-5 alert-custom alert-danger d-flex show fade" role="alert">
 											<div class="alert-text" id="alert_message_login">
 												You don't have access
 											</div>

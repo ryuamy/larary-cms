@@ -524,9 +524,7 @@ if(!function_exists('create_log')) {
             
             $path = str_replace('./', '', $month_folder); //'logs/'.$foldername.'/'.date('Y').'/'.date('m');
 
-            // $log_data['event_datetime'] = '['.date('Y-m-d h:i:s A').'] [client '.$_SERVER['REMOTE_ADDR'].']';
             $insert_content = '';
-            // $insert_content .= $log_data['event_datetime'].' '.$message."\n";
             $insert_content .= '['.date('Y-m-d h:i:s A').'] [client '.$_SERVER['REMOTE_ADDR'].']'.' '.$message."\n";
 
             $stCurLogFileName = $path . '/file_log.log';
