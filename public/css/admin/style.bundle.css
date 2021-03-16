@@ -71992,8 +71992,8 @@ to {
 @-webkit-keyframes animation-dropdown-menu-move-up {
   from {
     margin-top: 10px;
-}
-to {
+  }
+  to {
     margin-top: 0px;
   }
 }
@@ -72001,13 +72001,13 @@ to {
 @keyframes animation-dropdown-menu-move-up {
   from {
     margin-top: 10px;
-}
-to {
+  }
+  to {
     margin-top: 0px;
   }
 }
 
-.form-group.captcha .bx-image {
+.captcha .bx-image {
   width: 160px;
   border-radius: 0.42rem;
   margin-right: 0.5rem;
@@ -72016,15 +72016,21 @@ to {
   align-items: center;
 }
 
-.form-group.captcha .bx-image img {
-  height: 100%;
+.captcha .bx-image img {
+  /* height: 100%; */
+  width: 100%;
   border-radius: 0.42rem;
 }
 
-.form-group.captcha input {
+.captcha input {
+  width: 195px;
+  /* margin-left: 0.5rem; */
+}
+
+/* .captcha .form-group {
   width: 195px;
   margin-left: 0.5rem;
-}
+} */
 
 .form-group label {
   font-size: 1rem;

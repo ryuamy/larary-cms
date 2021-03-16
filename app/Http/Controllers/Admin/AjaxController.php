@@ -137,7 +137,7 @@ class AjaxController extends Controller
     public function login(Request $request)
     {
         $rules = [
-            'username'              => 'required|email',
+            'username'              => 'required|alpha_num',
             'password'              => 'required|alpha_num_spaces',
             /** reCaptcha */
             // 'g-recaptcha-response'  => 'required|captcha',
@@ -146,14 +146,14 @@ class AjaxController extends Controller
         ];
 
         $messages = [
-            'username.required'             => 'Email is required',
-            'username.email'                => 'Email format invalid',
+            'username.required'             => 'Username is required',
+            'username.alpha_num'            => 'Username only accept alphanumeric',
             'password.required'             => 'Password is required',
             'captcha.string'                => 'Password only accept alphanumeric and space',
             /** reCaptcha */
             // 'g-recaptcha-response.captcha'  => 'Invalid captcha',
             /** Laravel Captcha */
-            'captcha.email'                 => 'Captcha is required',
+            'captcha.required'              => 'Captcha is required',
             'captcha.captcha'               => 'Invalid captcha',
         ];
 
@@ -164,7 +164,7 @@ class AjaxController extends Controller
             $data_log->admin_id         = 0;
             $data_log->table            = 'ADMINS';
             $data_log->table_id         = 0;
-            $data_log->action           = '';
+            $data_log->action           = 'LOGIN';
             $data_log->action_detail    = 'Failed to login. Error: '.$validator->errors()->all();
             $data_log->ipaddress        = get_client_ip();
             $data_log->save();
@@ -181,21 +181,21 @@ class AjaxController extends Controller
             );
         } else {
             $check = DB::table('admins')
-                ->where('email', $request->username)
+                ->where('slug', $request->username)
                 ->first();
             
             $admin_id = ($check) ? $check->id : 0;
 
             $remember_login = $request->remember != null ? true : false;
 
-            if ( Auth::guard('admin')->attempt(['email' => $request->username, 'password' => $request->password], $remember_login) ) {
+            if ( Auth::guard('admin')->attempt(['slug' => $request->username, 'password' => $request->password], $remember_login) ) {
                 try {
                     if($check->status != 1) {
                         $data_log = new Adminlogs();
                         $data_log->admin_id         = $admin_id;
                         $data_log->table            = 'ADMINS';
                         $data_log->table_id         = $admin_id;
-                        $data_log->action           = '';
+                        $data_log->action           = 'LOGIN';
                         $data_log->action_detail    = 'Failed to login due inactive admin account';
                         $data_log->ipaddress        = get_client_ip();
                         $data_log->save();
@@ -213,7 +213,7 @@ class AjaxController extends Controller
                     $data_log->admin_id         = $admin_id;
                     $data_log->table            = 'ADMINS';
                     $data_log->table_id         = $admin_id;
-                    $data_log->action           = '';
+                    $data_log->action           = 'LOGIN';
                     $data_log->action_detail    = 'Success login';
                     $data_log->ipaddress        = get_client_ip();
                     $data_log->save();
@@ -233,7 +233,7 @@ class AjaxController extends Controller
                     $data_log->admin_id         = $admin_id;
                     $data_log->table            = 'ADMINS';
                     $data_log->table_id         = $admin_id;
-                    $data_log->action           = '';
+                    $data_log->action           = 'LOGIN';
                     $data_log->action_detail    = 'Failed to login. Error: '.$error->getMessage();
                     $data_log->ipaddress        = get_client_ip();
                     $data_log->save();
@@ -254,7 +254,7 @@ class AjaxController extends Controller
                 $data_log->admin_id         = $admin_id;
                 $data_log->table            = 'ADMINS';
                 $data_log->table_id         = $admin_id;
-                $data_log->action           = '';
+                $data_log->action           = 'LOGIN';
                 $data_log->action_detail    = 'Attempting to login with incorrect password';
                 $data_log->ipaddress        = get_client_ip();
                 $data_log->save();
@@ -262,7 +262,7 @@ class AjaxController extends Controller
                 return response()->json(
                     array(
                         'response'  => 'failed',
-                        'message'   => 'Incorrect email or password',
+                        'message'   => 'Incorrect username or password',
                     ), 
                     400
                 );

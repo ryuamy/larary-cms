@@ -14,11 +14,11 @@
 					username: {
 						validators: {
 							notEmpty: {
-								message: 'Email is required'
+								message: 'Username is required'
 							},
 							regexp: {
-								regexp: /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i,
-								message: 'Invalid email address'
+								regexp: /^[a-z0-9]+$/i,
+								message: 'Username can consist of alphabetical'
 							}
 						}
 					},
@@ -37,6 +37,11 @@
 						validators: {
 							notEmpty: {
 								message: 'Please enter captcha'
+							},
+							stringLength: {
+								min: 5,
+								max: 5,
+								message: 'Captcha must be have 5 characters'
 							},
 						}
 					}
