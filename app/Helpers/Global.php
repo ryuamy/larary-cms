@@ -863,11 +863,10 @@ if(!function_exists('create_slug')) {
         $slug = strtolower(str_replace(' ', $separator, $title));
 
         $check = DB::table($table)
-            ->whereRaw('status != 2')
             ->where('slug', 'like', '%'.$slug.'%')
             ->get();
         
-        if(!empty($check)) {
+        if(count($check) > 0) {
             $total = count($check) + 1;
             $slug = $slug.$separator.$total;
         }
