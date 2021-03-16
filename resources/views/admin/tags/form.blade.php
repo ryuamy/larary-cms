@@ -70,7 +70,7 @@
                                 Title 
                                 <span class="text-danger">*</span>
                             </label>
-                            <input type="text" name="title" class="form-control" placeholder="Page Title"
+                            <input type="text" name="title" class="form-control"
                                 <?php if($cur_uri[6] === 'detail') { ?>
                                     value="{{ isset($request['title']) ? $request['title'] : $current['name'] }}"
                                 <?php } elseif($cur_uri[6] !== 'detail') { ?>
@@ -131,7 +131,7 @@
                                 @foreach ($staticdata['default_status'] as $kS => $status)
                                     @if ($kS != 2)
                                         <option value="{{ $kS }}" 
-                                            {{ isset($current['type']) && $current['type'] == $kS ? 'selected' : '' }}
+                                            {{ isset($current['status']) && $current['status'] == $kS ? 'selected' : '' }}
                                         >{{ $status }}</option>
                                     @endif
                                 @endforeach
