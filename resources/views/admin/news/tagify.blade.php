@@ -1,5 +1,5 @@
 <script>
-var KTTagifyDemos = function() {
+var KTTagify = function() {
     var categories = function() {
         var input = document.getElementById('categories_tagify');
         var tagify = new Tagify(input, {
@@ -12,10 +12,6 @@ var KTTagifyDemos = function() {
         var tagify = new Tagify(input, {
             enforceWhitelist: true,
             whitelist: [<?php foreach($tags as $kT => $t) { echo ($kT != 0) ? ',"'.$t['name'].'"' : '"'.$t['name'].'"'; } ?>],
-            // callbacks: {
-            //     add: console.log, // callback when adding a tag
-            //     remove: console.log // callback when removing a tag
-            // }
         });
     }
 
@@ -29,7 +25,7 @@ var KTTagifyDemos = function() {
 }();
 
 jQuery(document).ready(function() {
-    KTTagifyDemos.init();
+    KTTagify.init();
 });
 
 </script>

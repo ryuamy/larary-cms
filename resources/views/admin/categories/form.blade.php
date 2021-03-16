@@ -5,7 +5,7 @@
 <?php 
     $cur_uri = current_uri();
     $request = Session::get('request') ? Session::get('request') : array();
-    $action_url = ($cur_uri[5] === 'detail') ? $admin_url.'/update/'.$current['uuid'] : $admin_url.'/save';
+    $action_url = ($cur_uri[6] === 'detail') ? $admin_url.'/update/'.$current['uuid'] : $admin_url.'/save';
 ?>
 
 <div class="d-flex flex-column-fluid">
@@ -71,13 +71,13 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="title" class="form-control" placeholder="Page Title"
-                                <?php if($cur_uri[5] === 'detail') { ?>
+                                <?php if($cur_uri[6] === 'detail') { ?>
                                     value="{{ isset($request['title']) ? $request['title'] : $current['name'] }}"
-                                <?php } elseif($cur_uri[5] !== 'detail') { ?>
+                                <?php } elseif($cur_uri[6] !== 'detail') { ?>
                                     value="{{ isset($request['title']) ? $request['title'] : '' }}"
                                 <?php } ?>
                             />
-                            <?php if($cur_uri[5] === 'detail') { ?>
+                            <?php if($cur_uri[6] === 'detail') { ?>
                                 <span class="form-text text-muted d-flex align-items-center">
                                     Permalink: 
                                      <a href="{{ env('APP_URL').'/' }}">
@@ -96,17 +96,18 @@
                         </div>
                         
                         <div class="form-group">
-                            <label>
-                                Content 
+                            <label for="type">
+                                Type
                                 <span class="text-danger">*</span>
-                            </label>
-                            <textarea class="summernote"
-                                name="content"
-                            ><?php if($cur_uri[5] === 'detail') { ?>
-                                    {{ isset($request['content']) ? $request['content'] : $current['content'] }}
-                                <?php } elseif($cur_uri[5] !== 'detail') { ?>
-                                    {{ isset($request['content']) ? $request['content'] : '' }}
-                                <?php } ?></textarea>
+                            </label>                            
+                            <?php
+                                $datas = [
+                                    'staticdata' => [
+                                        'category_tag_type' => $staticdata['category_tag_type']
+                                    ]
+                                ]
+                            ?>
+                            {{ view( 'admin.'.$cur_uri[4].'.category_tag_type', $datas ) }}
                         </div>
                     </div>
                 </div>
@@ -136,54 +137,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        
-                        <div class="form-group">
-                            <label>
-                                Categories
-                            </label>                            
-                            <input id="categories_tagify" class="form-control tagify" name='categories' placeholder='type...' value='' autofocus="" />
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>
-                                Tags
-                            </label>                            
-                            <input id="tags_tagify" class="form-control tagify" name="tags" placeholder='type...' value='' />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card card-custom mb-8">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            Featured Image
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ isset($current['featured_image']) && $current['featured_image'] ? asset($current['featured_image']) : asset('/img/admin/layout/default-featured-img.png') }}"
-                            alt="Preview Image"
-                            title="Preview Image"
-                            style="width: 100%; margin-bottom: 2rem"
-                            id="preview_feature_img"
-                        />
-
-                        <p class="d-none">
-                            <input id="upload_feature_image" name="featured" type="file" class="invisible" onchange="preview_image(event, 'preview_feature_img')" value="{{ isset($current['featured_image']) && $current['featured_image'] ? $current['featured_image'] : '' }}" />
-                        </p>
-
-                        <div>
-                            <button type="button" class="btn btn-hover-primary btn-lg btn-block" id="set_feature_image">
-                                {{ isset($current['featured_image']) ? 'Change' : 'Set' }} featured image
-                            </button>
-                        </div>
-
-                        <?php if (isset($current['featured_image'])) { ?>
-                            <div>
-                                <button type="button" class="btn btn-danger btn-lg btn-block mt-2" id="delete_feature_image">
-                                    Delete current featured image
-                                </button>
-                            </div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>

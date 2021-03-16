@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\NewscategoriesController;
+use App\Http\Controllers\Admin\NewstagsController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 
@@ -61,25 +64,71 @@ Route::prefix('pages')->group(function () {
 });
 
 Route::prefix('news')->group(function () {
-    Route::get('/', [NewsController::class, 'index'] )
-        ->middleware('admin');
-    Route::get('create', [NewsController::class, 'create'] )
-        ->middleware('admin');
+    Route::get('/', [NewsController::class, 'index'] );
+    Route::get('create', [NewsController::class, 'create'] );
     Route::get('save', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('save', [NewsController::class, 'save'] )
-        ->middleware('admin');
-    Route::get('detail/{uuid}', [NewsController::class, 'detail'] )
-        ->middleware('admin');
+    Route::post('save', [NewsController::class, 'save'] );
+    Route::get('detail/{uuid}', [NewsController::class, 'detail'] );
     Route::get('update/{uuid}', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::get('update', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('update/{uuid}', [NewsController::class, 'update'] )
-        ->middleware('admin');
+    Route::post('update/{uuid}', [NewsController::class, 'update'] );
+        
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [NewscategoriesController::class, 'index'] );
+        Route::get('create', [NewscategoriesController::class, 'create'] );
+        Route::get('save', function() {
+            return view('errors.404', array('message'=>'404 | Page Not Found!') );
+        });
+        Route::post('save', [NewscategoriesController::class, 'save'] );
+        Route::get('detail/{uuid}', [NewscategoriesController::class, 'detail'] );
+        Route::get('update/{uuid}', function() {
+            return view('errors.404', array('message'=>'404 | Page Not Found!') );
+        });
+        Route::get('update', function() {
+            return view('errors.404', array('message'=>'404 | Page Not Found!') );
+        });
+        Route::post('update/{uuid}', [NewscategoriesController::class, 'update'] );
+    });
+        
+    Route::prefix('tags')->group(function () {
+        Route::get('/', [NewstagsController::class, 'index'] );
+        Route::get('create', [NewstagsController::class, 'create'] );
+        Route::get('save', function() {
+            return view('errors.404', array('message'=>'404 | Page Not Found!') );
+        });
+        Route::post('save', [NewstagsController::class, 'save'] );
+        Route::get('detail/{uuid}', [NewstagsController::class, 'detail'] );
+        Route::get('update/{uuid}', function() {
+            return view('errors.404', array('message'=>'404 | Page Not Found!') );
+        });
+        Route::get('update', function() {
+            return view('errors.404', array('message'=>'404 | Page Not Found!') );
+        });
+        Route::post('update/{uuid}', [NewstagsController::class, 'update'] );
+    });
+});
+
+Route::prefix('admins')->group(function () {
+    Route::get('/', [AdminsController::class, 'index'] );
+    Route::get('create', [AdminsController::class, 'create'] );
+    Route::get('save', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::post('save', [AdminsController::class, 'save'] );
+    Route::get('detail/{uuid}', [AdminsController::class, 'detail'] );
+    Route::get('update/{uuid}', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::get('update', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::post('update/{uuid}', [AdminsController::class, 'update'] );
 });
 
 // for skeleton

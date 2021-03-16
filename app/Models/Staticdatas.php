@@ -43,16 +43,6 @@ class Staticdatas extends Model
     }
 
     //because we dont have this table, and not sure should I create one?
-    public static function level() {
-        $list = [];
-        $list[1] = 'Admin';
-        $list[2] = 'Stakeholder';
-        $list[3] = 'Masyarakat';
-
-        return $list;
-    }
-
-    //because we dont have this table, and not sure should I create one?
     public static function default_status() {
         $list = [];
         $list[0] = 'Inactive';

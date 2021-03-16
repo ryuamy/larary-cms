@@ -44,7 +44,7 @@ class PagesRequest extends FormRequest
             // 'permalink.required' => 'Permalink can not be empty.',
             // 'permalink.slug' => 'Permalink only allowed aplhanumeric with dash or underscore.',
             'content.required' => 'Content can not be empty.',
-            'status.required' => 'Select status.',
+            'status.required' => 'Status must be selected.',
         ];
     }
 }

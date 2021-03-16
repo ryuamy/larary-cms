@@ -503,7 +503,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<div class="dropdown">
 									<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px" title="23 new notification" data-toggle="tooltip" data-placement="bottom" data-theme="dark">
 										<div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary">
-											<span class="svg-icon svg-icon-xl svg-icon-primary">
+											<span class="svg-icon svg-icon-xl svg-icon-danger">
 												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 													width="24px" height="24px"
 													viewBox="0 0 24 24" version="1.1"
@@ -520,7 +520,7 @@ License: You must have a valid license purchased only from themeforest(the above
 													</g>
 												</svg>
 											</span>
-											<span class="pulse-ring"></span>
+											<span class="pulse-ring" style="border-color:red;"></span>
 										</div>
 									</div>
                                     
@@ -707,6 +707,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 								</div>
                                 
+								<?php /*
 								<div class="topbar-item">
 									<div class="btn btn-icon btn-clean btn-lg mr-1" id="kt_quick_panel_toggle">
 										<span class="svg-icon svg-icon-xl svg-icon-primary">
@@ -726,6 +727,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										</span>
 									</div>
 								</div>
+								*/ ?>
                                 
 								<div class="topbar-item">
 									<div class="btn btn-icon btn-clean btn-lg mr-1" data-toggle="modal" data-target="#kt_chat_modal">
@@ -786,7 +788,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 								<div class="d-flex align-items-center flex-wrap mr-1 w-100">
 									<div class="d-flex justify-content-between align-items-baseline flex-wrap w-100">
-										<div class="d-flex align-items-baseline w-50">
+										<div class="d-flex align-items-baseline">
 											<h5 class="text-dark font-weight-bold my-1 mr-5">
 												{{ $meta['title'] }}
 											</h5>
@@ -1481,7 +1483,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		    <script src="{{ asset('/'.$j.'.js') }}"></script>
         @endforeach
 
-		@if (isset($cur_uri[4]) && $cur_uri[4] === 'news' && ($cur_uri[5] === 'create' || $cur_uri[5] === 'detail'))
+		@if (isset($cur_uri[4]) && $cur_uri[4] === 'news' && isset($cur_uri[5]) && ($cur_uri[5] === 'create' || $cur_uri[5] === 'detail'))
 			<?php
 				$datas = [
 					'tags' => $tags,

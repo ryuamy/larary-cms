@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-// use App\Http\Requests\PagesRequest;
 use App\Models\Admins;
 use App\Models\Adminlogs;
-use App\Models\Pages;
-use App\Models\Pagelogs;
+use App\Models\Categories;
 use App\Models\Staticdatas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,18 +13,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
-class PagesController extends Controller
+class NewscategoriesController extends Controller
 {
     protected $validationRules = [
         'title' => 'required|alpha_num_spaces',
-        'content' => 'required',
         'status' => 'required',
     ];
     
     protected $validationMessages = [
         'title.required' => 'Title can not be empty.',
         'title.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
-        'content.required' => 'Content can not be empty.',
         'status.required' => 'Status must be selected.',
     ];
 
@@ -37,13 +33,10 @@ class PagesController extends Controller
      */
     public function __construct()
     {
-        // dd(Auth::guard('admin')->user());
-        // dd(Auth::guard('admin')->check());
-        // $this->middleware('admin');
         $this->middleware('auth:admin');
         $this->admin = Auth::guard('admin')->user();
-        $this->table = 'pages';
-        $this->admin_url = admin_uri().$this->table;
+        $this->table = 'categories';
+        $this->admin_url = admin_uri().'news/'.$this->table;
     }
 
     public function index()
@@ -52,8 +45,8 @@ class PagesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'CMS Pages',
-                'heading'   => 'Pages Management'
+                'title'     => 'CMS News Categories',
+                'heading'   => 'News Categories Management'
             ],
             'css' => [],
             'js' => [
@@ -66,8 +59,12 @@ class PagesController extends Controller
                     'url'   => 'dashboard'
                 ),
                 array(
-                    'title' => 'Pages',
-                    'url'   => $this->table
+                    'title' => 'News',
+                    'url'   => 'news'
+                ),
+                array(
+                    'title' => 'Categories',
+                    'url'   => 'news/'.$this->table
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
@@ -78,7 +75,7 @@ class PagesController extends Controller
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = Pages::whereRaw('status != 2');
+        $datas_list = Categories::whereRaw('status != 2')->whereRaw('status != 2');
         
         //*** Filter
         if(isset($_GET['action'])) {
@@ -143,13 +140,13 @@ class PagesController extends Controller
         
         $table_head = [
             'table'         => $this->table,
-            'head'          => [ 'title', 'featured_image', 'status', 'created_at', 'updated_at' ],
-            'disabled_head' => [ 'featured_image' ]
+            'head'          => [ 'title', 'status', 'created_at', 'updated_at' ],
+            'disabled_head' => []
         ];
         $table_head = admin_table_head($table_head);
         $datas['table_head'] = $table_head;
 
-        return view('admin.pages.index', $datas);
+        return view('admin.categories.index', $datas);
     }
 
     public function create()
@@ -158,36 +155,37 @@ class PagesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Create New Page',
-                'heading'   => 'Pages Management'
+                'title'     => 'Create News Category',
+                'heading'   => 'News Categories Management'
             ],
             'css' => [],
-            'js' => [
-                'js/admin/edit-permalink',
-                'js/admin/set-feature-image',
-                'js/admin/wysiwyg-editor'
-            ],
+            'js' => [],
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
                     'url'   => 'dashboard'
                 ),
                 array(
-                    'title' => 'Pages',
-                    'url'   => $this->table
+                    'title' => 'News',
+                    'url'   => 'news'
                 ),
                 array(
-                    'title' => 'Create Page',
-                    'url'   => $this->table.'/create'
+                    'title' => 'Category',
+                    'url'   => 'news/'.$this->table
+                ),
+                array(
+                    'title' => 'Create News Category',
+                    'url'   => 'news/'.$this->table.'/create'
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'category_tag_type' => Staticdatas::category_tag_type()
             ],
         ];
 
-        return view('admin.pages.form', $datas);
+        return view('admin.categories.form', $datas);
     }
 
     public function save(Request $request)
@@ -204,61 +202,37 @@ class PagesController extends Controller
 
         $admin_id = $this->admin->id;
 
-        $path_featured_image = create_uploads_folder();
-        
-        $image_new_name = '';
-        $featured = $request->file('featured');
-        //http://image.intervention.io/api/crop
-        if(!empty($featured)) {
-            $image_mime_type = $featured->getMimeType();
-            $image_extention = $featured->getClientOriginalExtension();
-            $image_size = $featured->getSize();
-
-            $image_new_name = uniqid().'.'.$image_extention;
-            
-            $featured->move($path_featured_image, $image_new_name);
-        }
-
         $slug = create_slug($this->table, $request->input('title'));
 
-        $insert = new Pages();
-        $insert->uuid           = (string) Str::uuid();
-        $insert->name           = $request->input('title');
-        $insert->slug           = $slug;
-        $insert->featured_image = $path_featured_image.'/'.$image_new_name;
-        $insert->content        = $request->input('content');
-        $insert->status         = $request->input('status');
-        $insert->created_by     = $admin_id;
-        $insert->updated_by     = $admin_id;
+        $insert = new Categories();
+        $insert->uuid       = (string) Str::uuid();
+        $insert->name       = $request->input('title');
+        $insert->slug       = $slug;
+        $insert->type       = 1;
+        $insert->status     = $request->input('status');
+        $insert->created_by = $admin_id;
+        $insert->updated_by = $admin_id;
         $insert->save();
 
-        $new_data = Pages::whereRaw('status != 2')->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
-
-        $data_log = new Pagelogs();
-        $data_log->admin_id         = $admin_id;
-        $data_log->page_id          = $new_data->id;
-        $data_log->action           = 'INSERT';
-        $data_log->action_detail    = 'Created page';
-        $data_log->ipaddress        = get_client_ip();
-        $data_log->save();
+        $new_data = Categories::whereRaw('status != 2')->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
 
         $admin_log = new Adminlogs();
         $admin_log->admin_id         = $admin_id;
         $admin_log->table            = strtoupper($this->table);
         $admin_log->table_id         = $new_data->id;
         $admin_log->action           = 'INSERT';
-        $admin_log->action_detail    = 'Create new pages with title '.$new_data->name;
+        $admin_log->action_detail    = 'Create news categories with title '.$new_data->name;
         $admin_log->ipaddress        = get_client_ip();
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
-            'success-message' => 'Success add new page.'
+            'success-message' => 'Success add news categories.'
         ]);
     }
 
     public function detail($uuid)
     {
-        $current = Pages::where('uuid', $uuid)->first();
+        $current = Categories::where('uuid', $uuid)->whereRaw('type = 1')->first();
 
         if(!$current) {
             return redirect($this->admin_url)->with([
@@ -270,14 +244,12 @@ class PagesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Detail '.$current['name'].' Page',
-                'heading'   => 'Pages Management'
+                'title'     => 'Detail '.$current['name'].' News Category',
+                'heading'   => 'News Categories Management'
             ],
             'css' => [],
             'js' => [
-                'js/admin/edit-permalink',
-                'js/admin/set-feature-image',
-                'js/admin/wysiwyg-editor'
+                'js/admin/edit-permalink'
             ],
             'breadcrumb' => [
                 array(
@@ -285,27 +257,32 @@ class PagesController extends Controller
                     'url'   => 'dashboard'
                 ),
                 array(
-                    'title' => 'Pages',
-                    'url'   => $this->table
+                    'title' => 'News',
+                    'url'   => 'news'
                 ),
                 array(
-                    'title' => 'Detail Page',
-                    'url'   => $this->table.'/detail/'.$uuid
+                    'title' => 'Category',
+                    'url'   => 'news/'.$this->table
+                ),
+                array(
+                    'title' => 'Detail News Category',
+                    'url'   => 'news/'.$this->table.'/detail/'.$uuid
                 ),
             ],
             'current' => $current,
             'admindata' => Auth::guard('admin')->user(),
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'category_tag_type' => Staticdatas::category_tag_type()
             ],
         ];
 
-        return view('admin.pages.form', $datas);
+        return view('admin.categories.form', $datas);
     }
 
     public function update($uuid, Request $request)
     {
-        $current = Pages::where('uuid', $uuid)->first();
+        $current = Categories::where('uuid', $uuid)->whereRaw('type = 1')->first();
 
         if(!$current) {
             return redirect($this->admin_url)->with([
@@ -329,46 +306,20 @@ class PagesController extends Controller
 
         $admin_id = $this->admin->id;
 
-        $path_featured_image = create_uploads_folder();
-        
-        $featured_image = $current->featured_image;
-        $featured = $request->file('featured');
-        if(!empty($featured)) {
-            $image_mime_type = $featured->getMimeType();
-            $image_extention = $featured->getClientOriginalExtension();
-            $image_size = $featured->getSize();
-
-            $image_new_name = uniqid().'.'.$image_extention;
-            
-            $featured->move($path_featured_image, $image_new_name);
-            
-            $featured_image = $path_featured_image.'/'.$image_new_name;
-        }
-
         $slug = ($request->input('permalink') != $current->slug) ? create_slug($this->table, $request->input('permalink')) : $request->input('permalink');
 
-        Pages::where('uuid', $uuid)->update(
+        Categories::where('uuid', $uuid)->update(
             array(
-                'name'              => $request->input('title'),
-                'slug'              => $slug,
-                'featured_image'    => $featured_image,
-                'content'           => $request->input('content'),
-                'status'            => $request->input('status'),
-                'updated_by'        => $admin_id
+                'name'          => $request->input('title'),
+                'slug'          => $slug,
+                'status'        => $request->input('status'),
+                'updated_by'    => $admin_id
             )
         );
 
         $action_detail = ($current->name != $request->input('title')) ? 
             'Update content and rename title from '.$current->name.' to '.$request->input('title'): 
-            'Update pages '.$current->name;
-        
-        $data_log = new Pagelogs();
-        $data_log->admin_id         = $admin_id;
-        $data_log->page_id          = $current->id;
-        $data_log->action           = 'UPDATE';
-        $data_log->action_detail    = $action_detail;
-        $data_log->ipaddress        = get_client_ip();
-        $data_log->save();
+            'Update news categories '.$current->name;
 
         $admin_log = new Adminlogs();
         $admin_log->admin_id         = $admin_id;
@@ -380,7 +331,7 @@ class PagesController extends Controller
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([
-            'success-message' => 'Success update page.'
+            'success-message' => 'Success update news categories.'
         ]);
     }
 }

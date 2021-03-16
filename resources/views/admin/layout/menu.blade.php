@@ -64,7 +64,7 @@
                         <span class="menu-text">News</span>
                     </a>
                 </li>
-                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'bullet' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'categories' ? 'menu-item-active' : '' }}" aria-haspopup="true">
                     <a href="{{ url(admin_uri().'news/categories') }}" class="menu-link">
                         <i class="menu-bullet menu-bullet-dot">
                             <span></span>

@@ -5,11 +5,12 @@
 <?php 
     $cur_uri = current_uri();
     $request = Session::get('request') ? Session::get('request') : array();
+    $action_url = ($cur_uri[5] === 'detail') ? $admin_url.'/update/'.$current['uuid'] : $admin_url.'/save';
 ?>
 
 <div class="d-flex flex-column-fluid">
     <div class="container">
-        <form class="row form-input" method="POST" action="{{ $admin_url.'/save' }}" id="{{ $table }}" enctype="multipart/form-data">
+        <form class="row form-input" method="POST" action="{{ $action_url }}" id="{{ $table }}" enctype="multipart/form-data">
             <div class="col-md-12 d-flex justify-content-end mb-5">
                 <button type="submit" class="btn btn-success mr-2">
                     <i class="fas fa-save"></i> Save
@@ -115,7 +116,7 @@
                 <div class="card card-custom mb-8">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Page Setting
+                            Setting
                         </h3>
                     </div>
                     <div class="card-body">
@@ -126,12 +127,13 @@
                             </label>
                             <select class="form-control" name="status" id="status">
                                 <option value="">Select Status</option>
-                                <option value="0" 
-                                    {{ isset($current['status']) && $current['status'] == 0 ? 'selected' : '' }}
-                                >Inactive</option>
-                                <option value="1" 
-                                    {{ isset($current['status']) && $current['status'] == 1 ? 'selected' : '' }}
-                                >Active</option>
+                                @foreach ($staticdata['default_status'] as $kS => $status)
+                                    @if ($kS != 2)
+                                        <option value="{{ $kS }}" 
+                                            {{ isset($current['type']) && $current['type'] == $kS ? 'selected' : '' }}
+                                        >{{ $status }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                     </div>

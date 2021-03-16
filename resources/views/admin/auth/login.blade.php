@@ -78,14 +78,14 @@ License: You must have a valid license purchased only from themeforest(the above
 								</div>
 
 								<div class="form-group mb-5">
-									<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Email" name="username" autocomplete="off" />
+									<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Username" name="username" autocomplete="off" />
 								</div>
 
 								<div class="form-group mb-5">
 									<input class="form-control h-auto form-control-solid py-4 px-8" type="password" placeholder="Password" name="password" />
 								</div>
 
-								<div class="form-group mb-5 d-flex justify-content-center captcha">
+								<div class="mb-5 d-flex justify-content-center captcha">
 									<?php /** reCaptcha */ ?>
 									<?php /*{!! app('captcha')->display() !!}*/ ?>
 									<?php /*@if ($errors->has('g-recaptcha-response'))
@@ -100,7 +100,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<button type="button" class="btn btn-danger" class="reload" id="reload">
 										&#x21bb;
 									</button>
-									<div>
+									<div class="form-group mb-0 ml-2">
 										<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Enter Captcha" name="captcha" id="captcha" autocomplete="off" />
 									</div>
 								</div>

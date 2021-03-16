@@ -31,7 +31,7 @@ class NewsController extends Controller
         'title.required' => 'Title can not be empty.',
         'title.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
         'content.required' => 'Content can not be empty.',
-        'status.required' => 'Select status.',
+        'status.required' => 'Status must be selected.',
     ];
 
     /**
@@ -275,7 +275,7 @@ class NewsController extends Controller
                 $data_log_categories->admin_id         = $admin_id;
                 $data_log_categories->news_id          = $current->id;
                 $data_log_categories->action           = 'INSERT';
-                $data_log_categories->action_detail    = 'Add news categories';
+                $data_log_categories->action_detail    = 'Add categories of news';
                 $data_log_categories->ipaddress        = get_client_ip();
                 $data_log_categories->save();
             }
@@ -392,7 +392,7 @@ class NewsController extends Controller
             $featured_image = $path_featured_image.'/'.$image_new_name;
         }
 
-        $slug = create_slug($this->table, $request->input('permalink'));
+        $slug = ($request->input('permalink') != $current->slug) ? create_slug($this->table, $request->input('permalink')) : $request->input('permalink');
 
         News::where('uuid', $uuid)->update(
             array(
@@ -444,7 +444,7 @@ class NewsController extends Controller
             $data_log->admin_id         = $admin_id;
             $data_log->news_id          = $current->id;
             $data_log->action           = 'DELETE';
-            $data_log->action_detail    = 'Delete previous news categories';
+            $data_log->action_detail    = 'Delete previous categories of news';
             $data_log->ipaddress        = get_client_ip();
             $data_log->save();
 
@@ -463,7 +463,7 @@ class NewsController extends Controller
                 $data_log->admin_id         = $admin_id;
                 $data_log->news_id          = $current->id;
                 $data_log->action           = 'UPDATE';
-                $data_log->action_detail    = 'Update news categories';
+                $data_log->action_detail    = 'Update categories of news';
                 $data_log->ipaddress        = get_client_ip();
                 $data_log->save();
             }
