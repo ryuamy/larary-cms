@@ -23,8 +23,9 @@ $(document).ready(function () {
     if ($('#OHours2').length > 0) {
         setInterval(function () {
             var hours2 = new Date().getHours();
-            hours2 = hours2 > 12 ? hours2 - 12 : '';
-            $('#OHours2').html('0' + hours2);
+            hours2 = hours2 > 12 ? hours2 - 12 : hours2;
+            hours2 = hours2 < 10 ? '0' + hours2 : hours2;
+            $('#OHours2').html(hours2);
         }, 1000);
     }
 
