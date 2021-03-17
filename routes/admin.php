@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AdminsController;
+use App\Http\Controllers\Admin\AdminrolesController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\HomeController;
@@ -134,6 +135,23 @@ Route::prefix('admins')->group(function () {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::post('update/{uuid}', [AdminsController::class, 'update'] );
+});
+
+Route::prefix('admin-roles')->group(function () {
+    Route::get('/', [AdminrolesController::class, 'index'] );
+    Route::get('create', [AdminrolesController::class, 'create'] );
+    Route::get('save', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::post('save', [AdminrolesController::class, 'save'] );
+    Route::get('detail/{uuid}', [AdminrolesController::class, 'detail'] );
+    Route::get('update/{uuid}', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::get('update', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::post('update/{uuid}', [AdminrolesController::class, 'update'] );
 });
 
 // for skeleton

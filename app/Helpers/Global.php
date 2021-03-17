@@ -24,7 +24,7 @@ if(!function_exists('pre')) {
 
 if(!function_exists('customTanggal')) {
     function customTanggal($date,$date_format) {
-        return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format($date_format);    
+        // return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format($date_format);    
     }
 }
 
@@ -527,7 +527,7 @@ if(!function_exists('create_log')) {
             $insert_content = '';
             $insert_content .= '['.date('Y-m-d h:i:s A').'] [client '.$_SERVER['REMOTE_ADDR'].']'.' '.$message."\n";
 
-            $stCurLogFileName = $path . '/file_log.log';
+            $stCurLogFileName = $path.'/file_log.log';
 
             $fHandler = fopen($stCurLogFileName,'a+');
             fwrite($fHandler, $insert_content);
@@ -536,12 +536,52 @@ if(!function_exists('create_log')) {
             return 'log created';
         }
 
-        return 'failed create log';
+        return 'failed create log. please check APP_CREATE_LOG_FILE enviroment setting';
     }
 }
 
-function create_translation_file($language_code) {
-    //C:\xampp\htdocs\cms-lv\resources\lang\idn
+/**
+ * Create translataion file for multilanguage
+ * 
+ * @param string $language_code
+ * 
+ * @return string
+ * 
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('create_translation_file')) {
+    function create_translation_file($language_code) {
+        // //C:\xampp\htdocs\cms-lv\resources\lang\en
+        // $foldername = './resources/lang/'.$language_code;
+        // // echo $foldername; exit;
+        // if (!file_exists($foldername)) {
+        //     mkdir($foldername, 0777, true);
+        // }
+
+        // $translation_files = [
+        //     'auth.php',
+        //     'pagination.php',
+        //     'passwords.php',
+        //     'validation.php'
+        // ];
+
+        // foreach($translation_files as $file) {
+        //     $path = str_replace('./', '', $foldername);
+            
+        //     $stCurLogFileName = $path.'/'.$file;
+        //     echo $stCurLogFileName."<br />";
+
+        //     if (!file_exists($foldername.'/'.$file)) {
+        //         $insert_content = '<?php // please refer resources\lang\en to see how to add translation';
+        //         $fHandler = fopen($stCurLogFileName,'a+');
+        //         fwrite($fHandler, $insert_content);
+        //         fclose($fHandler);
+        //     }
+        // }
+        // exit;
+
+        // return 'success create translation files';
+    }
 }
 
 /**
@@ -876,151 +916,6 @@ if(!function_exists('create_slug')) {
         }
 
         return $slug;
-    }
-}
-
-/**
- * Global adsmedia / raja sms api
- * 
- * param reference example
- * $param = array(
- * 		'service'   => 'SMS_OTP',
- * 		'number'    => '0812345xxxxx,
- * 		'message'   => 'hello world'
- * );
- * 
- * param detail:
- * service  : (string - mandatory)	options are "MISSCALL_OTP", "SMS_OTP", "SMS_MASKING", "WA", "CHECK_BALANCE"
- * number   : (string - optional)	phone number. accept numberic only and indonesia number only
- * message  : (string - optional)	alpha numberic only and must be less than 890 character
- * 
- * @param array $params
- * 
- * @return array $return
- * 
- * @author Amy <laksmise@gmail.com>
- */
-if(!function_exists('adsmedia_api')) {
-    function adsmedia_api($params) {
-        // ob_start();
-
-        // if(!$params['service']) {
-        //     $return = [
-        //         'code'      => 400,
-        //         'response'  => 'failed',
-        //         'message'   => 'Please tell us service name',
-        //         'datas'     => []
-        //     ];
-
-        //     return $return;
-        // }
-
-        // if(preg_match('/[^A-Z_]/i', $params['service'])) {
-        //     $return = [
-        //         'code'      => 400,
-        //         'response'  => 'failed',
-        //         'message'   => 'Invalid service name',
-        //         'datas'     => []
-        //     ];
-
-        //     return $return;
-        // }
-        
-        // $apikey         = env('RAJASMS_KEY');
-        // $apiusername    = env('RAJASMS_USERNAME');
-        // $apiurl         = env('RAJASMS_URL');
-        // $callbackurl    = env('RAJASMS_CALLBACK');
-        // $endpointurl    = $apiurl;
-        // $senddata       = array();
- 
-        // if($params['service'] === 'SMS_OTP') {
-        //     $endpointurl = $endpointurl.'api_sms_otp_send_json.php';
-
-        //     $senddata = array(
-        //         'apikey'        => $apikey,  
-        //         'callbackurl'   => $callbackurl, 
-        //         'datapackets'    => array()
-        //     );
-            
-        //     $number = preg_replace( '/[^0-9]/i', '', $params['number'] );
-
-        //     $message = preg_replace( '/[\W]/', '', $params['message'] );
-        //     $count_message = strlen($message);
-        //     if($count_message > 145) {
-        //         $message = substr($message, 0, 145).'(cropped)';
-        //     }
-
-        //     array_push($senddata['datapackets'], array(
-        //         'number'    => $number,
-        //         'message'   => $message
-        //     ));
-        // }
- 
-        // if($params['service'] === 'SMS_MASKING') {
-        //     $number = preg_replace( '/[^0-9]/i', '', $params['number'] );
-
-        //     $message = preg_replace( '/[\W]/', '', $params['message'] );
-        //     $count_message = strlen($message);
-        //     if($count_message > 870) {
-        //         $message = substr($message, 0, 900).'(cropped)';
-        //     }
-
-        //     $endpointurl = $endpointurl.'smsmasking.php?username='.$apikey.'&key='.$apikey.'&number='.$number.'&message='.$message;
-        // }
- 
-        // if($params['service'] === 'MISSCALL_OTP') {
-        //     $endpointurl = $endpointurl.'api_misscall_otp_send_json.php';
-
-        //     $senddata = array(
-        //         'apikey' => $apikey
-        //     );
-        // }
- 
-        // if($params['service'] === 'WA') {
-        //     $endpointurl = $endpointurl.'api_whatsapp_send_json.php';
-
-        //     $senddata = array(
-        //         'apikey' => $apikey
-        //     );
-        // }
- 
-        // if($params['service'] === 'CHECK_BALANCE') {
-        //     $endpointurl = $endpointurl.'api_sms_otp_balance_json.php';
-
-        //     $senddata = array(
-        //         'apikey' => $apikey
-        //     );
-        // }
- 
-        // $data = json_encode($senddata);
-        // $curlHandle = curl_init($endpointurl);
-
-        // curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
-        // curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
-        // curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
-        //     'Content-Type: application/json',
-        //     'Content-Length: '.strlen($data))
-        // );
-        // curl_setopt($curlHandle, CURLOPT_TIMEOUT, 30);
-        // curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
-        // $respon = curl_exec($curlHandle);
-        // curl_close($curlHandle);
-
-        // $response = json_decode($respon);
-        // echo '<pre>';
-        // print_r($response->sending_respon[0]);
-        // echo '</pre>';
-        // exit;
-        
-        // $return = [
-        //     'code'      => 200,
-        //     'response'  => 'success',
-        //     'message'   => '',
-        //     'datas'     => json_decode($respon)
-        // ];
-
-        // return $return;
     }
 }
 
