@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ExportController;
@@ -32,6 +33,10 @@ Route::prefix('ajax')->group(function () {
     });
     Route::get('reload-captcha', [AjaxController::class, 'reload_captcha'] );
     Route::post('delete-file', [AjaxController::class, 'delete_file'] );
+    Route::get('delete-file', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::post('detail-admin-log/{id}', [AjaxController::class, 'detail_admin_log'] );
 });
 
 //** NOTES : buat Exports terlebih dahulu untuk mengaktifkan feature export */

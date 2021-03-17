@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,6 @@ Route::get( '/view-cache', function() {
     return view( 'clearcache.main', array('message'=>'View cache cleared!') );
 });
 
-Route::get('/oauth2callback', [App\Http\Controllers\OAuthController::class, 'index'])->name('oauth');
+Route::get('/oauth2callback', [OAuthController::class, 'index'])->name('oauth');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

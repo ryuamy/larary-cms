@@ -52,7 +52,7 @@ class AjaxController extends Controller
                 $data_page_log->admin_id        = $admin_id;
                 $data_page_log->page_id         = $data->id;
                 $data_page_log->action          = $action;
-                $data_page_log->action_detail   = 'Change '.$title.' status with id '.$uuid.' to '.$status;
+                $data_page_log->action_detail   = 'Change '.$title.' status with id '.$uuid;
                 $data_page_log->ipaddress       = get_client_ip();
                 $data_page_log->save();
             }
@@ -62,7 +62,7 @@ class AjaxController extends Controller
             $data_log->table            = $table;
             $data_log->table_id         = $data->id;
             $data_log->action           = $action;
-            $data_log->action_detail    = 'Change '.$title.' status with id '.$uuid.' to '.$status;
+            $data_log->action_detail    = 'Change '.$title.' status with id '.$uuid;
             $data_log->ipaddress        = get_client_ip();
             $data_log->save();
         }
@@ -291,6 +291,7 @@ class AjaxController extends Controller
         $value = $request->value;
         $path = '';
         $file = '';
+
         if(file_exists($path.'\\'.$file) === false) {
             return response()->json(
                 array(
@@ -317,6 +318,53 @@ class AjaxController extends Controller
             array(
                 'response'  => 'success',
                 'message'   => 'File deleted.',
+            ), 
+            200
+        );
+    }
+
+    /**
+     * Delete selected file
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detail_admin_log($id)
+    {
+        $limit = 10;
+
+        $logs = DB::table('admin_logs')
+            ->where('admin_id', $id)
+            // ->offset(0)
+            // ->limit($limit)
+            ->get();
+
+        $datas = [];
+
+        foreach($logs as $log) {
+            $datas[] = [
+                'action' => $log->action,
+                'actionDetail' => $log->action_detail,
+                'ipAddress' => $log->ipaddress,
+                'date' => $log->created_at
+            ];
+        };
+
+        $total = count($logs);
+
+
+        $pages = ceil($total/$limit);
+
+        return response()->json(
+            array(
+                'meta' => [
+                    'page' => 1,
+                    'pages' => $limit,
+                    'perpage' => $limit,
+                    'total' => $total,
+                    'sort' => 'asc',
+                    'field' => 'date'
+                ],
+                'data' => $datas
             ), 
             200
         );

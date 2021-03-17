@@ -489,7 +489,7 @@ if(!function_exists('create_uploads_folder')) {
         if (!file_exists($month_folder)) {
             mkdir($month_folder, 0777);
         }
-        $path = 'uploads/'.date('Y').'/'.date('m');
+        $path = str_replace('./', '', $month_folder); //'uploads/'.date('Y').'/'.date('m');
         return $path;
     }
 }
@@ -538,6 +538,10 @@ if(!function_exists('create_log')) {
 
         return 'failed create log';
     }
+}
+
+function create_translation_file($language_code) {
+    //C:\xampp\htdocs\cms-lv\resources\lang\idn
 }
 
 /**
