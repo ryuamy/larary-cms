@@ -214,10 +214,12 @@
                             <?php if(count($list) > 0) { ?>
                                 <?php foreach($list as $dt) { ?>
                                     <tr>
-                                        @if( $admindata->role_id === 1)
+                                        @if( $admindata->role_id === 1 || $admindata->role_id === 2 )
                                             <td>
-                                                <label class="checkbox checkbox-lg checkbox-inline">
-                                                    <input type="checkbox" value="{{ $dt['uuid'] }}" name="bulk[]" class="bulk_action_list">
+                                                <label class="checkbox checkbox-lg checkbox-inline {{ $admindata->id === $dt['id'] ? 'checkbox-disabled' : '' }}">
+                                                    <input type="checkbox" value="{{ $dt['uuid'] }}" name="bulk[]" class="{{ $admindata->id === $dt['id'] ? '' : 'bulk_action_list' }}" 
+                                                        {{ $admindata->id === $dt['id'] ? 'disabled' : '' }}
+                                                    />
                                                     <span></span>
                                                 </label>
                                             </td>

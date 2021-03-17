@@ -8,16 +8,18 @@
             <div class="card-header pt-6 pb-6 pr-0">
                 <div class="row bx-bulk-action w-100 align-items-center">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_length" id="dataTable_length">
-                            <label class="m-0">
-                                <select id="bulk-action-select" name="bulk_action" class="m-0 custom-select custom-select-sm form-control form-control-sm">
-                                    <option value="">Bulk Edit Status</option>
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
-                                    <option value="2">Delete Permanent</option>
-                                </select>
-                            </label>
-                        </div>
+                        @if( $admindata->role_id === 1 || $admindata->role_id === 2 )
+                            <div class="dataTables_length" id="dataTable_length">
+                                <label class="m-0">
+                                    <select id="bulk-action-select" name="bulk_action" class="m-0 custom-select custom-select-sm form-control form-control-sm">
+                                        <option value="">Bulk Edit Status</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                        <option value="2">Delete Permanent</option>
+                                    </select>
+                                </label>
+                            </div>
+                        @endif
                     </div>
 
                     <div class="col-sm-12 col-md-7">
@@ -214,7 +216,7 @@
                             <?php if(count($list) > 0) { ?>
                                 <?php foreach($list as $dt) { ?>
                                     <tr>
-                                        @if( $admindata->role_id === 1)
+                                        @if( $admindata->role_id === 1 || $admindata->role_id === 2 )
                                             <td>
                                                 <label class="checkbox checkbox-lg checkbox-inline">
                                                     <input type="checkbox" value="{{ $dt['uuid'] }}" name="bulk[]" class="bulk_action_list">

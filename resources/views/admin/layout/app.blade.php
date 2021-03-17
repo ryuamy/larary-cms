@@ -396,6 +396,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											</div>
 										</li>
 
+										<?php /*
 										<li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
 											<a href="javascript:;" class="menu-link menu-toggle">
 												<span class="menu-text">Apps</span>
@@ -494,6 +495,7 @@ License: You must have a valid license purchased only from themeforest(the above
 												</ul>
 											</div>
 										</li>
+										*/ ?>
 									</ul>
 								</div>
 							</div>
