@@ -51,7 +51,7 @@ class Admins extends Authenticatable
     ];
 
     public function logs() {
-        return $this->hasMany(Adminlogs::class);
+        return $this->hasMany(Adminlogs::class, 'admin_id', 'id');
     }
 
     public function role() {

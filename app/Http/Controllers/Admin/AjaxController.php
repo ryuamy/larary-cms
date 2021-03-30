@@ -49,27 +49,27 @@ class AjaxController extends Controller
 
             if($table == 'pages') {
                 $data_page_log = new Pagelogs();
-                $data_page_log->admin_id        = $admin_id;
-                $data_page_log->page_id         = $data->id;
-                $data_page_log->action          = $action;
-                $data_page_log->action_detail   = 'Change '.$title.' status with id '.$uuid;
-                $data_page_log->ipaddress       = get_client_ip();
+                $data_page_log->admin_id = $admin_id;
+                $data_page_log->page_id = $data->id;
+                $data_page_log->action = $action;
+                $data_page_log->action_detail = 'Change '.$title.' status with id '.$uuid;
+                $data_page_log->ipaddress = get_client_ip();
                 $data_page_log->save();
             }
 
             $data_log = new Adminlogs();
-            $data_log->admin_id         = $admin_id;
-            $data_log->table            = $table;
-            $data_log->table_id         = $data->id;
-            $data_log->action           = $action;
-            $data_log->action_detail    = 'Change '.$title.' status with id '.$uuid;
-            $data_log->ipaddress        = get_client_ip();
+            $data_log->admin_id = $admin_id;
+            $data_log->table = $table;
+            $data_log->table_id = $data->id;
+            $data_log->action = $action;
+            $data_log->action_detail = 'Change '.$title.' status with id '.$uuid;
+            $data_log->ipaddress = get_client_ip();
             $data_log->save();
         }
 
         $response = response()->json(
             array(
-                'msg'   => 'success',
+                'msg' => 'success',
                 'datas' => []
             ), 
             200
@@ -95,32 +95,32 @@ class AjaxController extends Controller
         $title = $data->name;
 
         DB::table($table)->where('uuid', $uuid)->update([
-            'status'        => 2,
-            'updated_by'    => $admin_id,
+            'status' => 2,
+            'updated_by' => $admin_id,
         ]);
 
         if($table == 'pages') {
             $data_page_log = new Pagelogs();
-            $data_page_log->admin_id        = $admin_id;
-            $data_page_log->page_id         = $data->id;
-            $data_page_log->action          = 'DELETE';
-            $data_page_log->action_detail   = 'Delete '.$title.' (uuid '.$uuid.')';
-            $data_page_log->ipaddress       = get_client_ip();
+            $data_page_log->admin_id = $admin_id;
+            $data_page_log->page_id = $data->id;
+            $data_page_log->action = 'DELETE';
+            $data_page_log->action_detail = 'Delete '.$title.' (uuid '.$uuid.')';
+            $data_page_log->ipaddress = get_client_ip();
             $data_page_log->save();
         }
 
         $data_log = new Adminlogs();
-        $data_log->admin_id         = $admin_id;
-        $data_log->table            = $table;
-        $data_log->table_id         = $data->id;
-        $data_log->action           = 'DELETE';
-        $data_log->action_detail    = 'Delete '.$title.' (uuid '.$uuid.')';
-        $data_log->ipaddress        = get_client_ip();
+        $data_log->admin_id = $admin_id;
+        $data_log->table = $table;
+        $data_log->table_id = $data->id;
+        $data_log->action = 'DELETE';
+        $data_log->action_detail = 'Delete '.$title.' (uuid '.$uuid.')';
+        $data_log->ipaddress = get_client_ip();
         $data_log->save();
 
         $response = response()->json(
             array(
-                'msg'   => 'success',
+                'msg' => 'success',
                 'datas' => []
             ), 
             200
@@ -137,44 +137,46 @@ class AjaxController extends Controller
     public function login(Request $request)
     {
         $rules = [
-            'username'              => 'required|alpha_num',
-            'password'              => 'required|alpha_num_spaces',
+            'username' => 'required|alpha_num',
+            'password' => 'required|alpha_num_spaces',
             /** reCaptcha */
-            // 'g-recaptcha-response'  => 'required|captcha',
+            // 'g-recaptcha-response' => 'required|captcha',
             /** Laravel Captcha */
-            'captcha'               => 'required|captcha'
+            'captcha' => 'required|captcha'
         ];
 
         $messages = [
-            'username.required'             => 'Username is required',
-            'username.alpha_num'            => 'Username only accept alphanumeric',
-            'password.required'             => 'Password is required',
-            'captcha.string'                => 'Password only accept alphanumeric and space',
+            'username.required' => 'Username is required',
+            'username.alpha_num' => 'Username only accept alphanumeric',
+            'password.required' => 'Password is required',
+            'captcha.string' => 'Password only accept alphanumeric and space',
             /** reCaptcha */
-            // 'g-recaptcha-response.captcha'  => 'Invalid captcha',
+            // 'g-recaptcha-response.captcha' => 'Invalid captcha',
             /** Laravel Captcha */
-            'captcha.required'              => 'Captcha is required',
-            'captcha.captcha'               => 'Invalid captcha',
+            'captcha.required' => 'Captcha is required',
+            'captcha.captcha' => 'Invalid captcha',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if($validator->fails()){
+            $errors = str_replace( array('[', ']', '"'), '', json_encode($validator->errors()->all()) );
+
             $data_log = new Adminlogs();
-            $data_log->admin_id         = 0;
-            $data_log->table            = 'ADMINS';
-            $data_log->table_id         = 0;
-            $data_log->action           = 'LOGIN';
-            $data_log->action_detail    = 'Failed to login. Error: '.$validator->errors()->all();
-            $data_log->ipaddress        = get_client_ip();
+            $data_log->admin_id = 0;
+            $data_log->table = 'ADMINS';
+            $data_log->table_id = 0;
+            $data_log->action = 'LOGIN';
+            $data_log->action_detail = 'Failed to login. Error: '.$errors;
+            $data_log->ipaddress = get_client_ip();
             $data_log->save();
 
             return response()->json(
                 array(
-                    'response'  => 'failed',
-                    'message'   => $validator->errors()->all(),
-                    'datas'     => [
-                        'errors'    => $validator->errors()->all()
+                    'response' => 'failed',
+                    'message' => 'Failed to login. Error: '.$errors,
+                    'datas' => [
+                        'errors' => $validator->errors()->all()
                     ]
                 ), 
                 400
@@ -192,37 +194,37 @@ class AjaxController extends Controller
                 try {
                     if($check->status != 1) {
                         $data_log = new Adminlogs();
-                        $data_log->admin_id         = $admin_id;
-                        $data_log->table            = 'ADMINS';
-                        $data_log->table_id         = $admin_id;
-                        $data_log->action           = 'LOGIN';
-                        $data_log->action_detail    = 'Failed to login due inactive admin account';
-                        $data_log->ipaddress        = get_client_ip();
+                        $data_log->admin_id = $admin_id;
+                        $data_log->table = 'ADMINS';
+                        $data_log->table_id = $admin_id;
+                        $data_log->action = 'LOGIN';
+                        $data_log->action_detail = 'Failed to login due inactive admin account';
+                        $data_log->ipaddress = get_client_ip();
                         $data_log->save();
 
                         return response()->json(
                             array(
-                                'response'  => 'failed',
-                                'message'   => 'Admin not active'
+                                'response' => 'failed',
+                                'message' => 'Admin not active'
                             ), 
                             400
                         );
                     }
 
                     $data_log = new Adminlogs();
-                    $data_log->admin_id         = $admin_id;
-                    $data_log->table            = 'ADMINS';
-                    $data_log->table_id         = $admin_id;
-                    $data_log->action           = 'LOGIN';
-                    $data_log->action_detail    = 'Success login';
-                    $data_log->ipaddress        = get_client_ip();
+                    $data_log->admin_id = $admin_id;
+                    $data_log->table = 'ADMINS';
+                    $data_log->table_id = $admin_id;
+                    $data_log->action = 'LOGIN';
+                    $data_log->action_detail = 'Success login';
+                    $data_log->ipaddress = get_client_ip();
                     $data_log->save();
                     
                     return response()->json(
                         array(
-                            'response'  => 'success',
-                            'message'   => 'Admin found',
-                            'datas'     => [
+                            'response' => 'success',
+                            'message' => 'Admin found',
+                            'datas' => [
                                 'redirect' => url('/admin/dashboard')
                             ]
                         ), 
@@ -230,20 +232,20 @@ class AjaxController extends Controller
                     );
                 } catch (Exception $error) {
                     $data_log = new Adminlogs();
-                    $data_log->admin_id         = $admin_id;
-                    $data_log->table            = 'ADMINS';
-                    $data_log->table_id         = $admin_id;
-                    $data_log->action           = 'LOGIN';
-                    $data_log->action_detail    = 'Failed to login. Error: '.$error->getMessage();
-                    $data_log->ipaddress        = get_client_ip();
+                    $data_log->admin_id = $admin_id;
+                    $data_log->table = 'ADMINS';
+                    $data_log->table_id = $admin_id;
+                    $data_log->action = 'LOGIN';
+                    $data_log->action_detail = 'Failed to login. Error: '.$error->getMessage();
+                    $data_log->ipaddress = get_client_ip();
                     $data_log->save();
 
                     return response()->json(
                         array(
-                            'response'  => 'failed',
-                            'message'   => $error->getMessage(),
-                            'datas'     => [
-                                'exception'    => $error->getMessage()
+                            'response' => 'failed',
+                            'message' => $error->getMessage(),
+                            'datas' => [
+                                'exception' => $error->getMessage()
                             ]
                         ), 
                         500
@@ -251,18 +253,18 @@ class AjaxController extends Controller
                 }
             } else {
                 $data_log = new Adminlogs();
-                $data_log->admin_id         = $admin_id;
-                $data_log->table            = 'ADMINS';
-                $data_log->table_id         = $admin_id;
-                $data_log->action           = 'LOGIN';
-                $data_log->action_detail    = 'Attempting to login with incorrect password';
-                $data_log->ipaddress        = get_client_ip();
+                $data_log->admin_id = $admin_id;
+                $data_log->table = 'ADMINS';
+                $data_log->table_id = $admin_id;
+                $data_log->action = 'LOGIN';
+                $data_log->action_detail = 'Attempting to login with incorrect password';
+                $data_log->ipaddress = get_client_ip();
                 $data_log->save();
 
                 return response()->json(
                     array(
-                        'response'  => 'failed',
-                        'message'   => 'Incorrect username or password',
+                        'response' => 'failed',
+                        'message' => 'Incorrect username or password',
                     ), 
                     400
                 );
@@ -295,8 +297,8 @@ class AjaxController extends Controller
         if(file_exists($path.'\\'.$file) === false) {
             return response()->json(
                 array(
-                    'response'  => 'failed',
-                    'message'   => 'File not exist.',
+                    'response' => 'failed',
+                    'message' => 'File not exist.',
                 ), 
                 400
             );
@@ -305,8 +307,8 @@ class AjaxController extends Controller
         if(is_file($path.'\\'.$file) === false) {
             return response()->json(
                 array(
-                    'response'  => 'failed',
-                    'message'   => 'Invalid file.',
+                    'response' => 'failed',
+                    'message' => 'Invalid file.',
                 ), 
                 400
             );
@@ -316,8 +318,8 @@ class AjaxController extends Controller
 
         return response()->json(
             array(
-                'response'  => 'success',
-                'message'   => 'File deleted.',
+                'response' => 'success',
+                'message' => 'File deleted.',
             ), 
             200
         );
@@ -328,46 +330,46 @@ class AjaxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function detail_admin_log($id)
-    {
-        $limit = 10;
+    // public function detail_admin_log($id)
+    // {
+    //     $limit = 10;
 
-        $logs = DB::table('admin_logs')
-            ->where('admin_id', $id)
-            // ->offset(0)
-            // ->limit($limit)
-            ->get();
+    //     $logs = DB::table('admin_logs')
+    //         ->where('admin_id', $id)
+    //         // ->offset(0)
+    //         // ->limit($limit)
+    //         ->get();
 
-        $datas = [];
+    //     $datas = [];
 
-        foreach($logs as $log) {
-            $datas[] = [
-                'action' => $log->action,
-                'actionDetail' => $log->action_detail,
-                'ipAddress' => $log->ipaddress,
-                'date' => $log->created_at
-            ];
-        };
+    //     foreach($logs as $log) {
+    //         $datas[] = [
+    //             'action' => $log->action,
+    //             'actionDetail' => $log->action_detail,
+    //             'ipAddress' => $log->ipaddress,
+    //             'date' => $log->created_at
+    //         ];
+    //     };
 
-        $total = count($logs);
+    //     $total = count($logs);
 
 
-        $pages = ceil($total/$limit);
+    //     $pages = ceil($total/$limit);
 
-        return response()->json(
-            array(
-                'meta' => [
-                    'page' => 1,
-                    'pages' => $limit,
-                    'perpage' => $limit,
-                    'total' => $total,
-                    'sort' => 'asc',
-                    'field' => 'date'
-                ],
-                'data' => $datas
-            ), 
-            200
-        );
-    }
+    //     return response()->json(
+    //         array(
+    //             'meta' => [
+    //                 'page' => 1,
+    //                 'pages' => $limit,
+    //                 'perpage' => $limit,
+    //                 'total' => $total,
+    //                 'sort' => 'asc',
+    //                 'field' => 'date'
+    //             ],
+    //             'data' => $datas
+    //         ), 
+    //         200
+    //     );
+    // }
 
 }

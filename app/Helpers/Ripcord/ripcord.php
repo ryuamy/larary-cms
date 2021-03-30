@@ -274,19 +274,19 @@ class ripcord
 	/**
 	 * Method {method} not found. - Thrown by the ripcord server when a requested method isn't found.
 	 */
-	const methodNotFound     = -1;
+	const methodNotFound = -1;
 	/**
 	 * Argument {index} is not a valid Ripcord call - Thrown by the client when passing incorrect arguments to system.multiCall.
 	 */
-	const notRipcordCall     = -2;
+	const notRipcordCall = -2;
 	/**
 	 * Cannot recurse system.multiCall  - Thrown by the ripcord server when system.multicall is called within itself.
 	 */
-	const cannotRecurse      = -3;
+	const cannotRecurse = -3;
 	/**
 	 * Could not access {url} - Thrown by the transport object when unable to access the given url.
 	 */
-	const cannotAccessURL    = -4;
+	const cannotAccessURL = -4;
 	/**
 	 * PHP XMLRPC library is not installed - Thrown by the ripcord server and client when the xmlrpc library is not installed.
 	 */
@@ -294,11 +294,11 @@ class ripcord
 	/**
 	 * Variable is not of type datetime - Thrown by the ripcord timestamp method.
  	 */
-	const notDatetime        = -6;
+	const notDatetime = -6;
 	/**
 	 * Variable is not of type base64 - Thrown by the ripcord binary method.
  	 */
-	const notBase64          = -7;
+	const notBase64 = -7;
 	/**
 	 * Variable is not a classname or an object - Thrown by the ripcord server.
 	 */

@@ -45,8 +45,8 @@ class NewstagsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'CMS News Tags',
-                'heading'   => 'News Tags Management'
+                'title' => 'CMS News Tags',
+                'heading' => 'News Tags Management'
             ],
             'css' => [],
             'js' => [
@@ -56,15 +56,15 @@ class NewstagsController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'News',
-                    'url'   => 'news'
+                    'url' => 'news'
                 ),
                 array(
                     'title' => 'Tags',
-                    'url'   => 'news/'.$this->table
+                    'url' => 'news/'.$this->table
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
@@ -126,21 +126,21 @@ class NewstagsController extends Controller
 
         $datas['pagination']['view'] = custom_pagination(
             array(
-                'base'          => $page_link,
-                'page'          => $pagination_prep['page'],
-                'pages'         => $pagination_prep['pages'],
-                'key'           => 'page',
-                'next_text'     => '&rsaquo;',
-                'prev_text'     => '&lsaquo;',
-                'first_text'    => '&laquo;',
-                'last_text'     => '&raquo;',
-                'show_dots'     => TRUE
+                'base' => $page_link,
+                'page' => $pagination_prep['page'],
+                'pages' => $pagination_prep['pages'],
+                'key' => 'page',
+                'next_text' => '&rsaquo;',
+                'prev_text' => '&lsaquo;',
+                'first_text' => '&laquo;',
+                'last_text' => '&raquo;',
+                'show_dots' => TRUE
             )
         );
         
         $table_head = [
-            'table'         => $this->table,
-            'head'          => [ 'title', 'status', 'created_at', 'updated_at' ],
+            'table' => $this->table,
+            'head' => [ 'title', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => []
         ];
         $table_head = admin_table_head($table_head);
@@ -155,27 +155,27 @@ class NewstagsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Create News Tag',
-                'heading'   => 'News Tags Management'
+                'title' => 'Create News Tag',
+                'heading' => 'News Tags Management'
             ],
             'css' => [],
             'js' => [],
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'News',
-                    'url'   => 'news'
+                    'url' => 'news'
                 ),
                 array(
                     'title' => 'Tag',
-                    'url'   => 'news/'.$this->table
+                    'url' => 'news/'.$this->table
                 ),
                 array(
                     'title' => 'Create News Tag',
-                    'url'   => 'news/'.$this->table.'/create'
+                    'url' => 'news/'.$this->table.'/create'
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
@@ -205,11 +205,11 @@ class NewstagsController extends Controller
         $slug = create_slug($this->table, $request->input('title'));
 
         $insert = new Tags();
-        $insert->uuid       = (string) Str::uuid();
-        $insert->name       = $request->input('title');
-        $insert->slug       = $slug;
-        $insert->type       = 1;
-        $insert->status     = $request->input('status');
+        $insert->uuid = (string) Str::uuid();
+        $insert->name = $request->input('title');
+        $insert->slug = $slug;
+        $insert->type = 1;
+        $insert->status = $request->input('status');
         $insert->created_by = $admin_id;
         $insert->updated_by = $admin_id;
         $insert->save();
@@ -217,12 +217,12 @@ class NewstagsController extends Controller
         $new_data = Tags::whereRaw('status != 2')->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
 
         $admin_log = new Adminlogs();
-        $admin_log->admin_id         = $admin_id;
-        $admin_log->table            = strtoupper($this->table);
-        $admin_log->table_id         = $new_data->id;
-        $admin_log->action           = 'INSERT';
-        $admin_log->action_detail    = 'Create news tags with title '.$new_data->name;
-        $admin_log->ipaddress        = get_client_ip();
+        $admin_log->admin_id = $admin_id;
+        $admin_log->table = strtoupper($this->table);
+        $admin_log->table_id = $new_data->id;
+        $admin_log->action = 'INSERT';
+        $admin_log->action_detail = 'Create news tags with title '.$new_data->name;
+        $admin_log->ipaddress = get_client_ip();
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
@@ -244,8 +244,8 @@ class NewstagsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Detail '.$current['name'].' News Tag',
-                'heading'   => 'News Tags Management'
+                'title' => 'Detail '.$current['name'].' News Tag',
+                'heading' => 'News Tags Management'
             ],
             'css' => [],
             'js' => [
@@ -254,19 +254,19 @@ class NewstagsController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'News',
-                    'url'   => 'news'
+                    'url' => 'news'
                 ),
                 array(
                     'title' => 'Tag',
-                    'url'   => 'news/'.$this->table
+                    'url' => 'news/'.$this->table
                 ),
                 array(
                     'title' => 'Detail News Tag',
-                    'url'   => 'news/'.$this->table.'/detail/'.$uuid
+                    'url' => 'news/'.$this->table.'/detail/'.$uuid
                 ),
             ],
             'current' => $current,
@@ -310,10 +310,10 @@ class NewstagsController extends Controller
 
         Tags::where('uuid', $uuid)->update(
             array(
-                'name'          => $request->input('title'),
-                'slug'          => $slug,
-                'status'        => $request->input('status'),
-                'updated_by'    => $admin_id
+                'name' => $request->input('title'),
+                'slug' => $slug,
+                'status' => $request->input('status'),
+                'updated_by' => $admin_id
             )
         );
 
@@ -322,12 +322,12 @@ class NewstagsController extends Controller
             'Update news tags '.$current->name;
 
         $admin_log = new Adminlogs();
-        $admin_log->admin_id         = $admin_id;
-        $admin_log->table            = strtoupper($this->table);
-        $admin_log->table_id         = $current->id;
-        $admin_log->action           = 'UPDATE';
-        $admin_log->action_detail    = $action_detail;
-        $admin_log->ipaddress        = get_client_ip();
+        $admin_log->admin_id = $admin_id;
+        $admin_log->table = strtoupper($this->table);
+        $admin_log->table_id = $current->id;
+        $admin_log->action = 'UPDATE';
+        $admin_log->action_detail = $action_detail;
+        $admin_log->ipaddress = get_client_ip();
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([

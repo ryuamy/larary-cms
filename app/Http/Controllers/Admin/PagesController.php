@@ -52,8 +52,8 @@ class PagesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'CMS Pages',
-                'heading'   => 'Pages Management'
+                'title' => 'CMS Pages',
+                'heading' => 'Pages Management'
             ],
             'css' => [],
             'js' => [
@@ -63,11 +63,11 @@ class PagesController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'Pages',
-                    'url'   => $this->table
+                    'url' => $this->table
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
@@ -129,21 +129,21 @@ class PagesController extends Controller
 
         $datas['pagination']['view'] = custom_pagination(
             array(
-                'base'          => $page_link,
-                'page'          => $pagination_prep['page'],
-                'pages'         => $pagination_prep['pages'],
-                'key'           => 'page',
-                'next_text'     => '&rsaquo;',
-                'prev_text'     => '&lsaquo;',
-                'first_text'    => '&laquo;',
-                'last_text'     => '&raquo;',
-                'show_dots'     => TRUE
+                'base' => $page_link,
+                'page' => $pagination_prep['page'],
+                'pages' => $pagination_prep['pages'],
+                'key' => 'page',
+                'next_text' => '&rsaquo;',
+                'prev_text' => '&lsaquo;',
+                'first_text' => '&laquo;',
+                'last_text' => '&raquo;',
+                'show_dots' => TRUE
             )
         );
         
         $table_head = [
-            'table'         => $this->table,
-            'head'          => [ 'title', 'featured_image', 'status', 'created_at', 'updated_at' ],
+            'table' => $this->table,
+            'head' => [ 'title', 'featured_image', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => [ 'featured_image' ]
         ];
         $table_head = admin_table_head($table_head);
@@ -158,8 +158,8 @@ class PagesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Create New Page',
-                'heading'   => 'Pages Management'
+                'title' => 'Create New Page',
+                'heading' => 'Pages Management'
             ],
             'css' => [],
             'js' => [
@@ -170,15 +170,15 @@ class PagesController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'Pages',
-                    'url'   => $this->table
+                    'url' => $this->table
                 ),
                 array(
                     'title' => 'Create Page',
-                    'url'   => $this->table.'/create'
+                    'url' => $this->table.'/create'
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
@@ -222,33 +222,33 @@ class PagesController extends Controller
         $slug = create_slug($this->table, $request->input('title'));
 
         $insert = new Pages();
-        $insert->uuid           = (string) Str::uuid();
-        $insert->name           = $request->input('title');
-        $insert->slug           = $slug;
+        $insert->uuid = (string) Str::uuid();
+        $insert->name = $request->input('title');
+        $insert->slug = $slug;
         $insert->featured_image = $path_featured_image.'/'.$image_new_name;
-        $insert->content        = $request->input('content');
-        $insert->status         = $request->input('status');
-        $insert->created_by     = $admin_id;
-        $insert->updated_by     = $admin_id;
+        $insert->content = $request->input('content');
+        $insert->status = $request->input('status');
+        $insert->created_by = $admin_id;
+        $insert->updated_by = $admin_id;
         $insert->save();
 
         $new_data = Pages::whereRaw('status != 2')->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
 
         $data_log = new Pagelogs();
-        $data_log->admin_id         = $admin_id;
-        $data_log->page_id          = $new_data->id;
-        $data_log->action           = 'INSERT';
-        $data_log->action_detail    = 'Created page';
-        $data_log->ipaddress        = get_client_ip();
+        $data_log->admin_id = $admin_id;
+        $data_log->page_id = $new_data->id;
+        $data_log->action = 'INSERT';
+        $data_log->action_detail = 'Created page';
+        $data_log->ipaddress = get_client_ip();
         $data_log->save();
 
         $admin_log = new Adminlogs();
-        $admin_log->admin_id         = $admin_id;
-        $admin_log->table            = strtoupper($this->table);
-        $admin_log->table_id         = $new_data->id;
-        $admin_log->action           = 'INSERT';
-        $admin_log->action_detail    = 'Create new pages with title '.$new_data->name;
-        $admin_log->ipaddress        = get_client_ip();
+        $admin_log->admin_id = $admin_id;
+        $admin_log->table = strtoupper($this->table);
+        $admin_log->table_id = $new_data->id;
+        $admin_log->action = 'INSERT';
+        $admin_log->action_detail = 'Create new pages with title '.$new_data->name;
+        $admin_log->ipaddress = get_client_ip();
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
@@ -270,8 +270,8 @@ class PagesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Detail '.$current['name'].' Page',
-                'heading'   => 'Pages Management'
+                'title' => 'Detail '.$current['name'].' Page',
+                'heading' => 'Pages Management'
             ],
             'css' => [],
             'js' => [
@@ -282,15 +282,15 @@ class PagesController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'Pages',
-                    'url'   => $this->table
+                    'url' => $this->table
                 ),
                 array(
                     'title' => 'Detail Page',
-                    'url'   => $this->table.'/detail/'.$uuid
+                    'url' => $this->table.'/detail/'.$uuid
                 ),
             ],
             'current' => $current,
@@ -349,12 +349,12 @@ class PagesController extends Controller
 
         Pages::where('uuid', $uuid)->update(
             array(
-                'name'              => $request->input('title'),
-                'slug'              => $slug,
-                'featured_image'    => $featured_image,
-                'content'           => $request->input('content'),
-                'status'            => $request->input('status'),
-                'updated_by'        => $admin_id
+                'name' => $request->input('title'),
+                'slug' => $slug,
+                'featured_image' => $featured_image,
+                'content' => $request->input('content'),
+                'status' => $request->input('status'),
+                'updated_by' => $admin_id
             )
         );
 
@@ -363,20 +363,20 @@ class PagesController extends Controller
             'Update pages '.$current->name;
         
         $data_log = new Pagelogs();
-        $data_log->admin_id         = $admin_id;
-        $data_log->page_id          = $current->id;
-        $data_log->action           = 'UPDATE';
-        $data_log->action_detail    = $action_detail;
-        $data_log->ipaddress        = get_client_ip();
+        $data_log->admin_id = $admin_id;
+        $data_log->page_id = $current->id;
+        $data_log->action = 'UPDATE';
+        $data_log->action_detail = $action_detail;
+        $data_log->ipaddress = get_client_ip();
         $data_log->save();
 
         $admin_log = new Adminlogs();
-        $admin_log->admin_id         = $admin_id;
-        $admin_log->table            = strtoupper($this->table);
-        $admin_log->table_id         = $current->id;
-        $admin_log->action           = 'UPDATE';
-        $admin_log->action_detail    = $action_detail;
-        $admin_log->ipaddress        = get_client_ip();
+        $admin_log->admin_id = $admin_id;
+        $admin_log->table = strtoupper($this->table);
+        $admin_log->table_id = $current->id;
+        $admin_log->action = 'UPDATE';
+        $admin_log->action_detail = $action_detail;
+        $admin_log->ipaddress = get_client_ip();
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([

@@ -33,7 +33,7 @@ class HomeController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
             ],
             'data' => [],

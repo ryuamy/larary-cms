@@ -125,6 +125,22 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="col-md-12">
+                <?php if($cur_uri[5] === 'detail') { ?>
+                    <div class="card card-custom mb-8">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Admin List
+                            </h3>
+                        </div>
+                        <?php /** NOTES : datatable pagination not work */ ?>
+                        <div class="card-body">
+                            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable" data-uuid="{{ $current['id'] }}"></div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
 
             @csrf
         </form>

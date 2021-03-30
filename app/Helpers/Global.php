@@ -275,10 +275,10 @@ if(!function_exists('custom_pagination_prep')) {
         }
 
         $rtn = [
-            'pages'         => $pages,
-            'page'          => $page,
-            'showing_to'    => $showing_to,
-            'showing_from'  => $showing_from
+            'pages' => $pages,
+            'page' => $page,
+            'showing_to' => $showing_to,
+            'showing_from' => $showing_from
         ];
 
         return $rtn;
@@ -378,10 +378,10 @@ if(!function_exists('custom_pagination_prep')) {
         }
 
         $rtn = [
-            'pages'         => $pages,
-            'page'          => $page,
-            'showing_to'    => $showing_to,
-            'showing_from'  => $showing_from
+            'pages' => $pages,
+            'page' => $page,
+            'showing_to' => $showing_to,
+            'showing_from' => $showing_from
         ];
 
         return $rtn;
@@ -631,8 +631,8 @@ if(!function_exists('get_client_ip_info')) {
                     $ip = $_SERVER['HTTP_CLIENT_IP'];
             }
         }
-        $purpose    = str_replace(array('name', '\n', '\t', ' ', '-', '_'), NULL, strtolower(trim($purpose)));
-        $support    = array('country', 'countrycode', 'state', 'region', 'city', 'location', 'address');
+        $purpose = str_replace(array('name', '\n', '\t', ' ', '-', '_'), NULL, strtolower(trim($purpose)));
+        $support = array('country', 'countrycode', 'state', 'region', 'city', 'location', 'address');
         $continents = array(
             'AF' => 'Africa',
             'AN' => 'Antarctica',
@@ -648,11 +648,11 @@ if(!function_exists('get_client_ip_info')) {
                 switch ($purpose) {
                     case 'location':
                         $output = array(
-                            'city'           => @$ipdat->geoplugin_city,
-                            'state'          => @$ipdat->geoplugin_regionName,
-                            'country'        => @$ipdat->geoplugin_countryName,
-                            'country_code'   => @$ipdat->geoplugin_countryCode,
-                            'continent'      => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
+                            'city' => @$ipdat->geoplugin_city,
+                            'state' => @$ipdat->geoplugin_regionName,
+                            'country' => @$ipdat->geoplugin_countryName,
+                            'country_code' => @$ipdat->geoplugin_countryCode,
+                            'continent' => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
                             'continent_code' => @$ipdat->geoplugin_continentCode
                         );
                     break;
@@ -731,7 +731,7 @@ if(!function_exists('timezone_choice')) {
                 continue;
             }
 
-            $exists    = array(
+            $exists = array(
                 0 => ( isset( $zone[0] ) && $zone[0] ),
                 1 => ( isset( $zone[1] ) && $zone[1] ),
                 2 => ( isset( $zone[2] ) && $zone[2] ),
@@ -741,9 +741,9 @@ if(!function_exists('timezone_choice')) {
             $exists[5] = ( $exists[2] && $exists[3] );
 
             $zonen[] = array(
-                'continent'   => ( $exists[0] ? $zone[0] : '' ),
-                'city'        => ( $exists[1] ? $zone[1] : '' ),
-                'subcity'     => ( $exists[2] ? $zone[2] : '' ),
+                'continent' => ( $exists[0] ? $zone[0] : '' ),
+                'city' => ( $exists[1] ? $zone[1] : '' ),
+                'subcity' => ( $exists[2] ? $zone[2] : '' ),
             );
         }
 
@@ -765,7 +765,7 @@ if(!function_exists('timezone_choice')) {
 
                 // Continent optgroup.
                 if ( ! isset( $zonen[ $key - 1 ] ) || $zonen[ $key - 1 ]['continent'] !== $zone['continent'] ) {
-                    $label       = $zone['continent'];
+                    $label = $zone['continent'];
                     $structure[] = '<optgroup label="'.$label.'">';
                 }
 
@@ -775,13 +775,13 @@ if(!function_exists('timezone_choice')) {
                 $display = $zone['city'];
                 if ( ! empty( $zone['subcity'] ) ) {
                     // Add the subcity to the value.
-                    $value[]  = $zone['subcity'];
+                    $value[] = $zone['subcity'];
                     $display .= ' - '.$zone['subcity'];
                 }
             }
 
             // Build the value.
-            $value    = join( '/', $value );
+            $value = join( '/', $value );
             $selected = '';
             if ( $value === $selected_zone ) {
                 $selected = 'selected="selected" ';
@@ -799,7 +799,7 @@ if(!function_exists('timezone_choice')) {
 
         // Do UTC.
         $structure[] = '<optgroup label="UTC">';
-        $selected    = '';
+        $selected = '';
         if ( 'UTC' === $selected_zone ) {
             $selected = 'selected="selected" ';
         }
@@ -807,7 +807,7 @@ if(!function_exists('timezone_choice')) {
         $structure[] = '</optgroup>';
 
         // Do manual UTC offsets.
-        $structure[]  = '<optgroup label="Manual Offsets">';
+        $structure[] = '<optgroup label="Manual Offsets">';
         $offset_range = array(
             -12,
             -11.5,
@@ -874,11 +874,11 @@ if(!function_exists('timezone_choice')) {
             }
 
             $offset_value = $offset_name;
-            $offset_name  = str_replace( array( '.25', '.5', '.75' ), array( ':15', ':30', ':45' ), $offset_name );
-            $offset_name  = 'UTC'.$offset_name;
+            $offset_name = str_replace( array( '.25', '.5', '.75' ), array( ':15', ':30', ':45' ), $offset_name );
+            $offset_name = 'UTC'.$offset_name;
             $offset_value = 'UTC'.$offset_value;
 
-            $selected     = '';
+            $selected = '';
             if ( $offset_value === $selected_zone ) {
                 $selected = 'selected="selected" ';
             }

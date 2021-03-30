@@ -45,8 +45,8 @@ class AdminrolesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'CMS Admin Roles',
-                'heading'   => 'Admin Roles Management'
+                'title' => 'CMS Admin Roles',
+                'heading' => 'Admin Roles Management'
             ],
             'css' => [],
             'js' => [
@@ -56,11 +56,11 @@ class AdminrolesController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'Admin Roles',
-                    'url'   => str_replace('_', '-', $this->table)
+                    'url' => str_replace('_', '-', $this->table)
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
@@ -120,21 +120,21 @@ class AdminrolesController extends Controller
 
         $datas['pagination']['view'] = custom_pagination(
             array(
-                'base'          => $page_link,
-                'page'          => $pagination_prep['page'],
-                'pages'         => $pagination_prep['pages'],
-                'key'           => 'page',
-                'next_text'     => '&rsaquo;',
-                'prev_text'     => '&lsaquo;',
-                'first_text'    => '&laquo;',
-                'last_text'     => '&raquo;',
-                'show_dots'     => TRUE
+                'base' => $page_link,
+                'page' => $pagination_prep['page'],
+                'pages' => $pagination_prep['pages'],
+                'key' => 'page',
+                'next_text' => '&rsaquo;',
+                'prev_text' => '&lsaquo;',
+                'first_text' => '&laquo;',
+                'last_text' => '&raquo;',
+                'show_dots' => TRUE
             )
         );
         
         $table_head = [
-            'table'         => $this->table,
-            'head'          => [ 'name', 'status', 'created_at', 'updated_at' ],
+            'table' => $this->table,
+            'head' => [ 'name', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => []
         ];
         $table_head = admin_table_head($table_head);
@@ -149,23 +149,23 @@ class AdminrolesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Create New Admin Role',
-                'heading'   => 'Admin Roles Management'
+                'title' => 'Create New Admin Role',
+                'heading' => 'Admin Roles Management'
             ],
             'css' => [],
             'js' => [],
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'Admin Roles',
-                    'url'   => str_replace('_', '-', $this->table)
+                    'url' => str_replace('_', '-', $this->table)
                 ),
                 array(
                     'title' => 'Create Admin Role',
-                    'url'   => str_replace('_', '-', $this->table).'/create'
+                    'url' => str_replace('_', '-', $this->table).'/create'
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
@@ -195,10 +195,10 @@ class AdminrolesController extends Controller
         $slug = create_slug($this->table, $request->input('title'));
 
         $insert = new Adminroles();
-        $insert->uuid       = (string) Str::uuid();
-        $insert->name       = $request->input('name');
-        $insert->slug       = $slug;
-        $insert->status     = $request->input('status');
+        $insert->uuid = (string) Str::uuid();
+        $insert->name = $request->input('name');
+        $insert->slug = $slug;
+        $insert->status = $request->input('status');
         $insert->created_by = $admin_id;
         $insert->updated_by = $admin_id;
         $insert->save();
@@ -206,12 +206,12 @@ class AdminrolesController extends Controller
         $new_data = Adminroles::whereRaw('status != 2')->whereRaw('name = "'.$request->input('name').'"')->orderByRaw('id desc')->first();
 
         $admin_log = new Adminlogs();
-        $admin_log->admin_id         = $admin_id;
-        $admin_log->table            = strtoupper($this->table);
-        $admin_log->table_id         = $new_data->id;
-        $admin_log->action           = 'INSERT';
-        $admin_log->action_detail    = 'Create new admin role with name '.$new_data->name;
-        $admin_log->ipaddress        = get_client_ip();
+        $admin_log->admin_id = $admin_id;
+        $admin_log->table = strtoupper($this->table);
+        $admin_log->table_id = $new_data->id;
+        $admin_log->action = 'INSERT';
+        $admin_log->action_detail = 'Create new admin role with name '.$new_data->name;
+        $admin_log->ipaddress = get_client_ip();
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
@@ -233,8 +233,8 @@ class AdminrolesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Detail '.$current['name'].' Admin Role',
-                'heading'   => 'Admin Roles Management'
+                'title' => 'Detail '.$current['name'].' Admin Role',
+                'heading' => 'Admin Roles Management'
             ],
             'css' => [],
             'js' => [
@@ -243,15 +243,15 @@ class AdminrolesController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'Admin Roles',
-                    'url'   => str_replace('_', '-', $this->table)
+                    'url' => str_replace('_', '-', $this->table)
                 ),
                 array(
                     'title' => 'Detail Admin Role',
-                    'url'   => str_replace('_', '-', $this->table).'/detail/'.$uuid
+                    'url' => str_replace('_', '-', $this->table).'/detail/'.$uuid
                 ),
             ],
             'current' => $current,
@@ -295,10 +295,10 @@ class AdminrolesController extends Controller
 
         Adminroles::where('uuid', $uuid)->update(
             array(
-                'name'          => $request->input('name'),
-                'slug'          => $slug,
-                'status'        => $request->input('status'),
-                'updated_by'    => $admin_id
+                'name' => $request->input('name'),
+                'slug' => $slug,
+                'status' => $request->input('status'),
+                'updated_by' => $admin_id
             )
         );
 
@@ -307,12 +307,12 @@ class AdminrolesController extends Controller
             'Update admin role '.$current->name;
 
         $admin_log = new Adminlogs();
-        $admin_log->admin_id         = $admin_id;
-        $admin_log->table            = strtoupper($this->table);
-        $admin_log->table_id         = $current->id;
-        $admin_log->action           = 'UPDATE';
-        $admin_log->action_detail    = $action_detail;
-        $admin_log->ipaddress        = get_client_ip();
+        $admin_log->admin_id = $admin_id;
+        $admin_log->table = strtoupper($this->table);
+        $admin_log->table_id = $current->id;
+        $admin_log->action = 'UPDATE';
+        $admin_log->action_detail = $action_detail;
+        $admin_log->ipaddress = get_client_ip();
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([

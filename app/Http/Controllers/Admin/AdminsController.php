@@ -49,8 +49,8 @@ class AdminsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'CMS Admins',
-                'heading'   => 'Admins Management'
+                'title' => 'CMS Admins',
+                'heading' => 'Admins Management'
             ],
             'css' => [],
             'js' => [
@@ -60,11 +60,11 @@ class AdminsController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'Admins',
-                    'url'   => $this->table
+                    'url' => $this->table
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
@@ -124,21 +124,21 @@ class AdminsController extends Controller
 
         $datas['pagination']['view'] = custom_pagination(
             array(
-                'base'          => $page_link,
-                'page'          => $pagination_prep['page'],
-                'pages'         => $pagination_prep['pages'],
-                'key'           => 'page',
-                'next_text'     => '&rsaquo;',
-                'prev_text'     => '&lsaquo;',
-                'first_text'    => '&laquo;',
-                'last_text'     => '&raquo;',
-                'show_dots'     => TRUE
+                'base' => $page_link,
+                'page' => $pagination_prep['page'],
+                'pages' => $pagination_prep['pages'],
+                'key' => 'page',
+                'next_text' => '&rsaquo;',
+                'prev_text' => '&lsaquo;',
+                'first_text' => '&laquo;',
+                'last_text' => '&raquo;',
+                'show_dots' => TRUE
             )
         );
         
         $table_head = [
-            'table'         => $this->table,
-            'head'          => [ 'name', 'username', 'email', 'status', 'created_at', 'updated_at' ],
+            'table' => $this->table,
+            'head' => [ 'name', 'username', 'email', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => []
         ];
         $table_head = admin_table_head($table_head);
@@ -153,23 +153,23 @@ class AdminsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Create New Admin',
-                'heading'   => 'Admins Management'
+                'title' => 'Create New Admin',
+                'heading' => 'Admins Management'
             ],
             'css' => [],
             'js' => [],
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'Admins',
-                    'url'   => $this->table
+                    'url' => $this->table
                 ),
                 array(
                     'title' => 'Create Admin',
-                    'url'   => $this->table.'/create'
+                    'url' => $this->table.'/create'
                 ),
             ],
             'admindata' => Auth::guard('admin')->user(),
@@ -207,12 +207,12 @@ class AdminsController extends Controller
         $admin_id = $this->admin->id;
 
         $insert = new Admins();
-        $insert->uuid       = (string) Str::uuid();
-        $insert->name       = $request->input('name');
-        $insert->slug       = $request->input('username');
-        $insert->email      = $request->input('email');
-        $insert->password   = Hash::make($request->input('repassword'));
-        $insert->status     = $request->input('status');
+        $insert->uuid = (string) Str::uuid();
+        $insert->name = $request->input('name');
+        $insert->slug = $request->input('username');
+        $insert->email = $request->input('email');
+        $insert->password = Hash::make($request->input('repassword'));
+        $insert->status = $request->input('status');
         $insert->created_by = $admin_id;
         $insert->updated_by = $admin_id;
         $insert->save();
@@ -220,12 +220,12 @@ class AdminsController extends Controller
         $new_data = Admins::whereRaw('status != 2')->whereRaw('name = "'.$request->input('name').'"')->orderByRaw('id desc')->first();
 
         $admin_log = new Adminlogs();
-        $admin_log->admin_id         = $admin_id;
-        $admin_log->table            = strtoupper($this->table);
-        $admin_log->table_id         = $new_data->id;
-        $admin_log->action           = 'INSERT';
-        $admin_log->action_detail    = 'Create new admin with name '.$new_data->name;
-        $admin_log->ipaddress        = get_client_ip();
+        $admin_log->admin_id = $admin_id;
+        $admin_log->table = strtoupper($this->table);
+        $admin_log->table_id = $new_data->id;
+        $admin_log->action = 'INSERT';
+        $admin_log->action_detail = 'Create new admin with name '.$new_data->name;
+        $admin_log->ipaddress = get_client_ip();
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
@@ -235,7 +235,7 @@ class AdminsController extends Controller
 
     public function detail($uuid)
     {
-        $current = Admins::where('uuid', $uuid)->first();
+        $current = Admins::where('uuid', $uuid)->with('logs')->first();
 
         if(!$current) {
             return redirect($this->admin_url)->with([
@@ -247,8 +247,8 @@ class AdminsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title'     => 'Detail '.$current['name'].' admin',
-                'heading'   => 'Admins Management'
+                'title' => 'Detail '.$current['name'].' admin',
+                'heading' => 'Admins Management'
             ],
             'css' => [],
             'js' => [
@@ -257,15 +257,15 @@ class AdminsController extends Controller
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
-                    'url'   => 'dashboard'
+                    'url' => 'dashboard'
                 ),
                 array(
                     'title' => 'Admins',
-                    'url'   => $this->table
+                    'url' => $this->table
                 ),
                 array(
                     'title' => 'Detail Admin',
-                    'url'   => $this->table.'/detail/'.$uuid
+                    'url' => $this->table.'/detail/'.$uuid
                 ),
             ],
             'current' => $current,
@@ -323,10 +323,10 @@ class AdminsController extends Controller
 
         Admins::where('uuid', $uuid)->update(
             array(
-                'name'          => $request->input('name'),
-                'slug'          => $request->input('username'),
-                'status'        => $request->input('status'),
-                'updated_by'    => $admin_id
+                'name' => $request->input('name'),
+                'slug' => $request->input('username'),
+                'status' => $request->input('status'),
+                'updated_by' => $admin_id
             )
         );
 
@@ -335,29 +335,29 @@ class AdminsController extends Controller
             'Update admin '.$current->name;
 
         $admin_log = new Adminlogs();
-        $admin_log->admin_id         = $admin_id;
-        $admin_log->table            = strtoupper($this->table);
-        $admin_log->table_id         = $current->id;
-        $admin_log->action           = 'UPDATE';
-        $admin_log->action_detail    = $action_detail;
-        $admin_log->ipaddress        = get_client_ip();
+        $admin_log->admin_id = $admin_id;
+        $admin_log->table = strtoupper($this->table);
+        $admin_log->table_id = $current->id;
+        $admin_log->action = 'UPDATE';
+        $admin_log->action_detail = $action_detail;
+        $admin_log->ipaddress = get_client_ip();
         $admin_log->save();
 
         if($request->input('renewpassword')) {
             Admins::where('uuid', $uuid)->update(
                 array(
-                    'password'      => Hash::make($request->input('renewpassword')),
-                    'updated_by'    => $admin_id
+                    'password' => Hash::make($request->input('renewpassword')),
+                    'updated_by' => $admin_id
                 )
             );
 
             $admin_log = new Adminlogs();
-            $admin_log->admin_id        = $admin_id;
-            $admin_log->table           = strtoupper($this->table);
-            $admin_log->table_id        = $current->id;
-            $admin_log->action          = 'UPDATE';
-            $admin_log->action_detail   = 'Update password admin '.$current->name;
-            $admin_log->ipaddress       = get_client_ip();
+            $admin_log->admin_id = $admin_id;
+            $admin_log->table = strtoupper($this->table);
+            $admin_log->table_id = $current->id;
+            $admin_log->action = 'UPDATE';
+            $admin_log->action_detail = 'Update password admin '.$current->name;
+            $admin_log->ipaddress = get_client_ip();
             $admin_log->save();
         }
 

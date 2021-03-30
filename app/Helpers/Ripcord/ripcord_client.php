@@ -195,15 +195,15 @@ class Ripcord_Client
 				}
 				if ( is_a( $arg, 'Ripcord_Client_Call' ) ) 
 				{
-					$arg->index  = count( $params );
-					$params[]    = $arg->encode();
+					$arg->index = count( $params );
+					$params[] = $arg->encode();
 				}
 				else
 				{
 					$arg['index'] = count( $params );
-					$params[]    = array(
+					$params[] = array(
 						'methodName' => $arg['methodName'],
-						'params'     => isset($arg['params']) ? 
+						'params' => isset($arg['params']) ? 
 							(array) $arg['params'] : array()
 					);
 				}
@@ -224,10 +224,10 @@ class Ripcord_Client
 				}
 			}
 		}
-		$request  = xmlrpc_encode_request( $name, $args, $this->_outputOptions );
+		$request = xmlrpc_encode_request( $name, $args, $this->_outputOptions );
 		$response = $this->_transport->post( $this->_url, $request );
-		$result   = xmlrpc_decode( $response, $this->_outputOptions['encoding'] );
-		$this->_rootClient->_request  = $request;
+		$result = xmlrpc_decode( $response, $this->_outputOptions['encoding'] );
+		$this->_rootClient->_request = $request;
 		$this->_rootClient->_response = $response;
 		if ( ripcord::isFault( $result ) && $this->_throwExceptions ) 
 		{
@@ -373,12 +373,12 @@ class Ripcord_Client_Call
 	/**
 	 * The index in the multicall request array, if any.
 	 */
-	public $index  = null;
+	public $index = null;
 	
 	/**
 	 * A reference to the php variable to fill with the result of the call, if any.
 	 */
-	public $bound  = null;
+	public $bound = null;
 	
 	/**
 	 * The constructor for the Ripcord_Client_Call class.
@@ -481,7 +481,7 @@ class  Ripcord_Transport_Stream implements Ripcord_Transport
 			) 
 		);
 		$context = stream_context_create( $options );
-		$result  = @file_get_contents( $url, false, $context );
+		$result = @file_get_contents( $url, false, $context );
 		$this->responseHeaders = $http_response_header;
 		if ( !$result )
 		{
@@ -541,10 +541,10 @@ class Ripcord_Transport_CURL implements Ripcord_Transport
 		$curl = curl_init();
 		$options = (array) $this->options + array(
 			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_URL            => $url,
-			CURLOPT_POST           => true,
-			CURLOPT_POSTFIELDS     => $request,
-			CURLOPT_HEADER         => true
+			CURLOPT_URL => $url,
+			CURLOPT_POST => true,
+			CURLOPT_POSTFIELDS => $request,
+			CURLOPT_HEADER => true
 		);
 		curl_setopt_array( $curl, $options );
 		$contents = curl_exec( $curl );

@@ -50,9 +50,9 @@ class ProfileRequest extends FormRequest
     // public function messages()
     // {
     //     return [
-    //         "nik.required"  => "NIK KTP / SIM / No Passport tidak boleh kosong.",
-    //         "nik.unique"   => "NIK KTP / SIM / No Passport sudah terdaftar.",
-    //         "nik.numeric"   => "NIK KTP / SIM / No Passport hanya boleh diisi dengan angka.",
+    //         "nik.required" => "NIK KTP / SIM / No Passport tidak boleh kosong.",
+    //         "nik.unique" => "NIK KTP / SIM / No Passport sudah terdaftar.",
+    //         "nik.numeric" => "NIK KTP / SIM / No Passport hanya boleh diisi dengan angka.",
     //         "name.required" => "Nama tidak boleh kosong.",
     //         "name.alpha_spaces" => "Nama hanya boleh diisi dengan alpha dan space.",
     //         "education.required" => "Pendidikan wajib dipilih.",

@@ -206,7 +206,7 @@
                 </div>
             </div>
             
-            <div class="col-md-12">                
+            <div class="col-md-12">
                 <?php if($cur_uri[5] === 'detail') { ?>
                     <div class="card card-custom mb-8">
                         <div class="card-header">
@@ -215,7 +215,26 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable" data-uuid="{{ $current['id'] }}"></div>
+                            <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                                <thead>
+                                    <tr>
+                                        <th title="Action">Action</th>
+                                        <th title="Action Detail">Action Detail</th>
+                                        <th title="IP Address">IP Address</th>
+                                        <th title="Date">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($current['logs'] as $l)
+                                        <tr>        
+                                            <td>{{ $l['action'] }}</td>
+                                            <td>{{ $l['action_detail'] }}</td>
+                                            <td>{{ $l['ipaddress'] }}</td>
+                                            <td>{{ date('d-m-Y H:i', strtotime($l['created_at'])) }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 <?php } ?>

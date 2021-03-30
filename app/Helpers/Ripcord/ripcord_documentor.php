@@ -34,12 +34,12 @@ class Ripcord_Documentor implements Ripcord_Documentor_Interface
 	/**
 	 * The name of the rpc server, used as the title and heading of the default HTML page.
 	 */
-	public $name     = 'Ripcord: Simple RPC Server';
+	public $name = 'Ripcord: Simple RPC Server';
 	
 	/**
 	 * A url to an optional css file or a css string for an inline stylesheet.
 	 */
-	public $css      = "
+	public $css = "
 		html {
 			font-family: georgia, times, serif;
 			font-size: 79%;
@@ -153,32 +153,32 @@ class Ripcord_Documentor implements Ripcord_Documentor_Interface
 	/**
 	 * The wsdl 1.0 description.
 	 */
-	public $wsdl     = false;
+	public $wsdl = false;
 	
 	/**
 	 * The wsdl 2.0 description
 	 */
-	public $wsdl2    = false;
+	public $wsdl2 = false;
 	
 	/**
 	 * Which version of the XML vocabulary the server implements. Either 'xmlrpc', 'soap 1.1', 'simple' or 'auto'.
 	 */
-	public $version  = 'auto';
+	public $version = 'auto';
 	
 	/**
 	 * The root URL of the rpc server.
 	 */
-	public $root     = '';
+	public $root = '';
 
 	/**
 	 * Optional header text for the online documentation.
 	 */
-	public $header     = '';
+	public $header = '';
 
 	/**
 	 * Optional footer text for the online documentation.
 	 */
-	public $footer     = '';	
+	public $footer = '';	
 	
 	/**
 	 * A list of method data, containing all the user supplied methods the rpc server implements.

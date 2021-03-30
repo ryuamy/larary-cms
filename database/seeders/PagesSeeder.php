@@ -17,38 +17,38 @@ class PagesSeeder extends Seeder
     {
         $datas = [
             [
-                'uuid'      => (string) Str::uuid(),
-                'name'      => 'Home',
-                'slug'      => 'home',
-                'content'   => '',
-                'status'    => '1',
+                'uuid' => (string) Str::uuid(),
+                'name' => 'Home',
+                'slug' => 'home',
+                'content' => '',
+                'status' => '1',
             ],
             [
-                'uuid'      => (string) Str::uuid(),
-                'name'      => 'About Us',
-                'slug'      => 'about-us',
-                'content'   => '',
-                'status'    => '1',
+                'uuid' => (string) Str::uuid(),
+                'name' => 'About Us',
+                'slug' => 'about-us',
+                'content' => '',
+                'status' => '1',
             ],
             [
-                'uuid'      => (string) Str::uuid(),
-                'name'      => 'Contact Us',
-                'slug'      => 'contact-us',
-                'content'   => '',
-                'status'    => '1',
+                'uuid' => (string) Str::uuid(),
+                'name' => 'Contact Us',
+                'slug' => 'contact-us',
+                'content' => '',
+                'status' => '1',
             ],
         ];
 
         foreach($datas as $data)
         {
             DB::table('pages')->insert([
-                'uuid'          => $data['uuid'],
-                'name'          => $data['name'],
-                'slug'          => $data['slug'],
-                'content'       => $data['content'],
-                'status'        => $data['status'],
-                'created_by'    => 1,
-                'updated_by'    => 1,
+                'uuid' => $data['uuid'],
+                'name' => $data['name'],
+                'slug' => $data['slug'],
+                'content' => $data['content'],
+                'status' => $data['status'],
+                'created_by' => 1,
+                'updated_by' => 1,
             ]);
         }
     }
