@@ -134,7 +134,7 @@
                     </div>
 
                     <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-end">
-                        <select id="page-limit" name="limit" class="w-auto mr-2 form-control form-control-solid form-control-sm">
+                        <select name="limit" class="w-auto mr-2 form-control form-control-solid form-control-sm page-limit">
                             <option value="20">20</option>
                             <option value="50" {{ isset($_GET['limit']) && $_GET['limit'] == 50 ? 'selected' : '' }}>50</option>
                             <option value="70" {{ isset($_GET['limit']) && $_GET['limit'] == 70 ? 'selected' : '' }}>70</option>
@@ -263,7 +263,7 @@
                     </div>
                     
                     <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-end">
-                        <select id="page-limit" name="limit" class="w-auto mr-2 form-control form-control-solid form-control-sm">
+                        <select name="limit" class="w-auto mr-2 form-control form-control-solid form-control-sm page-limit">
                             <option value="20">20</option>
                             <option value="50" {{ isset($_GET['limit']) && $_GET['limit'] == 50 ? 'selected' : '' }}>50</option>
                             <option value="70" {{ isset($_GET['limit']) && $_GET['limit'] == 70 ? 'selected' : '' }}>70</option>

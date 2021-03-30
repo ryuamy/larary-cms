@@ -11,4 +11,10 @@
             wrap_filter.addClass('d-none').removeClass('d-flex');
         }
     });
+
+    $('.page-limit').on('change', function (e) {
+        let current_table_id = $('.table-list').attr('id');
+        let pageLimit = $(this).val();
+        window.location.replace(baseUrl + current_table_id + '?limit=' + pageLimit);
+    });
 })(jQuery);

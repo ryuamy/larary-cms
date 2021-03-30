@@ -101,9 +101,4 @@
             BulkConfirmDialog(alertMessage, bulkActionType);
         }
     });
-
-    $('#page-limit').on('change', function (e) {
-        let pageLimit = $(this).val();
-        window.location.replace(baseUrl+'pages?limit='+pageLimit);
-    });
 })(jQuery);
