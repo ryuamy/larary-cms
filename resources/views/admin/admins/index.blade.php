@@ -69,7 +69,7 @@
                                         <label>
                                             Title
                                         </label>
-                                        <input type="title" class="form-control" value="{{ isset($_GET['title']) ? $_GET['title'] : '' }}">
+                                        <input type="text" class="form-control" value="{{ isset($_GET['title']) ? $_GET['title'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -252,7 +252,7 @@
                                 <?php } ?>
                             <?php } else { ?>
                                 <tr>
-                                    <td colspan="{{ $admindata->role_id === 1 || $admindata->role_id === 2 ? 6 : 5 }}" style="text-align:center;">
+                                    <td colspan="{{ $admindata->role_id === 1 || $admindata->role_id === 2 ? $table_body_colspan+1 : $table_body_colspan }}" style="text-align:center;">
                                         No Data
                                     </td>
                                 </tr>

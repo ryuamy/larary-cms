@@ -71,7 +71,7 @@ class NewsController extends Controller
                     'url' => $this->table
                 ),
             ],
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
@@ -147,8 +147,8 @@ class NewsController extends Controller
             'head' => [ 'title', 'featured_image', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => [ 'featured_image' ]
         ];
-        $table_head = admin_table_head($table_head);
-        $datas['table_head'] = $table_head;
+        $datas['table_head'] = admin_table_head($table_head);        
+        $datas['table_body_colspan'] = count($table_head['head']);
 
         return view('admin.news.index', $datas);
     }
@@ -181,7 +181,7 @@ class NewsController extends Controller
                     'url' => $this->table.'/create'
                 ),
             ],
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status(),
                 'category_tag_type' => Staticdatas::category_tag_type()
@@ -341,7 +341,7 @@ class NewsController extends Controller
                 ),
             ],
             'current' => $current,
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],

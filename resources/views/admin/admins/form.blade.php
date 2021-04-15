@@ -5,7 +5,8 @@
 <?php 
     $cur_uri = current_uri();
     $request = Session::get('request') ? Session::get('request') : array();
-    $action_url = ($cur_uri[5] === 'detail') ? $admin_url.'/update/'.$current['uuid'] : $admin_url.'/save';
+    $current_route = \Route::currentRouteName();
+    $action_url = (str_contains($current_route, 'detail')) ? $admin_url.'/update/'.$current['uuid'] : $admin_url.'/save';
 ?>
 
 <div class="d-flex flex-column-fluid">
@@ -71,7 +72,7 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="name" class="form-control"
-                                <?php if($cur_uri[5] === 'detail') { ?>
+                                <?php if(str_contains($current_route, 'detail')) { ?>
                                     value="{{ isset($request['name']) ? $request['name'] : $current['name'] }}"
                                 <?php } elseif($cur_uri[5] !== 'detail') { ?>
                                     value="{{ isset($request['name']) ? $request['name'] : '' }}"
@@ -85,7 +86,7 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="username" class="form-control"
-                                <?php if($cur_uri[5] === 'detail') { ?>
+                                <?php if(str_contains($current_route, 'detail')) { ?>
                                     value="{{ isset($request['username']) ? $request['username'] : $current['slug'] }}"
                                 <?php } elseif($cur_uri[5] !== 'detail') { ?>
                                     value="{{ isset($request['username']) ? $request['username'] : '' }}"
@@ -99,7 +100,7 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="email" class="form-control"
-                                <?php if($cur_uri[5] === 'detail') { ?>
+                                <?php if(str_contains($current_route, 'detail')) { ?>
                                     value="{{ isset($request['email']) ? $request['email'] : $current['email'] }}"
                                 <?php } elseif($cur_uri[5] !== 'detail') { ?>
                                     value="{{ isset($request['email']) ? $request['email'] : '' }}"
@@ -142,7 +143,7 @@
                     </div>
                 </div>
                 
-                <?php if($cur_uri[5] === 'detail') { ?>
+                <?php if(str_contains($current_route, 'detail')) { ?>
                     <div class="card card-custom mb-8">
                         <div class="card-header">
                             <h3 class="card-title">
@@ -207,7 +208,7 @@
             </div>
             
             <div class="col-md-12">
-                <?php if($cur_uri[5] === 'detail') { ?>
+                <?php if(str_contains($current_route, 'detail')) { ?>
                     <div class="card card-custom mb-8">
                         <div class="card-header">
                             <h3 class="card-title">

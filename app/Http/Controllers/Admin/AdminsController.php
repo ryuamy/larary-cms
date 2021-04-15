@@ -67,7 +67,7 @@ class AdminsController extends Controller
                     'url' => $this->table
                 ),
             ],
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
@@ -141,8 +141,8 @@ class AdminsController extends Controller
             'head' => [ 'name', 'username', 'email', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => []
         ];
-        $table_head = admin_table_head($table_head);
-        $datas['table_head'] = $table_head;
+        $datas['table_head'] = admin_table_head($table_head);        
+        $datas['table_body_colspan'] = count($table_head['head']);
 
         return view('admin.admins.index', $datas);
     }
@@ -172,7 +172,7 @@ class AdminsController extends Controller
                     'url' => $this->table.'/create'
                 ),
             ],
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
@@ -269,7 +269,7 @@ class AdminsController extends Controller
                 ),
             ],
             'current' => $current,
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],

@@ -5,7 +5,8 @@
 <?php 
     $cur_uri = current_uri();
     $request = Session::get('request') ? Session::get('request') : array();
-    $action_url = ($cur_uri[5] === 'detail') ? $admin_url.'/update/'.$current['uuid'] : $admin_url.'/save';
+    $current_route = \Route::currentRouteName();
+    $action_url = (str_contains($current_route, 'detail')) ? $admin_url.'/update/'.$current['uuid'] : $admin_url.'/save';
 ?>
 
 <div class="d-flex flex-column-fluid">
@@ -71,13 +72,13 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="title" class="form-control"
-                                <?php if($cur_uri[5] === 'detail') { ?>
+                                <?php if(str_contains($current_route, 'detail')) { ?>
                                     value="{{ isset($request['title']) ? $request['title'] : $current['name'] }}"
                                 <?php } elseif($cur_uri[5] !== 'detail') { ?>
                                     value="{{ isset($request['title']) ? $request['title'] : '' }}"
                                 <?php } ?>
                             />
-                            <?php if($cur_uri[5] === 'detail') { ?>
+                            <?php if(str_contains($current_route, 'detail')) { ?>
                                 <span class="form-text text-muted d-flex align-items-center">
                                     Permalink: 
                                      <a href="{{ env('APP_URL').'/' }}">
@@ -102,7 +103,7 @@
                             </label>
                             <textarea class="summernote"
                                 name="content"
-                            ><?php if($cur_uri[5] === 'detail') { ?>
+                            ><?php if(str_contains($current_route, 'detail')) { ?>
                                     {{ isset($request['content']) ? $request['content'] : $current['content'] }}
                                 <?php } elseif($cur_uri[5] !== 'detail') { ?>
                                     {{ isset($request['content']) ? $request['content'] : '' }}

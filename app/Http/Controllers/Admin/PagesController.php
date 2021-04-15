@@ -70,7 +70,7 @@ class PagesController extends Controller
                     'url' => $this->table
                 ),
             ],
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
@@ -146,8 +146,8 @@ class PagesController extends Controller
             'head' => [ 'title', 'featured_image', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => [ 'featured_image' ]
         ];
-        $table_head = admin_table_head($table_head);
-        $datas['table_head'] = $table_head;
+        $datas['table_head'] = admin_table_head($table_head);        
+        $datas['table_body_colspan'] = count($table_head['head']);
 
         return view('admin.pages.index', $datas);
     }
@@ -181,7 +181,7 @@ class PagesController extends Controller
                     'url' => $this->table.'/create'
                 ),
             ],
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
@@ -294,7 +294,7 @@ class PagesController extends Controller
                 ),
             ],
             'current' => $current,
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],

@@ -67,7 +67,7 @@ class NewstagsController extends Controller
                     'url' => 'news/'.$this->table
                 ),
             ],
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
@@ -143,8 +143,8 @@ class NewstagsController extends Controller
             'head' => [ 'title', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => []
         ];
-        $table_head = admin_table_head($table_head);
-        $datas['table_head'] = $table_head;
+        $datas['table_head'] = admin_table_head($table_head);        
+        $datas['table_body_colspan'] = count($table_head['head']);
 
         return view('admin.tags.index', $datas);
     }
@@ -178,7 +178,7 @@ class NewstagsController extends Controller
                     'url' => 'news/'.$this->table.'/create'
                 ),
             ],
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status(),
                 'category_tag_type' => Staticdatas::category_tag_type()
@@ -270,7 +270,7 @@ class NewstagsController extends Controller
                 ),
             ],
             'current' => $current,
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status(),
                 'category_tag_type' => Staticdatas::category_tag_type()

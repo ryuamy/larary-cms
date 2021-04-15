@@ -63,7 +63,7 @@ class AdminrolesController extends Controller
                     'url' => str_replace('_', '-', $this->table)
                 ),
             ],
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
@@ -137,8 +137,8 @@ class AdminrolesController extends Controller
             'head' => [ 'name', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => []
         ];
-        $table_head = admin_table_head($table_head);
-        $datas['table_head'] = $table_head;
+        $datas['table_head'] = admin_table_head($table_head);        
+        $datas['table_body_colspan'] = count($table_head['head']);
 
         return view('admin.admin_roles.index', $datas);
     }
@@ -168,7 +168,7 @@ class AdminrolesController extends Controller
                     'url' => str_replace('_', '-', $this->table).'/create'
                 ),
             ],
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
@@ -255,7 +255,7 @@ class AdminrolesController extends Controller
                 ),
             ],
             'current' => $current,
-            'admindata' => Auth::guard('admin')->user(),
+            'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
