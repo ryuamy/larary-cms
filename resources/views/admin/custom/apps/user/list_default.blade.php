@@ -9,7 +9,7 @@
                 <div class="d-flex">
                     <div class="flex-shrink-0 mr-7">
                         <div class="symbol symbol-50 symbol-lg-120">
-                            <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_1.jpg') }}" />
+                            <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_1.jpg') }}" />
                         </div>
                     </div>
                     
@@ -162,19 +162,19 @@
                         </span>
                         <div class="symbol-group symbol-hover">
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Mark Stone">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_25.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_25.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Charlie Stone">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_19.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_19.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Luca Doncic">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_22.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_22.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Nick Mana">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_23.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_23.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Teresa Fox">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_18.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_18.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle symbol-light" data-toggle="tooltip" title="More users">
                                 <span class="symbol-label font-weight-bold">5+</span>
@@ -351,19 +351,19 @@
                         </span>
                         <div class="symbol-group symbol-hover">
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Mark Stone">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_25.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_25.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Charlie Stone">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_19.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_19.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Luca Doncic">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_22.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_22.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Nick Mana">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_23.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_23.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Teresa Fox">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_18.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_18.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle symbol-light" data-toggle="tooltip" title="More users">
                                 <span class="symbol-label font-weight-bold">5+</span>
@@ -384,7 +384,7 @@
                     <!--begin::Pic-->
                     <div class="flex-shrink-0 mr-7">
                         <div class="symbol symbol-50 symbol-lg-120">
-                            <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media//users/300_10.jpg') }}" />
+                            <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media//users/300_10.jpg') }}" />
                         </div>
                     </div>
                     <!--end::Pic-->
@@ -540,19 +540,19 @@
                         </span>
                         <div class="symbol-group symbol-hover">
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Mark Stone">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_25.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_25.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Charlie Stone">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_19.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_19.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Luca Doncic">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_22.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_22.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Nick Mana">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_23.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_23.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Teresa Fox">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_18.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_18.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle symbol-light" data-toggle="tooltip" title="More users">
                                 <span class="symbol-label font-weight-bold">5+</span>
@@ -729,19 +729,19 @@
                         </span>
                         <div class="symbol-group symbol-hover">
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Mark Stone">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_25.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_25.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Charlie Stone">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_19.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_19.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Luca Doncic">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_22.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_22.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Nick Mana">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_23.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_23.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Teresa Fox">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_18.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_18.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle symbol-light" data-toggle="tooltip" title="More users">
                                 <span class="symbol-label font-weight-bold">5+</span>
@@ -762,7 +762,7 @@
                     <!--begin::Pic-->
                     <div class="flex-shrink-0 mr-7">
                         <div class="symbol symbol-50 symbol-lg-120">
-                            <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media//users/300_1.jpg') }}" />
+                            <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media//users/300_1.jpg') }}" />
                         </div>
                     </div>
                     <!--end::Pic-->
@@ -918,19 +918,19 @@
                         </span>
                         <div class="symbol-group symbol-hover">
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Mark Stone">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_25.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_25.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Charlie Stone">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_19.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_19.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Luca Doncic">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_22.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_22.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Nick Mana">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_23.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_23.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="Teresa Fox">
-                                <img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_18.jpg') }}" />
+                                <img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_18.jpg') }}" />
                             </div>
                             <div class="symbol symbol-30 symbol-circle symbol-light" data-toggle="tooltip" title="More users">
                                 <span class="symbol-label font-weight-bold">5+</span>

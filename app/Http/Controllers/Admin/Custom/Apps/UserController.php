@@ -42,7 +42,7 @@ class UserController extends Controller
             ],
             'css' => [],
             'js' => [
-                'metronic_v7.1.2/js/pages/custom/user/list-datatable'
+                'metronic_v7.1.2/pages/custom/user/list-datatable'
             ],
             'breadcrumb' => [
                 //...

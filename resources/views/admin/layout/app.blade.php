@@ -24,19 +24,19 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />    
 		
         @foreach ($css as $c)
-		    <link href="{{ asset('/'.$c.'.css') }}" rel="stylesheet" type="text/css" />
+		    <link href="{{ asset('/css/'.$c.'.css') }}" rel="stylesheet" type="text/css" />
         @endforeach  
 		
-		<link href="{{ asset('/metronic_v7.1.2/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('/css/global/metronic_v7.1.2/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('/css/global/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('/css/admin/style.bundle.css') }}" rel="stylesheet" type="text/css" />
         
-		<link href="{{ asset('/metronic_v7.1.2/css/themes/layout/header/base/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/metronic_v7.1.2/css/themes/layout/header/menu/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/metronic_v7.1.2/css/themes/layout/brand/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/metronic_v7.1.2/css/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/header/base/light.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/header/menu/light.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/brand/light.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css" />
         
-		<link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" />
+		<link rel="shortcut icon" href="{{ asset('/media/favicon.ico') }}" />
 	</head>
 
 	<?php
@@ -52,7 +52,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	>
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<a href="index">
-				<img alt="Logo" src="{{ asset('/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
+				<img alt="Logo" src="{{ asset('/media/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
 			</a>
             
 			<div class="d-flex align-items-center">
@@ -90,7 +90,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
 					<div class="brand flex-column-auto" id="kt_brand">
 						<a href="index" class="brand-logo">
-							<img alt="Logo" src="{{ asset('/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
+							<img alt="Logo" src="{{ asset('/media/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
 						</a>                        
 						<button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
 							<span class="svg-icon svg-icon svg-icon-xl">
@@ -528,7 +528,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
 										<div>
 											<div class="d-flex flex-column pt-5 pb-5 bgi-size-cover bgi-no-repeat rounded-top"
-												style="background-image: url({{ asset('/metronic_v7.1.2/media/misc/bg-1.jpg') }})"
+												style="background-image: url({{ asset('/media/metronic_v7.1.2/media/misc/bg-1.jpg') }})"
 											>
 												<h4 class="d-flex flex-center rounded-top">
 													<span class="text-white">
@@ -864,7 +864,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<?php /*
 					<div class="symbol symbol-100 mr-5">
 						<div class="symbol-label"
-							style="background-image:url('{{ asset('/metronic_v7.1.2/media/users/300_21.jpg') }}')"></div>
+							style="background-image:url('{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}')"></div>
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					*/ ?>
@@ -1319,7 +1319,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="d-flex flex-column mb-5 align-items-start">
 										<div class="d-flex align-items-center">
 											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_12.jpg') }}" />
+												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_12.jpg') }}" />
 											</div>
 											<div>
 												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
@@ -1336,7 +1336,7 @@ License: You must have a valid license purchased only from themeforest(the above
 												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
 											</div>
 											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_21.jpg') }}" />
+												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}" />
 											</div>
 										</div>
 										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Hey there, we’re just writing to let you know that you’ve been subscribed to a repository on GitHub.</div>
@@ -1345,7 +1345,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="d-flex flex-column mb-5 align-items-start">
 										<div class="d-flex align-items-center">
 											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_21.jpg') }}" />
+												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}" />
 											</div>
 											<div>
 												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
@@ -1362,7 +1362,7 @@ License: You must have a valid license purchased only from themeforest(the above
 												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
 											</div>
 											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_21.jpg') }}" />
+												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}" />
 											</div>
 										</div>
 										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">You’ll receive notifications for all issues, pull requests!</div>
@@ -1371,7 +1371,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="d-flex flex-column mb-5 align-items-start">
 										<div class="d-flex align-items-center">
 											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_12.jpg') }}" />
+												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_12.jpg') }}" />
 											</div>
 											<div>
 												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
@@ -1389,7 +1389,7 @@ License: You must have a valid license purchased only from themeforest(the above
 												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
 											</div>
 											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_21.jpg') }}" />
+												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}" />
 											</div>
 										</div>
 										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Discover what students who viewed Learn Figma - UI/UX Design. Essential Training also viewed</div>
@@ -1398,7 +1398,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="d-flex flex-column mb-5 align-items-start">
 										<div class="d-flex align-items-center">
 											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_12.jpg') }}" />
+												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_12.jpg') }}" />
 											</div>
 											<div>
 												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
@@ -1415,7 +1415,7 @@ License: You must have a valid license purchased only from themeforest(the above
 												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
 											</div>
 											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="{{ asset('/metronic_v7.1.2/media/users/300_21.jpg') }}" />
+												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}" />
 											</div>
 										</div>
 										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Company BBQ to celebrate the last quater achievements and goals. Food and drinks provided</div>
@@ -1463,10 +1463,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#EBEDF3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };</script>
 		<!--end::Global Config-->
 		
-		<script src="{{ asset('/metronic_v7.1.2/plugins/global/plugins.bundle.js') }}"></script>
-		<script src="{{ asset('/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
-		<script src="{{ asset('/metronic_v7.1.2/js/scripts.bundle.js') }}"></script>
-		<script src="{{ asset('/js/admin/clock.js') }}"></script>
+		<script src="{{ asset('/js/global/metronic_v7.1.2/plugins/global/plugins.bundle.js') }}"></script>
+		<script src="{{ asset('/js/global/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
+		<script src="{{ asset('/js/global/scripts.bundle.js') }}"></script>
+		<script src="{{ asset('/js/global/clock.js') }}"></script>
 
 		<script>
 			var baseUrl = $('body').data('baseurl');
@@ -1481,7 +1481,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		</script>
 
         @foreach ($js as $j)
-		    <script src="{{ asset('/'.$j.'.js') }}"></script>
+		    <script src="{{ asset('/js/'.$j.'.js') }}"></script>
         @endforeach
 
 		@if (isset($cur_uri[4]) && $cur_uri[4] === 'news' && isset($cur_uri[5]) && ($cur_uri[5] === 'create' || $cur_uri[5] === 'detail'))
