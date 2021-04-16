@@ -21,8 +21,7 @@ class CreateAdminsTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_admin')->nullable();
-            $table->integer('role_id')->nullable();
+            $table->integer('role_id')->nullable()->index();
             $table->rememberToken();
             $table->dateTime('token_expired')->nullable();
             $table->integer('status')->default(0);
