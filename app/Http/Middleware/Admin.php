@@ -21,11 +21,11 @@ class Admin
         $name = Route::currentRouteName(); // string
         $action = Route::currentRouteAction(); // string
 
-        if(auth()->user() == null && $name != 'admin.login') {
+        if(auth()->user() == null && $name != 'adm_login') {
             return redirect('admin/login')->with('error-message', 'You don\'t have access');
         }
 
-        if(auth()->user() != null && $name == 'admin.login') {
+        if(auth()->user() != null && $name == 'adm_login') {
             return redirect('admin/dashboard')->with('error-message', 'You are already logged in');
         }
         

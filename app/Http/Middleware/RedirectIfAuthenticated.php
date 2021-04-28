@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
                 // echo $guard; exit;
                 if($guard == "admin"){
                     //user was authenticated with admin guard.
-                    return redirect()->route('admin.dashboard');
+                    return redirect()->route('adm_dashboard');
                 } else {
                     //default guard.
                     // return redirect()->route('home');

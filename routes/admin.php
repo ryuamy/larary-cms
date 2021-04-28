@@ -13,22 +13,22 @@ use App\Http\Controllers\Admin\NewstagsController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 
-Route::get('login', [LoginController::class, 'form'] )->name('admin.login');
+Route::get('login', [LoginController::class, 'form'] )->name('adm_login');
 
-Route::get('dashboard', [HomeController::class, 'index'] )->name('admin.dashboard');
+Route::get('dashboard', [HomeController::class, 'index'] )->name('adm_dashboard');
 
-Route::get('index', [HomeController::class, 'index'] )->name('admin.index');
+Route::get('index', [HomeController::class, 'index'] )->name('adm_index');
  
 Route::prefix('ajax')->group(function () {
-    Route::post('bulk-edit', [AjaxController::class, 'bulk_edit'] )->name('admin.ajax.bulk_edit');
+    Route::post('bulk-edit', [AjaxController::class, 'bulk_edit'] );
     Route::get('bulk-edit', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('delete-data', [AjaxController::class, 'delete_data'] )->name('admin.ajax.delete_data');
+    Route::post('delete-data', [AjaxController::class, 'delete_data'] );
     Route::get('delete-data', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('login', [AjaxController::class, 'login'] )->name('admin.ajax.login');
+    Route::post('login', [AjaxController::class, 'login'] );
     Route::get('login', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });

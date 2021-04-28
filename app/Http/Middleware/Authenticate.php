@@ -17,9 +17,9 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            if(Route::is('admin.*')){
+            if(Route::is('adm_*')){
                 Session::flash('error-message', 'You don\'t have access');
-                return route('admin.login');
+                return route('adm_login');
             }
 
             return route('login');
