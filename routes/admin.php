@@ -13,7 +13,11 @@ use App\Http\Controllers\Admin\NewstagsController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 
+// Auth::routes();
+
 Route::get('login', [LoginController::class, 'form'] )->name('adm_login');
+
+Route::get('logout', [LoginController::class, 'logout'])->name('adm_logout');
 
 Route::get('dashboard', [HomeController::class, 'index'] )->name('adm_dashboard');
 
