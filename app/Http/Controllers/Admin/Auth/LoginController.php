@@ -7,7 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-// use Validator;
+// use Illuminate\Support\Facades\Validator;
 // use Hash;
 // use Session;
 // use App\User;

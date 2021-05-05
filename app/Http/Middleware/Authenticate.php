@@ -2,8 +2,7 @@
 
 namespace App\Http\Middleware;
 use Illuminate\Support\Facades\Route;
-use Session;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware

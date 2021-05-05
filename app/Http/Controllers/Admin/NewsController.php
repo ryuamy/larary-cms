@@ -16,8 +16,9 @@ use App\Models\Staticdatas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class NewsController extends Controller
 {
@@ -198,8 +199,8 @@ class NewsController extends Controller
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {
             $errors = $validation->errors()->all();
-            \Session::flash('errors', $errors );
-            \Session::flash('request', $request->input() );
+            Session::flash('errors', $errors );
+            Session::flash('request', $request->input() );
             return redirect($this->admin_url.'/create')->with([
                 'error-message' => 'There is some errors, please check again'
             ]);
@@ -251,7 +252,7 @@ class NewsController extends Controller
                 
                 $data_log_tags = new Newslogs();
                 $data_log_tags->admin_id = $admin_id;
-                $data_log_tags->news_id = $current->id;
+                $data_log_tags->news_id = $new_data->id;
                 $data_log_tags->action = 'INSERT';
                 $data_log_tags->action_detail = 'Add news tags';
                 $data_log_tags->ipaddress = get_client_ip();
@@ -273,7 +274,7 @@ class NewsController extends Controller
                 
                 $data_log_categories = new Newslogs();
                 $data_log_categories->admin_id = $admin_id;
-                $data_log_categories->news_id = $current->id;
+                $data_log_categories->news_id = $new_data->id;
                 $data_log_categories->action = 'INSERT';
                 $data_log_categories->action_detail = 'Add categories of news';
                 $data_log_categories->ipaddress = get_client_ip();
@@ -367,8 +368,8 @@ class NewsController extends Controller
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {
             $errors = $validation->errors()->all();
-            \Session::flash('errors', $errors );
-            \Session::flash('request', $request->input() );
+            Session::flash('errors', $errors );
+            Session::flash('request', $request->input() );
             return redirect($this->admin_url.'/detail/'.$uuid)->with([
                 'error-message' => 'There is some errors, please check again'
             ]);
@@ -421,7 +422,7 @@ class NewsController extends Controller
 
                 $data_tag = new Newstags();
                 $data_tag->tag_id = $tag_data->id;
-                $data_tag->news_id = $new_data->id;
+                $data_tag->news_id = $current->id;
                 $data_tag->status = 1;
                 $data_tag->created_by = $admin_id;
                 $data_tag->updated_by = $admin_id;
@@ -453,7 +454,7 @@ class NewsController extends Controller
 
                 $data_category = new Newscategories();
                 $data_category->category_id = $category_data->id;
-                $data_category->news_id = $new_data->id;
+                $data_category->news_id = $current->id;
                 $data_category->status = 1;
                 $data_category->created_by = $admin_id;
                 $data_category->updated_by = $admin_id;

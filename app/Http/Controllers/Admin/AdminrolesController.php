@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AdminrolesController extends Controller
 {
@@ -183,8 +184,8 @@ class AdminrolesController extends Controller
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {
             $errors = $validation->errors()->all();
-            \Session::flash('errors', $errors );
-            \Session::flash('request', $request->input() );
+            Session::flash('errors', $errors );
+            Session::flash('request', $request->input() );
             return redirect($this->admin_url.'/create')->with([
                 'error-message' => 'There is some errors, please check again'
             ]);
@@ -282,8 +283,8 @@ class AdminrolesController extends Controller
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {
             $errors = $validation->errors()->all();
-            \Session::flash('errors', $errors );
-            \Session::flash('request', $request->input() );
+            Session::flash('errors', $errors );
+            Session::flash('request', $request->input() );
             return redirect($this->admin_url.'/detail/'.$uuid)->with([
                 'error-message' => 'There is some errors, please check again'
             ]);
