@@ -18,17 +18,17 @@ class SettingsSeeder extends Seeder
         $datas = [
             [
                 'meta_key' => 'title',
-                'meta_value' => 'CMS PTSP Kejaksaan',
+                'meta_value' => 'CMS',
                 'status' => '1',
             ],
             [
                 'meta_key' => 'tagline',
-                'meta_value' => 'CMS PTSP Kejaksaan',
+                'meta_value' => 'CMS',
                 'status' => '1',
             ],
             [
                 'meta_key' => 'description',
-                'meta_value' => 'CMS PTSP Kejaksaan',
+                'meta_value' => 'CMS',
                 'status' => '1',
             ],
             [

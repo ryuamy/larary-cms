@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminLogsTable extends Migration
+class CreateSettingsLogs extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,10 @@ class CreateAdminLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin_logs', function (Blueprint $table) {
+        Schema::create('settings_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('admin_id')->index();
-            $table->string('table', 255);
-            $table->integer('table_id')->index();
+            $table->integer('setting_id')->index();
             $table->string('action', 255);
             $table->text('action_detail');
             $table->string('ipaddress', 255);
@@ -34,6 +33,6 @@ class CreateAdminLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_logs');
+        Schema::dropIfExists('settings_logs');
     }
 }

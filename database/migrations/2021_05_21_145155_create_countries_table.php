@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNewsTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +13,17 @@ class CreateNewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
-            $table->id()->autoIncrement();
+        Schema::create('countries', function (Blueprint $table) {
+            $table->integer('id')->autoIncrement();
             $table->string('uuid')->unique();
             $table->string('name', 255);
             $table->string('slug', 255)->unique();
-            $table->mediumText('content');
-            $table->string('featured_image', 255)->nullable();
-            $table->integer('status')->default(0);
+            $table->string('iso_alpha_2_code', 10)->nullable();
+            $table->string('iso_alpha_3_code', 10)->nullable();
+            $table->string('un_code', 255)->nullable();
+            $table->string('phone_code', 15);
+            $table->string('flag', 255)->nullable();
+            $table->integer('status')->default(1);
             $table->integer('created_by')->nullable()->index();
             $table->integer('updated_by')->nullable()->index();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
@@ -36,6 +38,6 @@ class CreateNewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('countries');
     }
 }
