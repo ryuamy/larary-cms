@@ -71,7 +71,7 @@ Jalankan command **`php artisan serve`** atau **`php artisan serve --port=8081`*
 
 
 ## Not Work! What to do?
-* Jika kamu melakukan perubahan atau penambahan tetapi perubahan atau penambahan tersebut tidak berubah dari sebelumnya, jalankan command di bawah ini secara berurutan:
+* Jika kamu melakukan perubahan atau penambahan tetapi perubahan atau penambahan tersebut tidak berubah dari sebelumnya, jalankan salah satu command di bawah ini atau secara berurutan:
 ```command
 php artisan cache:clear
 php artisan view:clear
