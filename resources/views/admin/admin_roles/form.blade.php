@@ -2,7 +2,7 @@
 
 @section('content')
 
-<?php 
+<?php
     $cur_uri = current_uri();
     $request = Session::get('request') ? Session::get('request') : array();
     $current_route = \Route::currentRouteName();
@@ -37,7 +37,7 @@
                     </div>
                 </div>
             @endif
-            
+
             @if (Session::has('error-message'))
                 <div class="col-md-12 mb-5">
                     <div class="alert alert-custom alert-danger d-flex show fade" role="alert">
@@ -68,7 +68,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>
-                                Title 
+                                Title
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="title" class="form-control"
@@ -80,13 +80,13 @@
                             />
                             <?php if(str_contains($current_route, 'detail')) { ?>
                                 <span class="form-text text-muted d-flex align-items-center">
-                                    Permalink: 
+                                    Permalink:
                                      <a href="{{ env('APP_URL').'/' }}">
                                         {{ env('APP_URL') }}/<span id="permalink_slug" class="mr-1 d-inline-block">{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}</span>
-                                    </a> 
-                                    <input type="text" value="{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}" 
-                                        id="field_permalink_slug" 
-                                        class="form-control mr-1 d-none w-auto h-auto pt-0 pb-0" 
+                                    </a>
+                                    <input type="text" value="{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}"
+                                        id="field_permalink_slug"
+                                        class="form-control mr-1 d-none w-auto h-auto pt-0 pb-0"
                                         name="permalink"
                                     />
                                     <a class="label label-success label-inline" href="Javascript:;" id="edit_permalink_slug">
@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-4">
                 <div class="card card-custom mb-8">
                     <div class="card-header">
@@ -116,7 +116,7 @@
                                 <option value="">Select Status</option>
                                 @foreach ($staticdata['default_status'] as $kS => $status)
                                     @if ($kS != 2)
-                                        <option value="{{ $kS }}" 
+                                        <option value="{{ $kS }}"
                                             {{ isset($current['status']) && $current['status'] == $kS ? 'selected' : '' }}
                                         >{{ $status }}</option>
                                     @endif
@@ -126,7 +126,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-12">
                 <?php if(str_contains($current_route, 'detail')) { ?>
                     <div class="card card-custom mb-8">
@@ -135,7 +135,7 @@
                                 Admin List
                             </h3>
                         </div>
-                        <?php /** NOTES : datatable pagination not work */ ?>
+                        <?php /** FIXME : datatable pagination not work */ ?>
                         <div class="card-body">
                             <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable" data-uuid="{{ $current['id'] }}"></div>
                         </div>

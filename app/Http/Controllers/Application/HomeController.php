@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Application;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -48,7 +49,6 @@ class HomeController extends Controller
             }
             break;
         }
-        dd($return);
 
         return view('home');
     }

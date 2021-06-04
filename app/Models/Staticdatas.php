@@ -60,4 +60,23 @@ class Staticdatas extends Model
 
         return $list;
     }
+
+    //because we dont have this table, and not sure should I create one?
+    public static function idn_driver_license() {
+        $list = [];
+        $list[0] = '-';
+        $list[1] = 'A';
+        $list[2] = 'A UMUM';
+        $list[3] = 'BI';
+        $list[4] = 'BII';
+        $list[5] = 'BI UMUM';
+        $list[6] = 'BII UMUM';
+        $list[7] = 'C';
+        $list[8] = 'CI';
+        $list[9] = 'CII';
+        $list[10] = 'D';
+        $list[11] = 'DI';
+
+        return $list;
+    }
 }

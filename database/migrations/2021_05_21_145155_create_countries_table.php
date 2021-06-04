@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateCountriesTable extends Migration
@@ -23,6 +24,7 @@ class CreateCountriesTable extends Migration
             $table->string('un_code', 255)->nullable();
             $table->string('phone_code', 15);
             $table->string('flag', 255)->nullable();
+            $table->integer('capital_city')->nullable()->index();
             $table->integer('status')->default(1);
             $table->integer('created_by')->nullable()->index();
             $table->integer('updated_by')->nullable()->index();

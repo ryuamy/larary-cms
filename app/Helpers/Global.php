@@ -4,11 +4,11 @@
 
 /**
  * Old debug
- * 
+ *
  * @param array $array
- * 
+ *
  * @return boolean $exist_flag
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('pre')) {
@@ -24,7 +24,7 @@ if(!function_exists('pre')) {
 
 if(!function_exists('customTanggal')) {
     function customTanggal($date,$date_format) {
-        // return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format($date_format);    
+        // return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format($date_format);
     }
 }
 
@@ -65,14 +65,14 @@ if(!function_exists('base_img')) {
 
 /**
  * Get site settings
- * 
- * @param string $meta_value   
+ *
+ * @param string $meta_value
  * @param string $separator    separator, default is "|"
- * 
+ *
  * @return string
- * 
+ *
  * @author Amy <laksmise@gmail.com>
- * 
+ *
  */
 if(!function_exists('get_site_settings')) {
     function get_site_settings($meta_key, $separator='|') {
@@ -102,7 +102,7 @@ if(!function_exists('is_mobile')) {
 
 /**
  * custom pagination
- * 
+ *
  * param reference example
  * $param = array(
  * 		'base'          => 'user',
@@ -115,7 +115,7 @@ if(!function_exists('is_mobile')) {
  * 		'last_text'		=> 'Last',
  * 		'show_dots'     => true
  * );
- * 
+ *
  * param detail:
  * base         : (string - mandatory)	current page
  * page         : (integer - mandatory)	current page
@@ -129,11 +129,11 @@ if(!function_exists('is_mobile')) {
  *
  * @param array $params
  * @param string $adminpage
- * 
+ *
  * @return string $html
- * 
+ *
  * @author Amy <laksmise@gmail.com>
- * 
+ *
  */
 if(!function_exists('custom_pagination')) {
     function custom_pagination($params, $adminpage='') {
@@ -235,9 +235,9 @@ if(!function_exists('custom_pagination')) {
 
 /**
  * Global limit for custom pagination
- * 
+ *
  * @return integer $limit
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_pagination_limit')) {
@@ -249,9 +249,9 @@ if(!function_exists('custom_pagination_limit')) {
 
 /**
  * Pagination number of showing to and showing from
- * 
+ *
  * @return array $rtn
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_pagination_prep')) {
@@ -287,9 +287,9 @@ if(!function_exists('custom_pagination_prep')) {
 
 /**
  * Pagination global sort link
- * 
+ *
  * @return string $link
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_sort_link')) {
@@ -301,7 +301,7 @@ if(!function_exists('custom_sort_link')) {
         }
 
         if(
-        (isset($params['action']) && isset($params['page'])) || 
+        (isset($params['action']) && isset($params['page'])) ||
         (isset($params['action']) && !isset($params['page']))
         ) {
             if(isset($params['order']) && isset($params['sort'])) {
@@ -321,9 +321,9 @@ if(!function_exists('custom_sort_link')) {
 
 /**
  * Pagination global link
- * 
+ *
  * @return string $link
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_pagination_link')) {
@@ -335,7 +335,7 @@ if(!function_exists('custom_pagination_link')) {
         }
 
         if(
-        (isset($params['action']) && isset($params['order'])) || 
+        (isset($params['action']) && isset($params['order'])) ||
         (isset($params['action']) && !isset($params['order']))
         ) {
             foreach($params as $key_par => $par) {
@@ -352,9 +352,9 @@ if(!function_exists('custom_pagination_link')) {
 
 /**
  * Pagination number of showing to and showing from
- * 
+ *
  * @return array $rtn
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('custom_pagination_prep')) {
@@ -392,9 +392,9 @@ if(!function_exists('custom_pagination_prep')) {
  * Admin table header
  *
  * @param array $array
- * 
+ *
  * @return array $table_head
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('admin_table_head')) {
@@ -423,9 +423,9 @@ if(!function_exists('admin_table_head')) {
  * Month in bahasa Indonesia
  *
  * @param int $month
- * 
+ *
  * @return string
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('month_idn')) {
@@ -452,9 +452,9 @@ if(!function_exists('month_idn')) {
  * Day in bahasa Indonesia
  *
  * @param int $day
- * 
+ *
  * @return string
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('day_idn')) {
@@ -474,9 +474,9 @@ if(!function_exists('day_idn')) {
 
 /**
  * Create organized upload image folder
- * 
+ *
  * @return string $path
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('create_uploads_folder')) {
@@ -496,12 +496,12 @@ if(!function_exists('create_uploads_folder')) {
 
 /**
  * Create log file
- * 
+ *
  * @param string $message
  * @param string $foldername
- * 
+ *
  * @return string
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('create_log')) {
@@ -521,7 +521,7 @@ if(!function_exists('create_log')) {
             if (!file_exists($month_folder)) {
                 mkdir($month_folder, 0777);
             }
-            
+
             $path = str_replace('./', '', $month_folder); //'logs/'.$foldername.'/'.date('Y').'/'.date('m');
 
             $insert_content = '';
@@ -542,11 +542,11 @@ if(!function_exists('create_log')) {
 
 /**
  * Create translataion file for multilanguage
- * 
+ *
  * @param string $language_code
- * 
+ *
  * @return string
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('create_translation_file')) {
@@ -567,7 +567,7 @@ if(!function_exists('create_translation_file')) {
 
         // foreach($translation_files as $file) {
         //     $path = str_replace('./', '', $foldername);
-            
+
         //     $stCurLogFileName = $path.'/'.$file;
         //     echo $stCurLogFileName."<br />";
 
@@ -588,7 +588,7 @@ if(!function_exists('create_translation_file')) {
  * Get client ip address
  *
  * @return string $ipaddress
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('get_client_ip')) {
@@ -616,7 +616,7 @@ if(!function_exists('get_client_ip')) {
  * Get client ip address location information
  *
  * @return array $output
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('get_client_ip_info')) {
@@ -690,7 +690,7 @@ if(!function_exists('get_client_ip_info')) {
  * Get client locale
  *
  * @return array
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('get_client_locale')) {
@@ -715,7 +715,7 @@ if(!function_exists('get_client_locale')) {
  *
  * @param string $selected_zone Selected timezone.
  * @param string $locale        Optional. Locale to load the timezones in. Default current site locale.
- * 
+ *
  * @return string
  */
 if(!function_exists('timezone_choice')) {
@@ -892,30 +892,74 @@ if(!function_exists('timezone_choice')) {
 
 /**
  * Create slug
- * 
+ *
  * @param string $table
- * 
+ *
  * @return string $title
  * @return string $separator
- * 
+ *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('create_slug')) {
     function create_slug($table, $title, $separator = '-') {
         new \Illuminate\Support\Facades\DB;
 
-        $slug = strtolower(str_replace(' ', $separator, $title));
+        $slug = strtolower(
+            preg_replace(
+                '/[^A-Za-z0-9]/',
+                $separator,
+                clean_string($title)
+            )
+        );
 
         $check = DB::table($table)
             ->where('slug', 'like', '%'.$slug.'%')
             ->get();
-        
+
         if(count($check) > 0) {
             $total = count($check) + 1;
             $slug = $slug.$separator.$total;
         }
 
         return $slug;
+    }
+}
+
+/**
+ * Clean String of UTF8 Chars – Convert to similar ASCII char
+ * SEO Friendly for slug
+ * source: https://gist.github.com/salipro4ever/92dad7c5059cb79885ef
+ * copyright: Salipro Pham
+ *
+ * @param string $text
+ *
+ * @return string
+ *
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('clean_string')) {
+    function clean_string($text) {
+        $utf8 = array(
+            '/[áàâãªä]/u'   =>   'a',
+            '/[ÁÀÂÃÄ]/u'    =>   'A',
+            '/[ÍÌÎÏ]/u'     =>   'I',
+            '/[íìîï]/u'     =>   'i',
+            '/[éèêë]/u'     =>   'e',
+            '/[ÉÈÊË]/u'     =>   'E',
+            '/[óòôõºö]/u'   =>   'o',
+            '/[ÓÒÔÕÖ]/u'    =>   'O',
+            '/[úùûü]/u'     =>   'u',
+            '/[ÚÙÛÜ]/u'     =>   'U',
+            '/ç/'           =>   'c',
+            '/Ç/'           =>   'C',
+            '/ñ/'           =>   'n',
+            '/Ñ/'           =>   'N',
+            '/–/'           =>   '-', // UTF-8 hyphen to "normal" hyphen
+            '/[’‘‹›‚]/u'    =>   "'", // Literally a single quote
+            '/[“”«»„]/u'    =>   ' ', // Double quote
+            '/ /'           =>   ' ', // nonbreaking space (equiv. to 0x160)
+        );
+        return preg_replace(array_keys($utf8), array_values($utf8), $text);
     }
 }
 

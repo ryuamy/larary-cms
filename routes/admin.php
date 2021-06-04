@@ -22,7 +22,7 @@ Route::get('logout', [LoginController::class, 'logout'])->name('adm_logout');
 Route::get('dashboard', [HomeController::class, 'index'] )->name('adm_dashboard');
 
 Route::get('index', [HomeController::class, 'index'] )->name('adm_index');
- 
+
 Route::prefix('ajax')->group(function () {
     Route::post('bulk-edit', [AjaxController::class, 'bulk_edit'] );
     Route::get('bulk-edit', function() {
@@ -44,7 +44,7 @@ Route::prefix('ajax')->group(function () {
     Route::post('detail-admin-log/{id}', [AjaxController::class, 'detail_admin_log'] );
 });
 
-//** NOTES : buat Exports terlebih dahulu untuk mengaktifkan feature export */
+// TODO : buat Exports terlebih dahulu untuk mengaktifkan feature export
 Route::prefix('export')->group(function () {
     // Route::get('excel/{table}', [ExportController::class, 'export_excel'] )
     //     ->name('admin.export.export_excel');
@@ -88,7 +88,7 @@ Route::prefix('news')->group(function () {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::post('update/{uuid}', [NewsController::class, 'update'] );
-        
+
     Route::prefix('categories')->group(function () {
         Route::get('/', [NewscategoriesController::class, 'index'] );
         Route::get('create', [NewscategoriesController::class, 'create'] );
@@ -105,7 +105,7 @@ Route::prefix('news')->group(function () {
         });
         Route::post('update/{uuid}', [NewscategoriesController::class, 'update'] );
     });
-        
+
     Route::prefix('tags')->group(function () {
         Route::get('/', [NewstagsController::class, 'index'] );
         Route::get('create', [NewstagsController::class, 'create'] );
