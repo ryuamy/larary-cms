@@ -32,7 +32,12 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultstringLength(191);
 
         if(env('APP_ENV') === 'production') {
-            URL::forceScheme('https');
+            if( !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ) {
+                URL::forceScheme('https');
+            } else {
+                header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+                die();
+            }
         }
 
         //Custom validation rule.
@@ -50,7 +55,6 @@ class AppServiceProvider extends ServiceProvider
             if(!empty($check_province)) {
                 $check_city = DB::table('cities')->where('administration_code', $split_value[1])->first();
             }
-            // echo (!empty($check_province) && (isset($check_city) && !empty($check_city))) ? 'TRUE' : 'FALSE'; exit;
             return (!empty($check_province) && (isset($check_city) && !empty($check_city))) ? TRUE : FALSE;
         }, 'The :attribute invalid Indonesia identity number');
 
