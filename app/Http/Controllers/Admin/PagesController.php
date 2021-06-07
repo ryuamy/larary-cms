@@ -23,7 +23,7 @@ class PagesController extends Controller
         'content' => 'required',
         'status' => 'required',
     ];
-    
+
     protected $validationMessages = [
         'title.required' => 'Title can not be empty.',
         'title.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
@@ -58,8 +58,8 @@ class PagesController extends Controller
             ],
             'css' => [],
             'js' => [
-                'js/admin/bulk-edit',
-                'js/admin/filter-data'
+                'admin/bulk-edit',
+                'admin/filter-data'
             ],
             'breadcrumb' => [
                 array(
@@ -80,7 +80,7 @@ class PagesController extends Controller
         $param_get = isset($_GET) ? $_GET : [];
 
         $datas_list = Pages::whereRaw('status != 2');
-        
+
         //*** Filter
         if(isset($_GET['action'])) {
             if( $_GET['status'] !== 'all' ) {
@@ -110,7 +110,7 @@ class PagesController extends Controller
         $sort = (isset($param_get['sort'])) ? strtoupper($param_get['sort']) : 'DESC';
         $datas_list = $datas_list->orderByRaw($order.' '.$sort);
         //*** Sort
-        
+
         $datas['total'] = count($datas_list->get());
 
         $limit = custom_pagination_limit();
@@ -141,13 +141,13 @@ class PagesController extends Controller
                 'show_dots' => TRUE
             )
         );
-        
+
         $table_head = [
             'table' => $this->table,
             'head' => [ 'title', 'featured_image', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => [ 'featured_image' ]
         ];
-        $datas['table_head'] = admin_table_head($table_head);        
+        $datas['table_head'] = admin_table_head($table_head);
         $datas['table_body_colspan'] = count($table_head['head']);
 
         return view('admin.pages.index', $datas);
@@ -164,9 +164,9 @@ class PagesController extends Controller
             ],
             'css' => [],
             'js' => [
-                'js/admin/edit-permalink',
-                'js/admin/set-feature-image',
-                'js/admin/wysiwyg-editor'
+                'admin/edit-permalink',
+                'admin/set-feature-image',
+                'admin/wysiwyg-editor'
             ],
             'breadcrumb' => [
                 array(
@@ -206,7 +206,7 @@ class PagesController extends Controller
         $admin_id = $this->admin->id;
 
         $path_featured_image = create_uploads_folder();
-        
+
         $image_new_name = '';
         $featured = $request->file('featured');
         //http://image.intervention.io/api/crop
@@ -216,7 +216,7 @@ class PagesController extends Controller
             $image_size = $featured->getSize();
 
             $image_new_name = uniqid().'.'.$image_extention;
-            
+
             $featured->move($path_featured_image, $image_new_name);
         }
 
@@ -276,9 +276,9 @@ class PagesController extends Controller
             ],
             'css' => [],
             'js' => [
-                'js/admin/edit-permalink',
-                'js/admin/set-feature-image',
-                'js/admin/wysiwyg-editor'
+                'admin/edit-permalink',
+                'admin/set-feature-image',
+                'admin/wysiwyg-editor'
             ],
             'breadcrumb' => [
                 array(
@@ -331,7 +331,7 @@ class PagesController extends Controller
         $admin_id = $this->admin->id;
 
         $path_featured_image = create_uploads_folder();
-        
+
         $featured_image = $current->featured_image;
         $featured = $request->file('featured');
         if(!empty($featured)) {
@@ -340,9 +340,9 @@ class PagesController extends Controller
             $image_size = $featured->getSize();
 
             $image_new_name = uniqid().'.'.$image_extention;
-            
+
             $featured->move($path_featured_image, $image_new_name);
-            
+
             $featured_image = $path_featured_image.'/'.$image_new_name;
         }
 
@@ -359,10 +359,10 @@ class PagesController extends Controller
             )
         );
 
-        $action_detail = ($current->name != $request->input('title')) ? 
-            'Update content and rename title from '.$current->name.' to '.$request->input('title'): 
+        $action_detail = ($current->name != $request->input('title')) ?
+            'Update content and rename title from '.$current->name.' to '.$request->input('title'):
             'Update pages '.$current->name;
-        
+
         $data_log = new Pagelogs();
         $data_log->admin_id = $admin_id;
         $data_log->page_id = $current->id;

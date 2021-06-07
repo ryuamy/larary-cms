@@ -22,7 +22,7 @@ class AdminsController extends Controller
         'username' => 'required|alpha_num',
         'status' => 'required',
     ];
-    
+
     protected $validationMessages = [
         'name.required' => 'Title can not be empty.',
         'name.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
@@ -55,8 +55,8 @@ class AdminsController extends Controller
             ],
             'css' => [],
             'js' => [
-                'js/admin/bulk-edit',
-                'js/admin/filter-data'
+                'admin/bulk-edit',
+                'admin/filter-data'
             ],
             'breadcrumb' => [
                 array(
@@ -78,7 +78,7 @@ class AdminsController extends Controller
         $param_get = isset($_GET) ? $_GET : [];
 
         $datas_list = Admins::whereRaw('status != 2');
-        
+
         //*** Filter
         if(isset($_GET['action'])) {
             if( $_GET['status'] !== 'all' ) {
@@ -105,7 +105,7 @@ class AdminsController extends Controller
         $sort = (isset($param_get['sort'])) ? strtoupper($param_get['sort']) : 'DESC';
         $datas_list = $datas_list->orderByRaw($order.' '.$sort);
         //*** Sort
-        
+
         $datas['total'] = count($datas_list->get());
 
         $limit = custom_pagination_limit();
@@ -136,13 +136,13 @@ class AdminsController extends Controller
                 'show_dots' => TRUE
             )
         );
-        
+
         $table_head = [
             'table' => $this->table,
             'head' => [ 'name', 'username', 'email', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => []
         ];
-        $datas['table_head'] = admin_table_head($table_head);        
+        $datas['table_head'] = admin_table_head($table_head);
         $datas['table_body_colspan'] = count($table_head['head']);
 
         return view('admin.admins.index', $datas);
@@ -253,7 +253,7 @@ class AdminsController extends Controller
             ],
             'css' => [],
             'js' => [
-                'js/admin/detail-admin-log'
+                'admin/detail-admin-log'
             ],
             'breadcrumb' => [
                 array(
@@ -331,8 +331,8 @@ class AdminsController extends Controller
             )
         );
 
-        $action_detail = ($current->name != $request->input('name')) ? 
-            'Update datas and rename name from '.$current->name.' to '.$request->input('name'): 
+        $action_detail = ($current->name != $request->input('name')) ?
+            'Update datas and rename name from '.$current->name.' to '.$request->input('name'):
             'Update admin '.$current->name;
 
         $admin_log = new Adminlogs();

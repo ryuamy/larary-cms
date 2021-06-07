@@ -20,7 +20,7 @@ class NewstagsController extends Controller
         'title' => 'required|alpha_num_spaces',
         'status' => 'required',
     ];
-    
+
     protected $validationMessages = [
         'title.required' => 'Title can not be empty.',
         'title.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
@@ -51,8 +51,8 @@ class NewstagsController extends Controller
             ],
             'css' => [],
             'js' => [
-                'js/admin/bulk-edit',
-                'js/admin/filter-data'
+                'admin/bulk-edit',
+                'admin/filter-data'
             ],
             'breadcrumb' => [
                 array(
@@ -77,7 +77,7 @@ class NewstagsController extends Controller
         $param_get = isset($_GET) ? $_GET : [];
 
         $datas_list = Tags::whereRaw('status != 2')->whereRaw('status != 2');
-        
+
         //*** Filter
         if(isset($_GET['action'])) {
             if( $_GET['status'] !== 'all' ) {
@@ -107,7 +107,7 @@ class NewstagsController extends Controller
         $sort = (isset($param_get['sort'])) ? strtoupper($param_get['sort']) : 'DESC';
         $datas_list = $datas_list->orderByRaw($order.' '.$sort);
         //*** Sort
-        
+
         $datas['total'] = count($datas_list->get());
 
         $limit = custom_pagination_limit();
@@ -138,13 +138,13 @@ class NewstagsController extends Controller
                 'show_dots' => TRUE
             )
         );
-        
+
         $table_head = [
             'table' => $this->table,
             'head' => [ 'title', 'status', 'created_at', 'updated_at' ],
             'disabled_head' => []
         ];
-        $datas['table_head'] = admin_table_head($table_head);        
+        $datas['table_head'] = admin_table_head($table_head);
         $datas['table_body_colspan'] = count($table_head['head']);
 
         return view('admin.tags.index', $datas);
@@ -250,7 +250,7 @@ class NewstagsController extends Controller
             ],
             'css' => [],
             'js' => [
-                'js/admin/edit-permalink'
+                'admin/edit-permalink'
             ],
             'breadcrumb' => [
                 array(
@@ -318,8 +318,8 @@ class NewstagsController extends Controller
             )
         );
 
-        $action_detail = ($current->name != $request->input('title')) ? 
-            'Update content and rename title from '.$current->name.' to '.$request->input('title'): 
+        $action_detail = ($current->name != $request->input('title')) ?
+            'Update content and rename title from '.$current->name.' to '.$request->input('title'):
             'Update news tags '.$current->name;
 
         $admin_log = new Adminlogs();
