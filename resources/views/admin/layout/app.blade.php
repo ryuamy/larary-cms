@@ -29,7 +29,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<link href="{{ asset('/css/global/metronic_v7.1.2/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('/css/global/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/css/admin/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('/css/global/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
 		<link href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/header/base/light.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/header/menu/light.css') }}" rel="stylesheet" type="text/css" />

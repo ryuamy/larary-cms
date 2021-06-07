@@ -61,7 +61,7 @@
 			var values = $('#kt_login_signin_form').serialize();
 			var login_url = baseUrl + 'ajax/login';
 
-			var bx_alert_message_login = `<div class="alert alert-custom alert-danger show fade" role="alert">
+			var bx_alert_message_login = `<div class="alert alert-custom alert-danger mb-5 show fade" role="alert">
 							<div class="alert-text" id="alert_message_login">
 								You don't have access
 							</div>

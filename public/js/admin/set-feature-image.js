@@ -20,12 +20,12 @@ function reset_feature_image(image_slug) {
 
 (function ($) {
     'use strict';
-    
+
     var baseUrl = $('body').data('baseurl');
 
     $('#set_feature_image').click(function(){
         // alert('boo!');
-        $('#upload_feature_image').trigger('click'); 
+        $('#upload_feature_image').trigger('click');
     })
 
     $('#delete_feature_image').click(function () {
@@ -50,7 +50,7 @@ function reset_feature_image(image_slug) {
                     type: 'POST',
                     data: '_token=' + cToken + '&value=' + value + '&table=' + table,
                     success: function (res) {
-                        $('#preview_feature_img').attr('src', '../img/admin/layout/default-featured-img.png');
+                        $('#preview_feature_img').attr('src', '../media/admin/layout/default-featured-img.png');
                         $('#delete_feature_image').hide();
                         swal.fire({
                             text: 'Image deleted',
@@ -64,7 +64,7 @@ function reset_feature_image(image_slug) {
                         var obj = $.parseJSON(res);
                         console.log(obj);
                     }
-                });                    
+                });
             } else if (result.isDismissed == true) {
                 // Swal.fire('Changes are not saved', '', 'info')
             }

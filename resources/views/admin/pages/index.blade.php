@@ -25,7 +25,7 @@
                     <div class="col-sm-12 col-md-7">
                         <div class="d-flex justify-content-end">
                             {{ view( "admin.layout.export_button" ) }}
-                            
+
                             <button class="btn {{ isset($_GET['action']) ? 'btn-light-success' : 'btn-success' }} mr-2 font-weight-bolder" id="btn-filter" style="padding-left: 9px;">
                                 <span class="svg-icon-md">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" version="1.1">
@@ -36,13 +36,13 @@
                                             />
                                         </g>
                                     </svg>
-                                </span> 
+                                </span>
                             </button>
 
                             <a href="{{ url($admin_url.'/create') }}" class="btn btn-primary font-weight-bolder">
                                 <span class="svg-icon svg-icon-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                        width="23px" height="23px" 
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="23px" height="23px"
                                         viewBox="0 0 23 23" version="1.1"
                                     >
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -52,7 +52,7 @@
                                         </g>
                                     </svg>
                                 </span>
-                                Add 
+                                Add
                             </a>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                 <div class="row mt-3 card card-custom mb-8 w-100 {{ isset($_GET['action']) ? 'd-flex' : 'd-none' }}" id="filter">
                     <div class="card-body">
                         <h3 class="card-label mb-7">
-                            Filter {{ $meta['heading'] }}    
+                            Filter {{ $meta['heading'] }}
                         </h3>
 
                         <form>
@@ -102,7 +102,7 @@
                                 <button type="submit" class="btn btn-success mr-2" name="action" value="search">
                                     <span class="svg-icon svg-icon-md">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            width="24px" height="24px" 
+                                            width="24px" height="24px"
                                             viewBox="0 0 24 24" version="1.1"
                                         >
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -111,7 +111,7 @@
                                                 <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"/>
                                             </g>
                                         </svg>
-                                    </span> 
+                                    </span>
                                     Search
                                 </button>
                                 <a href="{{ url($admin_url) }}" class="btn btn-secondary">
@@ -145,12 +145,12 @@
                                 Showing {{ $pagination['showing_from'] }}
                                 to {{ $pagination['showing_to'] }}
                                 of
-                            <?php } ?> 
+                            <?php } ?>
                             {{ $total }} entries
                         </div>
                     </div>
                 </div>
-            
+
                 @if (Session::has('error-message'))
                     <div class="row">
                         <div class="col-md-12 mb-5 mt-5">
@@ -191,7 +191,7 @@
                                 <?php } ?>
                             </tr>
                         </thead>
-                        
+
                         <tfoot>
                             <tr>
                                 @if( $admindata->role_id == 1)
@@ -231,7 +231,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ $dt['featured_image'] ? $dt['featured_image'] : 'Javascript:;'}}" {{ $dt['featured_image'] ? 'target="_blank"' : '' }}>
-                                                <img src="{{ $dt['featured_image'] ? asset($dt['featured_image']) : asset('/img/admin/layout/no-image-available.png') }}"
+                                                <img src="{{ $dt['featured_image'] ? asset($dt['featured_image']) : asset('/media/admin/layout/no-image-available.png') }}"
                                                     alt="{{ $dt['name'] }}"
                                                     width="80"
                                                 />
@@ -269,7 +269,7 @@
                             </div>
                         <?php } ?>
                     </div>
-                    
+
                     <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-end">
                         <select name="limit" class="w-auto mr-2 form-control form-control-solid form-control-sm page-limit">
                             <option value="20">20</option>
@@ -279,10 +279,10 @@
                         </select>
                         <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
                             <?php if($total != 0) { ?>
-                                Showing {{ $pagination['showing_from'] }} 
-                                to {{ $pagination['showing_to'] }} 
+                                Showing {{ $pagination['showing_from'] }}
+                                to {{ $pagination['showing_to'] }}
                                 of
-                            <?php } ?> 
+                            <?php } ?>
                             {{ $total }} entries
                         </div>
                     </div>
