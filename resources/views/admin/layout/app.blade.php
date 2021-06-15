@@ -16,25 +16,28 @@ License: You must have a valid license purchased only from themeforest(the above
 <html lang="en">
 	<head>
 		<base href="{{ url('/') }}" />
+
 		<meta charset="utf-8" />
-		<title>{{ $meta["title"].get_site_settings('title') }}</title>
 		<meta name="description" content="{{ get_site_settings('description') }}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+		<title>{{ $meta["title"].get_site_settings('title') }}</title>
+
 		<link rel="canonical" href="{{ url('/') }}" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/plugins/global/plugins.bundle.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/style.bundle.css') }}" />
+
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/header/base/light.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/header/menu/light.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/brand/light.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/aside/light.css') }}" />
+
         @foreach ($css as $c)
-		    <link href="{{ asset('/css/'.$c.'.css') }}" rel="stylesheet" type="text/css" />
+		    <link rel="stylesheet" type="text/css" href="{{ asset('/css/'.$c.'.css') }}" />
         @endforeach
-
-		<link href="{{ asset('/css/global/metronic_v7.1.2/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/css/global/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/css/global/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-
-		<link href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/header/base/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/header/menu/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/brand/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css" />
 
 		<link rel="shortcut icon" href="{{ asset('/media/favicon.ico') }}" />
 	</head>
@@ -1501,7 +1504,6 @@ License: You must have a valid license purchased only from themeforest(the above
             //IDEA:
             //REVIEW:
             //NOTES:
-            //Access VS Code JSON Setting: CTRL + SHIFT + P > Open Settings (JSON)
         ?>
 
 	</body>
