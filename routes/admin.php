@@ -57,105 +57,105 @@ Route::prefix('sms')->group(function () {
 });
 
 Route::prefix('pages')->group(function () {
-    Route::get('/', [PagesController::class, 'index'] );
-    Route::get('create', [PagesController::class, 'create'] );
+    Route::get('/', [PagesController::class, 'index'] )->name('adm_pages_index');
+    Route::get('create', [PagesController::class, 'create'] )->name('adm_pages_create');
     Route::get('save', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('save', [PagesController::class, 'save'] );
-    Route::get('detail/{uuid}', [PagesController::class, 'detail'] );
+    Route::post('save', [PagesController::class, 'save'] )->name('adm_pages_save');
+    Route::get('detail/{uuid}', [PagesController::class, 'detail'] )->name('adm_pages_detail');
     Route::get('update/{uuid}', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::get('update', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('update/{uuid}', [PagesController::class, 'update'] );
+    Route::post('update/{uuid}', [PagesController::class, 'update'] )->name('adm_pages_update');
 });
 
 Route::prefix('news')->group(function () {
-    Route::get('/', [NewsController::class, 'index'] );
-    Route::get('create', [NewsController::class, 'create'] );
+    Route::get('/', [NewsController::class, 'index'] )->name('adm_news_index');
+    Route::get('create', [NewsController::class, 'create'] )->name('adm_news_create');
     Route::get('save', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('save', [NewsController::class, 'save'] );
-    Route::get('detail/{uuid}', [NewsController::class, 'detail'] );
+    Route::post('save', [NewsController::class, 'save'] )->name('adm_news_save');
+    Route::get('detail/{uuid}', [NewsController::class, 'detail'] )->name('adm_news_detail');
     Route::get('update/{uuid}', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::get('update', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('update/{uuid}', [NewsController::class, 'update'] );
+    Route::post('update/{uuid}', [NewsController::class, 'update'] )->name('adm_news_update');
 
     Route::prefix('categories')->group(function () {
-        Route::get('/', [NewscategoriesController::class, 'index'] );
-        Route::get('create', [NewscategoriesController::class, 'create'] );
+        Route::get('/', [NewscategoriesController::class, 'index'] )->name('adm_news_categories_index');
+        Route::get('create', [NewscategoriesController::class, 'create'] )->name('adm_news_categories_create');
         Route::get('save', function() {
             return view('errors.404', array('message'=>'404 | Page Not Found!') );
         });
-        Route::post('save', [NewscategoriesController::class, 'save'] );
-        Route::get('detail/{uuid}', [NewscategoriesController::class, 'detail'] );
+        Route::post('save', [NewscategoriesController::class, 'save'] )->name('adm_news_categories_save');
+        Route::get('detail/{uuid}', [NewscategoriesController::class, 'detail'] )->name('adm_news_categories_detail');
         Route::get('update/{uuid}', function() {
             return view('errors.404', array('message'=>'404 | Page Not Found!') );
         });
         Route::get('update', function() {
             return view('errors.404', array('message'=>'404 | Page Not Found!') );
         });
-        Route::post('update/{uuid}', [NewscategoriesController::class, 'update'] );
+        Route::post('update/{uuid}', [NewscategoriesController::class, 'update'] )->name('adm_news_categories_update');
     });
 
     Route::prefix('tags')->group(function () {
-        Route::get('/', [NewstagsController::class, 'index'] );
-        Route::get('create', [NewstagsController::class, 'create'] );
+        Route::get('/', [NewstagsController::class, 'index'] )->name('adm_news_tags_index');
+        Route::get('create', [NewstagsController::class, 'create'] )->name('adm_news_tags_create');
         Route::get('save', function() {
             return view('errors.404', array('message'=>'404 | Page Not Found!') );
         });
-        Route::post('save', [NewstagsController::class, 'save'] );
-        Route::get('detail/{uuid}', [NewstagsController::class, 'detail'] );
+        Route::post('save', [NewstagsController::class, 'save'] )->name('adm_news_tags_save');
+        Route::get('detail/{uuid}', [NewstagsController::class, 'detail'] )->name('adm_news_tags_detail');
         Route::get('update/{uuid}', function() {
             return view('errors.404', array('message'=>'404 | Page Not Found!') );
         });
         Route::get('update', function() {
             return view('errors.404', array('message'=>'404 | Page Not Found!') );
         });
-        Route::post('update/{uuid}', [NewstagsController::class, 'update'] );
+        Route::post('update/{uuid}', [NewstagsController::class, 'update'] )->name('adm_news_tags_update');
     });
 });
 
 Route::prefix('admins')->group(function () {
-    Route::get('/', [AdminsController::class, 'index'] );
-    Route::get('create', [AdminsController::class, 'create'] );
+    Route::get('/', [AdminsController::class, 'index'] )->name('adm_admins_index');
+    Route::get('create', [AdminsController::class, 'create'] )->name('adm_admins_create');
     Route::get('save', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('save', [AdminsController::class, 'save'] );
-    Route::get('detail/{uuid}', [AdminsController::class, 'detail'] );
+    Route::post('save', [AdminsController::class, 'save'] )->name('adm_admins_save');
+    Route::get('detail/{uuid}', [AdminsController::class, 'detail'] )->name('adm_admins_detail');
     Route::get('update/{uuid}', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::get('update', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('update/{uuid}', [AdminsController::class, 'update'] );
+    Route::post('update/{uuid}', [AdminsController::class, 'update'] )->name('adm_admins_update');
 });
 
 Route::prefix('admin-roles')->group(function () {
-    Route::get('/', [AdminrolesController::class, 'index'] );
-    Route::get('create', [AdminrolesController::class, 'create'] );
+    Route::get('/', [AdminrolesController::class, 'index'] )->name('adm_admin_roles_index');
+    Route::get('create', [AdminrolesController::class, 'create'] )->name('adm_admin_roles_create');
     Route::get('save', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('save', [AdminrolesController::class, 'save'] );
-    Route::get('detail/{uuid}', [AdminrolesController::class, 'detail'] );
+    Route::post('save', [AdminrolesController::class, 'save'] )->name('adm_admin_roles_save');
+    Route::get('detail/{uuid}', [AdminrolesController::class, 'detail'] )->name('adm_admin_roles_detail');
     Route::get('update/{uuid}', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::get('update', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('update/{uuid}', [AdminrolesController::class, 'update'] );
+    Route::post('update/{uuid}', [AdminrolesController::class, 'update'] )->name('adm_admin_roles_update');
 });
 
 // for skeleton
