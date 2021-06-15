@@ -22,12 +22,6 @@ if(!function_exists('pre')) {
     }
 }
 
-if(!function_exists('customTanggal')) {
-    function customTanggal($date,$date_format) {
-        // return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format($date_format);
-    }
-}
-
 if(!function_exists('current_uri')) {
     function current_uri() {
         $currentURIPath = url()->current();
@@ -45,21 +39,21 @@ if(!function_exists('admin_uri')) {
     }
 }
 
-if(!function_exists('base_css')) {
-    function base_css() {
-        return asset('/css').'/';
+if(!function_exists('app_css')) {
+    function app_css() {
+        return asset('css').'/';
     }
 }
 
-if(!function_exists('base_js')) {
-    function base_js() {
-        return asset('/js').'/';
+if(!function_exists('app_js')) {
+    function app_js() {
+        return asset('js').'/';
     }
 }
 
-if(!function_exists('base_img')) {
-    function base_img() {
-        return asset('/images').'/';
+if(!function_exists('app_media')) {
+    function app_media() {
+        return asset('media').'/';
     }
 }
 
@@ -76,8 +70,8 @@ if(!function_exists('base_img')) {
  */
 if(!function_exists('get_site_settings')) {
     function get_site_settings($meta_key, $separator='|') {
-        new \Illuminate\Support\Facades\DB;
-        $select = DB::table('settings')
+        $DB = new \Illuminate\Support\Facades\DB;
+        $select = $DB::table('settings')
             ->where('status', 1)
             ->where('meta_key', $meta_key)
             ->orderBy('id', 'desc')
@@ -902,7 +896,7 @@ if(!function_exists('timezone_choice')) {
  */
 if(!function_exists('create_slug')) {
     function create_slug($table, $title, $separator = '-') {
-        new \Illuminate\Support\Facades\DB;
+        $DB = new \Illuminate\Support\Facades\DB;
 
         $slug = strtolower(
             preg_replace(
@@ -912,7 +906,7 @@ if(!function_exists('create_slug')) {
             )
         );
 
-        $check = DB::table($table)
+        $check = $DB::table($table)
             ->where('slug', 'like', '%'.$slug.'%')
             ->get();
 

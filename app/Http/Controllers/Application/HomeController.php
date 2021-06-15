@@ -24,6 +24,26 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $datas = [
+            'meta' => [
+                'title' => 'Home',
+                'heading' => 'Admins Management'
+            ],
+            'css' => [],
+            'js' => [],
+            'breadcrumb' => [],
+        ];
+
+        return view('application.home.index', $datas);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function test()
+    {
         $return = [];
         $sendingstatus = 10;
         switch ($sendingstatus) {
@@ -49,7 +69,5 @@ class HomeController extends Controller
             }
             break;
         }
-
-        return view('home');
     }
 }
