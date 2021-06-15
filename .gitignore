@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 /public/logs
+/public/uploads
 google_credentials.json
 docker-compose.override.yml
 Homestead.json
