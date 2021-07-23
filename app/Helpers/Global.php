@@ -259,10 +259,12 @@ if(!function_exists('custom_pagination_prep')) {
         if($total < $limit) {
             $showing_to = $total;
         }
+
         if($current_page > 1) {
             $showing_from = $showing_to*($current_page-1)+1;
             $showing_to = $showing_to*$current_page;
         }
+
         //kalau udah halaman terakhir, showing_to = total
         if($pages == $current_page) {
             $showing_to = $total;
@@ -302,6 +304,7 @@ if(!function_exists('custom_sort_link')) {
                 unset($params['order']);
                 unset($params['sort']);
             }
+
             foreach($params as $key_par => $par) {
                 $link .= $key_par.'='.$par.'&';
             }
@@ -362,10 +365,12 @@ if(!function_exists('custom_pagination_prep')) {
         if($total < $limit) {
             $showing_to = $total;
         }
+
         if($current_page > 1) {
             $showing_from = $showing_to*($current_page-1)+1;
             $showing_to = $showing_to*$current_page;
         }
+
         //kalau udah halaman terakhir, showing_to = total
         if($pages == $current_page) {
             $showing_to = $total;
@@ -616,6 +621,7 @@ if(!function_exists('get_client_ip')) {
 if(!function_exists('get_client_ip_info')) {
     function get_client_ip_info($ip = '173.252.110.27', $purpose = 'location', $deep_detect = TRUE) {
         $output = NULL;
+
         if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
             $ip = $_SERVER['REMOTE_ADDR'];
             if ($deep_detect) {
@@ -625,8 +631,11 @@ if(!function_exists('get_client_ip_info')) {
                     $ip = $_SERVER['HTTP_CLIENT_IP'];
             }
         }
-        $purpose = str_replace(array('name', '\n', '\t', ' ', '-', '_'), NULL, strtolower(trim($purpose)));
+
+        $purpose = str_replace(array('name', '\n', '\t', ' ', '-', '_'), '', strtolower(trim($purpose)));
+
         $support = array('country', 'countrycode', 'state', 'region', 'city', 'location', 'address');
+
         $continents = array(
             'AF' => 'Africa',
             'AN' => 'Antarctica',
@@ -636,8 +645,10 @@ if(!function_exists('get_client_ip_info')) {
             'NA' => 'North America',
             'SA' => 'South America'
         );
+
         if (filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
             $ipdat = @json_decode(file_get_contents('http://www.geoplugin.net/json.gp?ip='.$ip));
+
             if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
                 switch ($purpose) {
                     case 'location':
@@ -676,6 +687,7 @@ if(!function_exists('get_client_ip_info')) {
                 }
             }
         }
+
         return $output;
     }
 }
@@ -907,7 +919,7 @@ if(!function_exists('create_slug')) {
         );
 
         $check = $DB::table($table)
-            ->where('slug', 'like', '%'.$slug.'%')
+            ->where('slug', 'like', $slug.'%')
             ->get();
 
         if(count($check) > 0) {
@@ -954,6 +966,41 @@ if(!function_exists('clean_string')) {
             '/ /'           =>   ' ', // nonbreaking space (equiv. to 0x160)
         );
         return preg_replace(array_keys($utf8), array_values($utf8), $text);
+    }
+}
+
+/**
+ * Get qiscus authentication token
+ *
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('get_qiscus_token')) {
+    function get_qiscus_token() {
+        $Session = new \Illuminate\Support\Facades\Session;
+        $qiscus_auth = new \Ryuamy\WAQiscus\Authentication();
+
+        // unset($_SESSION['qiscus_auth']);
+
+        if (!session('qiscus_auth')) {
+            $get_token_qiscus = $qiscus_auth->getToken(
+                env('QISCUS_APP_ID'),
+                [ 'email' => env('QISCUS_ACCOUNT_USERNAME'), 'password' => env('QISCUS_ACCOUNT_PASSWORD') ]
+            );
+
+            if( isset($get_token_qiscus->data->user->authentication_token) ) {
+                $qiscus_auth = $get_token_qiscus->data->user->authentication_token;
+                // $_SESSION['qiscus_auth'] = $qiscus_auth;
+                $Session::put('qiscus_auth', $qiscus_auth);
+                // session(['qiscus_auth' => $qiscus_auth]);
+                // $_SESSION['qiscus_start'] = time();
+            }
+        }
+
+        if (!session('qiscus_auth')) {
+            return 'Invalid Qiscus Token';
+        }
+
+        return session('qiscus_auth');
     }
 }
 

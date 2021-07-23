@@ -1497,14 +1497,5 @@ License: You must have a valid license purchased only from themeforest(the above
 			{{ view( 'admin.news.tagify', $datas ) }}
 		@endif
 
-        <?php
-            // Highlight Example:
-            //TODO:
-            //FIXME:
-            //IDEA:
-            //REVIEW:
-            //NOTES:
-        ?>
-
 	</body>
 </html>

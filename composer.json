@@ -21,7 +21,8 @@
         "laravel/ui": "^3.2",
         "maatwebsite/excel": "^3.1",
         "mews/captcha": "^3.2",
-        "mobiledetect/mobiledetectlib": "^2.8"
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "ryuamy/whatsapp-qiscus-php": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
