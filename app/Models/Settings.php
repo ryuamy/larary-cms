@@ -5,26 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Adminroles extends Model
+class Settings extends Model
 {
     use HasFactory;
 
-    protected $table = "admin_roles";
+    protected $table = "settings";
 
     protected $primaryKey = "id";
 
     protected $fillable = [
-        'uuid',
-        'name',
-        'slug',
+        'meta_key',
+        'meta_value',
         'status',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
-    public function admins()
-    {
-        return $this->hasMany(Admins::class);
+    public function logs() {
+        return $this->hasMany(Settinglogs::class);
     }
 
     // List of statuses

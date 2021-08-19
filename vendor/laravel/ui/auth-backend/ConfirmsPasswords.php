@@ -11,31 +11,12 @@ trait ConfirmsPasswords
 
     /**
      * Display the password confirmation view.
-     * Custom Auth UI
      *
      * @return \Illuminate\View\View
      */
     public function showConfirmForm()
     {
-        // return view('auth.passwords.confirm');
-
-        $datas = [
-            'table' => '',
-            'meta' => [
-                'title' => 'Password Confirmation'
-            ],
-            'css' => [],
-            'js' => [],
-            'breadcrumb' => [
-                array(
-                    'title' => 'CMS',
-                    'url' => ''
-                ),
-            ],
-            'data' => [],
-        ];
-
-        return view('application.auth.passwords.confirm', $datas);
+        return view('auth.passwords.confirm');
     }
 
     /**

@@ -7,11 +7,12 @@ use App\Http\Controllers\Admin\AdminrolesController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\NewsController;
-use App\Http\Controllers\Admin\NewscategoriesController;
-use App\Http\Controllers\Admin\NewstagsController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\News\NewsController;
+use App\Http\Controllers\Admin\News\NewscategoriesController;
+use App\Http\Controllers\Admin\News\NewstagsController;
+use App\Http\Controllers\Admin\Settings\GeneralSettingsController;
 
 // Auth::routes();
 
@@ -156,6 +157,14 @@ Route::prefix('admin-roles')->group(function () {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::post('update/{uuid}', [AdminrolesController::class, 'update'] )->name('adm_admin_roles_update');
+});
+
+Route::prefix('settings')->group(function () {
+    Route::get('general', [GeneralSettingsController::class, 'detail'] )->name('adm_settings_general');
+    Route::get('general/update', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    // Route::post('general/save', [GeneralSettingsController::class, 'save'] )->name('adm_settings_general_save');
 });
 
 // for skeleton

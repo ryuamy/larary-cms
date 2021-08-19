@@ -79,7 +79,7 @@ class PagesController extends Controller
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = Pages::whereRaw('status != 2');
+        $datas_list = Pages::where('deleted_at', NULL);
 
         //*** Filter
         if(isset($_GET['action'])) {
@@ -233,7 +233,7 @@ class PagesController extends Controller
         $insert->updated_by = $admin_id;
         $insert->save();
 
-        $new_data = Pages::whereRaw('status != 2')->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
+        $new_data = Pages::where('deleted_at', NULL)->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
 
         $data_log = new Pagelogs();
         $data_log->admin_id = $admin_id;

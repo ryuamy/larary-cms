@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\News;
 
 use App\Http\Controllers\Controller;
 // use App\Http\Requests\PagesRequest;
@@ -80,7 +80,7 @@ class NewsController extends Controller
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = News::whereRaw('status != 2');
+        $datas_list = News::where('deleted_at', NULL);
 
         //*** Filter
         if(isset($_GET['action'])) {
@@ -187,8 +187,8 @@ class NewsController extends Controller
                 'default_status' => Staticdatas::default_status(),
                 'category_tag_type' => Staticdatas::category_tag_type()
             ],
-            'categories' => Categories::whereRaw('status != 2')->get(),
-            'tags' => Tags::whereRaw('status != 2')->get(),
+            'categories' => Categories::where('deleted_at', NULL)->get(),
+            'tags' => Tags::where('deleted_at', NULL)->get(),
         ];
 
         return view('admin.news.form', $datas);
@@ -236,11 +236,11 @@ class NewsController extends Controller
         $insert->updated_by = $admin_id;
         $insert->save();
 
-        $new_data = News::whereRaw('status != 2')->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
+        $new_data = News::where('deleted_at', NULL)->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
 
         if(!empty($request->input('tags'))) {
             foreach($request->input('tags') as $tags) {
-                $tag_data = Tags::whereRaw('status != 2')->whereRaw('name = "'.$tags['value'].'"')->first();
+                $tag_data = Tags::where('deleted_at', NULL)->whereRaw('name = "'.$tags['value'].'"')->first();
 
                 $data_tag = new Newstags();
                 $data_tag->tag_id = $tag_data->id;
@@ -262,7 +262,7 @@ class NewsController extends Controller
 
         if(!empty($request->input('categories'))) {
             foreach($request->input('categories') as $categories) {
-                $category_data = Categories::whereRaw('status != 2')->whereRaw('name = "'.$categories['value'].'"')->first();
+                $category_data = Categories::where('deleted_at', NULL)->whereRaw('name = "'.$categories['value'].'"')->first();
 
                 $data_category = new Newscategories();
                 $data_category->category_id = $category_data->id;
@@ -418,7 +418,7 @@ class NewsController extends Controller
             $data_log->save();
 
             foreach($request->input('tags') as $tags) {
-                $tag_data = Tags::whereRaw('status != 2')->whereRaw('name = "'.$tags['value'].'"')->first();
+                $tag_data = Tags::where('deleted_at', NULL)->whereRaw('name = "'.$tags['value'].'"')->first();
 
                 $data_tag = new Newstags();
                 $data_tag->tag_id = $tag_data->id;
@@ -450,7 +450,7 @@ class NewsController extends Controller
             $data_log->save();
 
             foreach($request->input('categories') as $categories) {
-                $category_data = Categories::whereRaw('status != 2')->whereRaw('name = "'.$categories['value'].'"')->first();
+                $category_data = Categories::where('deleted_at', NULL)->whereRaw('name = "'.$categories['value'].'"')->first();
 
                 $data_category = new Newscategories();
                 $data_category->category_id = $category_data->id;

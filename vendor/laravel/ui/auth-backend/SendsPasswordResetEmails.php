@@ -11,31 +11,12 @@ trait SendsPasswordResetEmails
 {
     /**
      * Display the form to request a password reset link.
-     * Custom Auth UI
      *
      * @return \Illuminate\View\View
      */
     public function showLinkRequestForm()
     {
-        // return view('auth.passwords.email');
-
-        $datas = [
-            'table' => '',
-            'meta' => [
-                'title' => 'Reset Password'
-            ],
-            'css' => [],
-            'js' => [],
-            'breadcrumb' => [
-                array(
-                    'title' => 'CMS',
-                    'url' => ''
-                ),
-            ],
-            'data' => [],
-        ];
-
-        return view('application.auth.passwords.email', $datas);
+        return view('auth.passwords.email');
     }
 
     /**

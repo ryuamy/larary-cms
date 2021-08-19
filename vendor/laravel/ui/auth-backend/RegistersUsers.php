@@ -13,31 +13,12 @@ trait RegistersUsers
 
     /**
      * Show the application registration form.
-     * Custom Auth UI
      *
      * @return \Illuminate\View\View
      */
     public function showRegistrationForm()
     {
-        // return view('auth.register');
-
-        $datas = [
-            'table' => '',
-            'meta' => [
-                'title' => 'Register'
-            ],
-            'css' => [],
-            'js' => [],
-            'breadcrumb' => [
-                array(
-                    'title' => 'CMS',
-                    'url' => ''
-                ),
-            ],
-            'data' => [],
-        ];
-
-        return view('application.auth.register', $datas);
+        return view('auth.register');
     }
 
     /**

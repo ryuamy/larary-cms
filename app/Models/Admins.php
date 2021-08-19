@@ -61,5 +61,4 @@ class Admins extends Authenticatable
     // List of statuses
     const IS_INACTIVE = 0;
     const IS_ACTIVE = 1;
-    const IS_DELETED = 2;
 }

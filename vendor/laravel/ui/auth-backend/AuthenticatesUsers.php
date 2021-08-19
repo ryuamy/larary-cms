@@ -13,31 +13,12 @@ trait AuthenticatesUsers
 
     /**
      * Show the application's login form.
-     * Custom Auth UI
      *
      * @return \Illuminate\View\View
      */
     public function showLoginForm()
     {
-        // return view('auth.login');
-
-        $datas = [
-            'table' => '',
-            'meta' => [
-                'title' => 'Login'
-            ],
-            'css' => [],
-            'js' => [],
-            'breadcrumb' => [
-                array(
-                    'title' => 'CMS',
-                    'url' => ''
-                ),
-            ],
-            'data' => [],
-        ];
-
-        return view('application.auth.login', $datas);
+        return view('auth.login');
     }
 
     /**

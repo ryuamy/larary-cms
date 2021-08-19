@@ -85,6 +85,7 @@
 							// console.log(response);
 							// console.log(textStatus);
 							// console.log(request);
+                            _reloadCaptcha();
 							swal.fire({
 								text: 'Success login',
 								icon: 'success',
@@ -107,11 +108,13 @@
 							// console.log(response);
 							// console.log(textStatus);
 							// console.log(request);
+                            _reloadCaptcha();
 							$('#bx_alert_message_login').html(bx_alert_message_login);
 							$('#alert_message_login').html(response.responseJSON.message);
 						}
 					});
 				} else {
+                    _reloadCaptcha();
 					swal.fire({
 						text: 'Sorry, looks like there are some errors detected, please try again.',
 						icon: 'error',
@@ -126,18 +129,22 @@
 				}
 			});
 		});
-
-		$('#reload').click(function () {
-			$('.captcha span').html('loading new captcha...');
-			$.ajax({
-				type: 'GET',
-				url: baseUrl + 'ajax/reload-captcha',
-				success: function (data) {
-					$('.captcha span').html(data.captcha);
-				}
-			});
-		});
 	}
+
+    function _reloadCaptcha() {
+        $('.captcha span').html('loading new captcha...');
+        $.ajax({
+            type: 'GET',
+            url: baseUrl + 'ajax/reload-captcha',
+            success: function (data) {
+                $('.captcha span').html(data.captcha);
+            }
+        });
+    }
+
+    $('#reload').click(function () {
+        _reloadCaptcha();
+    });
 
 	_handleSignInForm();
 

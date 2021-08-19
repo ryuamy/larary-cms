@@ -72,12 +72,12 @@ class AdminsController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_roles' => Adminroles::whereRaw('status != 2')->get()
+            'admin_roles' => Adminroles::where('deleted_at', NULL)->get()
         ];
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = Admins::whereRaw('status != 2');
+        $datas_list = Admins::where('deleted_at', NULL);
 
         //*** Filter
         if(isset($_GET['action'])) {
@@ -177,7 +177,7 @@ class AdminsController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_roles' => Adminroles::whereRaw('status != 2')->get()
+            'admin_roles' => Adminroles::where('deleted_at', NULL)->get()
         ];
 
         return view('admin.admins.form', $datas);
@@ -218,7 +218,7 @@ class AdminsController extends Controller
         $insert->updated_by = $admin_id;
         $insert->save();
 
-        $new_data = Admins::whereRaw('status != 2')->whereRaw('name = "'.$request->input('name').'"')->orderByRaw('id desc')->first();
+        $new_data = Admins::where('deleted_at', NULL)->whereRaw('name = "'.$request->input('name').'"')->orderByRaw('id desc')->first();
 
         $admin_log = new Adminlogs();
         $admin_log->admin_id = $admin_id;
@@ -274,7 +274,7 @@ class AdminsController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_roles' => Adminroles::whereRaw('status != 2')->get()
+            'admin_roles' => Adminroles::where('deleted_at', NULL)->get()
         ];
 
         return view('admin.admins.form', $datas);

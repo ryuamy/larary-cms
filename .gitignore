@@ -1,7 +1,11 @@
 /.notes
+/copyfile
+/database/seeders/AdminsSeeder.php
 /node_modules
 /public/hot
+/public/logs
 /public/storage
+/public/uploads
 /storage/*.key
 #/vendor
 vendor/*
@@ -16,8 +20,6 @@ vendor/laravel/ui/auth-backend/*
 !vendor/laravel/ui/auth-backend/RegistersUsers.php
 !vendor/laravel/ui/auth-backend/ResetsPasswords.php
 !vendor/laravel/ui/auth-backend/SendsPasswordResetEmails.php
-/public/logs
-/public/uploads
 google_credentials.json
 docker-compose.override.yml
 Homestead.json

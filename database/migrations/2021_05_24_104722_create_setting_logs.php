@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingsLogs extends Migration
+class CreateSettingLogs extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateSettingsLogs extends Migration
      */
     public function up()
     {
-        Schema::create('settings_logs', function (Blueprint $table) {
+        Schema::create('setting_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('admin_id')->index();
             $table->integer('setting_id')->index();
@@ -23,6 +23,7 @@ class CreateSettingsLogs extends Migration
             $table->string('ipaddress', 255);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->softDeletes();
         });
     }
 
@@ -33,6 +34,6 @@ class CreateSettingsLogs extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings_logs');
+        Schema::dropIfExists('setting_logs');
     }
 }

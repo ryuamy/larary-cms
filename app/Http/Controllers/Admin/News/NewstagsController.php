@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\News;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admins;
 use App\Models\Adminlogs;
-use App\Models\Categories;
 use App\Models\Staticdatas;
+use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class NewscategoriesController extends Controller
+class NewstagsController extends Controller
 {
     protected $validationRules = [
         'title' => 'required|alpha_num_spaces',
@@ -36,7 +36,7 @@ class NewscategoriesController extends Controller
     {
         $this->middleware('auth:admin');
         $this->admin = Auth::guard('admin')->user();
-        $this->table = 'categories';
+        $this->table = 'tags';
         $this->admin_url = admin_uri().'news/'.$this->table;
     }
 
@@ -46,8 +46,8 @@ class NewscategoriesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title' => 'CMS News Categories',
-                'heading' => 'News Categories Management'
+                'title' => 'CMS News Tags',
+                'heading' => 'News Tags Management'
             ],
             'css' => [],
             'js' => [
@@ -64,7 +64,7 @@ class NewscategoriesController extends Controller
                     'url' => 'news'
                 ),
                 array(
-                    'title' => 'Categories',
+                    'title' => 'Tags',
                     'url' => 'news/'.$this->table
                 ),
             ],
@@ -76,7 +76,7 @@ class NewscategoriesController extends Controller
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = Categories::whereRaw('status != 2')->whereRaw('status != 2');
+        $datas_list = Tags::where('deleted_at', NULL);
 
         //*** Filter
         if(isset($_GET['action'])) {
@@ -147,7 +147,7 @@ class NewscategoriesController extends Controller
         $datas['table_head'] = admin_table_head($table_head);
         $datas['table_body_colspan'] = count($table_head['head']);
 
-        return view('admin.categories.index', $datas);
+        return view('admin.tags.index', $datas);
     }
 
     public function create()
@@ -156,8 +156,8 @@ class NewscategoriesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title' => 'Create News Category',
-                'heading' => 'News Categories Management'
+                'title' => 'Create News Tag',
+                'heading' => 'News Tags Management'
             ],
             'css' => [],
             'js' => [],
@@ -171,11 +171,11 @@ class NewscategoriesController extends Controller
                     'url' => 'news'
                 ),
                 array(
-                    'title' => 'Category',
+                    'title' => 'Tag',
                     'url' => 'news/'.$this->table
                 ),
                 array(
-                    'title' => 'Create News Category',
+                    'title' => 'Create News Tag',
                     'url' => 'news/'.$this->table.'/create'
                 ),
             ],
@@ -186,7 +186,7 @@ class NewscategoriesController extends Controller
             ],
         ];
 
-        return view('admin.categories.form', $datas);
+        return view('admin.tags.form', $datas);
     }
 
     public function save(Request $request)
@@ -205,7 +205,7 @@ class NewscategoriesController extends Controller
 
         $slug = create_slug($this->table, $request->input('title'));
 
-        $insert = new Categories();
+        $insert = new Tags();
         $insert->uuid = (string) Str::uuid();
         $insert->name = $request->input('title');
         $insert->slug = $slug;
@@ -215,25 +215,25 @@ class NewscategoriesController extends Controller
         $insert->updated_by = $admin_id;
         $insert->save();
 
-        $new_data = Categories::whereRaw('status != 2')->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
+        $new_data = Tags::where('deleted_at', NULL)->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
 
         $admin_log = new Adminlogs();
         $admin_log->admin_id = $admin_id;
         $admin_log->table = strtoupper($this->table);
         $admin_log->table_id = $new_data->id;
         $admin_log->action = 'INSERT';
-        $admin_log->action_detail = 'Create news categories with title '.$new_data->name;
+        $admin_log->action_detail = 'Create news tags with title '.$new_data->name;
         $admin_log->ipaddress = get_client_ip();
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
-            'success-message' => 'Success add news categories.'
+            'success-message' => 'Success add news tags.'
         ]);
     }
 
     public function detail($uuid)
     {
-        $current = Categories::where('uuid', $uuid)->whereRaw('type = 1')->first();
+        $current = Tags::where('uuid', $uuid)->whereRaw('type = 1')->first();
 
         if(!$current) {
             return redirect($this->admin_url)->with([
@@ -245,8 +245,8 @@ class NewscategoriesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title' => 'Detail '.$current['name'].' News Category',
-                'heading' => 'News Categories Management'
+                'title' => 'Detail '.$current['name'].' News Tag',
+                'heading' => 'News Tags Management'
             ],
             'css' => [],
             'js' => [
@@ -262,11 +262,11 @@ class NewscategoriesController extends Controller
                     'url' => 'news'
                 ),
                 array(
-                    'title' => 'Category',
+                    'title' => 'Tag',
                     'url' => 'news/'.$this->table
                 ),
                 array(
-                    'title' => 'Detail News Category',
+                    'title' => 'Detail News Tag',
                     'url' => 'news/'.$this->table.'/detail/'.$uuid
                 ),
             ],
@@ -278,12 +278,12 @@ class NewscategoriesController extends Controller
             ],
         ];
 
-        return view('admin.categories.form', $datas);
+        return view('admin.tags.form', $datas);
     }
 
     public function update($uuid, Request $request)
     {
-        $current = Categories::where('uuid', $uuid)->whereRaw('type = 1')->first();
+        $current = Tags::where('uuid', $uuid)->whereRaw('type = 1')->first();
 
         if(!$current) {
             return redirect($this->admin_url)->with([
@@ -309,7 +309,7 @@ class NewscategoriesController extends Controller
 
         $slug = ($request->input('permalink') != $current->slug) ? create_slug($this->table, $request->input('permalink')) : $request->input('permalink');
 
-        Categories::where('uuid', $uuid)->update(
+        Tags::where('uuid', $uuid)->update(
             array(
                 'name' => $request->input('title'),
                 'slug' => $slug,
@@ -320,7 +320,7 @@ class NewscategoriesController extends Controller
 
         $action_detail = ($current->name != $request->input('title')) ?
             'Update content and rename title from '.$current->name.' to '.$request->input('title'):
-            'Update news categories '.$current->name;
+            'Update news tags '.$current->name;
 
         $admin_log = new Adminlogs();
         $admin_log->admin_id = $admin_id;
@@ -332,7 +332,7 @@ class NewscategoriesController extends Controller
         $admin_log->save();
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([
-            'success-message' => 'Success update news categories.'
+            'success-message' => 'Success update news tags.'
         ]);
     }
 }
