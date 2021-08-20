@@ -47,7 +47,6 @@ class Staticdatas extends Model
         $list = [];
         $list[0] = 'Inactive';
         $list[1] = 'Active';
-        $list[2] = 'Deleted';
 
         return $list;
     }
@@ -76,6 +75,27 @@ class Staticdatas extends Model
         $list[9] = 'CII';
         $list[10] = 'D';
         $list[11] = 'DI';
+
+        return $list;
+    }
+
+    //because we dont have this table, and not sure should I create one?
+    public static function date_format() {
+        $list = [];
+        $list[1] = 'F j, Y';
+        $list[2] = 'Y-m-d';
+        $list[3] = 'm/d/Y';
+        $list[4] = 'd/m/Y';
+
+        return $list;
+    }
+
+    //because we dont have this table, and not sure should I create one?
+    public static function time_format() {
+        $list = [];
+        $list[1] = 'g:i a';
+        $list[2] = 'g:i A';
+        $list[3] = 'H:i';
 
         return $list;
     }

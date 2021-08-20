@@ -39,6 +39,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		    <link rel="stylesheet" type="text/css" href="{{ asset('/css/'.$c.'.css') }}" />
         @endforeach
 
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/admin/admin.css') }}" />
+
 		<link rel="shortcut icon" href="{{ asset('/media/favicon.ico') }}" />
 	</head>
 
@@ -832,7 +834,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<span class="text-muted font-weight-bold mr-2">
 									2020&copy;
 								</span>
-								Kejagung (themes by <a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">Keenthemes</a>)
+								{{ env('APP_NAME') }} (themes by <a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">Keenthemes</a>)
 							</div>
 
 							<div class="nav nav-dark">

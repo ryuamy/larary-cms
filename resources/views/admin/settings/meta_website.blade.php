@@ -16,6 +16,9 @@
                 <button type="submit" class="btn btn-success mr-2">
                     <i class="fas fa-save"></i> Save
                 </button>
+                <a class="btn btn-dark" href="{{ $admin_url }}">
+                    Cancel
+                </a>
             </div>
 
             @if (Session::has('success-message'))
@@ -93,6 +96,14 @@
 
                         <div class="form-group">
                             <label>
+                                Focus Keyphrase
+                                <span class="text-danger">*</span>
+                            </label>
+                            <textarea name="focus_keyphrase" class="form-control">{{ isset($request['focus_keyphrase']) ? $request['focus_keyphrase'] : $settings['focus_keyphrase'] }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
                                 Admin Pagination Limit
                                 <span class="text-danger">*</span>
                             </label>
@@ -153,12 +164,12 @@
                             </div>
                         </div>
 
-                        <div class="form-group d-none">
+                        <div class="form-group">
                             <label>
                                 Week Starts On
                                 <span class="text-danger">*</span>
                             </label>
-                            <select name="start_of_week" readonly class="form-control select2_infinity">
+                            <select name="start_of_week" disabled class="form-control select2_infinity">
                                 <option value="0">Sunday</option>
                                 <option value="1" selected="selected">Monday</option>
                                 <option value="2">Tuesday</option>

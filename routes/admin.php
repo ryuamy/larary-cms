@@ -164,7 +164,7 @@ Route::prefix('settings')->group(function () {
     Route::get('general/update', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    // Route::post('general/save', [GeneralSettingsController::class, 'save'] )->name('adm_settings_general_save');
+    Route::post('general/update', [GeneralSettingsController::class, 'update'] )->name('adm_settings_general_update');
 });
 
 // for skeleton

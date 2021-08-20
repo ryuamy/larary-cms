@@ -61,6 +61,11 @@ class SettingsSeeder extends Seeder
                 'meta_value' => 'id_ID',
                 'status' => '1',
             ],
+            [
+                'meta_key' => 'start_of_week',
+                'meta_value' => '1',
+                'status' => '1',
+            ],
         ];
 
         foreach($datas as $data)

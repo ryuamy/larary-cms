@@ -1,0 +1,9 @@
+.datetime_format label i {
+    font-size: inherit;
+    font-style: normal;
+    color: #3F4254;
+    display: flex;
+    margin-left: 7px;
+    justify-content: space-between;
+    width: 14em;
+}
