@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Application\HomeController;
+use App\Http\Controllers\Application\SitemapController;
 use App\Http\Controllers\OAuthController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'] );
+Route::get('/sitemap.xml', [SitemapController::class, 'sitemap'] );
 
 Route::get('test', [HomeController::class, 'test'] );
 
