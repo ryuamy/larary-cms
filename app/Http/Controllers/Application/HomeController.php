@@ -27,7 +27,7 @@ class HomeController extends Controller
         $datas = [
             'meta' => [
                 'title' => 'Home',
-                'heading' => 'Admins Management'
+                'description' => '',
             ],
             'css' => [],
             'js' => [],

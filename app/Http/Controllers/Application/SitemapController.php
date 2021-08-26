@@ -20,7 +20,6 @@ class SitemapController extends Controller
     {
         $datas = [];
         $datas['pages'] = Pages::where('deleted_at', NULL)->orderBy('updated_at', 'DESC')->get();
-        // return view('admin.pages.index', $datas);
         return response()->view('application.sitemap', $datas)->header('Content-Type', 'text/xml');
     }
 

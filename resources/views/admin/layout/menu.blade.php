@@ -36,8 +36,8 @@
         </a>
     </li>
 
-    <li class="menu-item menu-item-submenu {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' ? 'menu-item-active menu-item-open' : '' }} 
-        {{ isset($cur_uri[5]) && ($cur_uri[5] === 'news' || $cur_uri[5] === 'categories' || $cur_uri[5] === 'tags') ? 'menu-item-open' : '' }} " 
+    <li class="menu-item menu-item-submenu {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' ? 'menu-item-active menu-item-open' : '' }}
+        {{ isset($cur_uri[5]) && ($cur_uri[5] === 'news' || $cur_uri[5] === 'categories' || $cur_uri[5] === 'tags') ? 'menu-item-open' : '' }} "
         aria-haspopup="true" data-menu-toggle="hover">
         <a href="Javascript:;" class="menu-link menu-toggle">
             <span class="svg-icon menu-icon">
@@ -299,9 +299,9 @@
         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
     </li>
 
-    <li class="menu-item menu-item-submenu 
+    <li class="menu-item menu-item-submenu
             {{ isset($cur_uri[4]) && $cur_uri[4] === 'settings' ? 'menu-item-here' : '' }}
-            {{ isset($cur_uri[5]) && ($cur_uri[5] === 'general' || $cur_uri[5] === 'meta-website' || $cur_uri[5] === 'file-upload') ? 'menu-item-open' : '' }}
+            {{ isset($cur_uri[5]) && ($cur_uri[5] === 'general' || $cur_uri[5] === 'seo' || $cur_uri[5] === 'file-upload') ? 'menu-item-open' : '' }}
         " aria-haspopup="true" data-menu-toggle="hover"
     >
         <a href="javascript:;" class="menu-link menu-toggle">
@@ -325,12 +325,12 @@
                         <span class="menu-text">General Settings</span>
                     </a>
                 </li>
-                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'meta-website' ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                    <a href="{{ url(admin_uri().'settings/meta-website') }}" class="menu-link">
+                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'seo' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="{{ url(admin_uri().'settings/seo') }}" class="menu-link">
                         <i class="menu-bullet menu-bullet-dot">
                             <span></span>
                         </i>
-                        <span class="menu-text">Meta Website</span>
+                        <span class="menu-text">SEO Website</span>
                     </a>
                 </li>
                 <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'file-upload' ? 'menu-item-active' : '' }}" aria-haspopup="true">

@@ -3,24 +3,14 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
-// use App\Http\Requests\PagesRequest;
-// use App\Models\Admins;
 use App\Models\Adminlogs;
-// use App\Models\Categories;
-// use App\Models\News;
-// use App\Models\Newscategories;
-// use App\Models\Newslogs;
-// use App\Models\Newstags;
-// use App\Models\Tags;
 use App\Models\Settings;
 use App\Models\Settinglogs;
 use App\Models\Staticdatas;
 use App\Rules\MaxWordsRule;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class GeneralSettingsController extends Controller

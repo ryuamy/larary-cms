@@ -7,16 +7,16 @@
  *
  * @param array $array
  *
- * @return boolean $exist_flag
+ * @return boolean $is_exit
  *
  * @author Amy <laksmise@gmail.com>
  */
 if(!function_exists('pre')) {
-    function pre($array, $exist_flag = true) {
+    function pre($array, $is_exit = true) {
         echo '<pre>';
         print_r($array);
         echo '</pre>';
-        if($exist_flag === true) {
+        if($is_exit === true) {
             exit;
         }
     }
@@ -60,10 +60,9 @@ if(!function_exists('app_media')) {
 /**
  * Get site settings
  *
- * @param string $meta_value
- * @param string $separator    separator, default is "|"
+ * @param string $meta_key
  *
- * @return string
+ * @return string $meta_value
  *
  * @author Amy <laksmise@gmail.com>
  *
@@ -83,6 +82,7 @@ if(!function_exists('get_site_settings')) {
 
 /**
  * Check is current browser is mobile device or desktop
+ * copyright: serbanghita (https://github.com/serbanghita/Mobile-Detect/)
  */
 if(!function_exists('is_mobile')) {
     function is_mobile() {
@@ -482,11 +482,11 @@ if(!function_exists('create_uploads_folder')) {
     function create_uploads_folder() {
         $year_folder = './uploads/'.date('Y');
         if (!file_exists($year_folder)) {
-            mkdir($year_folder, 0777);
+            mkdir($year_folder, 0755);
         }
         $month_folder = $year_folder.'/'.date('m');
         if (!file_exists($month_folder)) {
-            mkdir($month_folder, 0777);
+            mkdir($month_folder, 0755);
         }
         $path = str_replace('./', '', $month_folder); //'uploads/'.date('Y').'/'.date('m');
         return $path;
@@ -508,17 +508,17 @@ if(!function_exists('create_log')) {
         if(env('APP_CREATE_LOG_FILE') === true) {
             $foldername = './logs/'.$foldername;
             if (!file_exists($foldername)) {
-                mkdir($foldername, 0777);
+                mkdir($foldername, 0755);
             }
 
             $year_folder = $foldername.'/'.date('Y');
             if (!file_exists($year_folder)) {
-                mkdir($year_folder, 0777);
+                mkdir($year_folder, 0755);
             }
 
             $month_folder = $year_folder.'/'.date('m');
             if (!file_exists($month_folder)) {
-                mkdir($month_folder, 0777);
+                mkdir($month_folder, 0755);
             }
 
             $path = str_replace('./', '', $month_folder); //'logs/'.$foldername.'/'.date('Y').'/'.date('m');
@@ -554,7 +554,7 @@ if(!function_exists('create_translation_file')) {
         // $foldername = './resources/lang/'.$language_code;
         // // echo $foldername; exit;
         // if (!file_exists($foldername)) {
-        //     mkdir($foldername, 0777, true);
+        //     mkdir($foldername, 0755, true);
         // }
 
         // $translation_files = [
@@ -606,7 +606,8 @@ if(!function_exists('get_client_ip')) {
         else if(getenv('REMOTE_ADDR'))
             $ipaddress = getenv('REMOTE_ADDR');
         else
-            $ipaddress = 'UNKNOWN';
+            // $ipaddress = 'UNKNOWN';
+            $ipaddress = '127.0.0.1';
         return $ipaddress;
     }
 }
@@ -702,8 +703,8 @@ if(!function_exists('get_client_ip_info')) {
 if(!function_exists('get_client_locale')) {
     function get_client_locale() {
         $ip = get_client_ip();
-        if($ip == 'UNKNOWN') {
-            $ip = '173.252.110.27';
+        if($ip == '127.0.0.1') {
+            $ip = '127.0.0.1';
         }
         return get_client_ip_info($ip, 'Country Code');
     }
@@ -900,9 +901,10 @@ if(!function_exists('timezone_choice')) {
  * Create slug
  *
  * @param string $table
+ * @param string $title
+ * @param string $separator
  *
- * @return string $title
- * @return string $separator
+ * @return string $slug
  *
  * @author Amy <laksmise@gmail.com>
  */

@@ -147,7 +147,7 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <img src="{{ isset($current['featured_image']) && $current['featured_image'] ? asset($current['featured_image']) : asset('/mediaphp /admin/layout/default-featured-img.png') }}"
+                        <img src="{{ isset($current['featured_image']) && $current['featured_image'] ? asset($current['featured_image']) : asset('/media/admin/layout/default-featured-img.png') }}"
                             alt="Preview Image"
                             title="Preview Image"
                             style="width: 100%; margin-bottom: 2rem"

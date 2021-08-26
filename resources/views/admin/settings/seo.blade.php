@@ -6,7 +6,7 @@
     $cur_uri = current_uri();
     $request = Session::get('request') ? Session::get('request') : array();
     $current_route = \Route::currentRouteName();
-    $action_url = $admin_url.'/general/update';
+    $action_url = $admin_url.'/seo/update';
 ?>
 
 <div class="d-flex flex-column-fluid">
@@ -65,10 +65,13 @@
 
             <div class="col-md-12">
                 <div class="card card-custom mb-8">
+                    <div class="card-header">
+                        <h3 class="card-title">Meta Website</h3>
+                    </div>
                     <div class="card-body">
                         <div class="form-group">
                             <label>
-                                Description
+                                Meta description
                                 <span class="text-danger">*</span>
                             </label>
                             <textarea name="description" class="form-control">{{ isset($request['description']) ? $request['description'] : $settings['description'] }}</textarea>
@@ -80,28 +83,70 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <textarea name="focus_keyphrase" class="form-control">{{ isset($request['focus_keyphrase']) ? $request['focus_keyphrase'] : $settings['focus_keyphrase'] }}</textarea>
+                            <span class="form-text text-muted">
+                                Focus keyphrase must be included in description.
+                            </span>
                         </div>
 
                         <div class="form-group">
                             <label>
-                                Admin Pagination Limit
-                                <span class="text-danger">*</span>
+                                Search Engine Visibility
                             </label>
-                            <input type="number" min="10" name="admin_pagination_limit" class="form-control"
-                                value="{{ isset($request['admin_pagination_limit']) ? $request['admin_pagination_limit'] : $settings['admin_pagination_limit'] }}"
+                            <div class="checkbox-list">
+                                <label class="checkbox">
+                                    <input type="checkbox" value="1" {{ (isset($request['search_engine_visibility']) && $request['search_engine_visibility'] == 1) || $settings['search_engine_visibility'] == 1 ? 'checked' : '' }} name="search_engine_visibility">
+                                    <span></span>Discourage search engines from indexing this site
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card card-custom mb-8">
+                    <div class="card-header">
+                        <h3 class="card-title">Webmaster Tools</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>
+                                Google Verification Code
+                            </label>
+                            <input type="text" name="google_verification_code" class="form-control"
+                                value="{{ isset($request['google_verification_code']) ? $request['google_verification_code'] : $settings['google_verification_code'] }}"
                             />
+                            <span class="form-text text-muted">
+                                This field is required if "Search Engine Visibility" field is checked.
+                            </span>
+                            <span class="form-text text-muted">
+                                Get your Google verification code in
+                                <a href="https://www.google.com/webmasters/verification/verification?hl=en&tid=alternate&siteUrl={{ env('APP_URL') }}">Google Search Console</a>.
+                            </span>
                         </div>
 
                         <div class="form-group">
                             <label>
-                                Timezone
-                                <span class="text-danger">*</span>
+                                Bing Verification Code
                             </label>
-                            <select class="form-control select2" name="timezone">
-                                <?php echo $timezone_choice; ?>
-                            </select>
+                            <input type="text" name="bing_verification_code" class="form-control"
+                                value="{{ isset($request['bing_verification_code']) ? $request['bing_verification_code'] : $settings['bing_verification_code'] }}"
+                            />
+                            <span class="form-text text-muted">
+                                Get your Bing verification code in
+                                <a href="https://www.bing.com/toolbox/webmaster/#/Dashboard/?url={{ env('APP_URL') }}">Bing Webmaster Tools</a>.
+                            </span>
                         </div>
 
+                    </div>
+                </div>
+
+                <div class="card card-custom mb-8">
+                    <div class="card-header">
+                        <h3 class="card-title">Schema</h3>
+                        {{-- https://schema.org/ --}}
+                    </div>
+                    <div class="card-body">
+                        <p>Coming Soon...</p>
                     </div>
                 </div>
             </div>

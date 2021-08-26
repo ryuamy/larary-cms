@@ -11,14 +11,19 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'] );
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::get('/sitemap.xml', [SitemapController::class, 'sitemap'] );
+
+Route::get('/oauth2callback', [OAuthController::class, 'index'])->name('oauth');
+
 
 Route::get('test', [HomeController::class, 'test'] );
 
 /** phpinfo */
-Route::get( 'phpinfo', function() {
-    return phpinfo();
-});
+// Route::get( 'phpinfo', function() {
+//     return phpinfo();
+// });
 
 /** clear cache on shared hosting */
 Route::get( '/route-cache', function() {
@@ -37,7 +42,3 @@ Route::get( '/view-cache', function() {
     Artisan::call('view:cache');
     return view( 'clearcache.main', array('message'=>'View cache cleared!') );
 });
-
-Route::get('/oauth2callback', [OAuthController::class, 'index'])->name('oauth');
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');

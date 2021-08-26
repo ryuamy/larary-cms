@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\News\NewsController;
 use App\Http\Controllers\Admin\News\NewscategoriesController;
 use App\Http\Controllers\Admin\News\NewstagsController;
 use App\Http\Controllers\Admin\Settings\GeneralSettingsController;
-use App\Http\Controllers\Admin\Settings\MetaSettingsController;
+use App\Http\Controllers\Admin\Settings\SeoSettingsController;
 
 // Auth::routes();
 
@@ -167,11 +167,11 @@ Route::prefix('settings')->group(function () {
     });
     Route::post('general/update', [GeneralSettingsController::class, 'update'] )->name('adm_settings_general_update');
 
-    Route::get('meta-website', [MetaSettingsController::class, 'detail'] )->name('adm_settings_general');
-    Route::get('meta-website/update', function() {
+    Route::get('seo', [SeoSettingsController::class, 'detail'] )->name('adm_seo');
+    Route::get('seo/update', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('meta-website/update', [MetaSettingsController::class, 'update'] )->name('adm_settings_general_update');
+    Route::post('seo/update', [SeoSettingsController::class, 'update'] )->name('adm_sseo_update');
 });
 
 // for skeleton
