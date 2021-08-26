@@ -32,44 +32,44 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultstringLength(191);
 
         //Custom validation rule.
-        Validator::extend('idn_phone_number', function($attribute, $value) {
-            return preg_match('/^(^\+62\s?|^0)(\d{2,4}-?){2}\d{3,5}$/', $value);
-        }, 'The :attribute invalid Indonesia phone number.');
+        // Validator::extend('idn_phone_number', function($attribute, $value) {
+        //     return preg_match('/^(^\+62\s?|^0)(\d{2,4}-?){2}\d{3,5}$/', $value);
+        // }, 'The :attribute invalid Indonesia phone number.');
 
-        Validator::extend("idn_address", function($attribute, $value) {
-            return preg_match('/^[a-zA-Z0-9-_,.\s]*$/', $value);
-        }, 'The :attribute invalid Indonesia address.');
+        // Validator::extend("idn_address", function($attribute, $value) {
+        //     return preg_match('/^[a-zA-Z0-9-_,.\s]*$/', $value);
+        // }, 'The :attribute invalid Indonesia address.');
 
-        Validator::extend('idn_identity_number', function($attribute, $value, $validator) {
-            //make sure to run IndonesiaProvinces and Indonesia Cities Seeder first
-            $split_value = str_split($value, 2);
-            $check_province = DB::table('provinces')->where('administration_code', $split_value[0])->first();
-            if(!empty($check_province)) {
-                $check_city = DB::table('cities')->where('administration_code', $split_value[1])->first();
-            }
-            return (!empty($check_province) && (isset($check_city) && !empty($check_city))) ? TRUE : FALSE;
-        }, 'The :attribute invalid Indonesia identity number');
+        // Validator::extend('idn_identity_number', function($attribute, $value, $validator) {
+        //     //make sure to run IndonesiaProvinces and Indonesia Cities Seeder first
+        //     $split_value = str_split($value, 2);
+        //     $check_province = DB::table('provinces')->where('administration_code', $split_value[0])->first();
+        //     if(!empty($check_province)) {
+        //         $check_city = DB::table('cities')->where('administration_code', $split_value[1])->first();
+        //     }
+        //     return (!empty($check_province) && (isset($check_city) && !empty($check_city))) ? TRUE : FALSE;
+        // }, 'The :attribute invalid Indonesia identity number');
 
-        Validator::extend('idn_driver_license', function($attribute, $value, $validator) {
-            //make sure to run IndonesiaProvinces and Indonesia Cities Seeder first
-            $split_value = str_split($value, 2);
-            $check_province = DB::table('provinces')->where('administration_code', $split_value[2])->first();
-            if(!empty($check_province)) {
-                $check_city = DB::table('cities')->where('administration_code', $split_value[3])->first();
-            }
-            return (!empty($check_province) && (isset($check_city) && !empty($check_city))) ? TRUE : FALSE;
-        }, 'The :attribute invalid Indonesia driver license');
+        // Validator::extend('idn_driver_license', function($attribute, $value, $validator) {
+        //     //make sure to run IndonesiaProvinces and Indonesia Cities Seeder first
+        //     $split_value = str_split($value, 2);
+        //     $check_province = DB::table('provinces')->where('administration_code', $split_value[2])->first();
+        //     if(!empty($check_province)) {
+        //         $check_city = DB::table('cities')->where('administration_code', $split_value[3])->first();
+        //     }
+        //     return (!empty($check_province) && (isset($check_city) && !empty($check_city))) ? TRUE : FALSE;
+        // }, 'The :attribute invalid Indonesia driver license');
 
         //Smart SIM
-        Validator::extend('idn_driver_license_v2', function($attribute, $value, $validator) {
-            //make sure to run IndonesiaProvinces and Indonesia Cities Seeder first
-            $split_value = str_split($value, 2);
-            $check_province = DB::table('provinces')->where('administration_code', $split_value[0])->first();
-            if(!empty($check_province)) {
-                $check_city = DB::table('cities')->where('administration_code', $split_value[1])->first();
-            }
-            return (!empty($check_province) || (isset($check_city) && !empty($check_city))) ? TRUE : FALSE;
-        }, 'The :attribute invalid Indonesia driver license');
+        // Validator::extend('idn_driver_license_v2', function($attribute, $value, $validator) {
+        //     //make sure to run IndonesiaProvinces and Indonesia Cities Seeder first
+        //     $split_value = str_split($value, 2);
+        //     $check_province = DB::table('provinces')->where('administration_code', $split_value[0])->first();
+        //     if(!empty($check_province)) {
+        //         $check_city = DB::table('cities')->where('administration_code', $split_value[1])->first();
+        //     }
+        //     return (!empty($check_province) && (isset($check_city) && !empty($check_city))) ? TRUE : FALSE;
+        // }, 'The :attribute invalid Indonesia driver license');
 
         Validator::extend('alpha_spaces', function($attribute, $value) {
             return preg_match('/^[\pL\s]+$/u', $value);

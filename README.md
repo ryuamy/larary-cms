@@ -1,6 +1,5 @@
 # CMS
 
-CMS utama untuk kjgng
 
 (semua tutorial yang ditulis di sini menggunakan web server XAMPP dan PHP ver 7.3.0)
 
@@ -36,7 +35,8 @@ run **`npm install`** untuk menginstall package dependency tambahan, contohnya `
 
 ### Mengaktifkan enviroment beserta config
 Copy file dari folder **`copyfile`** (asked me first) dan paste dengan path berikut:
-* copyfile/.env ke .env (index path)
+* copyfile/.env ke index path
+* copyfile/database/seeders/AdminsSeeder.php ke /database/seeders
 
 ### Mengubah enviroment
 Ubah beberapa property di bawah ini pada file **`.env`** menyesuaikan dengan local masing-masing
