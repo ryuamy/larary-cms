@@ -68,26 +68,6 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>
-                                Site Title
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" name="title" class="form-control"
-                                value="{{ isset($request['title']) ? $request['title'] : $settings['title'] }}"
-                            />
-                        </div>
-
-                        <div class="form-group">
-                            <label>
-                                Tagline
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" name="tagline" class="form-control"
-                                value="{{ isset($request['tagline']) ? $request['tagline'] : $settings['tagline'] }}"
-                            />
-                        </div>
-
-                        <div class="form-group">
-                            <label>
                                 Description
                                 <span class="text-danger">*</span>
                             </label>
@@ -122,63 +102,6 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label>
-                                Date Format
-                                <span class="text-danger">*</span>
-                            </label>
-                            <div class="datetime_format">
-                                @foreach ($staticdata['date_format'] as $date_format)
-                                    <p>
-                                        <label class="radio">
-                                            <input type="radio" {{ $settings['date_format'] == $date_format ? 'checked' : '' }} value="{{ $date_format }}" name="date_format" />
-                                            <span></span>
-                                            <i>
-                                                {{ date($date_format) }}
-                                                <code>{{ $date_format }}</code>
-                                            </i>
-                                        </label>
-                                    </p>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>
-                                Time Format
-                                <span class="text-danger">*</span>
-                            </label>
-                            <div class="datetime_format">
-                                @foreach ($staticdata['time_format'] as $time_format)
-                                    <p>
-                                        <label class="radio">
-                                            <input type="radio" {{ $settings['time_format'] == $time_format ? 'checked' : '' }} value="{{ $time_format }}" name="time_format" />
-                                            <span></span>
-                                            <i>
-                                                {{ date($time_format) }}
-                                                <code>{{ $time_format }}</code>
-                                            </i>
-                                        </label>
-                                    </p>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>
-                                Week Starts On
-                                <span class="text-danger">*</span>
-                            </label>
-                            <select name="start_of_week" disabled class="form-control select2_infinity">
-                                <option value="0">Sunday</option>
-                                <option value="1" selected="selected">Monday</option>
-                                <option value="2">Tuesday</option>
-                                <option value="3">Wednesday</option>
-                                <option value="4">Thursday</option>
-                                <option value="5">Friday</option>
-                                <option value="6">Saturday</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
             </div>

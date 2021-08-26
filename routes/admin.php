@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\News\NewsController;
 use App\Http\Controllers\Admin\News\NewscategoriesController;
 use App\Http\Controllers\Admin\News\NewstagsController;
 use App\Http\Controllers\Admin\Settings\GeneralSettingsController;
+use App\Http\Controllers\Admin\Settings\MetaSettingsController;
 
 // Auth::routes();
 
@@ -165,6 +166,12 @@ Route::prefix('settings')->group(function () {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::post('general/update', [GeneralSettingsController::class, 'update'] )->name('adm_settings_general_update');
+
+    Route::get('meta-website', [MetaSettingsController::class, 'detail'] )->name('adm_settings_general');
+    Route::get('meta-website/update', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::post('meta-website/update', [MetaSettingsController::class, 'update'] )->name('adm_settings_general_update');
 });
 
 // for skeleton

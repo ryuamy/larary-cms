@@ -62,8 +62,8 @@ class MetaSettingsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title' => 'Update General Settings',
-                'heading' => 'General Settings Management'
+                'title' => 'Update Meta Website Settings',
+                'heading' => 'Meta Website Settings Management'
             ],
             'css' => [],
             'js' => [
@@ -80,8 +80,8 @@ class MetaSettingsController extends Controller
                     'url' => 'settings'
                 ),
                 array(
-                    'title' => 'General Settings',
-                    'url' => 'settings/general'
+                    'title' => 'Meta Website Settings',
+                    'url' => 'settings/meta-website'
                 ),
             ],
             'admindata' => $this->admin,
@@ -90,7 +90,7 @@ class MetaSettingsController extends Controller
                 'time_format' => Staticdatas::time_format()
             ],
             'settings' => [
-                'title' => Settings::where('status', 1)->where('meta_key', 'title')->orderBy('id', 'desc')->first()->meta_value,
+                'title' => get_site_settings('title'),
                 'tagline' => get_site_settings('tagline'),
                 'description' => get_site_settings('description'),
                 'focus_keyphrase' => get_site_settings('focus_keyphrase'),
@@ -104,7 +104,7 @@ class MetaSettingsController extends Controller
             'timezone_choice' => timezone_choice(get_site_settings('timezone')),
         ];
 
-        return view('admin.settings.general', $datas);
+        return view('admin.settings.meta_website', $datas);
     }
 
     public function update(Request $request)

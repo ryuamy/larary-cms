@@ -42,7 +42,7 @@ class PagesRequest extends FormRequest
             'title.required' => 'Title can not be empty.',
             'title.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
             // 'permalink.required' => 'Permalink can not be empty.',
-            // 'permalink.slug' => 'Permalink only allowed aplhanumeric with dash or underscore.',
+            // 'permalink.slug' => 'Permalink only allowed letters and numbers  with dash or underscore.',
             'content.required' => 'Content can not be empty.',
             'status.required' => 'Status must be selected.',
         ];

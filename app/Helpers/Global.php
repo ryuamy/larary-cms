@@ -69,7 +69,7 @@ if(!function_exists('app_media')) {
  *
  */
 if(!function_exists('get_site_settings')) {
-    function get_site_settings($meta_key, $separator='|') {
+    function get_site_settings($meta_key) {
         $DB = new \Illuminate\Support\Facades\DB;
         $select = $DB::table('settings')
             ->where('status', 1)
@@ -77,7 +77,7 @@ if(!function_exists('get_site_settings')) {
             ->orderBy('id', 'desc')
             ->first();
         $meta_value = $select->meta_value;
-        return ($meta_key == 'title') ? ' '.$separator.' '.$meta_value : $meta_value;
+        return $meta_value;
     }
 }
 

@@ -71,6 +71,7 @@
                             <input type="text" name="title" class="form-control"
                                 value="{{ isset($request['title']) ? $request['title'] : $settings['title'] }}"
                             />
+                            <span class="form-text text-muted">Example: <label style="color:red">Title</label> | Tagline</span>
                         </div>
 
                         <div class="form-group">
@@ -81,14 +82,22 @@
                             <input type="text" name="tagline" class="form-control"
                                 value="{{ isset($request['tagline']) ? $request['tagline'] : $settings['tagline'] }}"
                             />
+                            <span class="form-text text-muted">
+                                Maximum 7 words.
+                                <br />
+                                Example: Title | <label style="color:red">Tagline</label>
+                            </span>
                         </div>
 
                         <div class="form-group">
                             <label>
-                                Description
+                                Separator Between Title and Tagline
                                 <span class="text-danger">*</span>
                             </label>
-                            <textarea name="description" class="form-control">{{ isset($request['description']) ? $request['description'] : $settings['description'] }}</textarea>
+                            <input type="text" name="separator" class="form-control"
+                                value="{{ isset($request['separator']) ? $request['separator'] : $settings['separator'] }}"
+                            />
+                            <span class="form-text text-muted">Example: Title <label style="color:red">|</label> Tagline</span>
                         </div>
 
                         <div class="form-group">

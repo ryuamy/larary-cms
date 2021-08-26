@@ -15,6 +15,7 @@ use App\Models\Adminlogs;
 use App\Models\Settings;
 use App\Models\Settinglogs;
 use App\Models\Staticdatas;
+use App\Rules\MaxWordsRule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +27,6 @@ class GeneralSettingsController extends Controller
 {
     protected $validationRules = [
         'title' => 'required|alpha_num_spaces',
-        'tagline' => 'required|alpha_num_spaces',
-        'description' => 'required|alpha_num_spaces',
         'admin_pagination_limit' => 'required|numeric',
         'timezone' => 'required',
         'date_format' => 'required',
@@ -38,8 +37,6 @@ class GeneralSettingsController extends Controller
     protected $validationMessages = [
         'title.required' => 'Title can not be empty.',
         'title.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
-        'tagline.required' => 'Tagline can not be empty.',
-        'description.required' => 'Description can not be empty.',
         'admin_pagination_limit.required' => 'Admin pagination limit can not be empty.',
         'admin_pagination_limit.numeric' => 'Admin pagination limit only accept numeric.',
         'timezone.required' => 'Timezone must be selected.',
@@ -95,9 +92,9 @@ class GeneralSettingsController extends Controller
                 'time_format' => Staticdatas::time_format()
             ],
             'settings' => [
-                'title' => Settings::where('status', 1)->where('meta_key', 'title')->orderBy('id', 'desc')->first()->meta_value,
+                'title' => get_site_settings('title'),
                 'tagline' => get_site_settings('tagline'),
-                'description' => get_site_settings('description'),
+                'separator' => get_site_settings('separator'),
                 'focus_keyphrase' => get_site_settings('focus_keyphrase'),
                 'timezone' => get_site_settings('timezone'),
                 'date_format' => get_site_settings('date_format'),
@@ -114,6 +111,11 @@ class GeneralSettingsController extends Controller
 
     public function update(Request $request)
     {
+        $this->validationRules['tagline'] = ['required', 'alpha_num_spaces', new MaxWordsRule(7)];
+        $this->validationMessages['tagline.required'] = 'Tagline can not be empty.';
+        $this->validationMessages['tagline.alpha_num_spaces'] = 'Tagline only allowed letters, numbers, and space.';
+        $this->validationMessages['tagline.MaxWordsRule'] = 'Tagline cannot be longer than 7 words.';
+
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {
             $errors = $validation->errors()->all();

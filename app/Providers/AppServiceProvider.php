@@ -68,7 +68,7 @@ class AppServiceProvider extends ServiceProvider
             if(!empty($check_province)) {
                 $check_city = DB::table('cities')->where('administration_code', $split_value[1])->first();
             }
-            return (!empty($check_province) && (isset($check_city) && !empty($check_city))) ? TRUE : FALSE;
+            return (!empty($check_province) || (isset($check_city) && !empty($check_city))) ? TRUE : FALSE;
         }, 'The :attribute invalid Indonesia driver license');
 
         Validator::extend('alpha_spaces', function($attribute, $value) {
@@ -82,10 +82,6 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('slug', function($attribute, $value) {
             return preg_match('/^[a-zA-Z0-9-_]+$/', $value);
         }, 'The :attribute may only contain letters, numbers, dashes and underscores.');
-
-        Validator::extend('check_uuid', function ($attribute, $value, $parameters, $validator) {
-            return preg_match('/[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3‌​}\-[a-f0-9]{12}/', $value);
-        });
 
         Validator::extend('old_password', function($attribute, $value, $parameters, $validator) {
             $user = DB::table('users')->where('uuid', $parameters)->first();

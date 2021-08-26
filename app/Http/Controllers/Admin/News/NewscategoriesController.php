@@ -293,7 +293,7 @@ class NewscategoriesController extends Controller
 
         $this->validationRules['permalink'] = 'required|slug';
         $this->validationMessages['permalink.required'] = 'Permalink can not be empty.';
-        $this->validationMessages['permalink.slug'] = 'Permalink only allowed aplhanumeric with dash or underscore.';
+        $this->validationMessages['permalink.slug'] = 'Permalink only allowed letters and numbers with dash or underscore.';
 
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {

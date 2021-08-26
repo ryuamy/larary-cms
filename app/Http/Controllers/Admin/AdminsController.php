@@ -27,7 +27,7 @@ class AdminsController extends Controller
         'name.required' => 'Title can not be empty.',
         'name.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
         'username.required' => 'Username can not be empty.',
-        'username.alpha_num' => 'Username only allowed aplhanumeric.',
+        'username.alpha_num' => 'Username only allowed letters and numbers.',
         'status.required' => 'Status must be selected.',
     ];
 

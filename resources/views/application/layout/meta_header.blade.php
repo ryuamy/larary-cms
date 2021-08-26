@@ -1,11 +1,15 @@
 <base href="{{ url('/') }}" />
 
+<title>
+    {{ !empty($meta["title"]) ? $meta["title"] : get_site_settings('title') }}
+    {{ get_site_settings('separator') }}
+    {{ get_site_settings('tagline') }}
+</title>
+
 <meta charset="utf-8" />
 <meta name="description" content="{{ get_site_settings('description') }}" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
-<title>{{ $meta["title"].get_site_settings('title') }}</title>
 
 <link rel="canonical" href="{{ url('/') }}" />
 <link rel="dns-prefetch" href="//fonts.gstatic.com" />
