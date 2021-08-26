@@ -1,6 +1,8 @@
 "use strict";
 // Class definition
 
+var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+
 var KTAppsEducationSchoolTeacher = function() {
 	// Private functions
 
@@ -41,7 +43,7 @@ var KTAppsEducationSchoolTeacher = function() {
 					width: 250,
                     template: function(data) {
                         var number = KTUtil.getRandomInt(1, 10);
-                        
+
                         var avatarsGirl = {
                             1: {'file': '002-girl.svg'},
                             2: {'file': '003-girl-1.svg'},

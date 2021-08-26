@@ -1,4 +1,7 @@
 "use strict";
+
+var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+
 var KTDatatablesExtensionsScroller = function() {
 
 	var initTable1 = function() {

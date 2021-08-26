@@ -1,6 +1,8 @@
 "use strict";
 // Class definition
 
+var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+
 var KTDatatableColumnWidthDemo = function () {
     // Private functions
     var demo = function () {
@@ -68,8 +70,8 @@ var KTDatatableColumnWidthDemo = function () {
                         "Mobile Device",
                         "Running Shoes",
                         "Bicycle",
-                        "Fashion", 
-                        "Mobile Device"                 
+                        "Fashion",
+                        "Mobile Device"
                     ]
                     var output = '<div class="d-flex align-items-center">\
                         <div class="symbol symbol-50 symbol-sm flex-shrink-0">\

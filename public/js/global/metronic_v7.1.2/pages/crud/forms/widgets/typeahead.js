@@ -1,3 +1,5 @@
+var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+
 // Class definition
 var KTTypeahead = function() {
     var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',

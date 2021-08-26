@@ -1,5 +1,7 @@
 "use strict";
 
+var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+
 var KTSessionTimeoutDemo = function () {
     var initDemo = function () {
         $.sessionTimeout({

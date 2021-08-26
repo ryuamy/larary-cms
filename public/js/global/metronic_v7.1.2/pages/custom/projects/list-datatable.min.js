@@ -1,6 +1,8 @@
 "use strict";
 // Class definition
 
+var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+
 var KTAppsProjectsListDatatable = function() {
     // Private functions
 

@@ -1,5 +1,7 @@
 "use strict";
 
+var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+
 // Component Definition
 var KTApp = function() {
     /** @type {object} colors State colors **/
@@ -763,7 +765,7 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 "use strict";
 // DOCS: https://javascript.info/cookie
 
-// Component Definition 
+// Component Definition
 var KTCookie = function() {
   return {
     // returns the cookie with the given name,
@@ -818,7 +820,7 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 
 "use strict";
 
-// Component Definition 
+// Component Definition
 var KTDialog = function(options) {
     // Main object
     var the = this;
@@ -1213,7 +1215,7 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 
 "use strict";
 
-// Component Definition 
+// Component Definition
 var KTImageInput = function(elementId, options) {
     // Main object
     var the = this;
@@ -4767,7 +4769,7 @@ var KTUtil = function() {
 
         isOffscreen: function(el, direction, offset) {
             offset = offset || 0;
-            
+
             var windowWidth = KTUtil.getViewPort().width;
             var windowHeight = KTUtil.getViewPort().height;
 
@@ -10462,7 +10464,7 @@ var KTLayoutHeaderMenu = function() {
 				state: 'mobile-toggle-active'
 			}
 		});
-		
+
 		_menuObject = new KTMenu(_menuElement, {
 			submenu: {
 				desktop: 'dropdown',
