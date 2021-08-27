@@ -72,6 +72,14 @@ class SettingsSeeder extends Seeder
                 'meta_key' => 'bing_verification_code',
                 'meta_value' => '',
             ],
+            [
+                'meta_key' => 'bing_verification_code',
+                'meta_value' => '',
+            ],
+            [
+                'meta_key' => 'organize_uploads',
+                'meta_value' => '1',
+            ],
         ];
 
         foreach($datas as $data)

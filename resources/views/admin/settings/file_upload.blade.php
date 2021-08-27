@@ -66,36 +66,17 @@
             <div class="col-md-12">
                 <div class="card card-custom mb-8">
                     <div class="card-header">
-                        <h3 class="card-title">Meta Website</h3>
+                        <h3 class="card-title">Uploading Files</h3>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
                             <label>
-                                Meta description
-                                <span class="text-danger">*</span>
-                            </label>
-                            <textarea name="description" class="form-control">{{ isset($request['description']) ? $request['description'] : $settings['description'] }}</textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label>
-                                Focus Keyphrase
-                                <span class="text-danger">*</span>
-                            </label>
-                            <textarea name="focus_keyphrase" class="form-control">{{ isset($request['focus_keyphrase']) ? $request['focus_keyphrase'] : $settings['focus_keyphrase'] }}</textarea>
-                            <span class="form-text text-muted">
-                                Focus keyphrase must be included in description.
-                            </span>
-                        </div>
-
-                        <div class="form-group">
-                            <label>
-                                Search Engine Visibility
+                                Organize Uploads
                             </label>
                             <div class="checkbox-list">
                                 <label class="checkbox">
-                                    <input type="checkbox" value="1" {{ (isset($request['search_engine_visibility']) && $request['search_engine_visibility'] == 1) || $settings['search_engine_visibility'] == 1 ? 'checked' : '' }} name="search_engine_visibility">
-                                    <span></span>Discourage search engines from indexing this site
+                                    <input type="checkbox" value="1" {{ (isset($request['organize_uploads']) && $request['organize_uploads'] == 1) || $settings['organize_uploads'] == 1 ? 'checked' : '' }} name="organize_uploads">
+                                    <span></span>Organize my uploads into month and year based folders
                                 </label>
                             </div>
                         </div>
@@ -106,12 +87,12 @@
                 <div class="card card-custom mb-8">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Webmaster Tools
+                            Image sizes
                         </h3>
                     </div>
                     <div class="card-body">
                         <p class="form-text text-danger">
-                            All fields in this section are required if "Search Engine Visibility" field is checked.
+                            The sizes listed below determine the maximum dimensions in pixels to use when adding an image to the Media Library.
                         </p>
                         <div class="form-group">
                             <label>
@@ -139,16 +120,6 @@
                             </span>
                         </div>
 
-                    </div>
-                </div>
-
-                <div class="card card-custom mb-8">
-                    <div class="card-header">
-                        <h3 class="card-title">Schema</h3>
-                        {{-- https://schema.org/ --}}
-                    </div>
-                    <div class="card-body">
-                        <p>Coming Soon...</p>
                     </div>
                 </div>
             </div>

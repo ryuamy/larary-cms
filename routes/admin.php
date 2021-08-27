@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\News\NewsController;
 use App\Http\Controllers\Admin\News\NewscategoriesController;
 use App\Http\Controllers\Admin\News\NewstagsController;
 use App\Http\Controllers\Admin\Settings\GeneralSettingsController;
+use App\Http\Controllers\Admin\Settings\FileUploadSettingsController;
 use App\Http\Controllers\Admin\Settings\SeoSettingsController;
 
 // Auth::routes();
@@ -171,7 +172,13 @@ Route::prefix('settings')->group(function () {
     Route::get('seo/update', function() {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
-    Route::post('seo/update', [SeoSettingsController::class, 'update'] )->name('adm_sseo_update');
+    Route::post('seo/update', [SeoSettingsController::class, 'update'] )->name('adm_seo_update');
+
+    Route::get('file-upload', [FileUploadSettingsController::class, 'detail'] )->name('adm_file_upload');
+    Route::get('file-upload/update', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::post('file-upload/update', [FileUploadSettingsController::class, 'update'] )->name('adm_file_upload_update');
 });
 
 // for skeleton

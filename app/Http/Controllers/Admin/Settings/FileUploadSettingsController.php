@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class SeoSettingsController extends Controller
+class FileUploadSettingsController extends Controller
 {
     protected $validationRules = [
         'description' => 'required|alpha_num_spaces|max:60',
@@ -73,7 +73,7 @@ class SeoSettingsController extends Controller
             'admindata' => $this->admin,
             'staticdata' => [],
             'settings' => [
-                'search_engine_visibility' => get_site_settings('search_engine_visibility'),
+                'organize_uploads' => get_site_settings('organize_uploads'),
                 'description' => get_site_settings('description'),
                 'focus_keyphrase' => get_site_settings('focus_keyphrase'),
                 'google_verification_code' => get_site_settings('google_verification_code'),
@@ -81,7 +81,7 @@ class SeoSettingsController extends Controller
             ],
         ];
 
-        return view('admin.settings.seo', $datas);
+        return view('admin.settings.file_upload', $datas);
     }
 
     public function update(Request $request)
