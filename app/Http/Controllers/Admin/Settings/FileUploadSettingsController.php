@@ -18,15 +18,31 @@ use Illuminate\Support\Facades\Validator;
 class FileUploadSettingsController extends Controller
 {
     protected $validationRules = [
-        'description' => 'required|alpha_num_spaces|max:60',
-        'search_engine_visibility' => 'nullable|numeric',
+        'organize_uploads' => 'nullable|numeric',
+        'crop_image_to_exact_dimensions' => 'nullable|numeric',
+        'thumbnail_width' => 'required|numeric|min:100',
+        'thumbnail_height' => 'required|numeric|min:100',
+        'medium_max_width' => 'required|numeric|min:100',
+        'medium_max_height' => 'required|numeric|min:100',
+        'large_max_width' => 'required|numeric|min:100',
+        'large_max_height' => 'required|numeric|min:100',
     ];
 
     protected $validationMessages = [
-        'description.required' => 'Description can not be empty.',
-        'description.alpha_num_spaces' => 'Description only allowed alphanumeric with spaces.',
-        'description.max' => 'Description only allowed alphanumeric with spaces.',
-        'search_engine_visibility.numeric' => 'Search engine visibility only accept numeric.',
+        'organize_uploads.numeric' => 'Organize uploads only accept numeric.',
+        'crop_image_to_exact_dimensions.numeric' => 'Crop image to exact dimensions only accept numeric.',
+        'thumbnail_width.required' => 'Thumbnail width size can not be empty.',
+        'thumbnail_width.numeric' => 'Thumbnail width size only accept numeric.',
+        'thumbnail_height.required' => 'Thumbnail height size can not be empty.',
+        'thumbnail_height.numeric' => 'Thumbnail height size only accept numeric.',
+        'medium_max_width.required' => 'Medium max width size can not be empty.',
+        'medium_max_width.numeric' => 'Medium max width size only accept numeric.',
+        'medium_max_height.required' => 'Medium max height size can not be empty.',
+        'medium_max_height.numeric' => 'Medium max height size only accept numeric.',
+        'large_max_width.required' => 'Large max width size can not be empty.',
+        'large_max_width.numeric' => 'Large max width size only accept numeric.',
+        'large_max_height.required' => 'Large max height size can not be empty.',
+        'large_max_height.numeric' => 'Large max height size only accept numeric.',
     ];
 
     /**
@@ -48,8 +64,8 @@ class FileUploadSettingsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title' => 'Update SEO Website Settings',
-                'heading' => 'SEO Website Settings Management'
+                'title' => 'Update File Upload Settings',
+                'heading' => 'File Upload Settings Management'
             ],
             'css' => [],
             'js' => [
@@ -66,18 +82,21 @@ class FileUploadSettingsController extends Controller
                     'url' => 'settings'
                 ),
                 array(
-                    'title' => 'SEO Website Settings',
-                    'url' => 'settings/seo'
+                    'title' => 'File Upload Settings',
+                    'url' => 'settings/file-upload'
                 ),
             ],
             'admindata' => $this->admin,
             'staticdata' => [],
             'settings' => [
                 'organize_uploads' => get_site_settings('organize_uploads'),
-                'description' => get_site_settings('description'),
-                'focus_keyphrase' => get_site_settings('focus_keyphrase'),
-                'google_verification_code' => get_site_settings('google_verification_code'),
-                'bing_verification_code' => get_site_settings('bing_verification_code'),
+                'crop_image_to_exact_dimensions' => get_site_settings('crop_image_to_exact_dimensions'),
+                'thumbnail_width' => get_site_settings('thumbnail_width'),
+                'thumbnail_height' => get_site_settings('thumbnail_height'),
+                'medium_max_width' => get_site_settings('medium_max_width'),
+                'medium_max_height' => get_site_settings('medium_max_height'),
+                'large_max_width' => get_site_settings('large_max_width'),
+                'large_max_height' => get_site_settings('large_max_height'),
             ],
         ];
 
@@ -86,24 +105,12 @@ class FileUploadSettingsController extends Controller
 
     public function update(Request $request)
     {
-        $this->validationRules['focus_keyphrase'] = ['required', new IndonesianAddressRule()];
-        $this->validationMessages['focus_keyphrase.required'] = 'Focus keyphrase can not be empty.';
-        $this->validationMessages['focus_keyphrase.IndonesianAddressRule'] = 'Focus keyphrase only accept letters, numeric and comma.';
-
-        $this->validationRules['google_verification_code'] = ['nullable', 'required_if:search_engine_visibility,1', new IndonesianAddressRule()];
-        $this->validationMessages['google_verification_code.required_if'] = 'Google Verification Code can not be empty.';
-        $this->validationMessages['google_verification_code.IndonesianAddressRule'] = 'Google Verification Code only accept letters, numeric, dashes and underscores.';
-
-        $this->validationRules['bing_verification_code'] = ['nullable', 'required_if:search_engine_visibility,1', new IndonesianAddressRule()];
-        $this->validationMessages['bing_verification_code.required_if'] = 'Bing Verification Code can not be empty.';
-        $this->validationMessages['bing_verification_code.IndonesianAddressRule'] = 'Bing Verification Code only accept letters, numeric, dashes and underscores.';
-
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {
             $errors = $validation->errors()->all();
             Session::flash('errors', $errors );
             Session::flash('request', $request->input() );
-            return redirect($this->admin_url.'/seo/')->with([
+            return redirect($this->admin_url.'/file-upload/')->with([
                 'error-message' => 'There is some errors, please check again'
             ]);
         }
@@ -148,8 +155,8 @@ class FileUploadSettingsController extends Controller
             }
         }
 
-        if($request->input('search_engine_visibility') == null) {
-            Settings::where('meta_key', 'search_engine_visibility')->update(
+        if($request->input('organize_uploads') == null) {
+            Settings::where('meta_key', 'organize_uploads')->update(
                 array(
                     'meta_value' => '0',
                     'updated_by' => $admin_id
@@ -157,8 +164,8 @@ class FileUploadSettingsController extends Controller
             );
 
             $action_detail = ($current_meta_value != $request->input($key)) ?
-                'Update settings search_engine_visibility from 1 to 0':
-                'Update settings search_engine_visibility';
+                'Update settings Organize Uploads from 1 to 0':
+                'Update settings Organize Uploads';
 
             $setting_log = new Settinglogs();
             $setting_log->admin_id = $admin_id;
@@ -178,8 +185,38 @@ class FileUploadSettingsController extends Controller
             $admin_log->save();
         }
 
-        return redirect($this->admin_url.'/seo/')->with([
-            'success-message' => 'Success update SEO website setting.'
+        if($request->input('crop_image_to_exact_dimensions') == null) {
+            Settings::where('meta_key', 'crop_image_to_exact_dimensions')->update(
+                array(
+                    'meta_value' => '0',
+                    'updated_by' => $admin_id
+                )
+            );
+
+            $action_detail = ($current_meta_value != $request->input($key)) ?
+                'Update settings Crop Image To Exact Dimensions from 1 to 0':
+                'Update settings Crop Image To Exact Dimensions';
+
+            $setting_log = new Settinglogs();
+            $setting_log->admin_id = $admin_id;
+            $setting_log->setting_id = $current_settings->id;
+            $setting_log->action = 'UPDATE';
+            $setting_log->action_detail = $action_detail;
+            $setting_log->ipaddress = get_client_ip();
+            $setting_log->save();
+
+            $admin_log = new Adminlogs();
+            $admin_log->admin_id = $admin_id;
+            $admin_log->table = strtoupper($this->table);
+            $admin_log->table_id = $current_settings->id;
+            $admin_log->action = 'UPDATE';
+            $admin_log->action_detail = $action_detail;
+            $admin_log->ipaddress = get_client_ip();
+            $admin_log->save();
+        }
+
+        return redirect($this->admin_url.'/file-upload/')->with([
+            'success-message' => 'Success update file upload setting.'
         ]);
     }
 }

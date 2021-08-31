@@ -80,6 +80,34 @@ class SettingsSeeder extends Seeder
                 'meta_key' => 'organize_uploads',
                 'meta_value' => '1',
             ],
+            [
+                'meta_key' => 'crop_image_to_exact_dimensions',
+                'meta_value' => '1',
+            ],
+            [
+                'meta_key' => 'thumbnail_width',
+                'meta_value' => '150',
+            ],
+            [
+                'meta_key' => 'thumbnail_height',
+                'meta_value' => '150',
+            ],
+            [
+                'meta_key' => 'medium_max_width',
+                'meta_value' => '300',
+            ],
+            [
+                'meta_key' => 'medium_max_height',
+                'meta_value' => '300',
+            ],
+            [
+                'meta_key' => 'large_max_width',
+                'meta_value' => '1024',
+            ],
+            [
+                'meta_key' => 'large_max_height',
+                'meta_value' => '1024',
+            ],
         ];
 
         foreach($datas as $data)

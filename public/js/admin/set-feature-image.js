@@ -50,7 +50,7 @@ function reset_feature_image(image_slug) {
                     type: 'POST',
                     data: '_token=' + cToken + '&value=' + value + '&table=' + table,
                     success: function (res) {
-                        $('#preview_feature_img').attr('src', '../media/admin/layout/default-featured-img.png');
+                        $('#preview_feature_img').attr('src', '../media/admin/layout/no-image-available.png');
                         $('#delete_feature_image').hide();
                         swal.fire({
                             text: 'Image deleted',

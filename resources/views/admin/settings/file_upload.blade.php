@@ -6,7 +6,7 @@
     $cur_uri = current_uri();
     $request = Session::get('request') ? Session::get('request') : array();
     $current_route = \Route::currentRouteName();
-    $action_url = $admin_url.'/seo/update';
+    $action_url = $admin_url.'/file-upload/update';
 ?>
 
 <div class="d-flex flex-column-fluid">
@@ -81,6 +81,17 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label>
+                                Crop Image To Exact Dimensions
+                            </label>
+                            <div class="checkbox-list">
+                                <label class="checkbox">
+                                    <input type="checkbox" value="1" {{ (isset($request['crop_image_to_exact_dimensions']) && $request['crop_image_to_exact_dimensions'] == 1) || $settings['crop_image_to_exact_dimensions'] == 1 ? 'checked' : '' }} name="crop_image_to_exact_dimensions">
+                                    <span></span>Crop image to exact dimensions (normally thumbnails are proportional)
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -94,32 +105,138 @@
                         <p class="form-text text-danger">
                             The sizes listed below determine the maximum dimensions in pixels to use when adding an image to the Media Library.
                         </p>
-                        <div class="form-group">
-                            <label>
-                                Google Verification Code
-                            </label>
-                            <input type="text" name="google_verification_code" class="form-control"
-                                value="{{ isset($request['google_verification_code']) ? $request['google_verification_code'] : $settings['google_verification_code'] }}"
-                            />
-                            <span class="form-text text-muted">
-                                Get your Google verification code in
-                                <a href="https://www.google.com/webmasters/verification/verification?hl=en&tid=alternate&siteUrl={{ env('APP_URL') }}">Google Search Console</a>.
-                            </span>
+
+                        <div class="form-group form-image-size">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        Thumbnail Size
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        Width
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" min="100" name="thumbnail_width" class="form-control"
+                                        value="{{ isset($request['thumbnail_width']) ? $request['thumbnail_width'] : $settings['thumbnail_width'] }}"
+                                    />
+                                </div>
+
+                            </div>
                         </div>
 
+
                         <div class="form-group">
-                            <label>
-                                Bing Verification Code
-                            </label>
-                            <input type="text" name="bing_verification_code" class="form-control"
-                                value="{{ isset($request['bing_verification_code']) ? $request['bing_verification_code'] : $settings['bing_verification_code'] }}"
-                            />
-                            <span class="form-text text-muted">
-                                Get your Bing verification code in
-                                <a href="https://www.bing.com/toolbox/webmaster/#/Dashboard/?url={{ env('APP_URL') }}">Bing Webmaster Tools</a>.
-                            </span>
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        &nbsp;
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        Height
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" min="100" name="thumbnail_height" class="form-control"
+                                        value="{{ isset($request['thumbnail_height']) ? $request['thumbnail_height'] : $settings['thumbnail_height'] }}"
+                                    />
+                                </div>
+
+                            </div>
                         </div>
 
+                        <div class="form-group form-image-size">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        Medium Size
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        Max Width
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" min="100" name="medium_max_width" class="form-control"
+                                        value="{{ isset($request['medium_max_width']) ? $request['medium_max_width'] : $settings['medium_max_width'] }}"
+                                    />
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        &nbsp;
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        Max Height
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" min="100" name="medium_max_height" class="form-control"
+                                        value="{{ isset($request['medium_max_height']) ? $request['medium_max_height'] : $settings['medium_max_height'] }}"
+                                    />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group form-image-size">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        Large Size
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        Max Width
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" min="100" name="large_max_width" class="form-control"
+                                        value="{{ isset($request['large_max_width']) ? $request['large_max_width'] : $settings['large_max_width'] }}"
+                                    />
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        &nbsp;
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="m-0">
+                                        Max Height
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" min="100" name="large_max_height" class="form-control"
+                                        value="{{ isset($request['large_max_height']) ? $request['large_max_height'] : $settings['large_max_height'] }}"
+                                    />
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

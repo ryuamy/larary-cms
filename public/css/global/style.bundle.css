@@ -3054,7 +3054,7 @@ select.form-control:focus::-ms-value {
   border-radius: 0.42rem;
 }
 
-select.form-control[size], 
+select.form-control[size],
 select.form-control[multiple] {
   height: auto;
 }
@@ -54264,7 +54264,7 @@ i {
 
   .icon-lg-7x {
     font-size: 7rem !important;
-  } 
+  }
 
   .icon-lg-8x {
     font-size: 8rem !important;
@@ -72107,6 +72107,10 @@ code {
 .form-group .form-text {
   font-size: 0.9rem;
   font-weight: 400;
+}
+
+.form-group.form-image-size {
+    margin-bottom: 0.5rem;
 }
 
 .form-control[readonly] {
@@ -98475,7 +98479,7 @@ body {
 .admin-pagination a.active {
   /* z-index: 1;
   color: #fff;
-  background-color: #4e73df; 
+  background-color: #4e73df;
   border-color: #4e73df */
   -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
   transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
