@@ -24,7 +24,20 @@ class Adminroles extends Model
 
     public function admins()
     {
-        return $this->hasMany(Admins::class);
+        return $this->hasMany(Admins::class, 'id', 'role_id');
+    }
+
+    public function modules()
+    {
+        return $this->hasMany(Adminrolemodules::class, 'id', 'admin_role_id');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
+    }
+
+    public function updated_by() {
+        return $this->belongsTo(Admins::class, 'updated_by', 'id');
     }
 
     // List of statuses

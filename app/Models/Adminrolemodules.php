@@ -5,27 +5,35 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Adminlogs extends Model
+class Adminrolemodules extends Model
 {
     use HasFactory;
 
-    protected $table = "admin_logs";
+    protected $table = "admin_roles";
 
     protected $primaryKey = "id";
 
     protected $fillable = [
         'admin_id',
-        'table',
-        'table_id',
-        'action',
-        'action_detail',
-        'ipaddress',
+        'admin_role_id',
+        'module_id',
+        'rule',
         'created_by'
     ];
 
     public function admin()
     {
         return $this->belongsTo(Admins::class, 'admin_id', 'id');
+    }
+
+    public function admin_role()
+    {
+        return $this->belongsTo(Adminroles::class, 'admin_role_id', 'id');
+    }
+
+    public function module()
+    {
+        return $this->belongsTo(Modules::class, 'module_id', 'id');
     }
 
     public function created_by() {

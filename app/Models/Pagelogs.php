@@ -12,19 +12,27 @@ class Pagelogs extends Model
     protected $table = "page_logs";
 
     protected $primaryKey = "id";
-    
+
     protected $fillable = [
         'admin_id',
         'page_id',
         'action',
         'action_detail',
         'ipaddress',
-        'created_at',
-        'updated_at'
+        'created_by'
     ];
+
+    public function admin()
+    {
+        return $this->belongsTo(Admins::class, 'admin_id', 'id');
+    }
 
     public function page()
     {
-        return $this->belongsTo(Pages::class);
+        return $this->belongsTo(Pages::class, 'page_id', 'id');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
     }
 }

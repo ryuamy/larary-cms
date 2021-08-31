@@ -53,6 +53,14 @@ class User extends Authenticatable
         return $this->hasMany(Userlogs::class);
     }
 
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
+    }
+
+    public function updated_by() {
+        return $this->belongsTo(Admins::class, 'updated_by', 'id');
+    }
+
     // List of statuses
     const IS_INACTIVE = 0;
     const IS_ACTIVE = 1;

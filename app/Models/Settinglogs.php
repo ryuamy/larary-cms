@@ -19,11 +19,20 @@ class Settinglogs extends Model
         'action',
         'action_detail',
         'ipaddress',
-        'created_at',
-        'updated_at'
+        'created_by'
     ];
 
-    public function settings() {
-        return $this->belongsTo(Settings::class);
+    public function admin()
+    {
+        return $this->belongsTo(Admins::class, 'admin_id', 'id');
+    }
+
+    public function setting()
+    {
+        return $this->belongsTo(Settings::class, 'setting_id', 'id');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
     }
 }

@@ -25,11 +25,15 @@ class Pages extends Model
     ];
 
     public function logs() {
-        return $this->hasMany(Pagelogs::class);
+        return $this->hasMany(Pagelogs::class, 'id', 'page_id');
     }
 
-    public function admin() {
-        return $this->belongsTo(Admins::class);
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
+    }
+
+    public function updated_by() {
+        return $this->belongsTo(Admins::class, 'updated_by', 'id');
     }
 
     // List of statuses

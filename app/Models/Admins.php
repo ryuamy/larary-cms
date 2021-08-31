@@ -55,7 +55,15 @@ class Admins extends Authenticatable
     }
 
     public function role() {
-        return $this->belongsTo(Adminroles::class);
+        return $this->belongsTo(Adminroles::class, 'id', 'role_id');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
+    }
+
+    public function updated_by() {
+        return $this->belongsTo(Admins::class, 'updated_by', 'id');
     }
 
     // List of statuses

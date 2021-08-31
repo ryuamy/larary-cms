@@ -12,7 +12,7 @@ class Tags extends Model
     protected $table = "tags";
 
     protected $primaryKey = "id";
-    
+
     protected $fillable = [
         'uuid',
         'name',
@@ -22,4 +22,12 @@ class Tags extends Model
         'created_by',
         'updated_by'
     ];
+
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
+    }
+
+    public function updated_by() {
+        return $this->belongsTo(Admins::class, 'updated_by', 'id');
+    }
 }

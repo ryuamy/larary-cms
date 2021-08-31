@@ -12,7 +12,7 @@ class Newscategories extends Model
     protected $table = "news_categories";
 
     protected $primaryKey = "id";
-    
+
     protected $fillable = [
         'news_id',
         'category_id',
@@ -23,6 +23,19 @@ class Newscategories extends Model
 
     public function news()
     {
-        return $this->belongsTo(News::class);
+        return $this->belongsTo(News::class, 'news_id', 'id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Categories::class, 'category_id', 'id');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
+    }
+
+    public function updated_by() {
+        return $this->belongsTo(Admins::class, 'updated_by', 'id');
     }
 }

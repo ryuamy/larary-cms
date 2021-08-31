@@ -12,7 +12,7 @@ class Categories extends Model
     protected $table = "categories";
 
     protected $primaryKey = "id";
-    
+
     protected $fillable = [
         'uuid',
         'name',
@@ -22,4 +22,12 @@ class Categories extends Model
         'created_by',
         'updated_by'
     ];
+
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
+    }
+
+    public function updated_by() {
+        return $this->belongsTo(Admins::class, 'updated_by', 'id');
+    }
 }

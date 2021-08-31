@@ -25,7 +25,7 @@ class Settings extends Model
     ];
 
     public function logs() {
-        return $this->hasMany(Settinglogs::class);
+        return $this->hasMany(Settinglogs::class, 'id', 'setting_id');
     }
 
     // List of statuses

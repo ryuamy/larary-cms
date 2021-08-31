@@ -22,8 +22,8 @@ class CreateAdminLogsTable extends Migration
             $table->string('action', 255);
             $table->text('action_detail');
             $table->string('ipaddress', 255);
+            $table->integer('created_by')->nullable()->index();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

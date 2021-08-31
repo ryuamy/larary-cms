@@ -36,8 +36,12 @@ class News extends Model
         return $this->hasMany(Newslogs::class);
     }
 
-    public function admin() {
-        return $this->belongsTo(Admins::class);
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
+    }
+
+    public function updated_by() {
+        return $this->belongsTo(Admins::class, 'updated_by', 'id');
     }
 
     // List of statuses

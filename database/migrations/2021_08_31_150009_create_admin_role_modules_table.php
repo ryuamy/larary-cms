@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingLogs extends Migration
+class CreateAdminRoleModulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,15 +14,13 @@ class CreateSettingLogs extends Migration
      */
     public function up()
     {
-        Schema::create('setting_logs', function (Blueprint $table) {
+        Schema::create('admin_role_modules', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('admin_id')->index();
-            $table->integer('setting_id')->index();
-            $table->string('action', 255);
-            $table->text('action_detail');
-            $table->string('ipaddress', 255);
-            $table->integer('created_by')->nullable()->index();
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->integer('admin_role_id')->index();
+            $table->integer('module_id')->index();
+            $table->string('rule', 10);
+            $table->integer('created_by')->default(0)->index();
         });
     }
 
@@ -33,6 +31,6 @@ class CreateSettingLogs extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('setting_logs');
+        Schema::dropIfExists('admin_role_modules');
     }
 }

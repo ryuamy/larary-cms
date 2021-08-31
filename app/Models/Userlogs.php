@@ -12,7 +12,7 @@ class Userlogs extends Model
     protected $table = "user_logs";
 
     protected $primaryKey = "id";
-    
+
     protected $fillable = [
         'user_id',
         'table',
@@ -20,12 +20,15 @@ class Userlogs extends Model
         'action',
         'action_detail',
         'ipaddress',
-        'created_at',
-        'updated_at'
+        'created_by'
     ];
 
-    public function user_data()
+    public function user()
     {
-        return $this->belongsTo(Users::class);
+        return $this->belongsTo(Users::class, 'user_id', 'id');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(Admins::class, 'created_by', 'id');
     }
 }
