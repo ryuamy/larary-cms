@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\AdminsController;
-use App\Http\Controllers\Admin\AdminrolesController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\Admins\AdminsController;
+use App\Http\Controllers\Admin\Admins\AdminrolesController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\News\NewsController;
 use App\Http\Controllers\Admin\News\NewscategoriesController;

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Admins;
 
 use App\Http\Controllers\Controller;
 use App\Models\Adminlogs;
 use App\Models\Adminroles;
+use App\Models\Adminrolemodules;
+use App\Models\Modules;
 use App\Models\Staticdatas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AdminrolesController extends Controller
@@ -22,8 +22,8 @@ class AdminrolesController extends Controller
     ];
 
     protected $validationMessages = [
-        'name.required' => 'Title can not be empty.',
-        'name.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
+        'name.required' => 'Name can not be empty.',
+        'name.alpha_num_spaces' => 'Name only allowed alphanumeric with spaces.',
         'status.required' => 'Status must be selected.',
     ];
 
@@ -154,7 +154,9 @@ class AdminrolesController extends Controller
                 'heading' => 'Admin Roles Management'
             ],
             'css' => [],
-            'js' => [],
+            'js' => [
+                'admin/admin-role-module',
+            ],
             'breadcrumb' => [
                 array(
                     'title' => 'Dashboard',
@@ -173,7 +175,8 @@ class AdminrolesController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_roles' => Adminroles::where('deleted_at', NULL)->get()
+            'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
+            'modules' => Modules::where('deleted_at', NULL)->get(),
         ];
 
         return view('admin.admin_roles.form', $datas);
@@ -242,7 +245,8 @@ class AdminrolesController extends Controller
             ],
             'css' => [],
             'js' => [
-                'admin/edit-permalink'
+                'admin/edit-permalink',
+                'admin/admin-role-module',
             ],
             'breadcrumb' => [
                 array(
@@ -263,7 +267,9 @@ class AdminrolesController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_roles' => Adminroles::where('deleted_at', NULL)->get()
+            'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
+            'modules' => Modules::where('deleted_at', NULL)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         return view('admin.admin_roles.form', $datas);
@@ -279,9 +285,7 @@ class AdminrolesController extends Controller
             ]);
         }
 
-        $this->validationRules['permalink'] = 'required|slug';
-        $this->validationMessages['permalink.required'] = 'Permalink can not be empty.';
-        $this->validationMessages['permalink.slug'] = 'Permalink only allowed letters and numbers with dash or underscore.';
+        // dd($request->input());
 
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {
@@ -318,6 +322,45 @@ class AdminrolesController extends Controller
         $admin_log->action_detail = $action_detail;
         $admin_log->ipaddress = get_client_ip();
         $admin_log->save();
+
+        if(!empty($request->input('modules'))) {
+            $check_admin_role_module = Adminrolemodules::where('admin_id', $current->id)->get();
+
+            if(!empty($check_admin_role_module)) {
+                Adminrolemodules::where('admin_id', $current->id)->delete();
+            }
+
+            $admin_log = new Adminlogs();
+            $admin_log->admin_id = $admin_id;
+            $admin_log->table = 'ADMIN_ROLE_MODULES';
+            $admin_log->table_id = $current->id;
+            $admin_log->action = 'DELETE';
+            $admin_log->action_detail = 'Delete previous admin role modules';
+            $admin_log->ipaddress = get_client_ip();
+            $admin_log->save();
+
+            foreach($request->input('modules') as $module) {
+                foreach($module['rules'] as $rules) {
+                    $admin_role_module = new Adminrolemodules();
+                    $admin_role_module->admin_id = $admin_id;
+                    $admin_role_module->admin_role_id = $this->admin->role_id;
+                    $admin_role_module->module_id = $module['module_id'];
+                    $admin_role_module->module_slug = $module['name'];
+                    $admin_role_module->rules = $rules;
+                    $admin_role_module->created_by = $admin_id;
+                    $admin_role_module->save();
+                }
+            }
+
+            $admin_log = new Adminlogs();
+            $admin_log->admin_id = $admin_id;
+            $admin_log->table = 'ADMIN_ROLE_MODULES';
+            $admin_log->table_id = $current->id;
+            $admin_log->action = 'UPDATE';
+            $admin_log->action_detail = 'Update admin role modules';
+            $admin_log->ipaddress = get_client_ip();
+            $admin_log->save();
+        }
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([
             'success-message' => 'Success update admin.'

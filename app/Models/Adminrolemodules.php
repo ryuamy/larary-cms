@@ -9,7 +9,7 @@ class Adminrolemodules extends Model
 {
     use HasFactory;
 
-    protected $table = "admin_roles";
+    protected $table = "admin_role_modules";
 
     protected $primaryKey = "id";
 
@@ -17,7 +17,8 @@ class Adminrolemodules extends Model
         'admin_id',
         'admin_role_id',
         'module_id',
-        'rule',
+        'module_slug',
+        'rules',
         'created_by'
     ];
 

@@ -16,9 +16,6 @@
                 <button type="submit" class="btn btn-success mr-2">
                     <i class="fas fa-save"></i> Save
                 </button>
-                <a class="btn btn-dark" href="{{ $admin_url }}">
-                    Cancel
-                </a>
             </div>
 
             @if (Session::has('success-message'))

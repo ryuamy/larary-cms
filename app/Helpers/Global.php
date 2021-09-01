@@ -1006,4 +1006,26 @@ if(!function_exists('get_qiscus_token')) {
     }
 }
 
+if(!function_exists('check_admin_role_module')) {
+    function check_admin_role_module($admin_id, $module_id, $module_rule='') {
+        $DB = new \Illuminate\Support\Facades\DB;
+
+        $check = $DB::table('admin_role_modules')
+            ->where('admin_id', $admin_id)
+            ->where('module_id', $module_id);
+
+        if(!empty($module_rule)) {
+            $check = $check->where('rules', $module_rule);
+        }
+
+        $check = $check->first();
+
+        if($check) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 ?>

@@ -19,8 +19,11 @@ class CreateAdminRoleModulesTable extends Migration
             $table->integer('admin_id')->index();
             $table->integer('admin_role_id')->index();
             $table->integer('module_id')->index();
-            $table->string('rule', 10);
+            $table->string('module_slug', 255)->nullable();
+            $table->text('rules')->nullable();
             $table->integer('created_by')->default(0)->index();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

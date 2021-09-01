@@ -63,69 +63,162 @@
                 </div>
             @endif
 
-            <div class="col-md-8">
+            <?php
+                if(str_contains($current_route, 'create') || (str_contains($current_route, 'detail') && ($current['slug'] !== 'super_admin' && $current['slug'] !== 'admin' && $current['slug'] !== 'editor'))) {
+                    $left_div_class = 'col-md-8';
+                } else {
+                    $left_div_class = 'col-md-12';
+                }
+            ?>
+            <div class="{{ $left_div_class }}">
                 <div class="card card-custom mb-8">
                     <div class="card-body">
                         <div class="form-group">
                             <label>
-                                Title
+                                Name
                                 <span class="text-danger">*</span>
                             </label>
-                            <input type="text" name="title" class="form-control"
+                            <input type="text" name="name" class="form-control"
                                 <?php if(str_contains($current_route, 'detail')) { ?>
-                                    value="{{ isset($request['title']) ? $request['title'] : $current['name'] }}"
+                                    value="{{ isset($request['name']) ? $request['name'] : $current['name'] }}"
                                 <?php } elseif($cur_uri[5] !== 'detail') { ?>
-                                    value="{{ isset($request['title']) ? $request['title'] : '' }}"
+                                    value="{{ isset($request['name']) ? $request['name'] : '' }}"
                                 <?php } ?>
                             />
-                            <?php if(str_contains($current_route, 'detail')) { ?>
-                                <span class="form-text text-muted d-flex align-items-center">
-                                    Permalink:
-                                     <a href="{{ env('APP_URL').'/' }}">
-                                        {{ env('APP_URL') }}/<span id="permalink_slug" class="mr-1 d-inline-block">{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}</span>
-                                    </a>
-                                    <input type="text" value="{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}"
-                                        id="field_permalink_slug"
-                                        class="form-control mr-1 d-none w-auto h-auto pt-0 pb-0"
-                                        name="permalink"
-                                    />
-                                    <a class="label label-success label-inline" href="Javascript:;" id="edit_permalink_slug">
-                                        edit
-                                    </a>
-                                </span>
-                            <?php } ?>
                         </div>
                     </div>
                 </div>
+
+                <?php if(str_contains($current_route, 'create') || (str_contains($current_route, 'detail') && ($current['slug'] !== 'super_admin' && $current['slug'] !== 'admin' && $current['slug'] !== 'editor'))) { ?>
+                    <div class="card card-custom mb-8">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Modules
+                            </h3>
+                        </div>
+                        <div class="my-5 mr-0">
+                            <div class="card-body" style="height:150px; overflow-y:scroll; overflow-x:auto;">
+                                <div class="form-group">
+                                    @foreach ($modules as $key => $module)
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label>{{ $module->name }}</label>
+                                                <input type="checkbox"
+                                                    class="d-none"
+                                                    <?php echo (str_contains($current_route, 'detail') && check_admin_role_module($admindata->id, $module->id) === true) ? 'checked' : ''; ?>
+                                                    value="{{ $module->id }}"
+                                                    id="modules_{{ $module->slug }}_id"
+                                                    name="modules[{{ $key }}][module_id]"
+                                                />
+                                                <input type="checkbox"
+                                                    class="d-none"
+                                                    <?php echo (str_contains($current_route, 'detail') && check_admin_role_module($admindata->id, $module->id) === true) ? 'checked' : ''; ?>
+                                                    value="{{ $module->slug }}"
+                                                    id="modules_{{ $module->slug }}"
+                                                    name="modules[{{ $key }}][name]"
+                                                />
+                                            </div>
+
+                                            <div class="col-2">
+                                                <div class="checkbox-list">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox"
+                                                            value="read"
+                                                            class="modules_rules modules_rules_read modules_{{ $module->slug }}_read"
+                                                            <?php echo (str_contains($current_route, 'detail') && check_admin_role_module($admindata->id, $module->id, 'read') === true) ? 'checked' : ''; ?>
+                                                            data-key="{{ $module->slug }}"
+                                                            name="modules[{{ $key }}][rules][]"
+                                                        />
+                                                        <span></span>Read
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            @if ($module->slug !== 'countries' && $module->slug !== 'cities' && $module->slug !== 'provinces')
+                                                <div class="col-2">
+                                                    <div class="checkbox-list">
+                                                        <label class="checkbox <?php echo (check_admin_role_module($admindata->id, $module->id) === true) ? '' : 'checkbox-disabled'; ?> label_modules_{{ $module->slug }}_add">
+                                                            <input type="checkbox"
+                                                                value="add"
+                                                                <?php echo (str_contains($current_route, 'detail') && check_admin_role_module($admindata->id, $module->id) === true) ? '' : 'disabled'; ?>
+                                                                <?php echo (str_contains($current_route, 'detail') && check_admin_role_module($admindata->id, $module->id, 'add') === true) ? 'checked' : ''; ?>
+                                                                class="modules_rules modules_{{ $module->slug }}_add"
+                                                                data-key="{{ $module->slug }}"
+                                                                name="modules[{{ $key }}][rules][]"
+                                                            />
+                                                            <span></span>Add
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="checkbox-list">
+                                                        <label class="checkbox <?php echo (check_admin_role_module($admindata->id, $module->id) === true) ? '' : 'checkbox-disabled'; ?> label_modules_{{ $module->slug }}_edit">
+                                                            <input type="checkbox"
+                                                                value="edit"
+                                                                <?php echo (str_contains($current_route, 'detail') && check_admin_role_module($admindata->id, $module->id) === true) ? '' : 'disabled'; ?>
+                                                                <?php echo (str_contains($current_route, 'detail') && check_admin_role_module($admindata->id, $module->id, 'edit') === true) ? 'checked' : ''; ?>
+                                                                class="modules_rules modules_{{ $module->slug }}_edit"
+                                                                data-key="{{ $module->slug }}"
+                                                                name="modules[{{ $key }}][rules][]"
+                                                            />
+                                                            <span></span>Edit
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="checkbox-list">
+                                                        <label class="checkbox <?php echo (check_admin_role_module($admindata->id, $module->id) === true) ? '' : 'checkbox-disabled'; ?> label_modules_{{ $module->slug }}_delete">
+                                                            <input type="checkbox"
+                                                                value="delete"
+                                                                <?php echo (str_contains($current_route, 'detail') && check_admin_role_module($admindata->id, $module->id) === true) ? '' : 'disabled'; ?>
+                                                                <?php echo (str_contains($current_route, 'detail') && check_admin_role_module($admindata->id, $module->id, 'delete') === true) ? 'checked' : ''; ?>
+                                                                class="modules_rules modules_{{ $module->slug }}_delete"
+                                                                data-key="{{ $module->slug }}"
+                                                                name="modules[{{ $key }}][rules][]"
+                                                            />
+                                                            <span></span>Delete
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
 
-            <div class="col-md-4">
-                <div class="card card-custom mb-8">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            Setting
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="status">
-                                Status
-                                <span class="text-danger">*</span>
-                            </label>
-                            <select class="form-control" name="status" id="status">
-                                <option value="">Select Status</option>
-                                @foreach ($staticdata['default_status'] as $kS => $status)
-                                    @if ($kS != 2)
-                                        <option value="{{ $kS }}"
-                                            {{ isset($current['status']) && $current['status'] == $kS ? 'selected' : '' }}
-                                        >{{ $status }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
+            <?php if(str_contains($current_route, 'create') || (str_contains($current_route, 'detail') && ($current['slug'] !== 'super_admin' && $current['slug'] !== 'admin' && $current['slug'] !== 'editor'))) { ?>
+                <div class="col-md-4">
+                    <div class="card card-custom mb-8">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Setting
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="status">
+                                    Status
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-control" name="status" id="status">
+                                    <option value="">Select Status</option>
+                                    @foreach ($staticdata['default_status'] as $kS => $status)
+                                        @if ($kS != 2)
+                                            <option value="{{ $kS }}"
+                                                {{ isset($current['status']) && $current['status'] == $kS ? 'selected' : '' }}
+                                            >{{ $status }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php } ?>
 
             <div class="col-md-12">
                 <?php if(str_contains($current_route, 'detail')) { ?>
