@@ -212,6 +212,7 @@ class AdminsController extends Controller
         $insert->slug = $request->input('username');
         $insert->email = $request->input('email');
         $insert->password = Hash::make($request->input('repassword'));
+        $insert->role_id = $request->input('role');
         $insert->status = $request->input('status');
         $insert->created_by = $admin_id;
         $insert->updated_by = $admin_id;
@@ -325,6 +326,7 @@ class AdminsController extends Controller
             array(
                 'name' => $request->input('name'),
                 'slug' => $request->input('username'),
+                'role_id' => $request->input('role'),
                 'status' => $request->input('status'),
                 'updated_by' => $admin_id
             )
