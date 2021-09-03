@@ -3,16 +3,14 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Models\Adminlogs;
+use App\Models\Adminrolemodules;
 use App\Models\Settings;
 use App\Models\Settinglogs;
 use App\Models\Staticdatas;
 use App\Rules\IndonesianAddressRule;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class SeoSettingsController extends Controller
@@ -79,6 +77,7 @@ class SeoSettingsController extends Controller
                 'google_verification_code' => get_site_settings('google_verification_code'),
                 'bing_verification_code' => get_site_settings('bing_verification_code'),
             ],
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         return view('admin.settings.seo', $datas);
@@ -137,14 +136,13 @@ class SeoSettingsController extends Controller
                 $setting_log->ipaddress = get_client_ip();
                 $setting_log->save();
 
-                $admin_log = new Adminlogs();
-                $admin_log->admin_id = $admin_id;
-                $admin_log->table = strtoupper($this->table);
-                $admin_log->table_id = $current_settings->id;
-                $admin_log->action = 'UPDATE';
-                $admin_log->action_detail = $action_detail;
-                $admin_log->ipaddress = get_client_ip();
-                $admin_log->save();
+                insert_admin_logs(
+                    $admin_id,
+                    $this->table,
+                    $current_settings->id,
+                    'UPDATE',
+                    $action_detail
+                );
             }
         }
 
@@ -168,14 +166,13 @@ class SeoSettingsController extends Controller
             $setting_log->ipaddress = get_client_ip();
             $setting_log->save();
 
-            $admin_log = new Adminlogs();
-            $admin_log->admin_id = $admin_id;
-            $admin_log->table = strtoupper($this->table);
-            $admin_log->table_id = $current_settings->id;
-            $admin_log->action = 'UPDATE';
-            $admin_log->action_detail = $action_detail;
-            $admin_log->ipaddress = get_client_ip();
-            $admin_log->save();
+            insert_admin_logs(
+                $admin_id,
+                $this->table,
+                $current_settings->id,
+                'UPDATE',
+                $action_detail
+            );
         }
 
         return redirect($this->admin_url.'/seo/')->with([

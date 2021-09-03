@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\Admins;
 
 use App\Http\Controllers\Controller;
-use App\Models\Adminlogs;
 use App\Models\Adminroles;
 use App\Models\Adminrolemodules;
 use App\Models\Modules;
@@ -171,6 +170,7 @@ class AdminrolesController extends Controller
                     'url' => str_replace('_', '-', $this->table).'/create'
                 ),
             ],
+            // 'current' => [],
             'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
@@ -201,7 +201,7 @@ class AdminrolesController extends Controller
         $insert = new Adminroles();
         $insert->uuid = (string) Str::uuid();
         $insert->name = $request->input('name');
-        $insert->slug = $slug;
+        // $insert->slug = $slug;
         $insert->status = $request->input('status');
         $insert->created_by = $admin_id;
         $insert->updated_by = $admin_id;
@@ -212,14 +212,36 @@ class AdminrolesController extends Controller
             ->orderByRaw('id desc')
             ->first();
 
-        $admin_log = new Adminlogs();
-        $admin_log->admin_id = $admin_id;
-        $admin_log->table = strtoupper($this->table);
-        $admin_log->table_id = $new_data->id;
-        $admin_log->action = 'INSERT';
-        $admin_log->action_detail = 'Create new admin role with name '.$new_data->name;
-        $admin_log->ipaddress = get_client_ip();
-        $admin_log->save();
+        insert_admin_logs(
+            $admin_id,
+            $this->table,
+            $new_data->id,
+            'INSERT',
+            'Create new admin role with name '.$new_data->name
+        );
+
+        if(!empty($request->input('modules'))) {
+            foreach($request->input('modules') as $module) {
+                foreach($module['rules'] as $rules) {
+                    $admin_role_module = new Adminrolemodules();
+                    $admin_role_module->admin_id = $admin_id;
+                    $admin_role_module->admin_role_id = $new_data->id;
+                    $admin_role_module->module_id = $module['module_id'];
+                    $admin_role_module->module_slug = $module['name'];
+                    $admin_role_module->rules = $rules;
+                    $admin_role_module->created_by = $admin_id;
+                    $admin_role_module->save();
+                }
+            }
+
+            insert_admin_logs(
+                $admin_id,
+                $this->table,
+                $this->admin->role_id,
+                'UPDATE',
+                'Update admin role modules'
+            );
+        }
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
             'success-message' => 'Success add new admin role.'
@@ -240,7 +262,7 @@ class AdminrolesController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title' => 'Detail '.$current['name'].' Admin Role',
+                'title' => 'Detail '.$current['name'].' Role',
                 'heading' => 'Admin Roles Management'
             ],
             'css' => [],
@@ -279,13 +301,13 @@ class AdminrolesController extends Controller
     {
         $current = Adminroles::where('uuid', $uuid)->first();
 
+        // dd($current);
+
         if(!$current) {
             return redirect($this->admin_url)->with([
                 'error-message' => 'Not found'
             ]);
         }
-
-        // dd($request->input());
 
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {
@@ -314,52 +336,50 @@ class AdminrolesController extends Controller
             'Update datas and rename name from '.$current->name.' to '.$request->input('name'):
             'Update admin role '.$current->name;
 
-        $admin_log = new Adminlogs();
-        $admin_log->admin_id = $admin_id;
-        $admin_log->table = strtoupper($this->table);
-        $admin_log->table_id = $current->id;
-        $admin_log->action = 'UPDATE';
-        $admin_log->action_detail = $action_detail;
-        $admin_log->ipaddress = get_client_ip();
-        $admin_log->save();
+        insert_admin_logs(
+            $admin_id,
+            $this->table,
+            $current->id,
+            'UPDATE',
+            $action_detail
+        );
 
         if(!empty($request->input('modules'))) {
-            $check_admin_role_module = Adminrolemodules::where('admin_id', $current->id)->get();
+            $check_admin_role_module = Adminrolemodules::where('admin_role_id', $current->id)->get();
 
             if(!empty($check_admin_role_module)) {
-                Adminrolemodules::where('admin_id', $current->id)->delete();
+                Adminrolemodules::where('admin_role_id', $current->id)->delete();
             }
 
-            $admin_log = new Adminlogs();
-            $admin_log->admin_id = $admin_id;
-            $admin_log->table = 'ADMIN_ROLE_MODULES';
-            $admin_log->table_id = $current->id;
-            $admin_log->action = 'DELETE';
-            $admin_log->action_detail = 'Delete previous admin role modules';
-            $admin_log->ipaddress = get_client_ip();
-            $admin_log->save();
+            insert_admin_logs(
+                $admin_id,
+                $this->table,
+                $current->id,
+                'DELETE',
+                'Delete previous admin role modules'
+            );
 
             foreach($request->input('modules') as $module) {
-                foreach($module['rules'] as $rules) {
-                    $admin_role_module = new Adminrolemodules();
-                    $admin_role_module->admin_id = $admin_id;
-                    $admin_role_module->admin_role_id = $this->admin->role_id;
-                    $admin_role_module->module_id = $module['module_id'];
-                    $admin_role_module->module_slug = $module['name'];
-                    $admin_role_module->rules = $rules;
-                    $admin_role_module->created_by = $admin_id;
-                    $admin_role_module->save();
+                if(isset($module['rules'])) {
+                    foreach($module['rules'] as $rules) {
+                        $admin_role_module = new Adminrolemodules();
+                        $admin_role_module->admin_role_id = $current->id;
+                        $admin_role_module->module_id = $module['module_id'];
+                        $admin_role_module->module_slug = $module['name'];
+                        $admin_role_module->rules = $rules;
+                        $admin_role_module->created_by = $admin_id;
+                        $admin_role_module->save();
+                    }
                 }
             }
 
-            $admin_log = new Adminlogs();
-            $admin_log->admin_id = $admin_id;
-            $admin_log->table = 'ADMIN_ROLE_MODULES';
-            $admin_log->table_id = $current->id;
-            $admin_log->action = 'UPDATE';
-            $admin_log->action_detail = 'Update admin role modules';
-            $admin_log->ipaddress = get_client_ip();
-            $admin_log->save();
+            insert_admin_logs(
+                $admin_id,
+                $this->table,
+                $this->admin->role_id,
+                'UPDATE',
+                'Update admin role modules'
+            );
         }
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([

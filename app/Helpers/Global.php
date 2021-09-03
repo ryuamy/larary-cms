@@ -1006,6 +1006,11 @@ if(!function_exists('get_qiscus_token')) {
     }
 }
 
+/**
+ * Check modules of admin role
+ *
+ * @author Amy <laksmise@gmail.com>
+ */
 if(!function_exists('check_admin_role_module')) {
     function check_admin_role_module($admin_id, $module_id, $module_rule='') {
         $DB = new \Illuminate\Support\Facades\DB;
@@ -1025,6 +1030,66 @@ if(!function_exists('check_admin_role_module')) {
         } else {
             return false;
         }
+    }
+}
+
+/**
+ * Check admin access
+ *
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('check_admin_access')) {
+    function check_admin_access($role_id, $module_slug, $module_rule='') {
+        $DB = new \Illuminate\Support\Facades\DB;
+
+        $check = $DB::table('admin_role_modules')
+            ->where('admin_role_id', $role_id)
+            ->where('module_slug', $module_slug);
+
+        if(!empty($module_rule)) {
+            $check = $check->where('rules', $module_rule);
+        }
+
+        $check = $check->first();
+
+        if(!empty($check)) {
+            // echo 'true';
+            // dd($check);
+            return true;
+        } else {
+            // echo 'false';
+            // dd($check);
+            return false;
+        }
+    }
+}
+
+/**
+ * Insert admin logs
+ *
+ * @param integer $admin_id
+ * @param string $table
+ * @param integer $table_id
+ * @param string $action
+ * @param string $action_detail
+ *
+ * @return boolean
+ *
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('insert_admin_logs')) {
+    function insert_admin_logs($admin_id, $table, $table_id, $action, $action_detail) {
+        $DB = new \Illuminate\Support\Facades\DB;
+        $DB::table('admin_logs')->insert([
+            'admin_id' => $admin_id,
+            'table' => strtoupper($table),
+            'table_id' => $table_id,
+            'action' => strtoupper($action),
+            'action_detail' => $action_detail,
+            'ipaddress' => get_client_ip(),
+            'created_by' => $admin_id
+        ]);
+        return true;
     }
 }
 

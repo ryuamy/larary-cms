@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
+// Make sure to add Modules manually every time you create new admin page
 class ModulesSeeder extends Seeder
 {
     /**
@@ -21,8 +22,8 @@ class ModulesSeeder extends Seeder
                 'slug' => 'admins',
             ],
             [
-                'name' => 'Admin Logs',
-                'slug' => 'admin_logs',
+                'name' => 'Admin Roles',
+                'slug' => 'admin_roles',
             ],
             [
                 'name' => 'Cities',
@@ -61,8 +62,16 @@ class ModulesSeeder extends Seeder
                 'slug' => 'provinces',
             ],
             [
-                'name' => 'Settings',
-                'slug' => 'settings',
+                'name' => 'General Settings',
+                'slug' => 'general_settings',
+            ],
+            [
+                'name' => 'SEO Website Settings',
+                'slug' => 'seo_website_settings',
+            ],
+            [
+                'name' => 'File Upload Settings',
+                'slug' => 'file_upload_settings',
             ],
             [
                 'name' => 'Users',

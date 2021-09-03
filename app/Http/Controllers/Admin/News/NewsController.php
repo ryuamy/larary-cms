@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin\News;
 
 use App\Http\Controllers\Controller;
 // use App\Http\Requests\PagesRequest;
-use App\Models\Admins;
-use App\Models\Adminlogs;
+use App\Models\Adminrolemodules;
 use App\Models\Categories;
 use App\Models\News;
 use App\Models\Newscategories;
@@ -17,7 +16,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class NewsController extends Controller
@@ -76,6 +74,7 @@ class NewsController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         $param_get = isset($_GET) ? $_GET : [];
@@ -189,6 +188,7 @@ class NewsController extends Controller
             ],
             'categories' => Categories::where('deleted_at', NULL)->get(),
             'tags' => Tags::where('deleted_at', NULL)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         return view('admin.news.form', $datas);
@@ -290,14 +290,13 @@ class NewsController extends Controller
         $data_log->ipaddress = get_client_ip();
         $data_log->save();
 
-        $admin_log = new Adminlogs();
-        $admin_log->admin_id = $admin_id;
-        $admin_log->table = strtoupper($this->table);
-        $admin_log->table_id = $new_data->id;
-        $admin_log->action = 'INSERT';
-        $admin_log->action_detail = 'Create news with title '.$new_data->name;
-        $admin_log->ipaddress = get_client_ip();
-        $admin_log->save();
+        insert_admin_logs(
+            $admin_id,
+            $this->table,
+            $new_data->id,
+            'INSERT',
+            'Create news with title '.$new_data->name
+        );
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
             'success-message' => 'Success add news.'
@@ -346,6 +345,9 @@ class NewsController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
+            'categories' => Categories::where('deleted_at', NULL)->get(),
+            'tags' => Tags::where('deleted_at', NULL)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         return view('admin.news.form', $datas);
@@ -482,14 +484,13 @@ class NewsController extends Controller
         $data_log->ipaddress = get_client_ip();
         $data_log->save();
 
-        $admin_log = new Adminlogs();
-        $admin_log->admin_id = $admin_id;
-        $admin_log->table = strtoupper($this->table);
-        $admin_log->table_id = $current->id;
-        $admin_log->action = 'UPDATE';
-        $admin_log->action_detail = $action_detail;
-        $admin_log->ipaddress = get_client_ip();
-        $admin_log->save();
+        insert_admin_logs(
+            $admin_id,
+            $this->table,
+            $current->id,
+            'UPDATE',
+            $action_detail
+        );
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([
             'success-message' => 'Success update news.'

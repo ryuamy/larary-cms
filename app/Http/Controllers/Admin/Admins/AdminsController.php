@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Admins;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admins;
-use App\Models\Adminlogs;
 use App\Models\Adminroles;
+use App\Models\Adminrolemodules;
 use App\Models\Staticdatas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -71,7 +71,8 @@ class AdminsController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_roles' => Adminroles::where('deleted_at', NULL)->get()
+            'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         $param_get = isset($_GET) ? $_GET : [];
@@ -176,7 +177,8 @@ class AdminsController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_roles' => Adminroles::where('deleted_at', NULL)->get()
+            'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         return view('admin.admins.form', $datas);
@@ -218,16 +220,18 @@ class AdminsController extends Controller
         $insert->updated_by = $admin_id;
         $insert->save();
 
-        $new_data = Admins::where('deleted_at', NULL)->whereRaw('name = "'.$request->input('name').'"')->orderByRaw('id desc')->first();
+        $new_data = Admins::where('deleted_at', NULL)
+            ->whereRaw('name = "'.$request->input('name').'"')
+            ->orderByRaw('id desc')
+            ->first();
 
-        $admin_log = new Adminlogs();
-        $admin_log->admin_id = $admin_id;
-        $admin_log->table = strtoupper($this->table);
-        $admin_log->table_id = $new_data->id;
-        $admin_log->action = 'INSERT';
-        $admin_log->action_detail = 'Create new admin with name '.$new_data->name;
-        $admin_log->ipaddress = get_client_ip();
-        $admin_log->save();
+        insert_admin_logs(
+            $admin_id,
+            $this->table,
+            $new_data->id,
+            'INSERT',
+            'Create new admin with name '.$new_data->name
+        );
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
             'success-message' => 'Success add new admin.'
@@ -274,7 +278,8 @@ class AdminsController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_roles' => Adminroles::where('deleted_at', NULL)->get()
+            'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         return view('admin.admins.form', $datas);
@@ -336,14 +341,13 @@ class AdminsController extends Controller
             'Update datas and rename name from '.$current->name.' to '.$request->input('name'):
             'Update admin '.$current->name;
 
-        $admin_log = new Adminlogs();
-        $admin_log->admin_id = $admin_id;
-        $admin_log->table = strtoupper($this->table);
-        $admin_log->table_id = $current->id;
-        $admin_log->action = 'UPDATE';
-        $admin_log->action_detail = $action_detail;
-        $admin_log->ipaddress = get_client_ip();
-        $admin_log->save();
+        insert_admin_logs(
+            $admin_id,
+            $this->table,
+            $current->id,
+            'UPDATE',
+            $action_detail
+        );
 
         if($request->input('renewpassword')) {
             Admins::where('uuid', $uuid)->update(
@@ -353,14 +357,13 @@ class AdminsController extends Controller
                 )
             );
 
-            $admin_log = new Adminlogs();
-            $admin_log->admin_id = $admin_id;
-            $admin_log->table = strtoupper($this->table);
-            $admin_log->table_id = $current->id;
-            $admin_log->action = 'UPDATE';
-            $admin_log->action_detail = 'Update password admin '.$current->name;
-            $admin_log->ipaddress = get_client_ip();
-            $admin_log->save();
+            insert_admin_logs(
+                $admin_id,
+                $this->table,
+                $current->id,
+                'UPDATE',
+                'Update password admin '.$current->name
+            );
         }
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([

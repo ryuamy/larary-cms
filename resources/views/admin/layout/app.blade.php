@@ -124,6 +124,14 @@ License: You must have a valid license purchased only from themeforest(the above
 					</div>
 					<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 						<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
+                            <?php /*
+                            <?php
+                                $datas = [
+                                    'admin_modules' => $admin_modules
+                                ]
+                            ?>
+                            {{ view( 'admin.layout.menu', $datas ) }}
+                            */ ?>
                             {{ view( 'admin.layout.menu' ) }}
 						</div>
 					</div>
@@ -886,7 +894,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						</a>
 						<?php /*<div class="text-muted mt-1">Admin</div>*/ ?>
 						<div class="navi mt-2">
-							<a href="mailto:jm@softplus.com" class="navi-item">
+							<a href="mailto:{{ $admin_data->email }}" class="navi-item">
 								<span class="navi-link p-0 pb-2">
 									<span class="navi-icon mr-1">
 										<span class="svg-icon svg-icon-lg svg-icon-primary">

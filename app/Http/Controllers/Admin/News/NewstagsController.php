@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\Admin\News;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admins;
-use App\Models\Adminlogs;
+use App\Models\Adminrolemodules;
 use App\Models\Staticdatas;
 use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class NewstagsController extends Controller
@@ -72,6 +70,7 @@ class NewstagsController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         $param_get = isset($_GET) ? $_GET : [];
@@ -184,6 +183,7 @@ class NewstagsController extends Controller
                 'default_status' => Staticdatas::default_status(),
                 'category_tag_type' => Staticdatas::category_tag_type()
             ],
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         return view('admin.tags.form', $datas);
@@ -215,16 +215,18 @@ class NewstagsController extends Controller
         $insert->updated_by = $admin_id;
         $insert->save();
 
-        $new_data = Tags::where('deleted_at', NULL)->whereRaw('name = "'.$request->input('title').'"')->orderByRaw('id desc')->first();
+        $new_data = Tags::where('deleted_at', NULL)
+            ->whereRaw('name = "'.$request->input('title').'"')
+            ->orderByRaw('id desc')
+            ->first();
 
-        $admin_log = new Adminlogs();
-        $admin_log->admin_id = $admin_id;
-        $admin_log->table = strtoupper($this->table);
-        $admin_log->table_id = $new_data->id;
-        $admin_log->action = 'INSERT';
-        $admin_log->action_detail = 'Create news tags with title '.$new_data->name;
-        $admin_log->ipaddress = get_client_ip();
-        $admin_log->save();
+        insert_admin_logs(
+            $admin_id,
+            $this->table,
+            $new_data->id,
+            'INSERT',
+            'Create news tags with title '.$new_data->name
+        );
 
         return redirect($this->admin_url.'/detail/'.$new_data['uuid'])->with([
             'success-message' => 'Success add news tags.'
@@ -276,6 +278,7 @@ class NewstagsController extends Controller
                 'default_status' => Staticdatas::default_status(),
                 'category_tag_type' => Staticdatas::category_tag_type()
             ],
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         return view('admin.tags.form', $datas);
@@ -322,14 +325,13 @@ class NewstagsController extends Controller
             'Update content and rename title from '.$current->name.' to '.$request->input('title'):
             'Update news tags '.$current->name;
 
-        $admin_log = new Adminlogs();
-        $admin_log->admin_id = $admin_id;
-        $admin_log->table = strtoupper($this->table);
-        $admin_log->table_id = $current->id;
-        $admin_log->action = 'UPDATE';
-        $admin_log->action_detail = $action_detail;
-        $admin_log->ipaddress = get_client_ip();
-        $admin_log->save();
+            insert_admin_logs(
+                $admin_id,
+                $this->table,
+                $current->id,
+                'UPDATE',
+                $action_detail
+            );
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([
             'success-message' => 'Success update news tags.'

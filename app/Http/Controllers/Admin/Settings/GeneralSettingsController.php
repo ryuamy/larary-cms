@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Models\Adminlogs;
+use App\Models\Adminrolemodules;
 use App\Models\Settings;
 use App\Models\Settinglogs;
 use App\Models\Staticdatas;
@@ -94,6 +94,7 @@ class GeneralSettingsController extends Controller
                 'start_of_week' => get_site_settings('start_of_week'),
             ],
             'timezone_choice' => timezone_choice(get_site_settings('timezone')),
+            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         return view('admin.settings.general', $datas);
@@ -143,14 +144,13 @@ class GeneralSettingsController extends Controller
                 $setting_log->ipaddress = get_client_ip();
                 $setting_log->save();
 
-                $admin_log = new Adminlogs();
-                $admin_log->admin_id = $admin_id;
-                $admin_log->table = strtoupper($this->table);
-                $admin_log->table_id = $current_settings->id;
-                $admin_log->action = 'UPDATE';
-                $admin_log->action_detail = $action_detail;
-                $admin_log->ipaddress = get_client_ip();
-                $admin_log->save();
+                insert_admin_logs(
+                    $admin_id,
+                    $this->table,
+                    $current_settings->id,
+                    'UPDATE',
+                    $action_detail
+                );
             }
         }
 
