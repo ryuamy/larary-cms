@@ -912,8 +912,8 @@ License: You must have a valid license purchased only from themeforest(the above
 									</span>
 								</span>
 							</a>
-							<a href="{{ url(admin_uri().'signout') }}" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">
-								Sign Out
+							<a href="{{ url(admin_uri().'logout') }}" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">
+								Logout
 							</a>
 						</div>
 					</div>

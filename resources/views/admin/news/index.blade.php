@@ -15,7 +15,7 @@
                                         <option value="">Bulk Edit Status</option>
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
-                                        @if (check_admin_access($admindata->role_id, 'news', 'delete') == true)
+                                        @if ( check_admin_access($admindata->role_id, 'news', 'delete') == true )
                                         <option value="2">Delete Permanent</option>
                                         @endif
                                     </select>

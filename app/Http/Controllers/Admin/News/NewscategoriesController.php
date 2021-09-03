@@ -68,14 +68,15 @@ class NewscategoriesController extends Controller
             ],
             'admindata' => $this->admin,
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'module_slug' => 'news_categories',
             ],
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = Categories::where('deleted_at', NULL);
+        $datas_list = Categories::where('deleted_at', NULL)->where('type', 1);
 
         //*** Filter
         if(isset($_GET['action'])) {
@@ -181,7 +182,8 @@ class NewscategoriesController extends Controller
             'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status(),
-                'category_tag_type' => Staticdatas::category_tag_type()
+                'category_tag_type' => Staticdatas::category_tag_type(),
+                'module_slug' => 'news_categories',
             ],
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
@@ -273,7 +275,8 @@ class NewscategoriesController extends Controller
             'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status(),
-                'category_tag_type' => Staticdatas::category_tag_type()
+                'category_tag_type' => Staticdatas::category_tag_type(),
+                'module_slug' => 'news_categories',
             ],
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];

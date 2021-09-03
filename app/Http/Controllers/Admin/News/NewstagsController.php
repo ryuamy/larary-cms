@@ -68,7 +68,8 @@ class NewstagsController extends Controller
             ],
             'admindata' => $this->admin,
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'module_slug' => 'news_tags',
             ],
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
@@ -181,7 +182,8 @@ class NewstagsController extends Controller
             'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status(),
-                'category_tag_type' => Staticdatas::category_tag_type()
+                'category_tag_type' => Staticdatas::category_tag_type(),
+                'module_slug' => 'news_tags',
             ],
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
@@ -276,7 +278,8 @@ class NewstagsController extends Controller
             'admindata' => $this->admin,
             'staticdata' => [
                 'default_status' => Staticdatas::default_status(),
-                'category_tag_type' => Staticdatas::category_tag_type()
+                'category_tag_type' => Staticdatas::category_tag_type(),
+                'module_slug' => 'news_tags',
             ],
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];

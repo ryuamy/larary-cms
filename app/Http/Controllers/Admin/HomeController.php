@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -15,7 +15,9 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+        $this->admin = Auth::guard('admin')->user();
         $this->table = '';
+        $this->admin_url = admin_uri().$this->table;
     }
 
     public function index()
@@ -36,6 +38,7 @@ class HomeController extends Controller
                     'url' => 'dashboard'
                 ),
             ],
+            'admindata' => $this->admin,
             'data' => [],
         ];
 

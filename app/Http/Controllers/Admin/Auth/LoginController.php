@@ -51,7 +51,7 @@ class LoginController extends Controller
     {
         Auth::guard('admin')->logout();
         // Auth::logout()->guard('admin');
-        return redirect(admin_uri() . '/login/')->with([
+        return redirect(admin_uri() . 'login/')->with([
             'success-message' => 'Success logout'
         ]);
     }
