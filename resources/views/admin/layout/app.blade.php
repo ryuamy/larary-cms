@@ -124,15 +124,12 @@ License: You must have a valid license purchased only from themeforest(the above
 					</div>
 					<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 						<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
-                            <?php /*
                             <?php
                                 $datas = [
-                                    'admin_modules' => $admin_modules
+                                    'admindata' => $admindata
                                 ]
                             ?>
                             {{ view( 'admin.layout.menu', $datas ) }}
-                            */ ?>
-                            {{ view( 'admin.layout.menu' ) }}
 						</div>
 					</div>
 				</div>

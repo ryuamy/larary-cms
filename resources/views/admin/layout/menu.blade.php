@@ -1,5 +1,4 @@
 <?php $cur_uri = current_uri(); ?>
-<?php //dd($admin_modules); ?>
 
 <ul class="menu-nav">
     <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'dashboard' ? 'menu-item-active' : '' }}" aria-haspopup="true">
@@ -22,25 +21,28 @@
         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
     </li>
 
-    <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'pages' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
-        <a href="{{ url(admin_uri().'pages') }}" class="menu-link menu-toggle">
-            <span class="svg-icon menu-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24" />
-                        <rect fill="#000000" opacity="0.3" x="4" y="4" width="8" height="16" />
-                        <path d="M6,18 L9,18 C9.66666667,18.1143819 10,18.4477153 10,19 C10,19.5522847 9.66666667,19.8856181 9,20 L4,20 L4,15 C4,14.3333333 4.33333333,14 5,14 C5.66666667,14 6,14.3333333 6,15 L6,18 Z M18,18 L18,15 C18.1143819,14.3333333 18.4477153,14 19,14 C19.5522847,14 19.8856181,14.3333333 20,15 L20,20 L15,20 C14.3333333,20 14,19.6666667 14,19 C14,18.3333333 14.3333333,18 15,18 L18,18 Z M18,6 L15,6 C14.3333333,5.88561808 14,5.55228475 14,5 C14,4.44771525 14.3333333,4.11438192 15,4 L20,4 L20,9 C20,9.66666667 19.6666667,10 19,10 C18.3333333,10 18,9.66666667 18,9 L18,6 Z M6,6 L6,9 C5.88561808,9.66666667 5.55228475,10 5,10 C4.44771525,10 4.11438192,9.66666667 4,9 L4,4 L9,4 C9.66666667,4 10,4.33333333 10,5 C10,5.66666667 9.66666667,6 9,6 L6,6 Z" fill="#000000" fill-rule="nonzero" />
-                    </g>
-                </svg>
-            </span>
-            <span class="menu-text">Pages</span>
-        </a>
-    </li>
+    @if ( check_admin_access($admindata->role_id, 'pages', 'read') == true )
+        <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'pages' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+            <a href="{{ url(admin_uri().'pages') }}" class="menu-link menu-toggle">
+                <span class="svg-icon menu-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24" />
+                            <rect fill="#000000" opacity="0.3" x="4" y="4" width="8" height="16" />
+                            <path d="M6,18 L9,18 C9.66666667,18.1143819 10,18.4477153 10,19 C10,19.5522847 9.66666667,19.8856181 9,20 L4,20 L4,15 C4,14.3333333 4.33333333,14 5,14 C5.66666667,14 6,14.3333333 6,15 L6,18 Z M18,18 L18,15 C18.1143819,14.3333333 18.4477153,14 19,14 C19.5522847,14 19.8856181,14.3333333 20,15 L20,20 L15,20 C14.3333333,20 14,19.6666667 14,19 C14,18.3333333 14.3333333,18 15,18 L18,18 Z M18,6 L15,6 C14.3333333,5.88561808 14,5.55228475 14,5 C14,4.44771525 14.3333333,4.11438192 15,4 L20,4 L20,9 C20,9.66666667 19.6666667,10 19,10 C18.3333333,10 18,9.66666667 18,9 L18,6 Z M6,6 L6,9 C5.88561808,9.66666667 5.55228475,10 5,10 C4.44771525,10 4.11438192,9.66666667 4,9 L4,4 L9,4 C9.66666667,4 10,4.33333333 10,5 C10,5.66666667 9.66666667,6 9,6 L6,6 Z" fill="#000000" fill-rule="nonzero" />
+                        </g>
+                    </svg>
+                </span>
+                <span class="menu-text">Pages</span>
+            </a>
+        </li>
+    @endif
 
-    {{-- @if (check_admin_access('news') === true || check_admin_access('news_categories') === true || check_admin_access('news_tags') === true) --}}
+    @if ( check_admin_access($admindata->role_id, 'news', 'read') == true || check_admin_access($admindata->role_id, 'news_categories', 'read') == true || check_admin_access($admindata->role_id, 'news_tags', 'read') === true )
         <li class="menu-item menu-item-submenu {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' ? 'menu-item-active menu-item-open' : '' }}
             {{ isset($cur_uri[5]) && ($cur_uri[5] === 'news' || $cur_uri[5] === 'categories' || $cur_uri[5] === 'tags') ? 'menu-item-open' : '' }} "
             aria-haspopup="true" data-menu-toggle="hover">
+
             <a href="Javascript:;" class="menu-link menu-toggle">
                 <span class="svg-icon menu-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -58,7 +60,7 @@
             <div class="menu-submenu">
                 <i class="menu-arrow"></i>
                 <ul class="menu-subnav">
-                    {{-- @if (check_admin_access('news') === true) --}}
+                    @if ( check_admin_access($admindata->role_id, 'news', 'read') == true )
                         <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' && !isset($cur_uri[5]) ? 'menu-item-active' : '' }}" aria-haspopup="true">
                             <a href="{{ url(admin_uri().'news') }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
@@ -67,9 +69,9 @@
                                 <span class="menu-text">News</span>
                             </a>
                         </li>
-                    {{-- @endif --}}
+                    @endif
 
-                    {{-- @if (check_admin_access('news_categories') === true) --}}
+                    @if ( check_admin_access($admindata->role_id, 'news_categories', 'read') == true )
                         <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'categories' ? 'menu-item-active' : '' }}" aria-haspopup="true">
                             <a href="{{ url(admin_uri().'news/categories') }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
@@ -78,9 +80,9 @@
                                 <span class="menu-text">Categories</span>
                             </a>
                         </li>
-                    {{-- @endif --}}
+                    @endif
 
-                    {{-- @if (check_admin_access('news_tags') === true) --}}
+                    @if ( check_admin_access($admindata->role_id, 'news_tags', 'read') == true )
                         <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'tags' ? 'menu-item-active' : '' }}" aria-haspopup="true">
                             <a href="{{ url(admin_uri().'news/tags') }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
@@ -89,11 +91,11 @@
                                 <span class="menu-text">Tags</span>
                             </a>
                         </li>
-                    {{-- @endif --}}
+                    @endif
                 </ul>
             </div>
         </li>
-    {{-- @endif --}}
+    @endif
 
     <!--<li class="menu-section">
         <h4 class="menu-text">Messages</h4>

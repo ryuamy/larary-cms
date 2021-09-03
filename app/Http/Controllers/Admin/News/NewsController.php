@@ -317,7 +317,7 @@ class NewsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title' => 'Detail '.$current['name'].' NSews',
+                'title' => 'Detail '.$current['name'].' Sews',
                 'heading' => 'News Management'
             ],
             'css' => [],

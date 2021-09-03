@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-class TagsSeeder extends Seeder
+class NewsTagsSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -13,9 +13,11 @@
     <div class="container">
         <form class="row form-input" method="POST" action="{{ $action_url }}" id="{{ $table }}" enctype="multipart/form-data">
             <div class="col-md-12 d-flex justify-content-end mb-5">
-                <button type="submit" class="btn btn-success mr-2">
-                    <i class="fas fa-save"></i> Save
-                </button>
+                @if ( check_admin_access($admindata->role_id, 'news', 'edit') == true )
+                    <button type="submit" class="btn btn-success mr-2">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                @endif
                 <a class="btn btn-dark" href="{{ $admin_url }}">
                     Cancel
                 </a>
@@ -80,9 +82,9 @@
                             />
                             <?php if(str_contains($current_route, 'detail')) { ?>
                                 <span class="form-text text-muted d-flex align-items-center">
-                                    Permalink:
-                                     <a href="{{ env('APP_URL').'/' }}">
-                                        {{ env('APP_URL') }}/<span id="permalink_slug" class="mr-1 d-inline-block">{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}</span>
+                                    Permalink: &nbsp;
+                                     <a href="{{ env('APP_NEWS_URL') }}{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}">
+                                        {{ env('APP_NEWS_URL') }}<span id="permalink_slug" class="mr-1 d-inline-block">{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}</span>
                                     </a>
                                     <input type="text" value="{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}"
                                         id="field_permalink_slug"
