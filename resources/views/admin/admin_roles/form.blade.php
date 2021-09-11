@@ -13,9 +13,11 @@
     <div class="container">
         <form class="row form-input" method="POST" action="{{ $action_url }}" id="{{ $table }}" enctype="multipart/form-data">
             <div class="col-md-12 d-flex justify-content-end mb-5">
-                <button type="submit" class="btn btn-success mr-2">
-                    <i class="fas fa-save"></i> Save
-                </button>
+                @if ( check_admin_access($admindata->role_id, $staticdata['module_slug'], 'edit') == true )
+                    <button type="submit" class="btn btn-success mr-2">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                @endif
                 <a class="btn btn-dark" href="{{ $admin_url }}">
                     Cancel
                 </a>
@@ -141,11 +143,7 @@
                                                 check_admin_access($current['id'], $module->slug) == true || (
                                                     $current['slug'] == 'super_admin' || (
                                                         $current['slug'] == 'admin' && (
-                                                            $module->slug !== 'admin_roles' &&
-                                                            $module->slug !== 'modules' &&
-                                                            $module->slug !== 'general_settings' &&
-                                                            $module->slug !== 'seo_website_settings' &&
-                                                            $module->slug !== 'file_upload_settings'
+                                                            $module->slug !== 'modules'
                                                         )
                                                     ) || (
                                                         $current['slug'] == 'editor' && (
@@ -171,11 +169,7 @@
                                                 check_admin_access($current['id'], $module->slug, 'add') == true || (
                                                     $current['slug'] == 'super_admin' || (
                                                         $current['slug'] == 'admin' && (
-                                                            $module->slug !== 'admin_roles' &&
-                                                            $module->slug !== 'modules' &&
-                                                            $module->slug !== 'general_settings' &&
-                                                            $module->slug !== 'seo_website_settings' &&
-                                                            $module->slug !== 'file_upload_settings'
+                                                            $module->slug !== 'modules'
                                                         )
                                                     ) || (
                                                         $current['slug'] == 'editor' && (
@@ -199,11 +193,7 @@
                                                 check_admin_access($current['id'], $module->slug, 'edit') == true || (
                                                     $current['slug'] == 'super_admin' || (
                                                         $current['slug'] == 'admin' && (
-                                                            $module->slug !== 'admin_roles' &&
-                                                            $module->slug !== 'modules' &&
-                                                            $module->slug !== 'general_settings' &&
-                                                            $module->slug !== 'seo_website_settings' &&
-                                                            $module->slug !== 'file_upload_settings'
+                                                            $module->slug !== 'modules'
                                                         )
                                                     ) || (
                                                         $current['slug'] == 'editor' && (
@@ -227,11 +217,7 @@
                                                 check_admin_access($current['id'], $module->slug, 'delete') == true || (
                                                     $current['slug'] == 'super_admin' || (
                                                         $current['slug'] == 'admin' && (
-                                                            $module->slug !== 'admin_roles' &&
-                                                            $module->slug !== 'modules' &&
-                                                            $module->slug !== 'general_settings' &&
-                                                            $module->slug !== 'seo_website_settings' &&
-                                                            $module->slug !== 'file_upload_settings'
+                                                            $module->slug !== 'modules'
                                                         )
                                                     )
                                                 )
@@ -345,11 +331,7 @@
                                                     isset($current) && (
                                                         $current['slug'] == 'super_admin' || (
                                                             $current['slug'] == 'admin' && (
-                                                                $module->slug !== 'admin_roles' &&
-                                                                $module->slug !== 'modules' &&
-                                                                $module->slug !== 'general_settings' &&
-                                                                $module->slug !== 'seo_website_settings' &&
-                                                                $module->slug !== 'file_upload_settings'
+                                                                $module->slug !== 'modules'
                                                             )
                                                         ) || (
                                                             $current['slug'] == 'editor' && (
@@ -406,11 +388,7 @@
                                                         isset($current) && (
                                                             $current['slug'] == 'super_admin' || (
                                                                 $current['slug'] == 'admin' && (
-                                                                    $module->slug !== 'admin_roles' &&
-                                                                    $module->slug !== 'modules' &&
-                                                                    $module->slug !== 'general_settings' &&
-                                                                    $module->slug !== 'seo_website_settings' &&
-                                                                    $module->slug !== 'file_upload_settings'
+                                                                    $module->slug !== 'modules'
                                                                 )
                                                             ) || (
                                                                 $current['slug'] == 'editor' && (
@@ -467,11 +445,7 @@
                                                         isset($current) && (
                                                             $current['slug'] == 'super_admin' || (
                                                                 $current['slug'] == 'admin' && (
-                                                                    $module->slug !== 'admin_roles' &&
-                                                                    $module->slug !== 'modules' &&
-                                                                    $module->slug !== 'general_settings' &&
-                                                                    $module->slug !== 'seo_website_settings' &&
-                                                                    $module->slug !== 'file_upload_settings'
+                                                                    $module->slug !== 'modules'
                                                                 )
                                                             ) || (
                                                                 $current['slug'] == 'editor' && (
@@ -529,11 +503,7 @@
                                                         isset($current) && (
                                                             $current['slug'] == 'super_admin' || (
                                                                 $current['slug'] == 'admin' && (
-                                                                    $module->slug !== 'admin_roles' &&
-                                                                    $module->slug !== 'modules' &&
-                                                                    $module->slug !== 'general_settings' &&
-                                                                    $module->slug !== 'seo_website_settings' &&
-                                                                    $module->slug !== 'file_upload_settings'
+                                                                    $module->slug !== 'modules'
                                                                 )
                                                             )
                                                         )

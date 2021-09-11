@@ -69,7 +69,9 @@ class SeoSettingsController extends Controller
                 ),
             ],
             'admindata' => $this->admin,
-            'staticdata' => [],
+            'staticdata' => [
+                'module_slug' => 'seo_website_settings',
+            ],
             'settings' => [
                 'search_engine_visibility' => get_site_settings('search_engine_visibility'),
                 'description' => get_site_settings('description'),

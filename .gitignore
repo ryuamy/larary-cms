@@ -1,6 +1,7 @@
 /.notes
 /copyfile
 /database/seeders/AdminsSeeder.php
+/database/seeders/AdminRoleModulesSeeder.php
 /node_modules
 /public/hot
 /public/logs

@@ -79,7 +79,8 @@ class GeneralSettingsController extends Controller
             'admindata' => $this->admin,
             'staticdata' => [
                 'date_format' => Staticdatas::date_format(),
-                'time_format' => Staticdatas::time_format()
+                'time_format' => Staticdatas::time_format(),
+                'module_slug' => 'general_settings',
             ],
             'settings' => [
                 'title' => get_site_settings('title'),

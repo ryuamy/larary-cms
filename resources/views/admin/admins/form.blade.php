@@ -13,9 +13,11 @@
     <div class="container">
         <form class="row form-input" method="POST" action="{{ $action_url }}" id="{{ $table }}" enctype="multipart/form-data">
             <div class="col-md-12 d-flex justify-content-end mb-5">
-                <button type="submit" class="btn btn-success mr-2">
-                    <i class="fas fa-save"></i> Save
-                </button>
+                @if ( check_admin_access($admindata->role_id, $staticdata['module_slug'], 'edit') == true )
+                    <button type="submit" class="btn btn-success mr-2">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                @endif
                 <a class="btn btn-dark" href="{{ $admin_url }}">
                     Cancel
                 </a>

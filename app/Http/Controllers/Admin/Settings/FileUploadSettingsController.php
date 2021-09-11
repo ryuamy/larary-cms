@@ -85,7 +85,9 @@ class FileUploadSettingsController extends Controller
                 ),
             ],
             'admindata' => $this->admin,
-            'staticdata' => [],
+            'staticdata' => [
+                'module_slug' => 'file_upload_settings',
+            ],
             'settings' => [
                 'organize_uploads' => get_site_settings('organize_uploads'),
                 'crop_image_to_exact_dimensions' => get_site_settings('crop_image_to_exact_dimensions'),

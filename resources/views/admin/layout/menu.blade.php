@@ -278,84 +278,44 @@
         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
     </li>
 
-    <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'admins' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
-        <a href="{{ url(admin_uri().'admins') }}" class="menu-link menu-toggle">
-            <i class="menu-icon flaticon2-user-1"></i>
-            <span class="menu-text">Admins</span>
-        </a>
-    </li>
+    @if ( check_admin_access($admindata->role_id, 'admins', 'read') == true )
+        <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'admins' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+            <a href="{{ url(admin_uri().'admins') }}" class="menu-link menu-toggle">
+                <i class="menu-icon flaticon2-user-1"></i>
+                <span class="menu-text">Admins</span>
+            </a>
+        </li>
+    @endif
 
-    <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'admin-roles' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
-        <a href="{{ url(admin_uri().'admin-roles') }}" class="menu-link menu-toggle">
-            <i class="menu-icon flaticon2-group"></i>
-            <span class="menu-text">Admin Roles</span>
-        </a>
-    </li>
+    @if ( check_admin_access($admindata->role_id, 'admin_roles', 'read') == true )
+        <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'admin-roles' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+            <a href="{{ url(admin_uri().'admin-roles') }}" class="menu-link menu-toggle">
+                <i class="menu-icon flaticon2-group"></i>
+                <span class="menu-text">Admin Roles</span>
+            </a>
+        </li>
+    @endif
 
-    <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'users' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
-        <a href="{{ url(admin_uri().'users') }}" class="menu-link menu-toggle">
-            <span class="svg-icon menu-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <polygon points="0 0 24 0 24 24 0 24"/>
-                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
-                    </g>
-                </svg>
-            </span>
-            <span class="menu-text">Users</span>
-        </a>
-    </li>
+    @if ( check_admin_access($admindata->role_id, 'users', 'read') == true )
+        <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'users' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+            <a href="{{ url(admin_uri().'users') }}" class="menu-link menu-toggle">
+                <span class="svg-icon menu-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24"/>
+                            <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                            <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+                        </g>
+                    </svg>
+                </span>
+                <span class="menu-text">Users</span>
+            </a>
+        </li>
+    @endif
 
     <li class="menu-section">
         <h4 class="menu-text">Layout</h4>
         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-    </li>
-
-    <li class="menu-item menu-item-submenu
-            {{ isset($cur_uri[4]) && $cur_uri[4] === 'settings' ? 'menu-item-here' : '' }}
-            {{ isset($cur_uri[5]) && ($cur_uri[5] === 'general' || $cur_uri[5] === 'seo' || $cur_uri[5] === 'file-upload') ? 'menu-item-open' : '' }}
-        " aria-haspopup="true" data-menu-toggle="hover"
-    >
-        <a href="javascript:;" class="menu-link menu-toggle">
-            <i class="menu-icon flaticon2-laptop"></i>
-            <span class="menu-text">Settings</span>
-            <i class="menu-arrow"></i>
-        </a>
-        <div class="menu-submenu">
-            <i class="menu-arrow"></i>
-            <ul class="menu-subnav">
-                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                    <span class="menu-link">
-                        <span class="menu-text">Settings</span>
-                    </span>
-                </li>
-                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'general' ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                    <a href="{{ url(admin_uri().'settings/general') }}" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">General Settings</span>
-                    </a>
-                </li>
-                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'seo' ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                    <a href="{{ url(admin_uri().'settings/seo') }}" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">SEO Website</span>
-                    </a>
-                </li>
-                <li class="menu-item {{ isset($cur_uri[5]) && $cur_uri[5] === 'file-upload' ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                    <a href="{{ url(admin_uri().'settings/file-upload') }}" class="menu-link">
-                        <i class="menu-bullet menu-bullet-dot">
-                            <span></span>
-                        </i>
-                        <span class="menu-text">File Upload</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
     </li>
 
     <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'themes' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
@@ -372,6 +332,38 @@
             <span class="menu-text">Themes</span>
         </a>
     </li>
+
+    <li class="menu-section">
+        <h4 class="menu-text">Settings</h4>
+        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+    </li>
+
+    @if ( check_admin_access($admindata->role_id, 'general_settings', 'read') == true )
+        <li class="menu-item  {{ isset($cur_uri[5]) && $cur_uri[5] === 'general' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+            <a href="{{ url(admin_uri().'settings/general') }}" class="menu-link menu-toggle">
+                <i class="menu-icon flaticon2-laptop"></i>
+                <span class="menu-text">General Settings</span>
+            </a>
+        </li>
+    @endif
+
+    @if ( check_admin_access($admindata->role_id, 'seo_website_settings', 'read') == true )
+        <li class="menu-item  {{ isset($cur_uri[5]) && $cur_uri[5] === 'seo' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+            <a href="{{ url(admin_uri().'settings/seo') }}" class="menu-link menu-toggle">
+                <i class="menu-icon flaticon2-laptop"></i>
+                <span class="menu-text">SEO Website</span>
+            </a>
+        </li>
+    @endif
+
+    @if ( check_admin_access($admindata->role_id, 'file_upload_settings', 'read') == true )
+        <li class="menu-item  {{ isset($cur_uri[5]) && $cur_uri[5] === 'file-upload' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+            <a href="{{ url(admin_uri().'settings/file-upload') }}" class="menu-link menu-toggle">
+                <i class="menu-icon flaticon2-laptop"></i>
+                <span class="menu-text">File Upload</span>
+            </a>
+        </li>
+    @endif
 
     <!--<li class="menu-item" aria-haspopup="true">
         <a target="_blank" href="https://preview.keenthemes.com/metronic/demo1/builder" class="menu-link">

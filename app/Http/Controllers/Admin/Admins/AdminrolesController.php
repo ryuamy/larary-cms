@@ -65,7 +65,8 @@ class AdminrolesController extends Controller
             ],
             'admindata' => $this->admin,
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'module_slug' => 'admin_roles',
             ],
             'admin_roles' => Adminroles::where('deleted_at', NULL)->get()
         ];
@@ -173,7 +174,8 @@ class AdminrolesController extends Controller
             // 'current' => [],
             'admindata' => $this->admin,
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'module_slug' => 'admin_roles',
             ],
             'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
             'modules' => Modules::where('deleted_at', NULL)->get(),
@@ -287,7 +289,8 @@ class AdminrolesController extends Controller
             'current' => $current,
             'admindata' => $this->admin,
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'module_slug' => 'admin_roles',
             ],
             'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
             'modules' => Modules::where('deleted_at', NULL)->get(),
@@ -300,8 +303,6 @@ class AdminrolesController extends Controller
     public function update($uuid, Request $request)
     {
         $current = Adminroles::where('uuid', $uuid)->first();
-
-        // dd($current);
 
         if(!$current) {
             return redirect($this->admin_url)->with([

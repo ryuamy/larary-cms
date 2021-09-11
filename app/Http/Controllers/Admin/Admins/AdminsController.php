@@ -69,7 +69,8 @@ class AdminsController extends Controller
             ],
             'admindata' => $this->admin,
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'module_slug' => 'admins',
             ],
             'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
@@ -175,7 +176,8 @@ class AdminsController extends Controller
             ],
             'admindata' => $this->admin,
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'module_slug' => 'admins',
             ],
             'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
@@ -276,7 +278,8 @@ class AdminsController extends Controller
             'current' => $current,
             'admindata' => $this->admin,
             'staticdata' => [
-                'default_status' => Staticdatas::default_status()
+                'default_status' => Staticdatas::default_status(),
+                'module_slug' => 'admins',
             ],
             'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),

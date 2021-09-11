@@ -16,7 +16,6 @@ class CreateAdminRoleModulesTable extends Migration
     {
         Schema::create('admin_role_modules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('admin_id')->index();
             $table->integer('admin_role_id')->index();
             $table->integer('module_id')->index();
             $table->string('module_slug', 255)->nullable();

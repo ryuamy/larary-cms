@@ -8,16 +8,20 @@
             <div class="card-header pt-6 pb-6 pr-0">
                 <div class="row bx-bulk-action w-100 align-items-center">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_length" id="dataTable_length">
-                            <label class="m-0">
-                                <select id="bulk-action-select" name="bulk_action" class="m-0 custom-select custom-select-sm form-control form-control-sm">
-                                    <option value="">Bulk Edit Status</option>
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
-                                    <option value="2">Delete Permanent</option>
-                                </select>
-                            </label>
-                        </div>
+                        @if ( check_admin_access($admindata->role_id, $staticdata['module_slug'], 'edit') == true )
+                            <div class="dataTables_length" id="dataTable_length">
+                                <label class="m-0">
+                                    <select id="bulk-action-select" name="bulk_action" class="m-0 custom-select custom-select-sm form-control form-control-sm">
+                                        <option value="">Bulk Edit Status</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                        @if ( check_admin_access($admindata->role_id, $staticdata['module_slug'], 'delete') == true )
+                                        <option value="2">Delete Permanent</option>
+                                        @endif
+                                    </select>
+                                </label>
+                            </div>
+                        @endif
                     </div>
 
                     <div class="col-sm-12 col-md-7">
@@ -37,21 +41,23 @@
                                 </span> 
                             </button>
 
-                            <a href="{{ url($admin_url.'/create') }}" class="btn btn-primary font-weight-bolder">
-                                <span class="svg-icon svg-icon-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                        width="23px" height="23px" 
-                                        viewBox="0 0 23 23" version="1.1"
-                                    >
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="23" height="23" />
-                                            <circle fill="#000000" cx="9" cy="15" r="6" />
-                                            <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3" />
-                                        </g>
-                                    </svg>
-                                </span>
-                                Add 
-                            </a>
+                            @if ( check_admin_access($admindata->role_id, $staticdata['module_slug'], 'add') == true )
+                                <a href="{{ url($admin_url.'/create') }}" class="btn btn-primary font-weight-bolder">
+                                    <span class="svg-icon svg-icon-md">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                            width="23px" height="23px" 
+                                            viewBox="0 0 23 23" version="1.1"
+                                        >
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="23" height="23" />
+                                                <circle fill="#000000" cx="9" cy="15" r="6" />
+                                                <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3" />
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    Add 
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -172,7 +178,7 @@
                     <table id="{{ $table }}" class="table table-vertical-center table-head-custom table-foot-custom table-checkable table-list" style="width:1000px;">
                         <thead>
                             <tr>
-                                @if( $admindata->role_id == 1)
+                                @if ( check_admin_access($admindata->role_id, $staticdata['module_slug'], 'edit') == true )
                                     <th class="select-all select_all">
                                         <label class="checkbox checkbox-lg checkbox-inline">
                                             <input id="bulk-action-checkbox" type="checkbox" class="bulk_action_select">
@@ -192,7 +198,7 @@
                         
                         <tfoot>
                             <tr>
-                                @if( $admindata->role_id == 1)
+                                @if ( check_admin_access($admindata->role_id, $staticdata['module_slug'], 'edit') == true )
                                     <th class="select-all select_all">
                                         <label class="checkbox checkbox-lg checkbox-inline">
                                             <input id="bulk-action-checkbox-footer" type="checkbox" class="bulk_action_select">
@@ -214,15 +220,17 @@
                             <?php if(count($list) > 0) { ?>
                                 <?php foreach($list as $dt) { ?>
                                     <tr>
-                                        @if( $admindata->role_id === 1 || $admindata->role_id === 2 )
-                                            <td>
-                                                <label class="checkbox checkbox-lg checkbox-inline {{ $admindata->id === $dt['id'] ? 'checkbox-disabled' : '' }}">
-                                                    <input type="checkbox" value="{{ $dt['uuid'] }}" name="bulk[]" class="{{ $admindata->id === $dt['id'] ? '' : 'bulk_action_list' }}" 
-                                                        {{ $admindata->id === $dt['id'] ? 'disabled' : '' }}
-                                                    />
-                                                    <span></span>
-                                                </label>
-                                            </td>
+                                        @if ( check_admin_access($admindata->role_id, $staticdata['module_slug'], 'edit') == true )
+                                            @if( $admindata->role_id === 1 || $admindata->role_id === 2 )
+                                                <td>
+                                                    <label class="checkbox checkbox-lg checkbox-inline {{ $admindata->id === $dt['id'] ? 'checkbox-disabled' : '' }}">
+                                                        <input type="checkbox" value="{{ $dt['uuid'] }}" name="bulk[]" class="{{ $admindata->id === $dt['id'] ? '' : 'bulk_action_list' }}" 
+                                                            {{ $admindata->id === $dt['id'] ? 'disabled' : '' }}
+                                                        />
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                            @endif
                                         @endif
                                         <td>
                                             <a href="{{ $admin_url.'/detail/'.$dt['uuid'] }}">
