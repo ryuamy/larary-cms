@@ -21,6 +21,16 @@ class CreateNewsTable extends Migration
             $table->string('slug', 255)->unique();
             $table->mediumText('content');
             $table->string('featured_image', 255)->nullable();
+            $table->string('seo_title', 100)->nullable();
+            $table->string('seo_description', 100)->nullable();
+            $table->text('seo_focus_keyphrase')->nullable();
+            $table->string('seo_tagline', 255)->nullable();
+            $table->string('seo_facebook_title', 100)->nullable();
+            $table->string('seo_facebook_description', 100)->nullable();
+            $table->string('seo_twitter_title', 100)->nullable();
+            $table->string('seo_twitter_description', 100)->nullable();
+            $table->integer('seo_allow_search_engine_result')->default(1);
+            $table->integer('seo_allow_search_engine_follow')->default(1);
             $table->integer('status')->default(0);
             $table->integer('created_by')->nullable()->index();
             $table->integer('updated_by')->nullable()->index();

@@ -7,3 +7,14 @@
     justify-content: space-between;
     width: 14em;
 }
+.input-group-admin-select2 .select2 {
+    width: auto !important;
+}
+.input-group-admin-select2 .select2 .selection .select2-selection {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+.input-group-admin-select2-text .select2 .selection .select2-selection {
+    border-radius: 0 !important;
+    border-right: 0 !important;
+}

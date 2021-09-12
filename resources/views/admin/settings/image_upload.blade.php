@@ -6,7 +6,7 @@
     $cur_uri = current_uri();
     $request = Session::get('request') ? Session::get('request') : array();
     $current_route = \Route::currentRouteName();
-    $action_url = $admin_url.'/file-upload/update';
+    $action_url = $admin_url.'/image-upload/update';
 ?>
 
 <div class="d-flex flex-column-fluid">
@@ -65,7 +65,7 @@
             <div class="col-md-12">
                 <div class="card card-custom mb-8">
                     <div class="card-header">
-                        <h3 class="card-title">Uploading Files</h3>
+                        <h3 class="card-title">Uploading Image</h3>
                     </div>
                     <div class="card-body">
                         <div class="form-group">

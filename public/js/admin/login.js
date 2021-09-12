@@ -87,22 +87,19 @@
 							// console.log(request);
                             _reloadCaptcha();
 							swal.fire({
-								text: 'Success login',
+								html: 'Success login.<br />Please wait, you will be redirected to dashboard.',
 								icon: 'success',
-								buttonsStyling: false,
-								confirmButtonText: 'Go To Dashboard',
-								customClass: {
-									confirmButton: 'btn font-weight-bold btn-light-primary'
-								}
-							}).then(function() {
-								KTUtil.scrollTop();
-								if (request.status == 200) {
-									window.location.replace(response.datas.redirect);
-								} else {
-									$('#bx_alert_message_login').html(bx_alert_message_login);
-									$('#alert_message_login').html(response.responseJSON.message);
-								}
+								showConfirmButton: false,
+								showCancelButton: false,
 							});
+							if (request.status == 200) {
+								setTimeout(function () {
+									window.location.replace(response.datas.redirect);
+								}, 7500);
+							} else {
+								$('#bx_alert_message_login').html(bx_alert_message_login);
+								$('#alert_message_login').html(response.responseJSON.message);
+							}
 						},
 						error: function (response, textStatus, request) {
 							// console.log(response);

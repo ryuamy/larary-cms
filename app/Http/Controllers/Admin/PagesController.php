@@ -8,6 +8,7 @@ use App\Models\Adminrolemodules;
 use App\Models\Pages;
 use App\Models\Pagelogs;
 use App\Models\Staticdatas;
+use App\Rules\IndonesianAddressRule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,12 @@ class PagesController extends Controller
     protected $validationRules = [
         'title' => 'required|alpha_num_spaces',
         'content' => 'required',
+        'seo_title' => 'nullable|alpha_num_spaces|max:20',
+        'seo_description' => 'nullable|alpha_num_spaces|max:60',
+        'seo_facebook_title' => 'nullable|alpha_num_spaces|max:20',
+        'seo_facebook_description' => 'nullable|alpha_num_spaces|max:60',
+        'seo_twitter_title' => 'nullable|alpha_num_spaces|max:20',
+        'seo_twitter_description' => 'nullable|alpha_num_spaces|max:60',
         'status' => 'required',
     ];
 
@@ -26,6 +33,18 @@ class PagesController extends Controller
         'title.required' => 'Title can not be empty.',
         'title.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
         'content.required' => 'Content can not be empty.',
+        'seo_title.alpha_num_spaces' => 'SEO meta title only allowed alphanumeric with spaces.',
+        'seo_title.max' => 'SEO meta title may not be greater than 20 characters.',
+        'seo_description.alpha_num_spaces' => 'SEO meta description only allowed alphanumeric with spaces.',
+        'seo_description.max' => 'SEO meta description may not be greater than 60 characters.',
+        'seo_facebook_title.alpha_num_spaces' => 'SEO meta facebook title only allowed alphanumeric with spaces.',
+        'seo_facebook_title.max' => 'SEO meta facebook title may not be greater than 20 characters.',
+        'seo_facebook_description.alpha_num_spaces' => 'SEO meta facebook description only allowed alphanumeric with spaces.',
+        'seo_facebook_description.max' => 'SEO meta facebook description may not be greater than 60 characters.',
+        'seo_twitter_title.alpha_num_spaces' => 'SEO meta twitter title only allowed alphanumeric with spaces.',
+        'seo_twitter_title.max' => 'SEO meta twitter title may not be greater than 20 characters.',
+        'seo_twitter_description.alpha_num_spaces' => 'SEO meta title description only allowed alphanumeric with spaces.',
+        'seo_twitter_description.max' => 'SEO meta title description may not be greater than 60 characters.',
         'status.required' => 'Status must be selected.',
     ];
 
@@ -193,6 +212,9 @@ class PagesController extends Controller
 
     public function save(Request $request)
     {
+        $this->validationRules['seo_focus_keyphrase'] = ['nullable', new IndonesianAddressRule()];
+        $this->validationMessages['seo_focus_keyphrase.IndonesianAddressRule'] = 'Focus keyphrase only accept letters, numeric and comma.';
+
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {
             $errors = $validation->errors()->all();
@@ -222,12 +244,47 @@ class PagesController extends Controller
 
         $slug = create_slug($this->table, $request->input('title'));
 
+        $seo_title = (!empty($request->input('seo_title'))) ? 
+            $request->input('seo_title') : 
+            substr(strip_tags($request->input('title')), 0, 20);
+
+        $seo_description = (!empty($request->input('seo_description'))) ? 
+            $request->input('seo_description') : 
+            substr(strip_tags($request->input('content')), 0, 60);
+
+        $seo_facebook_title = (!empty($request->input('seo_facebook_title'))) ? 
+            $request->input('seo_facebook_title') : 
+            substr(strip_tags($request->input('title')), 0, 20);
+
+        $seo_facebook_description = (!empty($request->input('seo_facebook_description'))) ? 
+            $request->input('seo_facebook_description') : 
+            substr(strip_tags($request->input('content')), 0, 60);
+
+        $seo_twitter_title = (!empty($request->input('seo_twitter_title'))) ? 
+            $request->input('seo_twitter_title') : 
+            substr(strip_tags($request->input('title')), 0, 20);
+
+        $seo_twitter_description = (!empty($request->input('seo_twitter_description'))) ? 
+            $request->input('seo_twitter_description') : 
+            substr(strip_tags($request->input('content')), 0, 60);
+
+        $seo_focus_keyphrase = (!empty($request->input('seo_focus_keyphrase'))) ? 
+            $request->input('seo_focus_keyphrase') : 
+            get_site_settings('focus_keyphrase');
+
         $insert = new Pages();
         $insert->uuid = (string) Str::uuid();
         $insert->name = $request->input('title');
         $insert->slug = $slug;
         $insert->featured_image = $path_featured_image.'/'.$image_new_name;
         $insert->content = $request->input('content');
+        $insert->seo_title = $seo_title;
+        $insert->seo_description = $seo_description;
+        $insert->seo_focus_keyphrase = $seo_focus_keyphrase;
+        $insert->seo_facebook_title = $seo_facebook_title;
+        $insert->seo_facebook_description = $seo_facebook_description;
+        $insert->seo_twitter_title = $seo_twitter_title;
+        $insert->seo_twitter_description = $seo_twitter_description;
         $insert->status = $request->input('status');
         $insert->created_by = $admin_id;
         $insert->updated_by = $admin_id;
@@ -318,6 +375,9 @@ class PagesController extends Controller
         $this->validationMessages['permalink.required'] = 'Permalink can not be empty.';
         $this->validationMessages['permalink.slug'] = 'Permalink only allowed letters and numbers with dash or underscore.';
 
+        $this->validationRules['seo_focus_keyphrase'] = ['nullable', new IndonesianAddressRule()];
+        $this->validationMessages['seo_focus_keyphrase.IndonesianAddressRule'] = 'Focus keyphrase only accept letters, numeric and comma.';
+
         $validation = Validator::make($request->all(), $this->validationRules, $this->validationMessages);
         if ($validation->fails()) {
             $errors = $validation->errors()->all();
@@ -346,7 +406,37 @@ class PagesController extends Controller
             $featured_image = $path_featured_image.'/'.$image_new_name;
         }
 
-        $slug = ($request->input('permalink') != $current->slug) ? create_slug($this->table, $request->input('permalink')) : $request->input('permalink');
+        $slug = ($request->input('permalink') != $current->slug) ? 
+            create_slug($this->table, $request->input('permalink')) : 
+            $request->input('permalink');
+
+        $seo_title = (!empty($request->input('seo_title'))) ? 
+            $request->input('seo_title') : 
+            substr(strip_tags($request->input('title')), 0, 20);
+
+        $seo_description = (!empty($request->input('seo_description'))) ? 
+            $request->input('seo_description') : 
+            substr(strip_tags($request->input('content')), 0, 60);
+
+        $seo_facebook_title = (!empty($request->input('seo_facebook_title'))) ? 
+            $request->input('seo_facebook_title') : 
+            substr(strip_tags($request->input('title')), 0, 20);
+
+        $seo_facebook_description = (!empty($request->input('seo_facebook_description'))) ? 
+            $request->input('seo_facebook_description') : 
+            substr(strip_tags($request->input('content')), 0, 60);
+
+        $seo_twitter_title = (!empty($request->input('seo_twitter_title'))) ? 
+            $request->input('seo_twitter_title') : 
+            substr(strip_tags($request->input('title')), 0, 20);
+
+        $seo_twitter_description = (!empty($request->input('seo_twitter_description'))) ? 
+            $request->input('seo_twitter_description') : 
+            substr(strip_tags($request->input('content')), 0, 60);
+
+        $seo_focus_keyphrase = (!empty($request->input('seo_focus_keyphrase'))) ? 
+            $request->input('seo_focus_keyphrase') : 
+            get_site_settings('focus_keyphrase');
 
         Pages::where('uuid', $uuid)->update(
             array(
@@ -354,6 +444,13 @@ class PagesController extends Controller
                 'slug' => $slug,
                 'featured_image' => $featured_image,
                 'content' => $request->input('content'),
+                'seo_title' => $seo_title,
+                'seo_description' => $seo_description,
+                'seo_focus_keyphrase' => $seo_focus_keyphrase,
+                'seo_facebook_title' => $seo_facebook_title,
+                'seo_facebook_description' => $seo_facebook_description,
+                'seo_twitter_title' => $seo_twitter_title,
+                'seo_twitter_description' => $seo_twitter_description,
                 'status' => $request->input('status'),
                 'updated_by' => $admin_id
             )

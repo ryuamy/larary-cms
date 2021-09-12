@@ -76,15 +76,22 @@
                             <input type="text" name="title" class="form-control"
                                 <?php if(str_contains($current_route, 'detail')) { ?>
                                     value="{{ isset($request['title']) ? $request['title'] : $current['name'] }}"
-                                <?php } elseif($cur_uri[6] !== 'detail') { ?>
+                                <?php } else { ?>
                                     value="{{ isset($request['title']) ? $request['title'] : '' }}"
                                 <?php } ?>
                             />
                             <?php if(str_contains($current_route, 'detail')) { ?>
+                                <?php 
+                                    $permalink = env('APP_URL');
+
+                                    if($cur_uri[4] == 'news') {
+                                        $permalink = $permalink.'/'.get_site_settings('permalink_news').'/'.get_site_settings('permalink_news_tag').'/';
+                                    }
+                                ?>
                                 <span class="form-text text-muted d-flex align-items-center">
                                     Permalink:&nbsp;
-                                     <a href="{{ env('APP_NEWS_URL').'tags/' }}{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}">
-                                        {{ env('APP_NEWS_URL') }}tags/<span id="permalink_slug" class="mr-1 d-inline-block">{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}</span>
+                                     <a href="{{ $permalink }}{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}">
+                                        {{ $permalink }}<span id="permalink_slug" class="mr-1 d-inline-block">{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}</span>
                                     </a>
                                     <input type="text" value="{{ isset($request['permalink']) ? $request['permalink'] : $current['slug'] }}"
                                         id="field_permalink_slug"

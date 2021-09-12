@@ -67,6 +67,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Meta Website</h3>
                     </div>
+                    
                     <div class="card-body">
                         <div class="form-group">
                             <label>
@@ -74,6 +75,9 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <textarea name="description" class="form-control">{{ isset($request['description']) ? $request['description'] : $settings['description'] }}</textarea>
+                            <span class="form-text text-muted">
+                                Maximum 60 characters include spaces.
+                            </span>
                         </div>
 
                         <div class="form-group">

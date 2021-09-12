@@ -108,6 +108,22 @@ class SettingsSeeder extends Seeder
                 'meta_key' => 'large_max_height',
                 'meta_value' => '1024',
             ],
+            [
+                'meta_key' => 'multilanguage_website',
+                'meta_value' => '0',
+            ],
+            [
+                'meta_key' => 'permalink_news',
+                'meta_value' => 'news',
+            ],
+            [
+                'meta_key' => 'permalink_news_category',
+                'meta_value' => 'categories',
+            ],
+            [
+                'meta_key' => 'permalink_news_tag',
+                'meta_value' => 'tags',
+            ],
         ];
 
         foreach($datas as $data)

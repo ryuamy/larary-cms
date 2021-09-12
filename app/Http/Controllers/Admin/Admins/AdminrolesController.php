@@ -292,7 +292,7 @@ class AdminrolesController extends Controller
                 'default_status' => Staticdatas::default_status(),
                 'module_slug' => 'admin_roles',
             ],
-            'admin_roles' => Adminroles::where('deleted_at', NULL)->get(),
+            'admin_roles' => Adminroles::where('deleted_at', NULL)->orderBy('name')->get(),
             'modules' => Modules::where('deleted_at', NULL)->get(),
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];

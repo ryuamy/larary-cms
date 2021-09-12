@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Models\Adminrolemodules;
+use App\Models\Pages;
 use App\Models\Settings;
 use App\Models\Settinglogs;
 use App\Models\Staticdatas;
@@ -16,17 +17,19 @@ use Illuminate\Support\Facades\Validator;
 class GeneralSettingsController extends Controller
 {
     protected $validationRules = [
-        'title' => 'required|alpha_num_spaces',
+        'title' => 'required|alpha_num_spaces|max:20',
         'admin_pagination_limit' => 'required|numeric',
         'timezone' => 'required',
         'date_format' => 'required',
         'time_format' => 'required',
         // 'start_of_week' => 'required',
+        'multilanguage_website' => 'nullable|numeric',
     ];
 
     protected $validationMessages = [
         'title.required' => 'Title can not be empty.',
         'title.alpha_num_spaces' => 'Title only allowed alphanumeric with spaces.',
+        'title.max' => 'Title may not be greater than 20 characters.',
         'admin_pagination_limit.required' => 'Admin pagination limit can not be empty.',
         'admin_pagination_limit.numeric' => 'Admin pagination limit only accept numeric.',
         'timezone.required' => 'Timezone must be selected.',
@@ -93,9 +96,14 @@ class GeneralSettingsController extends Controller
                 'admin_pagination_limit' => get_site_settings('admin_pagination_limit'),
                 'language' => get_site_settings('language'),
                 'start_of_week' => get_site_settings('start_of_week'),
+                'multilanguage_website' => get_site_settings('multilanguage_website'),
+                'permalink_news' => get_site_settings('permalink_news'),
+                'permalink_news_category' => get_site_settings('permalink_news_category'),
+                'permalink_news_tag' => get_site_settings('permalink_news_tag'),
             ],
             'timezone_choice' => timezone_choice(get_site_settings('timezone')),
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'pages' => Pages::where('deleted_at', null)->orderBy('name', 'asc')->get(),
         ];
 
         return view('admin.settings.general', $datas);

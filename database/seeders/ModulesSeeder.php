@@ -70,8 +70,12 @@ class ModulesSeeder extends Seeder
                 'slug' => 'seo_website_settings',
             ],
             [
-                'name' => 'File Upload Settings',
-                'slug' => 'file_upload_settings',
+                'name' => 'Image Upload Settings',
+                'slug' => 'image_upload_settings',
+            ],
+            [
+                'name' => 'Multilanguage Settings',
+                'slug' => 'multilanguage_settings',
             ],
             [
                 'name' => 'Users',

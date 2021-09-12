@@ -23,7 +23,8 @@ class SeoSettingsController extends Controller
     protected $validationMessages = [
         'description.required' => 'Description can not be empty.',
         'description.alpha_num_spaces' => 'Description only allowed alphanumeric with spaces.',
-        'description.max' => 'Description only allowed alphanumeric with spaces.',
+        'description.max' => 'Description may not be greater than 60 characters.',
+        // 'description.max' => 'Description only allowed alphanumeric with spaces.',
         'search_engine_visibility.numeric' => 'Search engine visibility only accept numeric.',
     ];
 

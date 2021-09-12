@@ -24,10 +24,8 @@ License: You must have a valid license purchased only from themeforest(the above
         </title>
 
 		<meta charset="utf-8" />
-		<meta name="description" content="{{ get_site_settings('description') }}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-		<link rel="canonical" href="{{ url('/') }}" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
 		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/plugins/global/plugins.bundle.css') }}" />
@@ -59,20 +57,18 @@ License: You must have a valid license purchased only from themeforest(the above
 	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"
 		data-baseurl="{{ url(admin_uri()) }}" data-ctoken="{{ csrf_token() }}"
 	>
+		<!-- Mobile Header -->
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<a href="index">
 				<img alt="Logo" src="{{ asset('/media/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
 			</a>
-
 			<div class="d-flex align-items-center">
 				<button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">
 					<span></span>
 				</button>
-
 				<button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
 					<span></span>
 				</button>
-
 				<button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
 					<span class="svg-icon svg-icon-xl">
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -93,10 +89,12 @@ License: You must have a valid license purchased only from themeforest(the above
 				</button>
 			</div>
 		</div>
+		<!-- Mobile Header -->
 
 		<div class="d-flex flex-column flex-root">
 			<div class="d-flex flex-row flex-column-fluid page">
 				<div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
+					<!-- Desktop Logo -->
 					<div class="brand flex-column-auto" id="kt_brand">
 						<a href="index" class="brand-logo">
 							<img alt="Logo" src="{{ asset('/media/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
@@ -122,6 +120,9 @@ License: You must have a valid license purchased only from themeforest(the above
 							</span>
 						</button>
 					</div>
+					<!-- Desktop Logo -->
+					
+					<!-- Left Menu -->
 					<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 						<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
                             <?php
@@ -129,9 +130,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                     'admindata' => $admindata
                                 ]
                             ?>
-                            {{ view( 'admin.layout.menu', $datas ) }}
+                            {{ view( 'admin.layout.menu.left_menu', $datas ) }}
 						</div>
 					</div>
+					<!-- Left Menu -->
 				</div>
 
 				<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
@@ -140,273 +142,14 @@ License: You must have a valid license purchased only from themeforest(the above
 							<div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
 								<div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
 									<ul class="menu-nav">
-										<li class="menu-item menu-item-submenu menu-item-here menu-item-open menu-item-active" data-menu-toggle="click" aria-haspopup="true">
+										<li class="menu-item menu-item-submenu menu-item-rel menu-item-actives" data-menu-toggle="click" aria-haspopup="true">
 											<?php /** TODO : gonna use this as help center shortcut */ ?>
 											<a href="javascript:;" class="menu-link menu-toggle">
 												<span class="menu-text">Help Center</span>
 												<i class="menu-arrow"></i>
 											</a>
 											<div class="menu-submenu menu-submenu-fixed menu-submenu-left" style="width:1000px">
-												<div class="menu-subnav">
-													<ul class="menu-content">
-														<li class="menu-item">
-															<h3 class="menu-heading menu-toggle">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">SEO</span>
-																<i class="menu-arrow"></i>
-															</h3>
-															<ul class="menu-inner">
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="svg-icon menu-icon">
-																			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																					<rect x="0" y="0" width="24" height="24" />
-																					<path d="M5.84026576,8 L18.1597342,8 C19.1999115,8 20.0664437,8.79732479 20.1528258,9.83390904 L20.8194924,17.833909 C20.9112219,18.9346631 20.0932459,19.901362 18.9924919,19.9930915 C18.9372479,19.9976952 18.8818364,20 18.8264009,20 L5.1735991,20 C4.0690296,20 3.1735991,19.1045695 3.1735991,18 C3.1735991,17.9445645 3.17590391,17.889153 3.18050758,17.833909 L3.84717425,9.83390904 C3.93355627,8.79732479 4.80008849,8 5.84026576,8 Z M10.5,10 C10.2238576,10 10,10.2238576 10,10.5 L10,11.5 C10,11.7761424 10.2238576,12 10.5,12 L13.5,12 C13.7761424,12 14,11.7761424 14,11.5 L14,10.5 C14,10.2238576 13.7761424,10 13.5,10 L10.5,10 Z" fill="#000000" />
-																					<path d="M10,8 L8,8 L8,7 C8,5.34314575 9.34314575,4 11,4 L13,4 C14.6568542,4 16,5.34314575 16,7 L16,8 L14,8 L14,7 C14,6.44771525 13.5522847,6 13,6 L11,6 C10.4477153,6 10,6.44771525 10,7 L10,8 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-																				</g>
-																			</svg>
-																		</span>
-																		<span class="menu-text">Latest Tasks</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="svg-icon menu-icon">
-																			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																					<polygon points="0 0 24 0 24 24 0 24" />
-																					<path d="M11.2600599,5.81393408 L2,16 L22,16 L12.7399401,5.81393408 C12.3684331,5.40527646 11.7359848,5.37515988 11.3273272,5.7466668 C11.3038503,5.7680094 11.2814025,5.79045722 11.2600599,5.81393408 Z" fill="#000000" opacity="0.3" />
-																					<path d="M12.0056789,15.7116802 L20.2805786,6.85290308 C20.6575758,6.44930487 21.2903735,6.42774054 21.6939717,6.8047378 C21.8964274,6.9938498 22.0113578,7.25847607 22.0113578,7.535517 L22.0113578,20 L16.0113578,20 L2,20 L2,7.535517 C2,7.25847607 2.11493033,6.9938498 2.31738608,6.8047378 C2.72098429,6.42774054 3.35378194,6.44930487 3.7307792,6.85290308 L12.0056789,15.7116802 Z" fill="#000000" />
-																				</g>
-																			</svg>
-																		</span>
-																		<span class="menu-text">Pending Tasks</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="svg-icon menu-icon">
-																			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																					<rect x="0" y="0" width="24" height="24" />
-																					<path d="M7.38979581,2.8349582 C8.65216735,2.29743306 10.0413491,2 11.5,2 C17.2989899,2 22,6.70101013 22,12.5 C22,18.2989899 17.2989899,23 11.5,23 C5.70101013,23 1,18.2989899 1,12.5 C1,11.5151324 1.13559454,10.5619345 1.38913364,9.65805651 L3.31481075,10.1982117 C3.10672013,10.940064 3,11.7119264 3,12.5 C3,17.1944204 6.80557963,21 11.5,21 C16.1944204,21 20,17.1944204 20,12.5 C20,7.80557963 16.1944204,4 11.5,4 C10.54876,4 9.62236069,4.15592757 8.74872191,4.45446326 L9.93948308,5.87355717 C10.0088058,5.95617272 10.0495583,6.05898805 10.05566,6.16666224 C10.0712834,6.4423623 9.86044965,6.67852665 9.5847496,6.69415008 L4.71777931,6.96995273 C4.66931162,6.97269931 4.62070229,6.96837279 4.57348157,6.95710938 C4.30487471,6.89303938 4.13906482,6.62335149 4.20313482,6.35474463 L5.33163823,1.62361064 C5.35654118,1.51920756 5.41437908,1.4255891 5.49660017,1.35659741 C5.7081375,1.17909652 6.0235153,1.2066885 6.2010162,1.41822583 L7.38979581,2.8349582 Z" fill="#000000" opacity="0.3" />
-																					<path d="M14.5,11 C15.0522847,11 15.5,11.4477153 15.5,12 L15.5,15 C15.5,15.5522847 15.0522847,16 14.5,16 L9.5,16 C8.94771525,16 8.5,15.5522847 8.5,15 L8.5,12 C8.5,11.4477153 8.94771525,11 9.5,11 L9.5,10.5 C9.5,9.11928813 10.6192881,8 12,8 C13.3807119,8 14.5,9.11928813 14.5,10.5 L14.5,11 Z M12,9 C11.1715729,9 10.5,9.67157288 10.5,10.5 L10.5,11 L13.5,11 L13.5,10.5 C13.5,9.67157288 12.8284271,9 12,9 Z" fill="#000000" />
-																				</g>
-																			</svg>
-																		</span>
-																		<span class="menu-text">Urgent Tasks</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="svg-icon menu-icon">
-																			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																					<rect x="0" y="0" width="24" height="24" />
-																					<path d="M11.6734943,8.3307728 L14.9993074,6.09979492 L14.1213255,5.22181303 C13.7308012,4.83128874 13.7308012,4.19812376 14.1213255,3.80759947 L15.535539,2.39338591 C15.9260633,2.00286161 16.5592283,2.00286161 16.9497526,2.39338591 L22.6066068,8.05024016 C22.9971311,8.44076445 22.9971311,9.07392943 22.6066068,9.46445372 L21.1923933,10.8786673 C20.801869,11.2691916 20.168704,11.2691916 19.7781797,10.8786673 L18.9002333,10.0007208 L16.6692373,13.3265608 C16.9264145,14.2523264 16.9984943,15.2320236 16.8664372,16.2092466 L16.4344698,19.4058049 C16.360509,19.9531149 15.8568695,20.3368403 15.3095595,20.2628795 C15.0925691,20.2335564 14.8912006,20.1338238 14.7363706,19.9789938 L5.02099894,10.2636221 C4.63047465,9.87309784 4.63047465,9.23993286 5.02099894,8.84940857 C5.17582897,8.69457854 5.37719743,8.59484594 5.59418783,8.56552292 L8.79074617,8.13355557 C9.76799113,8.00149544 10.7477104,8.0735815 11.6734943,8.3307728 Z" fill="#000000" />
-																					<polygon fill="#000000" opacity="0.3" transform="translate(7.050253, 17.949747) rotate(-315.000000) translate(-7.050253, -17.949747)" points="5.55025253 13.9497475 5.55025253 19.6640332 7.05025253 21.9497475 8.55025253 19.6640332 8.55025253 13.9497475" />
-																				</g>
-																			</svg>
-																		</span>
-																		<span class="menu-text">Completed Tasks</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="svg-icon menu-icon">
-																			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																					<rect x="0" y="0" width="24" height="24" />
-																					<path d="M22,17 L22,21 C22,22.1045695 21.1045695,23 20,23 L4,23 C2.8954305,23 2,22.1045695 2,21 L2,17 L6.27924078,17 L6.82339262,18.6324555 C7.09562072,19.4491398 7.8598984,20 8.72075922,20 L15.381966,20 C16.1395101,20 16.8320364,19.5719952 17.1708204,18.8944272 L18.118034,17 L22,17 Z" fill="#000000" />
-																					<path d="M2.5625,15 L5.92654389,9.01947752 C6.2807805,8.38972356 6.94714834,8 7.66969497,8 L16.330305,8 C17.0528517,8 17.7192195,8.38972356 18.0734561,9.01947752 L21.4375,15 L18.118034,15 C17.3604899,15 16.6679636,15.4280048 16.3291796,16.1055728 L15.381966,18 L8.72075922,18 L8.17660738,16.3675445 C7.90437928,15.5508602 7.1401016,15 6.27924078,15 L2.5625,15 Z" fill="#000000" opacity="0.3" />
-																					<path d="M11.1288761,0.733697713 L11.1288761,2.69017121 L9.12120481,2.69017121 C8.84506244,2.69017121 8.62120481,2.91402884 8.62120481,3.19017121 L8.62120481,4.21346991 C8.62120481,4.48961229 8.84506244,4.71346991 9.12120481,4.71346991 L11.1288761,4.71346991 L11.1288761,6.66994341 C11.1288761,6.94608579 11.3527337,7.16994341 11.6288761,7.16994341 C11.7471877,7.16994341 11.8616664,7.12798964 11.951961,7.05154023 L15.4576222,4.08341738 C15.6683723,3.90498251 15.6945689,3.58948575 15.5161341,3.37873564 C15.4982803,3.35764848 15.4787093,3.33807751 15.4576222,3.32022374 L11.951961,0.352100892 C11.7412109,0.173666017 11.4257142,0.199862688 11.2472793,0.410612793 C11.1708299,0.500907473 11.1288761,0.615386087 11.1288761,0.733697713 Z" fill="#000000" fill-rule="nonzero" transform="translate(11.959697, 3.661508) rotate(-90.000000) translate(-11.959697, -3.661508)" />
-																				</g>
-																			</svg>
-																		</span>
-																		<span class="menu-text">Failed Tasks</span>
-																	</a>
-																</li>
-															</ul>
-														</li>
-
-														<li class="menu-item">
-															<h3 class="menu-heading menu-toggle">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Profit Margins</span>
-																<i class="menu-arrow"></i>
-															</h3>
-
-															<ul class="menu-inner">
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Overall Profits</span>
-																	</a>
-																</li>
-
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Gross Profits</span>
-																	</a>
-																</li>
-
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Nett Profits</span>
-																	</a>
-																</li>
-
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Year to Date Reports</span>
-																	</a>
-																</li>
-
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Quarterly Profits</span>
-																	</a>
-																</li>
-
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Monthly Profits</span>
-																	</a>
-																</li>
-															</ul>
-														</li>
-
-														<li class="menu-item">
-															<h3 class="menu-heading menu-toggle">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Staff Management</span>
-																<i class="menu-arrow"></i>
-															</h3>
-
-															<ul class="menu-inner">
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-dot">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Top Management</span>
-																	</a>
-																</li>
-
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-dot">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Project Managers</span>
-																	</a>
-																</li>
-
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-dot">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Development Staff</span>
-																	</a>
-																</li>
-
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-dot">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Customer Service</span>
-																	</a>
-																</li>
-
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-dot">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Sales and Marketing</span>
-																	</a>
-																</li>
-
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<i class="menu-bullet menu-bullet-dot">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Executives</span>
-																	</a>
-																</li>
-															</ul>
-														</li>
-
-														<li class="menu-item">
-															<h3 class="menu-heading menu-toggle">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Tools</span>
-																<i class="menu-arrow"></i>
-															</h3>
-															<ul class="menu-inner">
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="menu-text">Analytical Reports</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="menu-text">Customer CRM</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="menu-text">Operational Growth</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="menu-text">Social Media Presence</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="menu-text">Files and Directories</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="javascript:;" class="menu-link">
-																		<span class="menu-text">Audit &amp; Logs</span>
-																	</a>
-																</li>
-															</ul>
-														</li>
-													</ul>
-												</div>
+												{{ view( 'admin.layout.menu.help_center' ) }}
 											</div>
 										</li>
 
@@ -515,6 +258,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							</div>
 
 							<div class="topbar">
+								<!-- Notification -->
 								<div class="dropdown">
 									<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px" title="23 new notification" data-toggle="tooltip" data-placement="bottom" data-theme="dark">
 										<div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary">
@@ -721,6 +465,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 									</div>
 								</div>
+								<!-- Notification -->
 
 								<?php /*
 								<div class="topbar-item">
@@ -744,6 +489,8 @@ License: You must have a valid license purchased only from themeforest(the above
 								</div>
 								*/ ?>
 
+								<!-- Chat Box -->
+								<?php /*
 								<div class="topbar-item">
 									<div class="btn btn-icon btn-clean btn-lg mr-1" data-toggle="modal" data-target="#kt_chat_modal">
 										<span class="svg-icon svg-icon-xl svg-icon-primary">
@@ -765,9 +512,12 @@ License: You must have a valid license purchased only from themeforest(the above
 										</span>
 									</div>
 								</div>
+								*/ ?>
+								<!-- Chat Box -->
 
+								<!-- Message -->
 								<div class="topbar-item">
-									<div class="btn btn-icon btn-clean btn-lg mr-1" id="kt_quick_panel_toggle">
+									<a class="btn btn-icon btn-clean btn-lg mr-1" href="{{ admin_uri().'messages/inbox' }}">
 										<span class="svg-icon svg-icon-success svg-icon-xl svg-icon-primary">
 											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -776,9 +526,11 @@ License: You must have a valid license purchased only from themeforest(the above
 												</g>
 											</svg>
 										</span>
-									</div>
+									</a>
 								</div>
-
+								<!-- Message -->
+								
+								<!-- Profile Menu -->
 								<div class="topbar-item">
 									<div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
 										<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">
@@ -794,6 +546,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										</span>
 									</div>
 								</div>
+								<!-- Profile Menu -->
 							</div>
 						</div>
 					</div>
@@ -1071,393 +824,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			</div>
 		</div>
 
-		<div id="kt_quick_panel" class="offcanvas offcanvas-right pt-5 pb-10">
-			<div class="offcanvas-header offcanvas-header-navs d-flex align-items-center justify-content-between mb-5">
-				<ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-primary flex-grow-1 px-10" role="tablist">
-					<li class="nav-item">
-						<a class="nav-link active" data-toggle="tab" href="#kt_quick_panel_settings">Settings</a>
-					</li>
-				</ul>
-
-				<div class="offcanvas-close mt-n1 pr-5">
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_panel_close">
-						<i class="ki ki-close icon-xs text-muted"></i>
-					</a>
-				</div>
-			</div>
-
-			<div class="offcanvas-content px-10">
-				<div class="tab-content">
-					<div class="tab-pane fade show pt-3 pr-5 mr-n5 active" id="kt_quick_panel_settings" role="tabpanel">
-						<form class="form">
-							<div>
-								<h5 class="font-weight-bold mb-3">Customer Care</h5>
-
-								<div class="form-group mb-0 row align-items-center">
-									<label class="col-8 col-form-label">Enable Notifications:</label>
-									<div class="col-4 d-flex justify-content-end">
-										<span class="switch switch-success switch-sm">
-											<label>
-												<input type="checkbox" checked="checked" name="select" />
-												<span></span>
-											</label>
-										</span>
-									</div>
-								</div>
-
-								<div class="form-group mb-0 row align-items-center">
-									<label class="col-8 col-form-label">Enable Case Tracking:</label>
-									<div class="col-4 d-flex justify-content-end">
-										<span class="switch switch-success switch-sm">
-											<label>
-												<input type="checkbox" name="quick_panel_notifications_2" />
-												<span></span>
-											</label>
-										</span>
-									</div>
-								</div>
-
-								<div class="form-group mb-0 row align-items-center">
-									<label class="col-8 col-form-label">Support Portal:</label>
-									<div class="col-4 d-flex justify-content-end">
-										<span class="switch switch-success switch-sm">
-											<label>
-												<input type="checkbox" checked="checked" name="select" />
-												<span></span>
-											</label>
-										</span>
-									</div>
-								</div>
-							</div>
-
-							<div class="separator separator-dashed my-6"></div>
-
-							<div class="pt-2">
-								<h5 class="font-weight-bold mb-3">Reports</h5>
-
-								<div class="form-group mb-0 row align-items-center">
-									<label class="col-8 col-form-label">Generate Reports:</label>
-									<div class="col-4 d-flex justify-content-end">
-										<span class="switch switch-sm switch-danger">
-											<label>
-												<input type="checkbox" checked="checked" name="select" />
-												<span></span>
-											</label>
-										</span>
-									</div>
-								</div>
-
-								<div class="form-group mb-0 row align-items-center">
-									<label class="col-8 col-form-label">Enable Report Export:</label>
-									<div class="col-4 d-flex justify-content-end">
-										<span class="switch switch-sm switch-danger">
-											<label>
-												<input type="checkbox" name="select" />
-												<span></span>
-											</label>
-										</span>
-									</div>
-								</div>
-
-								<div class="form-group mb-0 row align-items-center">
-									<label class="col-8 col-form-label">Allow Data Collection:</label>
-									<div class="col-4 d-flex justify-content-end">
-										<span class="switch switch-sm switch-danger">
-											<label>
-												<input type="checkbox" checked="checked" name="select" />
-												<span></span>
-											</label>
-										</span>
-									</div>
-								</div>
-							</div>
-
-							<div class="separator separator-dashed my-6"></div>
-
-							<div class="pt-2">
-								<h5 class="font-weight-bold mb-3">Memebers</h5>
-
-								<div class="form-group mb-0 row align-items-center">
-									<label class="col-8 col-form-label">Enable Member singup:</label>
-									<div class="col-4 d-flex justify-content-end">
-										<span class="switch switch-sm switch-primary">
-											<label>
-												<input type="checkbox" checked="checked" name="select" />
-												<span></span>
-											</label>
-										</span>
-									</div>
-								</div>
-
-								<div class="form-group mb-0 row align-items-center">
-									<label class="col-8 col-form-label">Allow User Feedbacks:</label>
-									<div class="col-4 d-flex justify-content-end">
-										<span class="switch switch-sm switch-primary">
-											<label>
-												<input type="checkbox" name="select" />
-												<span></span>
-											</label>
-										</span>
-									</div>
-								</div>
-
-								<div class="form-group mb-0 row align-items-center">
-									<label class="col-8 col-form-label">Enable Customer Portal:</label>
-									<div class="col-4 d-flex justify-content-end">
-										<span class="switch switch-sm switch-primary">
-											<label>
-												<input type="checkbox" checked="checked" name="select" />
-												<span></span>
-											</label>
-										</span>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal modal-sticky modal-sticky-bottom-right" id="kt_chat_modal" role="dialog" data-backdrop="false">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="card card-custom">
-						<div class="card-header align-items-center px-4 py-3">
-
-							<div class="text-left flex-grow-1">
-								<div class="dropdown dropdown-inline">
-
-									<button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<span class="svg-icon svg-icon-lg">
-											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<polygon points="0 0 24 0 24 24 0 24" />
-													<path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-													<path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-												</g>
-											</svg>
-										</span>
-									</button>
-
-									<div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-md">
-										<ul class="navi navi-hover py-5">
-											<li class="navi-item">
-												<a href="javascript:;" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-drop"></i>
-													</span>
-													<span class="navi-text">New Group</span>
-												</a>
-											</li>
-											<li class="navi-item">
-												<a href="javascript:;" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-list-3"></i>
-													</span>
-													<span class="navi-text">Contacts</span>
-												</a>
-											</li>
-											<li class="navi-item">
-												<a href="javascript:;" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-rocket-1"></i>
-													</span>
-													<span class="navi-text">Groups</span>
-													<span class="navi-link-badge">
-														<span class="label label-light-primary label-inline font-weight-bold">new</span>
-													</span>
-												</a>
-											</li>
-											<li class="navi-item">
-												<a href="javascript:;" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-bell-2"></i>
-													</span>
-													<span class="navi-text">Calls</span>
-												</a>
-											</li>
-											<li class="navi-item">
-												<a href="javascript:;" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-gear"></i>
-													</span>
-													<span class="navi-text">Settings</span>
-												</a>
-											</li>
-											<li class="navi-separator my-3"></li>
-											<li class="navi-item">
-												<a href="javascript:;" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-magnifier-tool"></i>
-													</span>
-													<span class="navi-text">Help</span>
-												</a>
-											</li>
-											<li class="navi-item">
-												<a href="javascript:;" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-bell-2"></i>
-													</span>
-													<span class="navi-text">Privacy</span>
-													<span class="navi-link-badge">
-														<span class="label label-light-danger label-rounded font-weight-bold">5</span>
-													</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-
-								</div>
-							</div>
-
-							<div class="text-center flex-grow-1">
-								<div class="text-dark-75 font-weight-bold font-size-h5">Matt Pears</div>
-								<div>
-									<span class="label label-dot label-success"></span>
-									<span class="font-weight-bold text-muted font-size-sm">Active</span>
-								</div>
-							</div>
-
-							<div class="text-right flex-grow-1">
-								<button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-dismiss="modal">
-									<i class="ki ki-close icon-1x"></i>
-								</button>
-							</div>
-
-						</div>
-
-						<div class="card-body">
-							<div class="scroll scroll-pull" data-height="330" data-mobile-height="300">
-								<div class="messages">
-									<div class="d-flex flex-column mb-5 align-items-start">
-										<div class="d-flex align-items-center">
-											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_12.jpg') }}" />
-											</div>
-											<div>
-												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-												<span class="text-muted font-size-sm">2 Hours</span>
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">How likely are you to recommend our company to your friends and family?</div>
-									</div>
-
-									<div class="d-flex flex-column mb-5 align-items-end">
-										<div class="d-flex align-items-center">
-											<div>
-												<span class="text-muted font-size-sm">3 minutes</span>
-												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
-											</div>
-											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}" />
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Hey there, we’re just writing to let you know that you’ve been subscribed to a repository on GitHub.</div>
-									</div>
-
-									<div class="d-flex flex-column mb-5 align-items-start">
-										<div class="d-flex align-items-center">
-											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}" />
-											</div>
-											<div>
-												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-												<span class="text-muted font-size-sm">40 seconds</span>
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">Ok, Understood!</div>
-									</div>
-
-									<div class="d-flex flex-column mb-5 align-items-end">
-										<div class="d-flex align-items-center">
-											<div>
-												<span class="text-muted font-size-sm">Just now</span>
-												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
-											</div>
-											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}" />
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">You’ll receive notifications for all issues, pull requests!</div>
-									</div>
-
-									<div class="d-flex flex-column mb-5 align-items-start">
-										<div class="d-flex align-items-center">
-											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_12.jpg') }}" />
-											</div>
-											<div>
-												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-												<span class="text-muted font-size-sm">40 seconds</span>
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">You can unwatch this repository immediately by clicking here:
-										<a href="javascript:;">https://github.com</a></div>
-									</div>
-
-									<div class="d-flex flex-column mb-5 align-items-end">
-										<div class="d-flex align-items-center">
-											<div>
-												<span class="text-muted font-size-sm">Just now</span>
-												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
-											</div>
-											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}" />
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Discover what students who viewed Learn Figma - UI/UX Design. Essential Training also viewed</div>
-									</div>
-
-									<div class="d-flex flex-column mb-5 align-items-start">
-										<div class="d-flex align-items-center">
-											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_12.jpg') }}" />
-											</div>
-											<div>
-												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-												<span class="text-muted font-size-sm">40 seconds</span>
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">Most purchased Business courses during this sale!</div>
-									</div>
-
-									<div class="d-flex flex-column mb-5 align-items-end">
-										<div class="d-flex align-items-center">
-											<div>
-												<span class="text-muted font-size-sm">Just now</span>
-												<a href="javascript:;" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
-											</div>
-											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}" />
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Company BBQ to celebrate the last quater achievements and goals. Food and drinks provided</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="card-footer align-items-center">
-							<textarea class="form-control border-0 p-0" rows="2" placeholder="Type a message"></textarea>
-							<div class="d-flex align-items-center justify-content-between mt-5">
-								<div class="mr-3">
-									<a href="javascript:;" class="btn btn-clean btn-icon btn-md mr-1">
-										<i class="flaticon2-photograph icon-lg"></i>
-									</a>
-									<a href="javascript:;" class="btn btn-clean btn-icon btn-md">
-										<i class="flaticon2-photo-camera icon-lg"></i>
-									</a>
-								</div>
-								<div>
-									<button type="button" class="btn btn-primary btn-md text-uppercase font-weight-bold chat-send py-2 px-6">Send</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		{{ view( 'admin.layout.skeleton_chat' ) }}
 
 		<div id="kt_scrolltop" class="scrolltop">
 			<span class="svg-icon">

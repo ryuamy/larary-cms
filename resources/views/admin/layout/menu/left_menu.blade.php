@@ -350,17 +350,26 @@
     @if ( check_admin_access($admindata->role_id, 'seo_website_settings', 'read') == true )
         <li class="menu-item  {{ isset($cur_uri[5]) && $cur_uri[5] === 'seo' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
             <a href="{{ url(admin_uri().'settings/seo') }}" class="menu-link menu-toggle">
-                <i class="menu-icon flaticon2-laptop"></i>
+                <i class="menu-icon flaticon-analytics"></i>
                 <span class="menu-text">SEO Website</span>
             </a>
         </li>
     @endif
 
-    @if ( check_admin_access($admindata->role_id, 'file_upload_settings', 'read') == true )
-        <li class="menu-item  {{ isset($cur_uri[5]) && $cur_uri[5] === 'file-upload' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
-            <a href="{{ url(admin_uri().'settings/file-upload') }}" class="menu-link menu-toggle">
-                <i class="menu-icon flaticon2-laptop"></i>
-                <span class="menu-text">File Upload</span>
+    @if ( check_admin_access($admindata->role_id, 'image_upload_settings', 'read') == true )
+        <li class="menu-item  {{ isset($cur_uri[5]) && $cur_uri[5] === 'image-upload' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+            <a href="{{ url(admin_uri().'settings/image-upload') }}" class="menu-link menu-toggle">
+                <i class="menu-icon flaticon2-image-file"></i>
+                <span class="menu-text">Image Upload</span>
+            </a>
+        </li>
+    @endif
+
+    @if ( check_admin_access($admindata->role_id, 'multilanguage_settings', 'read') == true )
+        <li class="menu-item  {{ isset($cur_uri[5]) && $cur_uri[5] === 'multilanguage-website' ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+            <a href="{{ url(admin_uri().'settings/multilanguage-website') }}" class="menu-link menu-toggle">
+                <i class="menu-icon flaticon2-chat-1"></i>
+                <span class="menu-text">Multilanguage Website</span>
             </a>
         </li>
     @endif

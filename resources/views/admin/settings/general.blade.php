@@ -64,6 +64,10 @@
 
             <div class="col-md-12">
                 <div class="card card-custom mb-8">
+                    <div class="card-header">
+                        <h3 class="card-title">General Website Setting</h3>
+                    </div>
+
                     <div class="card-body">
                         <div class="form-group">
                             <label>
@@ -73,7 +77,11 @@
                             <input type="text" name="title" class="form-control"
                                 value="{{ isset($request['title']) ? $request['title'] : $settings['title'] }}"
                             />
-                            <span class="form-text text-muted">Example: <label style="color:red">Title</label> | Tagline</span>
+                            <span class="form-text text-muted">
+                                Maximum 20 characters include spaces.
+                                <br />
+                                Example: <label style="color:red">Title</label> | Tagline
+                            </span>
                         </div>
 
                         <div class="form-group">
@@ -178,6 +186,107 @@
                                 <option value="5">Friday</option>
                                 <option value="6">Saturday</option>
                             </select>
+                        </div>
+
+                        <!-- <div class="form-group">
+                            <label>
+                                Multilanguage Website
+                            </label>
+                            <div class="checkbox-list">
+                                <label class="checkbox">
+                                    <input type="checkbox" value="1" {{ (isset($request['multilanguage_website']) && $request['multilanguage_website'] == 1) || $settings['multilanguage_website'] == 1 ? 'checked' : '' }} name="multilanguage_website">
+                                    <span></span>Enable Web Multilanguage
+                                </label>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="card card-custom mb-8">
+                    <div class="card-header">
+                        <h3 class="card-title">Permalink Setting</h3>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>
+                                News
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group input-group-admin-select2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        {{ env('APP_URL') }}/
+                                    </span>
+                                </div>
+                                <select class="form-control select2" name="permalink_news">
+                                    <option value="">&nbsp;</option>
+                                    @foreach ($pages as $page)
+                                        <option value="{{ $page->slug }}"
+                                            {{ isset($settings['permalink_news']) && $settings['permalink_news'] == $page->slug ? 'selected' : '' }}
+                                        >{{ $page->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <span class="form-text text-muted">
+                                Select from pages.
+                            </span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                News Category
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group input-group-admin-select2 input-group-admin-select2-text">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        {{ env('APP_URL') }}/
+                                    </span>
+                                </div>
+                                <select class="form-control select2" name="permalink_news">
+                                    <option value="">&nbsp;</option>
+                                    @foreach ($pages as $page)
+                                        <option value="{{ $page->slug }}"
+                                            {{ isset($settings['permalink_news']) && $settings['permalink_news'] == $page->slug ? 'selected' : '' }}
+                                        >{{ $page->name }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="text" 
+                                    name="permalink_news_category"
+                                    class="form-control"
+                                    value="{{ isset($request['permalink_news_category']) ? $request['permalink_news_category'] : $settings['permalink_news_category'] }}"
+                                />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                News Tag
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group input-group-admin-select2 input-group-admin-select2-text">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        {{ env('APP_URL') }}/
+                                    </span>
+                                </div>
+                                <select class="form-control select2" name="permalink_news">
+                                    <option value="">&nbsp;</option>
+                                    @foreach ($pages as $page)
+                                        <option value="{{ $page->slug }}"
+                                            {{ isset($settings['permalink_news']) && $settings['permalink_news'] == $page->slug ? 'selected' : '' }}
+                                        >{{ $page->name }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="text" 
+                                    name="permalink_news_tag"
+                                    class="form-control"
+                                    value="{{ isset($request['permalink_news_tag']) ? $request['permalink_news_tag'] : $settings['permalink_news_tag'] }}"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -79,7 +79,7 @@
                             <input type="text" name="name" class="form-control"
                                 <?php if(str_contains($current_route, 'detail')) { ?>
                                     value="{{ isset($request['name']) ? $request['name'] : $current['name'] }}"
-                                <?php } elseif($cur_uri[5] !== 'detail') { ?>
+                                <?php } else { ?>
                                     value="{{ isset($request['name']) ? $request['name'] : '' }}"
                                 <?php } ?>
                             />
@@ -152,7 +152,7 @@
                                                             $module->slug !== 'modules' &&
                                                             $module->slug !== 'general_settings' &&
                                                             $module->slug !== 'seo_website_settings' &&
-                                                            $module->slug !== 'file_upload_settings' &&
+                                                            $module->slug !== 'image_upload_settings' &&
                                                             $module->slug !== 'users'
                                                         )
                                                     )
@@ -178,7 +178,7 @@
                                                             $module->slug !== 'modules' &&
                                                             $module->slug !== 'general_settings' &&
                                                             $module->slug !== 'seo_website_settings' &&
-                                                            $module->slug !== 'file_upload_settings' &&
+                                                            $module->slug !== 'image_upload_settings' &&
                                                             $module->slug !== 'users'
                                                         )
                                                     )
@@ -202,7 +202,7 @@
                                                             $module->slug !== 'modules' &&
                                                             $module->slug !== 'general_settings' &&
                                                             $module->slug !== 'seo_website_settings' &&
-                                                            $module->slug !== 'file_upload_settings' &&
+                                                            $module->slug !== 'image_upload_settings' &&
                                                             $module->slug !== 'users'
                                                         )
                                                     )
@@ -340,7 +340,7 @@
                                                                 $module->slug !== 'modules' &&
                                                                 $module->slug !== 'general_settings' &&
                                                                 $module->slug !== 'seo_website_settings' &&
-                                                                $module->slug !== 'file_upload_settings' &&
+                                                                $module->slug !== 'image_upload_settings' &&
                                                                 $module->slug !== 'users'
                                                             )
                                                         )
@@ -364,7 +364,7 @@
                                                 $module->slug !== 'provinces' &&
                                                 $module->slug !== 'general_settings' &&
                                                 $module->slug !== 'seo_website_settings' &&
-                                                $module->slug !== 'file_upload_settings'
+                                                $module->slug !== 'image_upload_settings'
                                             ) {
                                         ?>
                                             <div class="col-2">
@@ -397,7 +397,7 @@
                                                                     $module->slug !== 'modules' &&
                                                                     $module->slug !== 'general_settings' &&
                                                                     $module->slug !== 'seo_website_settings' &&
-                                                                    $module->slug !== 'file_upload_settings' &&
+                                                                    $module->slug !== 'image_upload_settings' &&
                                                                     $module->slug !== 'users'
                                                                 )
                                                             )
@@ -454,7 +454,7 @@
                                                                     $module->slug !== 'modules' &&
                                                                     $module->slug !== 'general_settings' &&
                                                                     $module->slug !== 'seo_website_settings' &&
-                                                                    $module->slug !== 'file_upload_settings' &&
+                                                                    $module->slug !== 'image_upload_settings' &&
                                                                     $module->slug !== 'users'
                                                                 )
                                                             )
@@ -479,7 +479,7 @@
                                                 $module->slug !== 'provinces' &&
                                                 $module->slug !== 'general_settings' &&
                                                 $module->slug !== 'seo_website_settings' &&
-                                                $module->slug !== 'file_upload_settings'
+                                                $module->slug !== 'image_upload_settings'
                                             ) {
                                         ?>
                                             <div class="col-2">

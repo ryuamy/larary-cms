@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
-class FileUploadSettingsController extends Controller
+class ImageUploadSettingsController extends Controller
 {
     protected $validationRules = [
         'organize_uploads' => 'nullable|numeric',
@@ -62,8 +62,8 @@ class FileUploadSettingsController extends Controller
             'table' => $this->table,
             'admin_url' =>$this->admin_url,
             'meta' => [
-                'title' => 'Update File Upload Settings',
-                'heading' => 'File Upload Settings Management'
+                'title' => 'Update Image Upload Settings',
+                'heading' => 'Image Upload Settings Management'
             ],
             'css' => [],
             'js' => [
@@ -80,13 +80,13 @@ class FileUploadSettingsController extends Controller
                     'url' => 'settings'
                 ),
                 array(
-                    'title' => 'File Upload Settings',
-                    'url' => 'settings/file-upload'
+                    'title' => 'Image Upload Settings',
+                    'url' => 'settings/image-upload'
                 ),
             ],
             'admindata' => $this->admin,
             'staticdata' => [
-                'module_slug' => 'file_upload_settings',
+                'module_slug' => 'image_upload_settings',
             ],
             'settings' => [
                 'organize_uploads' => get_site_settings('organize_uploads'),
@@ -101,7 +101,7 @@ class FileUploadSettingsController extends Controller
             'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
         ];
 
-        return view('admin.settings.file_upload', $datas);
+        return view('admin.settings.image_upload', $datas);
     }
 
     public function update(Request $request)
@@ -111,7 +111,7 @@ class FileUploadSettingsController extends Controller
             $errors = $validation->errors()->all();
             Session::flash('errors', $errors );
             Session::flash('request', $request->input() );
-            return redirect($this->admin_url.'/file-upload/')->with([
+            return redirect($this->admin_url.'/image-upload/')->with([
                 'error-message' => 'There is some errors, please check again'
             ]);
         }
@@ -213,8 +213,8 @@ class FileUploadSettingsController extends Controller
             );
         }
 
-        return redirect($this->admin_url.'/file-upload/')->with([
-            'success-message' => 'Success update file upload setting.'
+        return redirect($this->admin_url.'/image-upload/')->with([
+            'success-message' => 'Success update image upload setting.'
         ]);
     }
 }

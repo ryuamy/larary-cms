@@ -76,7 +76,7 @@
                             <input type="text" name="name" class="form-control"
                                 <?php if(str_contains($current_route, 'detail')) { ?>
                                     value="{{ isset($request['name']) ? $request['name'] : $current['name'] }}"
-                                <?php } elseif($cur_uri[5] !== 'detail') { ?>
+                                <?php } else { ?>
                                     value="{{ isset($request['name']) ? $request['name'] : '' }}"
                                 <?php } ?>
                             />
@@ -90,7 +90,7 @@
                             <input type="text" name="username" class="form-control"
                                 <?php if(str_contains($current_route, 'detail')) { ?>
                                     value="{{ isset($request['username']) ? $request['username'] : $current['slug'] }}"
-                                <?php } elseif($cur_uri[5] !== 'detail') { ?>
+                                <?php } else { ?>
                                     value="{{ isset($request['username']) ? $request['username'] : '' }}"
                                 <?php } ?>
                             />
@@ -104,7 +104,7 @@
                             <input type="text" name="email" class="form-control"
                                 <?php if(str_contains($current_route, 'detail')) { ?>
                                     value="{{ isset($request['email']) ? $request['email'] : $current['email'] }}"
-                                <?php } elseif($cur_uri[5] !== 'detail') { ?>
+                                <?php } else { ?>
                                     value="{{ isset($request['email']) ? $request['email'] : '' }}"
                                 <?php } ?>
                             />
