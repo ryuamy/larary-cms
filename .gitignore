@@ -22,13 +22,14 @@ vendor/laravel/ui/auth-backend/*
 !vendor/laravel/ui/auth-backend/ResetsPasswords.php
 !vendor/laravel/ui/auth-backend/SendsPasswordResetEmails.php
 google_credentials.json
-docker-compose.override.yml
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
+# docker-compose.override.yml
+# Homestead.json
+# Homestead.yaml
+# npm-debug.log
+# yarn-error.log
 .phpunit.result.cache
 .env
 .htaccess
 *.private
 *.backup
+google*.html

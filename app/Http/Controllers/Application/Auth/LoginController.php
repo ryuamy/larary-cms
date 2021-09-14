@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Application\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +18,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 
     public function form()
@@ -27,27 +26,30 @@ class LoginController extends Controller
         $datas = [
             "table" => "",
             "meta" => [
-                "title" => "Login Dashboard"
+                "title" => "Login"
             ],
             "css" => [],
             "js" => [],
             "breadcrumb" => [
                 array(
-                    "title" => "Dashboard",
-                    "url" => "dashboard"
+                    "title" => "",
+                    "url" => ""
                 ),
             ],
             "data" => [],
         ];
 
-        return view("admin.auth.login", $datas);
+        return view("application.auth.login", $datas);
     }
 
     public function logout(Request $request)
     {
-        Auth::guard('admin')->logout();
-        // Auth::logout()->guard('admin');
-        return redirect(admin_uri() . 'login/')->with([
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect(url('/login'))->with([
             'success-message' => 'Success logout'
         ]);
     }

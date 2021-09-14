@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'token_expired',
+        'google_id',
         'status',
         'created_by',
         'updated_by'

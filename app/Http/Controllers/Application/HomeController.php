@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
+        // $this->middleware('auth:web');
     }
 
     /**
@@ -35,39 +36,5 @@ class HomeController extends Controller
         ];
 
         return view('application.home.index', $datas);
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function test()
-    {
-        $return = [];
-        $sendingstatus = 10;
-        switch ($sendingstatus) {
-            case 10:
-            {
-                $return['status'] = 200;
-                $return['message'] = 'success';
-                $return['datas'] = [];
-            }
-            break;
-            case 'WA':
-            {
-                $return['status'] = 200;
-                $return['message'] = 'success WA';
-                $return['datas'] = [];
-            }
-            break;
-            case 'CHECK_BALANCE':
-            {
-                $return['status'] = 200;
-                $return['message'] = 'success CHECK_BALANCE';
-                $return['datas'] = [];
-            }
-            break;
-        }
     }
 }
