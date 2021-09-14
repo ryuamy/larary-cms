@@ -5,9 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Application\HomeController;
 use App\Http\Controllers\Application\SitemapController;
 use App\Http\Controllers\Application\TestController;
+use App\Http\Controllers\Application\Ajax\AjaxCaptchaController;
+use App\Http\Controllers\Application\Ajax\AjaxLoginController;
 use App\Http\Controllers\Application\Auth\LoginController;
 use App\Http\Controllers\Application\Auth\GoogleController;
-use App\Http\Controllers\OAuthController;
+// use App\Http\Controllers\OAuthController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,15 +18,23 @@ Auth::routes();
 Route::get( '/', [HomeController::class, 'index'] );
 Route::get( '/home', [HomeController::class, 'index'] )->name('home');
 
-Route::get( '/login', [LoginController::class, 'form'] )->name('login');
-Route::get( '/login/google', [GoogleController::class, 'redirect'] );
-Route::get( '/login/google/callback', [GoogleController::class, 'callback'] );
-Route::get( '/logout', [LoginController::class, 'logout'] );
+Route::post( 'login', [LoginController::class, 'form'] )->name('login');
+Route::get( 'login/google', [GoogleController::class, 'redirect'] );
+Route::get( 'login/google/callback', [GoogleController::class, 'callback'] );
+Route::get( 'logout', [LoginController::class, 'logout'] )->name('logout');
 
 Route::get( '/sitemap.xml', [SitemapController::class, 'sitemap'] );
 
-Route::get( '/oauth2callback', [OAuthController::class, 'index'] )->name('oauth');
+Route::prefix('ajax')->group(function () {
+    Route::post( 'login', [AjaxLoginController::class, 'login'] );
+    Route::get( 'login', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
 
+    Route::get( 'reload-captcha', [AjaxCaptchaController::class, 'reload_captcha'] );
+});
+
+// Route::get( '/oauth2callback', [OAuthController::class, 'index'] )->name('oauth');
 
 Route::get( 'test', [TestController::class, 'index'] );
 Route::get( 'xxx', [TestController::class, 'test'] );

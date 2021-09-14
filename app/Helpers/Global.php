@@ -1093,4 +1093,33 @@ if(!function_exists('insert_admin_logs')) {
     }
 }
 
+/**
+ * Insert user logs
+ *
+ * @param integer $user_id
+ * @param string $table
+ * @param integer $table_id
+ * @param string $action
+ * @param string $action_detail
+ *
+ * @return boolean
+ *
+ * @author Amy <laksmise@gmail.com>
+ */
+if(!function_exists('insert_user_logs')) {
+    function insert_user_logs($user_id, $table, $table_id, $action, $action_detail) {
+        $DB = new \Illuminate\Support\Facades\DB;
+        $DB::table('user_logs')->insert([
+            'user_id' => $user_id,
+            'table' => strtoupper($table),
+            'table_id' => $table_id,
+            'action' => strtoupper($action),
+            'action_detail' => $action_detail,
+            'ipaddress' => get_client_ip(),
+            'created_by' => $user_id
+        ]);
+        return true;
+    }
+}
+
 ?>

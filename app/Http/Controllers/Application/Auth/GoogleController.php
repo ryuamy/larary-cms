@@ -50,6 +50,7 @@ class GoogleController extends Controller
                 'email' => $oauthUser->email,
                 'google_id'=> $oauthUser->id,
                 'status' => 1,
+                'created_by' => 0,
                 // password tidak akan digunakan ;)
                 'password' => md5($oauthUser->token),
             ]);

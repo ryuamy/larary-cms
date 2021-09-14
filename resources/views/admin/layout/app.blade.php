@@ -28,14 +28,14 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
-		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/plugins/global/plugins.bundle.css') }}" />
-		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/plugins/global/plugins.bundle.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/plugins/custom/prismjs/prismjs.bundle.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/style.bundle.css') }}" />
 
-		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/header/base/light.css') }}" />
-		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/header/menu/light.css') }}" />
-		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/brand/light.css') }}" />
-		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/metronic_v7.1.2/themes/layout/aside/light.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/themes/layout/header/base/light.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/themes/layout/header/menu/light.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/themes/layout/brand/light.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/global/themes/layout/aside/light.css') }}" />
 
         @foreach ($css as $c)
 		    <link rel="stylesheet" type="text/css" href="{{ asset('/css/'.$c.'.css') }}" />
@@ -60,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- Mobile Header -->
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<a href="index">
-				<img alt="Logo" src="{{ asset('/media/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
+				<img alt="Logo" src="{{ asset('/media/media/logos/logo-dark.png') }}" />
 			</a>
 			<div class="d-flex align-items-center">
 				<button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">
@@ -97,7 +97,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!-- Desktop Logo -->
 					<div class="brand flex-column-auto" id="kt_brand">
 						<a href="index" class="brand-logo">
-							<img alt="Logo" src="{{ asset('/media/metronic_v7.1.2/media/logos/logo-dark.png') }}" />
+							<img alt="Logo" src="{{ asset('/media/media/logos/logo-dark.png') }}" />
 						</a>
 						<button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
 							<span class="svg-icon svg-icon svg-icon-xl">
@@ -121,7 +121,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						</button>
 					</div>
 					<!-- Desktop Logo -->
-					
+
 					<!-- Left Menu -->
 					<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 						<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
@@ -286,7 +286,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
 										<div>
 											<div class="d-flex flex-column pt-5 pb-5 bgi-size-cover bgi-no-repeat rounded-top"
-												style="background-image: url({{ asset('/media/metronic_v7.1.2/media/misc/bg-1.jpg') }})"
+												style="background-image: url({{ asset('/media/media/misc/bg-1.jpg') }})"
 											>
 												<h4 class="d-flex flex-center rounded-top">
 													<span class="text-white">
@@ -529,7 +529,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									</a>
 								</div>
 								<!-- Message -->
-								
+
 								<!-- Profile Menu -->
 								<div class="topbar-item">
 									<div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
@@ -631,7 +631,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<?php /*
 					<div class="symbol symbol-100 mr-5">
 						<div class="symbol-label"
-							style="background-image:url('{{ asset('/media/metronic_v7.1.2/media/users/300_21.jpg') }}')"></div>
+							style="background-image:url('{{ asset('/media/media/users/300_21.jpg') }}')"></div>
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					*/ ?>
@@ -844,8 +844,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#EBEDF3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };</script>
 		<!--end::Global Config-->
 
-		<script src="{{ asset('/js/global/metronic_v7.1.2/plugins/global/plugins.bundle.js') }}"></script>
-		<script src="{{ asset('/js/global/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
+		<script src="{{ asset('/js/global/plugins/global/plugins.bundle.js') }}"></script>
+		<script src="{{ asset('/js/global/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
 		<script src="{{ asset('/js/global/scripts.bundle.js') }}"></script>
 		<script src="{{ asset('/js/global/clock.js') }}"></script>
 

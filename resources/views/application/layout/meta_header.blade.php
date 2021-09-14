@@ -53,5 +53,5 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito" />
 <link rel="stylesheet" type="text/css" href="{{ app_css().'app.css' }}" />
 <link rel="stylesheet" type="text/css" href="{{ app_css().'global/style.bundle.css' }}" />
-<link rel="stylesheet" type="text/css" href="{{ app_css().'global/metronic_v7.1.2/plugins/global/plugins.bundle.css' }}" />
-<link rel="stylesheet" type="text/css" href="{{ app_css().'global/metronic_v7.1.2/plugins/custom/prismjs/prismjs.bundle.css' }}" />
+<link rel="stylesheet" type="text/css" href="{{ app_css().'global/plugins/global/plugins.bundle.css' }}" />
+<link rel="stylesheet" type="text/css" href="{{ app_css().'global/plugins/custom/prismjs/prismjs.bundle.css' }}" />
