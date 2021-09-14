@@ -43,7 +43,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<link rel="stylesheet" type="text/css" href="{{ asset('/css/admin/admin.css') }}" />
 
-		<link rel="shortcut icon" href="{{ asset('/media/favicon.ico') }}" />
+		<link rel="shortcut icon" href="{{ asset('/media/global/favicon.png') }}" />
 	</head>
 
 	<?php
@@ -60,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- Mobile Header -->
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<a href="index">
-				<img alt="Logo" src="{{ asset('/media/media/logos/logo-dark.png') }}" />
+				<img alt="Logo" src="{{ asset('/media/admin/logo.png') }}" />
 			</a>
 			<div class="d-flex align-items-center">
 				<button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">
@@ -97,7 +97,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!-- Desktop Logo -->
 					<div class="brand flex-column-auto" id="kt_brand">
 						<a href="index" class="brand-logo">
-							<img alt="Logo" src="{{ asset('/media/media/logos/logo-dark.png') }}" />
+							<img alt="Logo" src="{{ asset('/media/admin/logo.png') }}" />
 						</a>
 						<button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
 							<span class="svg-icon svg-icon svg-icon-xl">
@@ -286,7 +286,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
 										<div>
 											<div class="d-flex flex-column pt-5 pb-5 bgi-size-cover bgi-no-repeat rounded-top"
-												style="background-image: url({{ asset('/media/media/misc/bg-1.jpg') }})"
+												style="background-image: url({{ asset('/media/admin/layout/bg-notification.jpg') }})"
 											>
 												<h4 class="d-flex flex-center rounded-top">
 													<span class="text-white">

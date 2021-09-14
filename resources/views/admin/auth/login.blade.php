@@ -29,7 +29,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="{{ asset('/css/global/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('/css/global/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
-		<link rel="shortcut icon" href="{{ asset('/media/favicon.ico') }}" />
+		<link rel="shortcut icon" href="{{ asset('/media/global/favicon.png') }}" />
 
 	</head>
 
@@ -41,17 +41,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
 			<div class="login login-4 login-signin-on d-flex flex-row-fluid" id="kt_login">
 				<div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat"
-					style="background-image: url('{{ asset('/media/admin/layout/bg-login.jpg') }}');"
+					style="background-image: url('{{ asset('/media/global/background/bg-login.jpg') }}');"
 				>
 					<div class="login-form text-center p-7 position-relative overflow-hidden">
-
-						<?php /*<div class="d-flex flex-center mb-15">
-							<a href="#">
-								<img src="{{ asset('/media/media/logos/logo-letter-13.png') }}"
-									class="max-h-75px" alt=""
-								/>
-							</a>
-						</div>*/ ?>
 
 						<div class="login-signin">
 							<div class="mb-14">

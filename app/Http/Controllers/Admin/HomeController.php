@@ -29,8 +29,8 @@ class HomeController extends Controller
             ],
             'css' => [],
             'js' => [
-                'metronic_v7.1.2/plugins/custom/fullcalendar/fullcalendar.bundle',
-                'metronic_v7.1.2/pages/widgets'
+                'global/plugins/custom/fullcalendar/fullcalendar.bundle',
+                'global/pages/widgets'
             ],
             'breadcrumb' => [
                 array(

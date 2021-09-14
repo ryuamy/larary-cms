@@ -48,7 +48,7 @@
 <link rel="revision" href="{{ url('/') }}" />
 
 <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-<link rel="shortcut icon" href="{{ app_media().'favicon.ico' }}" />
+<link rel="shortcut icon" href="{{ app_media().'global/favicon.png' }}" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito" />
 <link rel="stylesheet" type="text/css" href="{{ app_css().'app.css' }}" />
