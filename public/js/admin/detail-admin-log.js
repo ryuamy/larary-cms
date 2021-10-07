@@ -1,7 +1,7 @@
 "use strict";
 var KTDatatableHtmlTableDemo = function () {
     var demo = function () {
-        $('#kt_datatable').KTDatatable({
+        $('#admin_logs').KTDatatable({
             sortable: true,
             pagination: true,
             columns: [{

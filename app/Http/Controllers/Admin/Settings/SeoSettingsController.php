@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admins;
 use App\Models\Adminrolemodules;
 use App\Models\Settings;
 use App\Models\Settinglogs;
@@ -36,7 +37,10 @@ class SeoSettingsController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
-        $this->admin = Auth::guard('admin')->user();
+        if(Auth::guard('admin')->user() != null) {
+            $admin_id = Auth::guard('admin')->user()->id;
+            $this->admin = Admins::where('id', $admin_id)->with('role')->first();
+        }
         $this->table = 'settings';
         $this->admin_url = admin_uri().$this->table;
     }

@@ -58,6 +58,8 @@
 		$('#kt_login_signin_submit').on('click', function (e) {
 			e.preventDefault();
 
+			$('#kt_login_signin_submit').html('Loading...');
+
 			var values = $('#kt_login_signin_form').serialize();
 			var login_url = baseUrl + 'ajax/login';
 
@@ -108,6 +110,7 @@
                             _reloadCaptcha();
 							$('#bx_alert_message_login').html(bx_alert_message_login);
 							$('#alert_message_login').html(response.responseJSON.message);
+							$('#kt_login_signin_submit').html('Sign In');
 						}
 					});
 				} else {
@@ -123,6 +126,7 @@
 					}).then(function () {
 						KTUtil.scrollTop();
 					});
+					$('#kt_login_signin_submit').html('Sign In');
 				}
 			});
 		});

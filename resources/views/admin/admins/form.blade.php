@@ -217,8 +217,8 @@
                                 Activity Logs
                             </h3>
                         </div>
-                        <div class="card-body">
-                            <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                        <div class="card-body admin-datatable">
+                            <table class="datatable datatable-bordered datatable-head-custom" id="admin_logs">
                                 <thead>
                                     <tr>
                                         <th title="Action">Action</th>

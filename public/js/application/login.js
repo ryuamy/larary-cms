@@ -57,6 +57,8 @@
 		$('#user_login').on('click', function (e) {
 			e.preventDefault();
 
+			$('#user_login').html('Loading...');
+
 			var values = $('#user_login_form').serialize();
 			var login_url = baseUrl + 'ajax/login';
 
@@ -93,14 +95,17 @@
 									window.location.replace(response.datas.redirect);
 								}, 7500);
 							} else {
+								_reloadCaptcha();
 								$('#bx_alert_message_login').html(bx_alert_message_login);
 								$('#alert_message_login').html(response.responseJSON.message);
+								$('#user_login').html('Sign In');
 							}
 						},
 						error: function (response, textStatus, request) {
                             _reloadCaptcha();
 							$('#bx_alert_message_login').html(bx_alert_message_login);
 							$('#alert_message_login').html(response.responseJSON.message);
+							$('#user_login').html('Sign In');
 						}
 					});
 				} else {
@@ -116,6 +121,7 @@
 					}).then(function () {
 						KTUtil.scrollTop();
 					});
+					$('#user_login').html('Sign In');
 				}
 			});
 		});

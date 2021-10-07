@@ -47,8 +47,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	</head>
 
 	<?php
-		$admin_data = Auth::guard('admin')->user();
-		$admin_name = explode(' ', $admin_data->name);
+		$admin_name = explode(' ', $admindata->name);
 		$first_name = $admin_name[0];
 		$last_name = isset($admin_name[1]) ? $admin_name[1] : '';
 		$cur_uri = current_uri();
@@ -66,9 +65,9 @@ License: You must have a valid license purchased only from themeforest(the above
 				<button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">
 					<span></span>
 				</button>
-				<button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
+				<!-- <button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
 					<span></span>
-				</button>
+				</button> -->
 				<button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
 					<span class="svg-icon svg-icon-xl">
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -259,6 +258,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 							<div class="topbar">
 								<!-- Notification -->
+								<?php /*
 								<div class="dropdown">
 									<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px" title="23 new notification" data-toggle="tooltip" data-placement="bottom" data-theme="dark">
 										<div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary">
@@ -457,16 +457,18 @@ License: You must have a valid license purchased only from themeforest(the above
 															</div>
 														</a>
 													</div>
-													<?php /*<div class="d-flex flex-center text-center text-muted min-h-200px">All caught up!
+													<!--<div class="d-flex flex-center text-center text-muted min-h-200px">All caught up!
 														<br />No new notifications.
-													</div>*/ ?>
+													</div>-->
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+								*/ ?>
 								<!-- Notification -->
 
+								<!-- Quick Panel -->
 								<?php /*
 								<div class="topbar-item">
 									<div class="btn btn-icon btn-clean btn-lg mr-1" id="kt_quick_panel_toggle">
@@ -488,6 +490,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 								</div>
 								*/ ?>
+								<!-- Quick Panel -->
 
 								<!-- Chat Box -->
 								<?php /*
@@ -557,10 +560,13 @@ License: You must have a valid license purchased only from themeforest(the above
 								<div class="d-flex align-items-center flex-wrap mr-1 w-100">
 									<div class="d-flex justify-content-between align-items-baseline flex-wrap w-100">
 										<div class="d-flex align-items-baseline">
+											<!-- Page Title Header -->
 											<h5 class="text-dark font-weight-bold my-1 mr-5">
 												{{ $meta['title'] }}
 											</h5>
+											<!-- Page Title Header -->
 
+											<!-- Breadcrumb Header -->
 											<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
 												@foreach ($breadcrumb as $kB => $b)
 													<?php $last_key = count($breadcrumb) - 1;?>
@@ -571,8 +577,10 @@ License: You must have a valid license purchased only from themeforest(the above
 													</li>
 												@endforeach
 											</ul>
+											<!-- Breadcrumb Header -->
 										</div>
 
+										<!-- Oclock -->
 										<div class="jam-bukutamu">
 											<div>
 												<span>{{ day_idn(date('w')).', '.date(' d ').month_idn(date('n')).date(' Y') }}</span> -
@@ -580,16 +588,20 @@ License: You must have a valid license purchased only from themeforest(the above
 												<span id="OAMPM">AM</span>
 											</div>
 										</div>
+										<!-- Oclock -->
 									</div>
 								</div>
 							</div>
 						</div>
 
+						<!-- Main Body -->
 						<main>
 							@yield('content')
 						</main>
+						<!-- Main Body -->
 					</div>
 
+					<!-- Footer -->
 					<div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
 						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 							<div class="text-dark order-2 order-md-1">
@@ -606,11 +618,13 @@ License: You must have a valid license purchased only from themeforest(the above
 							</div>
 						</div>
 					</div>
+					<!-- Footer -->
 
 				</div>
 			</div>
 		</div>
 
+		<!-- Popup Top Right -->
 		<div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
 			<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
 				<h3 class="font-weight-bold m-0">
@@ -627,24 +641,27 @@ License: You must have a valid license purchased only from themeforest(the above
 			</div>
 
 			<div class="offcanvas-content pr-5 mr-n5">
+				<!-- Admin Profile -->
 				<div class="d-flex align-items-center mt-5">
-					<?php /*
 					<div class="symbol symbol-100 mr-5">
 						<div class="symbol-label"
 							style="background-image:url('{{ asset('/media/media/users/300_21.jpg') }}')"></div>
-						<i class="symbol-badge bg-success"></i>
+						<!-- <i class="symbol-badge bg-success"></i> -->
 					</div>
-					*/ ?>
 
 					<div class="d-flex flex-column">
-						<a href="{{ url(admin_uri().'my-account') }}"
+						<a href="{{ url(admin_uri().'my-profile') }}"
 							class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
 						>
-							{{ $admin_data->name }}
+							{{ $admindata->name }}
 						</a>
-						<?php /*<div class="text-muted mt-1">Admin</div>*/ ?>
+
+						<div class="text-muted mt-1">
+							{{ $admindata->role->name }}
+						</div>
+
 						<div class="navi mt-2">
-							<a href="mailto:{{ $admin_data->email }}" class="navi-item">
+							<a href="mailto:{{ $admindata->email }}" class="navi-item">
 								<span class="navi-link p-0 pb-2">
 									<span class="navi-icon mr-1">
 										<span class="svg-icon svg-icon-lg svg-icon-primary">
@@ -660,22 +677,26 @@ License: You must have a valid license purchased only from themeforest(the above
 											</svg>
 										</span>
 									</span>
+									
 									<span class="navi-text text-muted text-hover-primary">
-										{{ $admin_data->email }}
+										{{ $admindata->email }}
 									</span>
 								</span>
 							</a>
+
 							<a href="{{ url(admin_uri().'logout') }}" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">
 								Logout
 							</a>
 						</div>
 					</div>
 				</div>
+				<!-- Admin Profile -->
 
 				<div class="separator separator-dashed mt-8 mb-5"></div>
 
+				<!-- Top Right Menu -->
 				<div class="navi navi-spacer-x-0 p-0">
-					<a href="{{ url(admin_uri().'my-account') }}" class="navi-item">
+					<a href="{{ url(admin_uri().'my-profile') }}" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">
@@ -730,7 +751,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						</div>
 					</a>
 
-					<a href="{{ url(admin_uri().'my-account/logs') }}" class="navi-item">
+					<a href="{{ url(admin_uri().'my-profile/logs') }}" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">
@@ -766,9 +787,12 @@ License: You must have a valid license purchased only from themeforest(the above
 						</div>
 					</a>
 				</div>
+				<!-- Top Right Menu -->
 
 				<div class="separator separator-dashed my-7"></div>
 
+				<!-- Top Right Menu Recent Notifications -->
+				<?php /*
 				<div>
 					<h5 class="mb-5">Recent Notifications</h5>
 
@@ -807,6 +831,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							</div>
 						</a>
 					</div>
+
 					<div class="navi-item">
 						<div class="navi-link">
 							<div class="navi-text justify-content-center d-flex">
@@ -821,10 +846,15 @@ License: You must have a valid license purchased only from themeforest(the above
 						</div>
 					</div>
 				</div>
+				*/ ?>
+				<!-- Top Right Menu Recent Notifications -->
 			</div>
 		</div>
+		<!-- Popup Top Right -->
 
+		<!-- Popup Chat -->
 		{{ view( 'admin.layout.skeleton_chat' ) }}
+		<!-- Popup Chat -->
 
 		<div id="kt_scrolltop" class="scrolltop">
 			<span class="svg-icon">
@@ -865,6 +895,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		    <script src="{{ asset('/js/'.$j.'.js') }}"></script>
         @endforeach
 
+		<!-- Custom View -->
 		@if (isset($cur_uri[4]) && $cur_uri[4] === 'news' && isset($cur_uri[5]) && ($cur_uri[5] === 'create' || $cur_uri[5] === 'detail'))
 			<?php
 				$datas = [
@@ -874,6 +905,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			?>
 			{{ view( 'admin.news.tagify', $datas ) }}
 		@endif
+		<!-- Custom View -->
 
 	</body>
 </html>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\News;
 
 use App\Http\Controllers\Controller;
 // use App\Http\Requests\PagesRequest;
+use App\Models\Admins;
 use App\Models\Adminrolemodules;
 use App\Models\Categories;
 use App\Models\News;
@@ -60,7 +61,10 @@ class NewsController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
-        $this->admin = Auth::guard('admin')->user();
+        if(Auth::guard('admin')->user() != null) {
+            $admin_id = Auth::guard('admin')->user()->id;
+            $this->admin = Admins::where('id', $admin_id)->with('role')->first();
+        }
         $this->table = 'news';
         $this->admin_url = admin_uri().$this->table;
     }

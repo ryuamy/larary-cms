@@ -55,7 +55,7 @@ class Admins extends Authenticatable
     }
 
     public function role() {
-        return $this->belongsTo(Adminroles::class, 'id', 'role_id');
+        return $this->belongsTo(Adminroles::class, 'role_id', 'id');
     }
 
     public function created_by() {

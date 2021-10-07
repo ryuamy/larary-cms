@@ -151,7 +151,13 @@
                         {{-- https://schema.org/ --}}
                     </div>
                     <div class="card-body">
-                        <p>Coming Soon...</p>
+                        <div class="mb-5">
+                            <div class="alert alert-custom alert-warning d-flex" role="alert">
+                                <div class="alert-text" id="alert_message_login">
+                                    Coming soon...
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

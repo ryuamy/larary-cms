@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Pages;
 
 use App\Http\Controllers\Controller;
 // use App\Http\Requests\PagesRequest;
+use App\Models\Admins;
 use App\Models\Adminrolemodules;
 use App\Models\Pages;
 use App\Models\Pagelogs;
@@ -59,7 +60,10 @@ class PagesController extends Controller
         // dd(Auth::guard('admin')->check());
         // $this->middleware('admin');
         $this->middleware('auth:admin');
-        $this->admin = Auth::guard('admin')->user();
+        if(Auth::guard('admin')->user() != null) {
+            $admin_id = Auth::guard('admin')->user()->id;
+            $this->admin = Admins::where('id', $admin_id)->with('role')->first();
+        }
         $this->table = 'pages';
         $this->admin_url = admin_uri().$this->table;
     }
