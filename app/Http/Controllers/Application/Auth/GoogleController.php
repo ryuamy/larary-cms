@@ -28,7 +28,7 @@ class GoogleController extends Controller
             return redirect('/home');
         }
 
-        $oauthUser = Socialite::driver('google')->user();
+        $oauthUser = Socialite::driver('google')->stateless()->user();
 
         $user = User::where('google_id', $oauthUser->id)->first();
 
@@ -50,6 +50,7 @@ class GoogleController extends Controller
                 'email' => $oauthUser->email,
                 'google_id'=> $oauthUser->id,
                 'status' => 1,
+                // created_by 0 mean registered by the user itself
                 'created_by' => 0,
                 // password tidak akan digunakan ;)
                 'password' => md5($oauthUser->token),

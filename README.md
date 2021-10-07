@@ -25,10 +25,8 @@
 
 ## Getting started
 
-### Install Composer
-Download composer melalui web ini [https://getcomposer.org/download/](https://getcomposer.org/download/) dan ikuti langkah-langkahnya. Composer digunakan sebagai dependency manager untuk menghubung antara project dengan library luar laravel. Restart komputer.
-
-Setelah install composer, run **`composer install`** pada console untuk mendapatkan folder `vendor` sebagai wadah folder dependency atau library yang dipakai Laravel. 
+### Install Composer Dependencies
+Pastikan sudah menginstall composer terlebih dahulu. Run **`composer install`** pada console untuk mendapatkan folder `vendor` sebagai wadah folder dependency atau library yang dipakai Laravel. 
 
 ### Install dependency package node.js
 run **`npm install`** untuk menginstall package dependency tambahan, contohnya `Laravel Mix`, dan beberapa dependency lainnya yang akan dipakai kedepannya.
