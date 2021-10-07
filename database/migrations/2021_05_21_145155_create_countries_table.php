@@ -25,6 +25,8 @@ class CreateCountriesTable extends Migration
             $table->string('phone_code', 15);
             $table->string('flag', 255)->nullable();
             $table->integer('capital_city')->nullable()->index();
+            $table->enum('enable_multilanguage', ['Y', 'N'])->default('N');
+            $table->enum('show_multilanguage', ['Y', 'N'])->default('N');
             $table->integer('status')->default(1);
             $table->integer('created_by')->nullable()->index();
             $table->integer('updated_by')->nullable()->index();
