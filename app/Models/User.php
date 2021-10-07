@@ -51,7 +51,7 @@ class User extends Authenticatable
     ];
 
     public function logs() {
-        return $this->hasMany(Userlogs::class);
+        return $this->hasMany(Userlogs::class, 'user_id', 'id');
     }
 
     public function created_by() {

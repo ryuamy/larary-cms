@@ -5,16 +5,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\PagesController;
-use App\Http\Controllers\Admin\Admins\AdminsController;
-use App\Http\Controllers\Admin\Admins\AdminrolesController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Layout\ThemesController;
 use App\Http\Controllers\Admin\News\NewsController;
 use App\Http\Controllers\Admin\News\NewscategoriesController;
 use App\Http\Controllers\Admin\News\NewstagsController;
+use App\Http\Controllers\Admin\Pages\PagesController;
 use App\Http\Controllers\Admin\Settings\GeneralSettingsController;
 use App\Http\Controllers\Admin\Settings\ImageUploadSettingsController;
+use App\Http\Controllers\Admin\Settings\MultilanguageSettingsController;
 use App\Http\Controllers\Admin\Settings\SeoSettingsController;
+use App\Http\Controllers\Admin\Users\AdminsController;
+use App\Http\Controllers\Admin\Users\AdminrolesController;
+use App\Http\Controllers\Admin\Users\UsersController;
 
 // Auth::routes();
 
@@ -144,6 +147,23 @@ Route::prefix('admins')->group(function () {
     Route::post( 'update/{uuid}', [AdminsController::class, 'update'] )->name('adm_admins_update');
 });
 
+Route::prefix('users')->group(function () {
+    Route::get( '/', [UsersController::class, 'index'] )->name('adm_users_index');
+    Route::get( 'create', [UsersController::class, 'create'] )->name('adm_users_create');
+    Route::get( 'save', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::post( 'save', [UsersController::class, 'save'] )->name('adm_users_save');
+    Route::get( 'detail/{uuid}', [UsersController::class, 'detail'] )->name('adm_users_detail');
+    Route::get( 'update/{uuid}', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::get( 'update', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::post( 'update/{uuid}', [UsersController::class, 'update'] )->name('adm_users_update');
+});
+
 Route::prefix('admin-roles')->group(function () {
     Route::get( '/', [AdminrolesController::class, 'index'] )->name('adm_admin_roles_index');
     Route::get( 'create', [AdminrolesController::class, 'create'] )->name('adm_admin_roles_create');
@@ -159,6 +179,10 @@ Route::prefix('admin-roles')->group(function () {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::post( 'update/{uuid}', [AdminrolesController::class, 'update'] )->name('adm_admin_roles_update');
+});
+
+Route::prefix('layout')->group(function () {
+    Route::get( 'themes', [ThemesController::class, 'index'] )->name('adm_layout_themes');
 });
 
 Route::prefix('settings')->group(function () {
@@ -179,6 +203,12 @@ Route::prefix('settings')->group(function () {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::post( 'image-upload/update', [ImageUploadSettingsController::class, 'update'] )->name('adm_image_upload_update');
+
+    Route::get('multilanguage-website', [MultilanguageSettingsController::class, 'detail'] )->name('adm_multilanguage_website');
+    Route::get('multilanguage-website/update', function() {
+        return view('errors.404', array('message'=>'404 | Page Not Found!') );
+    });
+    Route::post('multilanguage-website/update', [MultilanguageSettingsController::class, 'update'] )->name('adm_multilanguage_website_update');
 });
 
 // for skeleton
