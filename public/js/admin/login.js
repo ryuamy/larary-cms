@@ -79,6 +79,12 @@
 			validation.validate().then(function (status) {
 				console.log(status);
 				if (status == 'Valid') {
+					swal.fire({
+						html: '<div style="text-align:center;max-height:100%;overflow:hidden;margin-bottom:20px;"><i class="fa fa-spinner icon-8x fa-pulse"></i><h4 class="mt-5">Please wait</h4></div>',
+						showConfirmButton: false,
+						showCancelButton: false,
+					})
+
 					$.ajax({
 						url: login_url,
 						type: 'POST',

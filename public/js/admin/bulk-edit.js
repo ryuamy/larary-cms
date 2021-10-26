@@ -12,7 +12,7 @@
             showCancelButton: true,
             cancelButtonText: 'Cancel!',
             confirmButtonText: 'Ok!',
-            closeOnCancel: true,
+            // closeOnCancel: true,
             customClass: {
                 confirmButton: 'btn font-weight-bold btn-light-primary',
                 cancelButton: 'btn font-weight-bold btn-danger'
@@ -25,6 +25,12 @@
                     bulkCheckbox += $(this).val() + ',';
                 });
 
+                swal.fire({
+                    html: '<div style="text-align:center;max-height:100%;overflow:hidden;margin-bottom:20px;"><i class="fa fa-spinner icon-8x fa-pulse"></i><h4 class="mt-5">Please wait</h4></div>',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                })
+
                 if (bulkCheckbox != '') {
                     $.ajax({
                         url: baseUrl + 'ajax/bulk-edit',
@@ -34,8 +40,15 @@
                             location.reload();
                         },
                         error: function (res) {
-                            var obj = $.parseJSON(res);
-                            console.log(obj);
+                            swal.fire({
+                                html: '<h4 class="text-danger">Error!</h4>'+JSON.stringify(res.responseJSON),
+                                icon: 'error',
+                                buttonsStyling: false,
+                                confirmButtonText: 'Close',
+                                customClass: {
+                                    confirmButton: 'btn font-weight-bold btn-light-primary',
+                                }
+                            })
                         }
                     });
                 } else {

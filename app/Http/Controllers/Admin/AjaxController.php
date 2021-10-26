@@ -37,11 +37,20 @@ class AjaxController extends Controller
             $data = DB::table($table)->where('uuid', $uuid)->first();
             $title = $data->name;
 
-            DB::table($table)->where('uuid', $uuid)->update( ['status' => $status] );
+            // DB::table($table)->where('uuid', $uuid)->update( ['status' => $status] );
 
             if($status == 2) {
+                DB::table($table)->where('uuid', $uuid)->update([
+                    'status' => 2,
+                    'updated_by' => $admin_id,
+                    'deleted_at' => date('Y-m-d H:i:s'),
+                ]);
                 $action = 'DELETE';
             } else {
+                DB::table($table)->where('uuid', $uuid)->update([
+                    'status' => $status,
+                    'updated_by' => $admin_id,
+                ]);
                 $action = 'UPDATE';
             }
 
@@ -96,6 +105,7 @@ class AjaxController extends Controller
         DB::table($table)->where('uuid', $uuid)->update([
             'status' => 2,
             'updated_by' => $admin_id,
+            'deleted_at' => date('Y-m-d H:i:s'),
         ]);
 
         $action_detail = 'Delete '.$title.' (uuid '.$uuid.')';
