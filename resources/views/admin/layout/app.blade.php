@@ -650,7 +650,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</div>
 
 					<div class="d-flex flex-column">
-						<a href="{{ url(admin_uri().'my-profile') }}"
+						<a href="{{ url(admin_uri().'admins/detail/'.$admindata->uuid) }}"
 							class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
 						>
 							{{ $admindata->name }}
@@ -696,7 +696,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 				<!-- Top Right Menu -->
 				<div class="navi navi-spacer-x-0 p-0">
-					<a href="{{ url(admin_uri().'my-profile') }}" class="navi-item">
+					<a href="{{ url(admin_uri().'admins/detail/'.$admindata->uuid) }}" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">
@@ -751,7 +751,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						</div>
 					</a>
 
-					<a href="{{ url(admin_uri().'my-profile/logs') }}" class="navi-item">
+					<a href="{{ url(admin_uri().'admins/detail/'.$admindata->uuid.'#ActivityLogs') }}" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">

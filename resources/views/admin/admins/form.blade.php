@@ -194,7 +194,7 @@
                                 Status
                                 <span class="text-danger">*</span>
                             </label>
-                            <select class="form-control" name="status" id="status">
+                            <select class="form-control" {{ isset($current['id']) && $admindata->id === $current['id'] ? 'disabled' : '' }} style="{{ isset($current['id']) && $admindata->id === $current['id'] ? 'cursor:not-allowed' : '' }}" name="status" id="status">
                                 <option value="">Select Status</option>
                                 @foreach ($staticdata['default_status'] as $kS => $status)
                                     @if ($kS != 2)
@@ -209,7 +209,7 @@
                 </div>
             </div>
             
-            <div class="col-md-12">
+            <div class="col-md-12" id="ActivityLogs">
                 <?php if(str_contains($current_route, 'detail')) { ?>
                     <div class="card card-custom mb-8">
                         <div class="card-header">

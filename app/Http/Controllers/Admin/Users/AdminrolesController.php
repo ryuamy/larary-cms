@@ -202,12 +202,12 @@ class AdminrolesController extends Controller
 
         $admin_id = $this->admin->id;
 
-        $slug = create_slug($this->table, $request->input('title'));
+        $slug = create_slug($this->table, $request->input('name'));
 
         $insert = new Adminroles();
         $insert->uuid = (string) Str::uuid();
         $insert->name = $request->input('name');
-        // $insert->slug = $slug;
+        $insert->slug = $slug;
         $insert->status = $request->input('status');
         $insert->created_by = $admin_id;
         $insert->updated_by = $admin_id;
@@ -326,7 +326,8 @@ class AdminrolesController extends Controller
 
         $admin_id = $this->admin->id;
 
-        $slug = ($request->input('permalink') != $current->slug) ? create_slug($this->table, $request->input('permalink')) : $request->input('permalink');
+        $slug = create_slug($this->table, $request->input('name'));
+        $slug = ($slug != $current->slug) ? $slug : $current->slug;
 
         Adminroles::where('uuid', $uuid)->update(
             array(
@@ -388,7 +389,7 @@ class AdminrolesController extends Controller
         }
 
         return redirect($this->admin_url.'/detail/'.$current['uuid'])->with([
-            'success-message' => 'Success update admin.'
+            'success-message' => 'Success update admin role.'
         ]);
     }
 }

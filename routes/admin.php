@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Countries\CitiesController;
+use App\Http\Controllers\Admin\Countries\CountriesController;
+use App\Http\Controllers\Admin\Countries\ProvincesController;
 use App\Http\Controllers\Admin\Layout\ThemesController;
 use App\Http\Controllers\Admin\News\NewsController;
 use App\Http\Controllers\Admin\News\NewscategoriesController;
@@ -209,6 +212,18 @@ Route::prefix('settings')->group(function () {
         return view('errors.404', array('message'=>'404 | Page Not Found!') );
     });
     Route::post('multilanguage-website/update', [MultilanguageSettingsController::class, 'update'] )->name('adm_multilanguage_website_update');
+});
+
+Route::prefix('countries')->group(function () {
+    Route::get( '/', [CountriesController::class, 'index'] )->name('adm_countries_index');
+});
+
+Route::prefix('cities')->group(function () {
+    Route::get( '/', [CitiesController::class, 'index'] )->name('adm_cities_index');
+});
+
+Route::prefix('provinces')->group(function () {
+    Route::get( '/', [ProvincesController::class, 'index'] )->name('adm_provinces_index');
 });
 
 // for skeleton

@@ -9,20 +9,22 @@
 /public/storage
 /public/uploads
 /storage/*.key
-#/vendor
-vendor/*
-!vendor/laravel
-vendor/laravel/*
-!vendor/laravel/ui
-vendor/laravel/ui/*
-!vendor/laravel/ui/auth-backend
-vendor/laravel/ui/auth-backend/*
-!vendor/laravel/ui/auth-backend/AuthenticatesUsers.php
-!vendor/laravel/ui/auth-backend/ConfirmsPasswords.php
-!vendor/laravel/ui/auth-backend/RegistersUsers.php
-!vendor/laravel/ui/auth-backend/ResetsPasswords.php
-!vendor/laravel/ui/auth-backend/SendsPasswordResetEmails.php
+/vendor
+# vendor/*
+# !vendor/laravel
+# vendor/laravel/*
+# !vendor/laravel/ui
+# vendor/laravel/ui/*
+# !vendor/laravel/ui/auth-backend
+# vendor/laravel/ui/auth-backend/*
+# !vendor/laravel/ui/auth-backend/AuthenticatesUsers.php
+# !vendor/laravel/ui/auth-backend/ConfirmsPasswords.php
+# !vendor/laravel/ui/auth-backend/RegistersUsers.php
+# !vendor/laravel/ui/auth-backend/ResetsPasswords.php
+# !vendor/laravel/ui/auth-backend/SendsPasswordResetEmails.php
+client_secret_*.apps.googleusercontent.com.json
 google_credentials.json
+google*.html
 # docker-compose.override.yml
 # Homestead.json
 # Homestead.yaml
@@ -33,4 +35,3 @@ google_credentials.json
 .htaccess
 *.private
 *.backup
-google*.html

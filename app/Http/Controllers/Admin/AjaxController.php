@@ -159,13 +159,19 @@ class AjaxController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
+        $check = DB::table('admins')
+            ->where('slug', $request->username)
+            ->first();
+        
+        $admin_id = ($check) ? $check->id : 0;
+
         if($validator->fails()){
             $errors = str_replace( array('[', ']', '"'), '', json_encode($validator->errors()->all()) );
 
             insert_admin_logs(
-                0,
+                $admin_id,
                 'ADMINS',
-                0,
+                $admin_id,
                 'LOGIN',
                 'Failed to login. Error: '.$errors
             );
@@ -181,15 +187,15 @@ class AjaxController extends Controller
                 400
             );
         } else {
-            $check = DB::table('admins')
-                ->where('slug', $request->username)
-                ->first();
-
-            $admin_id = ($check) ? $check->id : 0;
-
             $remember_login = $request->remember != null ? true : false;
 
-            if ( Auth::guard('admin')->attempt(['slug' => $request->username, 'password' => $request->password], $remember_login) ) {
+            $login_attempt = [
+                'slug' => $request->username, 
+                'password' => $request->password
+            ];
+
+            if ( Auth::guard('admin')->attempt($login_attempt, $remember_login) )
+            {
                 try {
                     if($check->status != 1) {
                         insert_admin_logs(

@@ -21,6 +21,7 @@ class CreatePagesTable extends Migration
             $table->string('slug', 255)->unique();
             $table->mediumText('content');
             $table->string('featured_image', 255)->nullable();
+            $table->integer('sort')->default(0);
             $table->string('seo_title', 100)->nullable();
             $table->string('seo_description', 100)->nullable();
             $table->text('seo_focus_keyphrase')->nullable();

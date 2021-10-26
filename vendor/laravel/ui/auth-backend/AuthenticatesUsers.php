@@ -18,24 +18,7 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        // return view('auth.login');
-        $datas = [
-            "table" => "",
-            "meta" => [
-                "title" => "Login"
-            ],
-            "css" => [],
-            "js" => [],
-            "breadcrumb" => [
-                array(
-                    "title" => "",
-                    "url" => ""
-                ),
-            ],
-            "data" => [],
-        ];
-
-        return view("application.auth.login", $datas);
+        return view('auth.login');
     }
 
     /**

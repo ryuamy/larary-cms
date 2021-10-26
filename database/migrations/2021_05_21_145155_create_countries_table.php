@@ -24,7 +24,7 @@ class CreateCountriesTable extends Migration
             $table->string('un_code', 255)->nullable();
             $table->string('phone_code', 15);
             $table->string('flag', 255)->nullable();
-            $table->integer('capital_city')->nullable()->index();
+            $table->string('capital_city', 255)->nullable();
             $table->enum('enable_multilanguage', ['Y', 'N'])->default('N');
             $table->enum('show_multilanguage', ['Y', 'N'])->default('N');
             $table->integer('status')->default(1);

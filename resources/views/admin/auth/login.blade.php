@@ -67,6 +67,21 @@ License: You must have a valid license purchased only from themeforest(the above
 											</div>
 										</div>
 									@endif
+									
+									@if (Session::has('success-message'))
+										<div class="alert mb-5 alert-custom alert-success d-flex show fade" role="alert">
+											<div class="alert-text" id="alert_message_login">
+												{{ Session::get('success-message') }}
+											</div>
+											<div class="alert-close">
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">
+														<i class="ki ki-close"></i>
+													</span>
+												</button>
+											</div>
+										</div>
+									@endif
 								</div>
 
 								<div class="form-group mb-5">

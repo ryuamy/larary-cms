@@ -27,9 +27,9 @@
                 <span class="svg-icon menu-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <rect x="0" y="0" width="24" height="24" />
-                            <rect fill="#000000" opacity="0.3" x="4" y="4" width="8" height="16" />
-                            <path d="M6,18 L9,18 C9.66666667,18.1143819 10,18.4477153 10,19 C10,19.5522847 9.66666667,19.8856181 9,20 L4,20 L4,15 C4,14.3333333 4.33333333,14 5,14 C5.66666667,14 6,14.3333333 6,15 L6,18 Z M18,18 L18,15 C18.1143819,14.3333333 18.4477153,14 19,14 C19.5522847,14 19.8856181,14.3333333 20,15 L20,20 L15,20 C14.3333333,20 14,19.6666667 14,19 C14,18.3333333 14.3333333,18 15,18 L18,18 Z M18,6 L15,6 C14.3333333,5.88561808 14,5.55228475 14,5 C14,4.44771525 14.3333333,4.11438192 15,4 L20,4 L20,9 C20,9.66666667 19.6666667,10 19,10 C18.3333333,10 18,9.66666667 18,9 L18,6 Z M6,6 L6,9 C5.88561808,9.66666667 5.55228475,10 5,10 C4.44771525,10 4.11438192,9.66666667 4,9 L4,4 L9,4 C9.66666667,4 10,4.33333333 10,5 C10,5.66666667 9.66666667,6 9,6 L6,6 Z" fill="#000000" fill-rule="nonzero" />
+                            <rect x="0" y="0" width="24" height="24"/>
+                            <path d="M2,13 L22,13 L22,18 C22,19.1045695 21.1045695,20 20,20 L4,20 C2.8954305,20 2,19.1045695 2,18 L2,13 Z M18.5,18 C19.3284271,18 20,17.3284271 20,16.5 C20,15.6715729 19.3284271,15 18.5,15 C17.6715729,15 17,15.6715729 17,16.5 C17,17.3284271 17.6715729,18 18.5,18 Z M13.5,18 C14.3284271,18 15,17.3284271 15,16.5 C15,15.6715729 14.3284271,15 13.5,15 C12.6715729,15 12,15.6715729 12,16.5 C12,17.3284271 12.6715729,18 13.5,18 Z" fill="#000000"/>
+                            <path d="M5.79268604,8 L18.207314,8 C18.5457897,8 18.8612922,8.17121884 19.0457576,8.45501165 L22,13 L2,13 L4.95424243,8.45501165 C5.13870775,8.17121884 5.45421032,8 5.79268604,8 Z" fill="#000000" opacity="0.3"/>
                         </g>
                     </svg>
                 </span>
@@ -40,16 +40,15 @@
 
     @if ( check_admin_access($admindata->role_id, 'news', 'read') == true || check_admin_access($admindata->role_id, 'news_categories', 'read') == true || check_admin_access($admindata->role_id, 'news_tags', 'read') === true )
         <li class="menu-item menu-item-submenu {{ isset($cur_uri[4]) && $cur_uri[4] === 'news' ? 'menu-item-active menu-item-open' : '' }}
-            {{ isset($cur_uri[5]) && ($cur_uri[5] === 'news' || $cur_uri[5] === 'categories' || $cur_uri[5] === 'tags') ? 'menu-item-open' : '' }} "
-            aria-haspopup="true" data-menu-toggle="hover">
+            {{ isset($cur_uri[5]) && ($cur_uri[5] === 'news' || $cur_uri[5] === 'categories' || $cur_uri[5] === 'tags') ? 'menu-item-open' : '' }} " aria-haspopup="true" data-menu-toggle="hover">
 
             <a href="Javascript:;" class="menu-link menu-toggle">
                 <span class="svg-icon menu-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <rect x="0" y="0" width="24" height="24" />
-                            <rect fill="#000000" opacity="0.3" x="4" y="4" width="8" height="16" />
-                            <path d="M6,18 L9,18 C9.66666667,18.1143819 10,18.4477153 10,19 C10,19.5522847 9.66666667,19.8856181 9,20 L4,20 L4,15 C4,14.3333333 4.33333333,14 5,14 C5.66666667,14 6,14.3333333 6,15 L6,18 Z M18,18 L18,15 C18.1143819,14.3333333 18.4477153,14 19,14 C19.5522847,14 19.8856181,14.3333333 20,15 L20,20 L15,20 C14.3333333,20 14,19.6666667 14,19 C14,18.3333333 14.3333333,18 15,18 L18,18 Z M18,6 L15,6 C14.3333333,5.88561808 14,5.55228475 14,5 C14,4.44771525 14.3333333,4.11438192 15,4 L20,4 L20,9 C20,9.66666667 19.6666667,10 19,10 C18.3333333,10 18,9.66666667 18,9 L18,6 Z M6,6 L6,9 C5.88561808,9.66666667 5.55228475,10 5,10 C4.44771525,10 4.11438192,9.66666667 4,9 L4,4 L9,4 C9.66666667,4 10,4.33333333 10,5 C10,5.66666667 9.66666667,6 9,6 L6,6 Z" fill="#000000" fill-rule="nonzero" />
+                            <rect x="0" y="0" width="24" height="24"/>
+                            <path d="M2,13 L22,13 L22,18 C22,19.1045695 21.1045695,20 20,20 L4,20 C2.8954305,20 2,19.1045695 2,18 L2,13 Z M18.5,18 C19.3284271,18 20,17.3284271 20,16.5 C20,15.6715729 19.3284271,15 18.5,15 C17.6715729,15 17,15.6715729 17,16.5 C17,17.3284271 17.6715729,18 18.5,18 Z M13.5,18 C14.3284271,18 15,17.3284271 15,16.5 C15,15.6715729 14.3284271,15 13.5,15 C12.6715729,15 12,15.6715729 12,16.5 C12,17.3284271 12.6715729,18 13.5,18 Z" fill="#000000"/>
+                            <path d="M5.79268604,8 L18.207314,8 C18.5457897,8 18.8612922,8.17121884 19.0457576,8.45501165 L22,13 L2,13 L4.95424243,8.45501165 C5.13870775,8.17121884 5.45421032,8 5.79268604,8 Z" fill="#000000" opacity="0.3"/>
                         </g>
                     </svg>
                 </span>
@@ -97,7 +96,65 @@
         </li>
     @endif
 
-    <!--<li class="menu-section">
+    @if ( check_admin_access($admindata->role_id, 'countries', 'read') == true || check_admin_access($admindata->role_id, 'cities', 'read') == true || check_admin_access($admindata->role_id, 'provinces', 'read') === true )
+        <li class="menu-item menu-item-submenu {{ isset($cur_uri[4]) && ($cur_uri[4] === 'cities' || $cur_uri[4] === 'countries' || $cur_uri[4] === 'provinces') ? 'menu-item-active menu-item-open' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+
+            <a href="Javascript:;" class="menu-link menu-toggle">                
+                <span class="svg-icon menu-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24"/>
+                            <path d="M5,10.5 C5,6 8,3 12.5,3 C17,3 20,6.75 20,10.5 C20,12.8325623 17.8236613,16.03566 13.470984,20.1092932 C12.9154018,20.6292577 12.0585054,20.6508331 11.4774555,20.1594925 C7.15915182,16.5078313 5,13.2880005 5,10.5 Z M12.5,12 C13.8807119,12 15,10.8807119 15,9.5 C15,8.11928813 13.8807119,7 12.5,7 C11.1192881,7 10,8.11928813 10,9.5 C10,10.8807119 11.1192881,12 12.5,12 Z" fill="#000000" fill-rule="nonzero"/>
+                        </g>
+                    </svg>
+                </span>
+
+                <span class="menu-text">Countries</span>
+                <i class="menu-arrow"></i>
+            </a>
+
+            <div class="menu-submenu">
+                <i class="menu-arrow"></i>
+                <ul class="menu-subnav">
+                    @if ( check_admin_access($admindata->role_id, 'countries', 'read') == true )
+                        <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'countries' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                            <a href="{{ url(admin_uri().'countries') }}" class="menu-link">
+                                <i class="menu-bullet menu-bullet-dot">
+                                    <span></span>
+                                </i>
+                                <span class="menu-text">Countries</span>
+                            </a>
+                        </li>
+                    @endif
+
+                    @if ( check_admin_access($admindata->role_id, 'provinces', 'read') == true )
+                        <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'provinces' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                            <a href="{{ url(admin_uri().'provinces') }}" class="menu-link">
+                                <i class="menu-bullet menu-bullet-dot">
+                                    <span></span>
+                                </i>
+                                <span class="menu-text">Provinces</span>
+                            </a>
+                        </li>
+                    @endif
+
+                    @if ( check_admin_access($admindata->role_id, 'cities', 'read') == true )
+                        <li class="menu-item {{ isset($cur_uri[4]) && $cur_uri[4] === 'cities' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                            <a href="{{ url(admin_uri().'cities') }}" class="menu-link">
+                                <i class="menu-bullet menu-bullet-dot">
+                                    <span></span>
+                                </i>
+                                <span class="menu-text">Cities</span>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </div>
+        </li>
+    @endif
+
+    <!--
+    <li class="menu-section">
         <h4 class="menu-text">Messages</h4>
         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
     </li>
@@ -151,7 +208,7 @@
             </span>
             <span class="menu-text">Sent</span>
         </a>
-    </li>-->
+    </li>
 
     <li class="menu-section">
         <h4 class="menu-text">Reporting</h4>
@@ -272,6 +329,7 @@
             </ul>
         </div>
     </li>
+    -->
 
     <li class="menu-section">
         <h4 class="menu-text">Users</h4>
