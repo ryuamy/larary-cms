@@ -67,22 +67,23 @@ class ProvincesController extends Controller
         $datas_list = Provinces::where('deleted_at', NULL)->with('country');
 
         //*** Filter
-        if(isset($_GET['action'])) {
-            if(isset($_GET['name'])) {
-                if( $_GET['condition'] === 'like' ) {
-                    $datas_list = $datas_list->where('name', 'like', '%'.$_GET['name'].'%');
+        if(isset($param_get['action'])) {
+            if(isset($param_get['title'])) {
+                $name = $param_get['title'];
+                if( $param_get['condition'] === 'like' ) {
+                    $datas_list = $datas_list->where('name', 'like', '%'.$name.'%');
                 }
-                if( $_GET['condition'] === 'equal' ) {
-                    $datas_list = $datas_list->where('name', $_GET['name']);
+                if( $param_get['condition'] === 'equal' ) {
+                    $datas_list = $datas_list->where('name', $name);
                 }
             }
-            if( $_GET['status'] !== 'all' ) {
-                $datas_list = $datas_list->where('status', $_GET['status']);
+            if( $param_get['status'] !== 'all' ) {
+                $datas_list = $datas_list->where('status', $param_get['status']);
             }
-            if(isset($_GET['created_from']) && isset($_GET['created_to'])) {
+            if(isset($param_get['created_from']) && isset($param_get['created_to'])) {
                 $datas_list = $datas_list
-                    ->where('created_at', '>', date('Y-m-d', strtotime($_GET['created_from'])).' 00:00:00')
-                    ->where('created_at', '<', date('Y-m-d', strtotime($_GET['created_to'])).' 23:59:59');
+                    ->where('created_at', '>', date('Y-m-d', strtotime($param_get['created_from'])).' 00:00:00')
+                    ->where('created_at', '<', date('Y-m-d', strtotime($param_get['created_to'])).' 23:59:59');
             }
         }
         //*** Filter

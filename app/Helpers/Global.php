@@ -411,12 +411,14 @@ if(!function_exists('custom_admin_sort_filter')) {
         
         //*** Filter
         if(isset($actions['action'])) {
-            if(isset($actions['name'])) {
+            if(isset($actions['title'])) {
+                $name = $actions['title'];
+
                 if( $actions['condition'] === 'like' ) {
-                    $query = $query->where('name', 'like', '%'.$actions['name'].'%');
+                    $query = $query->where('name', 'like', '%'.$name.'%');
                 }
                 if( $actions['condition'] === 'equal' ) {
-                    $query = $query->where('name', $actions['name']);
+                    $query = $query->where('name', $name);
                 }
             }
             if( $actions['status'] !== 'all' ) {

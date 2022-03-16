@@ -101,43 +101,10 @@ class PagesController extends Controller
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = Pages::where('deleted_at', NULL);
-
-        //*** Filter
-        if(isset($_GET['action'])) {
-            if( $_GET['status'] !== 'all' ) {
-                $datas_list = $datas_list->where('status', $_GET['status']);
-            }
-            if(isset($_GET['created_from']) && isset($_GET['created_to'])) {
-                $datas_list = $datas_list
-                    ->where('created_at', '>', date('Y-m-d', strtotime($_GET['created_from'])).' 00:00:00')
-                    ->where('created_at', '<', date('Y-m-d', strtotime($_GET['created_to'])).' 23:59:59');
-            }
-        }
-        //*** Filter
-
-        //*** Sort
-        $order = 'id';
-        if(isset($param_get['order'])) {
-            $order = $param_get['order'];
-            if($param_get['order'] == 'title') {
-                $order = 'name';
-            }
-            if($param_get['order'] == 'created_date') {
-                $order = 'created_at';
-            } elseif($param_get['order'] == 'updated_date') {
-                $order = 'updated_at';
-            }
-        }
-        $sort = (isset($param_get['sort'])) ? strtoupper($param_get['sort']) : 'DESC';
-        $datas_list = $datas_list->orderByRaw($order.' '.$sort);
-        //*** Sort
-
-        $datas['total'] = count($datas_list->get());
-
-        $limit = custom_pagination_limit();
-        $offset = (isset($param_get['page']) && $param_get['page'] > 1) ? ($param_get['page'] * $limit) - $limit : 0;
-        $datas['list'] = $datas_list->offset($offset)->limit($limit)->get();
+        $datas_list = custom_admin_sort_filter('pages', $param_get);
+        
+        $datas['total'] = $datas_list['total'];
+        $datas['list'] = json_decode(json_encode($datas_list['datas_list']), true);
 
         $base_sort_link = custom_sort_link($this->table, $param_get);
         $datas['pagination']['base_sort_link'] = $base_sort_link;

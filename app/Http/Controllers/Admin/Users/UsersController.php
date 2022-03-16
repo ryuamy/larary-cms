@@ -83,14 +83,23 @@ class UsersController extends Controller
         $datas_list = User::where('deleted_at', NULL);
 
         //*** Filter
-        if(isset($_GET['action'])) {
-            if( $_GET['status'] !== 'all' ) {
-                $datas_list = $datas_list->where('status', $_GET['status']);
+        if(isset($param_get['action'])) {
+            if(isset($param_get['title'])) {
+                $name = $param_get['title'];
+                if( $param_get['condition'] === 'like' ) {
+                    $datas_list = $datas_list->where('name', 'like', '%'.$name.'%');
+                }
+                if( $param_get['condition'] === 'equal' ) {
+                    $datas_list = $datas_list->where('name', $name);
+                }
             }
-            if(isset($_GET['created_from']) && isset($_GET['created_to'])) {
+            if( $param_get['status'] !== 'all' ) {
+                $datas_list = $datas_list->where('status', $param_get['status']);
+            }
+            if(isset($param_get['created_from']) && isset($param_get['created_to'])) {
                 $datas_list = $datas_list
-                    ->where('created_at', '>', date('Y-m-d', strtotime($_GET['created_from'])).' 00:00:00')
-                    ->where('created_at', '<', date('Y-m-d', strtotime($_GET['created_to'])).' 23:59:59');
+                    ->where('created_at', '>', date('Y-m-d', strtotime($param_get['created_from'])).' 00:00:00')
+                    ->where('created_at', '<', date('Y-m-d', strtotime($param_get['created_to'])).' 23:59:59');
             }
         }
         //*** Filter

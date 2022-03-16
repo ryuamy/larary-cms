@@ -42,7 +42,7 @@
                                         <label>
                                             Name
                                         </label>
-                                        <input type="text" class="form-control" value="{{ isset($_GET['name']) ? $_GET['name'] : '' }}">
+                                        <input type="text" class="form-control" name="title" value="{{ isset($_GET['title']) ? $_GET['title'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -63,8 +63,8 @@
                                         </label>
                                         <select name="status" class="form-control">
                                             <option value="all" {{ isset($_GET['status']) && $_GET['status'] == 'all' ? 'selected' : '' }}>All</option>
-                                            <option value="1" {{ isset($_GET['status']) && $_GET['status'] == 1 ? 'selected' : '' }}>Active</option>
-                                            <option value="0" {{ isset($_GET['status']) && $_GET['status'] == 0 ? 'selected' : '' }}>Inactive</option>
+                                            <option value="1" {{ isset($_GET['status']) && $_GET['status'] == '1' ? 'selected' : '' }}>Active</option>
+                                            <option value="0" {{ isset($_GET['status']) && $_GET['status'] == '0' ? 'selected' : '' }}>Inactive</option>
                                         </select>
                                     </div>
                                 </div>
