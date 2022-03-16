@@ -84,7 +84,7 @@ class SeoSettingsController extends Controller
                 'google_verification_code' => get_site_settings('google_verification_code'),
                 'bing_verification_code' => get_site_settings('bing_verification_code'),
             ],
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
         ];
 
         return view('admin.settings.seo', $datas);

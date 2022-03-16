@@ -298,7 +298,7 @@ class AdminrolesController extends Controller
             ],
             'admin_roles' => Adminroles::where('deleted_at', NULL)->orderBy('name')->get(),
             'modules' => Modules::where('deleted_at', NULL)->get(),
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
         ];
 
         return view('admin.admin_roles.form', $datas);

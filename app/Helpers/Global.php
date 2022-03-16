@@ -65,7 +65,6 @@ if(!function_exists('app_media')) {
  * @return string $meta_value
  *
  * @author Amy <laksmise@gmail.com>
- *
  */
 if(!function_exists('get_site_settings')) {
     function get_site_settings($meta_key) {
@@ -127,7 +126,6 @@ if(!function_exists('is_mobile')) {
  * @return string $html
  *
  * @author Amy <laksmise@gmail.com>
- *
  */
 if(!function_exists('custom_pagination')) {
     function custom_pagination($params, $adminpage='') {
@@ -384,6 +382,68 @@ if(!function_exists('custom_pagination_prep')) {
         ];
 
         return $rtn;
+    }
+}
+
+if(!function_exists('custom_admin_sort_filter')) {
+    function custom_admin_sort_filter($table_name, $actions) {
+        $DB = new \Illuminate\Support\Facades\DB;
+
+        $query = $DB::table($table_name)->where('deleted_at', NULL);
+
+        if($table_name === 'cities') {
+            $query = $query->with('province')->with('country');
+        }
+
+        //*** Sort
+        $order = 'name';
+        if(isset($actions['order'])) {
+            $order = $actions['order'];
+            if($actions['order'] == 'created_date') {
+                $order = 'created_at';
+            } elseif($actions['order'] == 'updated_date') {
+                $order = 'updated_at';
+            }
+        }
+        $sort = (isset($actions['sort'])) ? strtoupper($actions['sort']) : 'ASC';
+        $query = $query->orderByRaw($order.' '.$sort);
+        //*** Sort
+        
+        //*** Filter
+        if(isset($actions['action'])) {
+            if(isset($actions['name'])) {
+                if( $actions['condition'] === 'like' ) {
+                    $query = $query->where('name', 'like', '%'.$actions['name'].'%');
+                }
+                if( $actions['condition'] === 'equal' ) {
+                    $query = $query->where('name', $actions['name']);
+                }
+            }
+            if( $actions['status'] !== 'all' ) {
+                $query = $query->where('status', $actions['status']);
+            }
+            if(isset($actions['created_from']) && isset($actions['created_to'])) {
+                $query = $query
+                    ->where('created_at', '>', date('Y-m-d', strtotime($actions['created_from'])).' 00:00:00')
+                    ->where('created_at', '<', date('Y-m-d', strtotime($actions['created_to'])).' 23:59:59');
+            }
+        }
+        //*** Filter
+
+        // dd($actions);
+
+        // dd($query->toSql());
+
+        $total = count($query->get());
+
+        $limit = custom_pagination_limit();
+        $offset = (isset($actions['page']) && $actions['page'] > 1) ? ($actions['page'] * $limit) - $limit : 0;
+        $list = $query->offset($offset)->limit($limit)->get();
+
+        return [
+            'total' => $total,
+            'datas_list' => $list
+        ];
     }
 }
 

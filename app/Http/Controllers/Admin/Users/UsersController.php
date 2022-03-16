@@ -75,7 +75,7 @@ class UsersController extends Controller
                 'default_status' => Staticdatas::default_status(),
                 'module_slug' => $this->table,
             ],
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
         ];
 
         $param_get = isset($_GET) ? $_GET : [];
@@ -181,7 +181,7 @@ class UsersController extends Controller
                 'default_status' => Staticdatas::default_status(),
                 'module_slug' => $this->table,
             ],
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
         ];
 
         return view('admin.users.form', $datas);
@@ -289,7 +289,7 @@ class UsersController extends Controller
                 'default_status' => Staticdatas::default_status(),
                 'module_slug' => $this->table,
             ],
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
         ];
 
         return view('admin.users.form', $datas);

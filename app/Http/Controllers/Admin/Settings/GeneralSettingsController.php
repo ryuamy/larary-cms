@@ -106,7 +106,7 @@ class GeneralSettingsController extends Controller
                 'permalink_news_tag' => get_site_settings('permalink_news_tag'),
             ],
             'timezone_choice' => timezone_choice(get_site_settings('timezone')),
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
             'pages' => Pages::where('deleted_at', null)->orderBy('name', 'asc')->get(),
         ];
 

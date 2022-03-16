@@ -59,7 +59,7 @@ class CitiesController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
         ];
 
         $param_get = isset($_GET) ? $_GET : [];
@@ -106,8 +106,6 @@ class CitiesController extends Controller
         $limit = custom_pagination_limit();
         $offset = (isset($param_get['page']) && $param_get['page'] > 1) ? ($param_get['page'] * $limit) - $limit : 0;
         $datas['list'] = $datas_list->offset($offset)->limit($limit)->get();
-
-        // dd($datas['list']);
 
         $base_sort_link = custom_sort_link($this->table, $param_get);
         $datas['pagination']['base_sort_link'] = $base_sort_link;

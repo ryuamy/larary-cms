@@ -59,7 +59,7 @@ class ProvincesController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
         ];
 
         $param_get = isset($_GET) ? $_GET : [];

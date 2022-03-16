@@ -102,7 +102,7 @@ class ImageUploadSettingsController extends Controller
                 'large_max_width' => get_site_settings('large_max_width'),
                 'large_max_height' => get_site_settings('large_max_height'),
             ],
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
         ];
 
         return view('admin.settings.image_upload', $datas);

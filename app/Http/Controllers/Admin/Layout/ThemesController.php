@@ -92,81 +92,81 @@ class ThemesController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
         ];
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = Pages::where('deleted_at', NULL);
+        // $datas_list = Pages::where('deleted_at', NULL);
 
-        //*** Filter
-        if(isset($_GET['action'])) {
-            if( $_GET['status'] !== 'all' ) {
-                $datas_list = $datas_list->where('status', $_GET['status']);
-            }
-            if(isset($_GET['created_from']) && isset($_GET['created_to'])) {
-                $datas_list = $datas_list
-                    ->where('created_at', '>', date('Y-m-d', strtotime($_GET['created_from'])).' 00:00:00')
-                    ->where('created_at', '<', date('Y-m-d', strtotime($_GET['created_to'])).' 23:59:59');
-            }
-        }
-        //*** Filter
+        // //*** Filter
+        // if(isset($_GET['action'])) {
+        //     if( $_GET['status'] !== 'all' ) {
+        //         $datas_list = $datas_list->where('status', $_GET['status']);
+        //     }
+        //     if(isset($_GET['created_from']) && isset($_GET['created_to'])) {
+        //         $datas_list = $datas_list
+        //             ->where('created_at', '>', date('Y-m-d', strtotime($_GET['created_from'])).' 00:00:00')
+        //             ->where('created_at', '<', date('Y-m-d', strtotime($_GET['created_to'])).' 23:59:59');
+        //     }
+        // }
+        // //*** Filter
 
-        //*** Sort
-        $order = 'id';
-        if(isset($param_get['order'])) {
-            $order = $param_get['order'];
-            if($param_get['order'] == 'title') {
-                $order = 'name';
-            }
-            if($param_get['order'] == 'created_date') {
-                $order = 'created_at';
-            } elseif($param_get['order'] == 'updated_date') {
-                $order = 'updated_at';
-            }
-        }
-        $sort = (isset($param_get['sort'])) ? strtoupper($param_get['sort']) : 'DESC';
-        $datas_list = $datas_list->orderByRaw($order.' '.$sort);
-        //*** Sort
+        // //*** Sort
+        // $order = 'id';
+        // if(isset($param_get['order'])) {
+        //     $order = $param_get['order'];
+        //     if($param_get['order'] == 'title') {
+        //         $order = 'name';
+        //     }
+        //     if($param_get['order'] == 'created_date') {
+        //         $order = 'created_at';
+        //     } elseif($param_get['order'] == 'updated_date') {
+        //         $order = 'updated_at';
+        //     }
+        // }
+        // $sort = (isset($param_get['sort'])) ? strtoupper($param_get['sort']) : 'DESC';
+        // $datas_list = $datas_list->orderByRaw($order.' '.$sort);
+        // //*** Sort
 
-        $datas['total'] = count($datas_list->get());
+        // $datas['total'] = count($datas_list->get());
 
-        $limit = custom_pagination_limit();
-        $offset = (isset($param_get['page']) && $param_get['page'] > 1) ? ($param_get['page'] * $limit) - $limit : 0;
-        $datas['list'] = $datas_list->offset($offset)->limit($limit)->get();
+        // $limit = custom_pagination_limit();
+        // $offset = (isset($param_get['page']) && $param_get['page'] > 1) ? ($param_get['page'] * $limit) - $limit : 0;
+        // $datas['list'] = $datas_list->offset($offset)->limit($limit)->get();
 
-        $base_sort_link = custom_sort_link($this->table, $param_get);
-        $datas['pagination']['base_sort_link'] = $base_sort_link;
+        // $base_sort_link = custom_sort_link($this->table, $param_get);
+        // $datas['pagination']['base_sort_link'] = $base_sort_link;
 
-        $page_link = custom_pagination_link($this->table, $param_get);
-        $datas['pagination']['page_link'] = $page_link;
+        // $page_link = custom_pagination_link($this->table, $param_get);
+        // $datas['pagination']['page_link'] = $page_link;
 
-        $current_page = isset($param_get['page']) ? (int)$param_get['page'] : 1;
-        $pagination_prep = custom_pagination_prep($datas['total'], $current_page);
-        $datas['pagination']['showing_from'] = $pagination_prep['showing_from'];
-        $datas['pagination']['showing_to'] = $pagination_prep['showing_to'];
+        // $current_page = isset($param_get['page']) ? (int)$param_get['page'] : 1;
+        // $pagination_prep = custom_pagination_prep($datas['total'], $current_page);
+        // $datas['pagination']['showing_from'] = $pagination_prep['showing_from'];
+        // $datas['pagination']['showing_to'] = $pagination_prep['showing_to'];
 
-        $datas['pagination']['view'] = custom_pagination(
-            array(
-                'base' => $page_link,
-                'page' => $pagination_prep['page'],
-                'pages' => $pagination_prep['pages'],
-                'key' => 'page',
-                'next_text' => '&rsaquo;',
-                'prev_text' => '&lsaquo;',
-                'first_text' => '&laquo;',
-                'last_text' => '&raquo;',
-                'show_dots' => TRUE
-            )
-        );
+        // $datas['pagination']['view'] = custom_pagination(
+        //     array(
+        //         'base' => $page_link,
+        //         'page' => $pagination_prep['page'],
+        //         'pages' => $pagination_prep['pages'],
+        //         'key' => 'page',
+        //         'next_text' => '&rsaquo;',
+        //         'prev_text' => '&lsaquo;',
+        //         'first_text' => '&laquo;',
+        //         'last_text' => '&raquo;',
+        //         'show_dots' => TRUE
+        //     )
+        // );
 
-        $table_head = [
-            'table' => $this->table,
-            'head' => [ 'title', 'featured_image', 'status', 'created_at', 'updated_at' ],
-            'disabled_head' => [ 'featured_image' ]
-        ];
-        $datas['table_head'] = admin_table_head($table_head);
-        $datas['table_body_colspan'] = count($table_head['head']);
+        // $table_head = [
+        //     'table' => $this->table,
+        //     'head' => [ 'title', 'featured_image', 'status', 'created_at', 'updated_at' ],
+        //     'disabled_head' => [ 'featured_image' ]
+        // ];
+        // $datas['table_head'] = admin_table_head($table_head);
+        // $datas['table_body_colspan'] = count($table_head['head']);
 
         return view('admin.themes.index', $datas);
     }
@@ -204,7 +204,7 @@ class ThemesController extends Controller
     //         'staticdata' => [
     //             'default_status' => Staticdatas::default_status()
     //         ],
-    //         'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+    //         'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
     //     ];
 
     //     return view('admin.pages.form', $datas);
@@ -355,7 +355,7 @@ class ThemesController extends Controller
     //         'staticdata' => [
     //             'default_status' => Staticdatas::default_status()
     //         ],
-    //         'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+    //         'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
     //     ];
 
     //     return view('admin.pages.form', $datas);

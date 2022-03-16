@@ -59,53 +59,15 @@ class CountriesController extends Controller
             'staticdata' => [
                 'default_status' => Staticdatas::default_status()
             ],
-            'admin_modules' => Adminrolemodules::where('admin_id', $this->admin->id)->get(),
+            'admin_modules' => Adminrolemodules::where('admin_role_id', $this->admin->role_id)->get(),
         ];
 
         $param_get = isset($_GET) ? $_GET : [];
 
-        $datas_list = Countries::where('deleted_at', NULL);
-
-        //*** Filter
-        if(isset($_GET['action'])) {
-            if(isset($_GET['name'])) {
-                if( $_GET['condition'] === 'like' ) {
-                    $datas_list = $datas_list->where('name', 'like', '%'.$_GET['name'].'%');
-                }
-                if( $_GET['condition'] === 'equal' ) {
-                    $datas_list = $datas_list->where('name', $_GET['name']);
-                }
-            }
-            if( $_GET['status'] !== 'all' ) {
-                $datas_list = $datas_list->where('status', $_GET['status']);
-            }
-            if(isset($_GET['created_from']) && isset($_GET['created_to'])) {
-                $datas_list = $datas_list
-                    ->where('created_at', '>', date('Y-m-d', strtotime($_GET['created_from'])).' 00:00:00')
-                    ->where('created_at', '<', date('Y-m-d', strtotime($_GET['created_to'])).' 23:59:59');
-            }
-        }
-        //*** Filter
-
-        //*** Sort
-        $order = 'name';
-        if(isset($param_get['order'])) {
-            $order = $param_get['order'];
-            if($param_get['order'] == 'created_date') {
-                $order = 'created_at';
-            } elseif($param_get['order'] == 'updated_date') {
-                $order = 'updated_at';
-            }
-        }
-        $sort = (isset($param_get['sort'])) ? strtoupper($param_get['sort']) : 'ASC';
-        $datas_list = $datas_list->orderByRaw($order.' '.$sort);
-        //*** Sort
-
-        $datas['total'] = count($datas_list->get());
-
-        $limit = custom_pagination_limit();
-        $offset = (isset($param_get['page']) && $param_get['page'] > 1) ? ($param_get['page'] * $limit) - $limit : 0;
-        $datas['list'] = $datas_list->offset($offset)->limit($limit)->get();
+        $datas_list = custom_admin_sort_filter('countries', $param_get);
+        
+        $datas['total'] = $datas_list['total'];
+        $datas['list'] = json_decode(json_encode($datas_list['datas_list']), true);
 
         $base_sort_link = custom_sort_link($this->table, $param_get);
         $datas['pagination']['base_sort_link'] = $base_sort_link;
