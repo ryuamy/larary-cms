@@ -14,6 +14,7 @@ class CountriesSeeder extends Seeder
      * // NOTES :
      * Please make sure the global helper loaded
      * Please make sure flag images uploaded
+     * UN Code = M49 Code
      *
      * source:
      * https://www.nationsonline.org/oneworld/country_code_list.htm
