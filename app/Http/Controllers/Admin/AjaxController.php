@@ -225,6 +225,8 @@ class AjaxController extends Controller
                         );
                     }
 
+                    $request->session()->regenerateToken();
+
                     insert_admin_logs(
                         $admin_id,
                         'ADMINS',
@@ -243,7 +245,12 @@ class AjaxController extends Controller
                         ),
                         200
                     );
-                } catch (Exception $error) {
+                    
+                    // Auth::login($user, $request->get('remember'));
+
+                    // Auth::guard('admin')
+
+                } catch (\Exception $error) {
                     insert_admin_logs(
                         $admin_id,
                         'ADMINS',

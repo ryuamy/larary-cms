@@ -10,7 +10,8 @@ class IndonesiaProvincesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     * Provinsi Indonesia
+     * 
      * // NOTES :
      * Please make sure the global helper loaded
      *

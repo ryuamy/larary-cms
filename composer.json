@@ -16,13 +16,15 @@
         "google/apiclient": "^2.10",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
+        "laravel/sanctum": "^2.14",
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "maatwebsite/excel": "^3.1",
         "mews/captcha": "^3.2",
         "mobiledetect/mobiledetectlib": "^2.8",
-        "ryuamy/whatsapp-qiscus-php": "^1.0"
+        "ryuamy/whatsapp-qiscus-php": "^1.0",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

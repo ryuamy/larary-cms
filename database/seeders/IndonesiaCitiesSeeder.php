@@ -10,6 +10,7 @@ class IndonesiaCitiesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * Kota/Kabupaten Indonesia
      *
      * // NOTES :
      * Please make sure the global helper loaded

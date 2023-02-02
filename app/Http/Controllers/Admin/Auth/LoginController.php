@@ -47,6 +47,9 @@ class LoginController extends Controller
     {
         Auth::guard('admin')->logout();
         // Auth::logout()->guard('admin');
+        // Auth::logoutOtherDevices($currentPassword);
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect(admin_uri() . 'login/')->with([
             'success-message' => 'Success logout'
         ]);

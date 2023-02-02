@@ -112,11 +112,13 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 								</div>
 
-								<div class="form-group d-flex flex-wrap justify-content-between align-items-center">
-									<div class="checkbox-inline">
-										<label class="checkbox m-0 text-muted">
-										<input type="checkbox" name="remember" />
-										<span></span>Remember me</label>
+								<div class="d-none">
+									<div class="form-group d-flex flex-wrap justify-content-between align-items-center">
+										<div class="checkbox-inline">
+											<label class="checkbox m-0 text-muted">
+											<input type="checkbox" name="remember" />
+											<span></span>Remember me</label>
+										</div>
 									</div>
 								</div>
 
